@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Task BasicSkill.JS.Object.715</title>
+</head>
+<script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    // đối tượng dơn giản chỉ có thuộc tính
+    // demo 1: định nghĩa và truy vấn đối tượng chỉ có thuộc tính
+    function testDoiTuongDonGianChiCoThuocTinh() {
+        console.log("%c demo 1: định nghĩa và truy vấn đối tượng chỉ có thuộc tính", "color:purple");
+        var vMarryPersonObject = {
+            firstName: "Marry",
+            age: 20
+        };
+        // write object to console
+        console.log(" Đối tượng Person Marry ");
+        console.log(vMarryPersonObject);
+        // viết từng thuộc tính của đối tượng ra 
+        console.log(vMarryPersonObject.firstName);
+        console.log(vMarryPersonObject.age);
+
+    }
+    // demo 2: định nghĩa và truy vấn đối tượng có thuộc tính và method (phương thức)
+    function testDoiTuongCoThuocTinhVaMethod() {
+        console.log("%c demo 2: định nghĩa và truy vấn đối tượng có thuộc tính và method (phương thức)", "color:purple");
+        var vMarryKanePersonObject = {
+            firstName: "Marry",
+            lastName: "Kane",
+            age: 20,
+            fullName: function () {  //method (phương thức) để tính toán dựa trên thuộc tính của đối tượng
+                return this.firstName + " " + this.lastName;
+            }
+        };
+        // write object to console
+        console.log(" Đối tượng Person Marry Kane ");
+        console.log(vMarryKanePersonObject);
+        // gọi method của đối tượng 
+        console.log(" gọi method FullName: " + vMarryKanePersonObject.fullName());
+    }
+
+    //demo 3: tác động vào thuộc tính, method của đối tượng
+    function testThayDoiThuocTinhVaMethodCuaDoiTuong() {
+        console.log("%c demo 3: tác động vào thuộc tính, method của đối tượng", "color:green");
+        var vMarryKanePersonObject = {
+            firstName: "Marry",
+            lastName: "Kane",
+            age: 20,
+            fullName: function () {  //method (phương thức) để tính toán dựa trên thuộc tính của đối tượng
+                return this.firstName + " " + this.lastName;
+            }
+        };
+        // đổi tuổi của Marry
+        vMarryKanePersonObject.age = "36";
+        // đổi method fullName
+        vMarryKanePersonObject.fullName = fullNameUpperCase; // đổi hẳn method này, chuyển thành chữ IN HOA  
+
+        // write object to console
+        console.log(" Đối tượng Person Marry Kane ");
+        console.log(vMarryKanePersonObject);
+        // gọi method của đối tượng 
+        console.log(" gọi method FullName: " + vMarryKanePersonObject.fullName());
+    }
+
+    //demo 4: đối tượng có thuộc tính là đối tượng, và thuộc tính là mảng
+    function testDoiTuongCoThuocTinhLaDoiTuong() {
+        console.log("%c demo 4: đối tượng có thuộc tính là đối tượng, và thuộc tính là mảng", "color:red");
+        //đối tượng có chứa attribute (thuộc tính) là array và thuộc tính là object
+        var vJohnPersonObject = {
+            name: "John",
+            age: 30,
+            cars: ["Ford", "BMW", "Fiat"],   //có nhiều ô tô (car) trong một mảng
+            pet: { type: "dog", name: "Jolly" }  //có 1 con vật nuôi (pet), 
+        };
+
+        // write object to console
+        console.log(" Đối tượng Person John: ");
+        console.log(vJohnPersonObject);
+        // viết từng thuộc tính của đối tượng ra 
+        console.log(vJohnPersonObject.name);
+        console.log(vJohnPersonObject.age);
+        console.log(vJohnPersonObject.cars);
+        console.log(vJohnPersonObject.pet);
+        // truy vấn thuộc tính của đối tượng bên trong 
+        console.log("Tên vật nuôi của John là: " + vJohnPersonObject.pet.name);
+    }
+
+    //demo 5: truyền đối tượng như tham số của hàm 
+    function testTruyenDoiTuongNhuThamSo() {
+        console.log("%c demo 5: truyền đối tượng như tham số của hàm ", "color:orange");
+        // tạo đối tượng
+        var vMarryPersonObject = {
+            firstName: "Marry",
+            age: 20
+        };
+        console.log(" Đối tượng Person Marry ban đầu ");
+        console.log(vMarryPersonObject);
+        // tăng tuổi của marry
+        tangTuoiPerson(vMarryPersonObject);
+        // write object to console
+        console.log(" Đối tượng Person Marry nhận về ");
+        console.log(vMarryPersonObject);
+    }
+
+    // demo 6: hàm trả lại đối tượng (tạo đối tượng giống nhau, mà ko phải viết code lại)
+    function testHamTraLaiDoiTuong() {
+        console.log("%c Demo 6: hàm trả lại đối tượng (tạo đối tượng giống nhau, mà ko phải viết code lại", "color:orange");
+        // dùng 1 hàm có thể tạo ra nhiều object giống nhau về cấu trúc (về thuộc tính, và method)
+        // khác nhau về giá trị của thuộc tính và method
+        var vMarryPersonObject = getPersonObj("Marry", "Kane", 20);
+        var vJohnPersonObject = getPersonObj("John", "Doe", 36);
+        console.log("Marry: ");
+        console.log(vMarryPersonObject);
+        console.log("John: ");
+        console.log(vJohnPersonObject);
+    }
+
+    // 715.10: định nghĩa và truy vấn đối tượng chỉ có thuộc tính
+    function testDoiTuongDonGianChiCoThuocTinh2() {
+        console.log("%c 715.10: định nghĩa và truy vấn đối tượng chỉ có thuộc tính", "color:pink");
+        var vMyCarObject = {
+            name: "Fiat",
+            model: 500,
+            weight: 850,
+            color: "White"
+        };
+        // write object to console
+        console.log(" Đối tượng myCar ");
+        console.log(vMyCarObject);
+        // viết từng thuộc tính của đối tượng ra 
+        console.log(vMyCarObject.name);
+        console.log(vMyCarObject.model);
+        console.log(vMyCarObject.weight);
+        console.log(vMyCarObject.color);
+    }
+
+    // 715.20: định nghĩa và truy vấn đối tượng có thuộc tính và method (phương thức)
+    function testDoiTuongCoThuocTinhVaMethod2() {
+        console.log("%c 715.20: định nghĩa và truy vấn đối tượng có thuộc tính và method (phương thức)", "color:purple");
+        var vMyCarObject = {
+            name: "Fiat",
+            model: 500,
+            weight: 850,
+            color: "White",
+            fullName: function () {  //method (phương thức) để tính toán dựa trên thuộc tính của đối tượng
+                return this.name + " " + this.model;
+            }
+        };
+        // write object to console
+        console.log(" Đối tượng myCar ");
+        console.log(vMyCarObject);
+        // gọi method của đối tượng 
+        console.log(" gọi method FullName: " + vMyCarObject.fullName());
+    }
+
+    // 715.30: tác động vào thuộc tính, method của đối tượng
+    function testThayDoiThuocTinhVaMethodCuaDoiTuong2() {
+        console.log("%c 715.30: tác động vào thuộc tính, method của đối tượng", "color:green");
+        var vMyCarObject = {
+            name: "Fiat",
+            model: 500,
+            weight: 850,
+            color: "White",
+            fullName: function () {  //method (phương thức) để tính toán dựa trên thuộc tính của đối tượng
+                return this.name + " " + this.model;
+            }
+        };
+        // đổi model của Fiat
+        vMyCarObject.model = 800;
+        // đổi method fullName
+        vMyCarObject.fullName = carNameUpperCase;// đổi hẳn method này, chuyển thành chữ IN HOA  
+
+        // write object to console
+        console.log(" Đối tượng myCar ");
+        console.log(vMyCarObject);
+        // gọi method của đối tượng 
+        console.log(" gọi method FullName: " + vMyCarObject.fullName());
+    }
+
+    // 715.40: đối tượng có thuộc tính là đối tượng, và thuộc tính là mảng
+    function testDoiTuongCoThuocTinhLaDoiTuong2() {
+        console.log("%c 715.40: đối tượng có thuộc tính là đối tượng, và thuộc tính là mảng", "color:red");
+        //đối tượng có chứa attribute (thuộc tính) là array và thuộc tính là object
+        var vMyCarObject = {
+            name: "Fiat",
+            model: 500,
+            weight: 850,
+            color: "White",
+            wheel: [{ type: "front", quantity: 2 }, { type: "rear", quantity: 2 }, { type: "backup", quantity: 1 }],
+            radio: {
+                name: "Philips",
+                model: "Wave200",
+                bluetooth: "yes",
+            },
+            fullName: function () {  //method (phương thức) để tính toán dựa trên thuộc tính của đối tượng
+                return this.name + " " + this.model;
+            }
+        };
+
+        // write object to console
+        console.log(" Đối tượng vMyCarObject: ");
+        console.log(vMyCarObject);
+        // viết từng thuộc tính của đối tượng ra 
+        console.log(vMyCarObject.name);
+        console.log(vMyCarObject.model);
+        console.log(vMyCarObject.weight);
+        console.log(vMyCarObject.color);
+        console.log(vMyCarObject.wheel);
+        console.log(vMyCarObject.radio);
+        // truy vấn thuộc tính của đối tượng bên trong 
+        console.log("Loại radio trên xe là: " + vMyCarObject.radio.name + "-" + vMyCarObject.radio.model);
+        console.log("Trang bị bluetooth: " + vMyCarObject.radio.bluetooth);
+    }
+
+    // 715.50: hàm trả lại đối tượng (tạo đối tượng giống nhau, mà ko phải viết code lại)
+    function testHamTraLaiDoiTuong2() {
+        console.log("%c 715.50: hàm trả lại đối tượng (tạo đối tượng giống nhau, mà ko phải viết code lại", "color:orange");
+        // dùng 1 hàm có thể tạo ra nhiều object giống nhau về cấu trúc (về thuộc tính, và method)
+        // khác nhau về giá trị của thuộc tính và method
+        var vToyotaObject = getCarObj("Toyota", "VIOS2020", 1050, "White");
+        var vFordObject = getCarObj("Ford", "Escape2021", 1450, "Silver");
+        var vMitsubishiObject = getCarObj("Mitsubishi", "Xpander2022", 1210, "Black");
+        var vSuzukiObject = getCarObj("Suzuki", "Ertiga2021", 1010, "Silver");
+        console.log("Toyota: ");
+        console.log(vToyotaObject);
+        console.log("Ford: ");
+        console.log(vFordObject);
+        console.log("Mitsubishi: ");
+        console.log(vMitsubishiObject);
+        console.log("Suzuki: ");
+        console.log(vSuzukiObject);
+    }
+
+    // 715.60: truyền đối tượng như tham số của hàm 
+    function testTruyenDoiTuongNhuThamSo2() {
+        console.log("%c 715.60: truyền đối tượng như tham số của hàm ", "color:orange");
+        // tạo đối tượng
+        var vMyCarObject = {
+            name: "Fiat",
+            model: 500,
+            weight: 850,
+            color: "White",
+            fullName: function () {  //method (phương thức) để tính toán dựa trên thuộc tính của đối tượng
+                return this.name + " " + this.model;
+            }
+        };
+        console.log(" Đối tượng vMyCarObject ban đầu ");
+        console.log(vMyCarObject);
+        // tăng tuổi của marry
+        changeCar(vMyCarObject);
+        // write object to console
+        console.log(" Đối tượng vMyCarObject nhận về ");
+        console.log(vMyCarObject);
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    // viết method fullName kiểu in hoa
+    function fullNameUpperCase() {
+        return (this.firstName + " " + this.lastName).toUpperCase();  //chuyển thành IN HOA 
+    }
+    // viết method fullName kiểu in ho
+    function carNameUpperCase() {
+        return (this.name + " " + this.model).toUpperCase();  //chuyển thành IN HOA 
+    }
+
+    // tăng tuổi của person
+    function tangTuoiPerson(paramPersonObject) {
+        paramPersonObject.age++;  //thêm 1 tuổi
+    }
+
+    // Đổi ô tô
+    function changeCar(paramCarObject) {
+        paramCarObject.name = "Suzuki";
+        paramCarObject.model = "Ertiga2021";
+        paramCarObject.weight = 1050;
+        paramCarObject.color = "Silver";
+    }
+
+    // tạo đối tượng bằng hàm số (để có thể tạo nhiều đối tượng giống nhau, mà không phải viết code lại )
+    function getPersonObj(paramFirstName, paramLastName, paramAge) {
+        var vPersonObject = {   //tạo đối tượng từ các tham số 
+            firstName: paramFirstName,
+            lastName: paramLastName,
+            age: paramAge,
+            fullName: function () {  //method (phương thức) để tính toán dựa trên thuộc tính của đối tượng
+                return this.firstName + " " + this.lastName;
+            }
+        };
+        return vPersonObject;  //trả lại đối tượng
+    }
+    //Create carObj
+    function getCarObj(paramName, paramModel, paramWeight, paramColor) {
+        var vCarObject = {   //tạo đối tượng từ các tham số 
+            name: paramName,
+            model: paramModel,
+            weight: paramWeight,
+            color: paramColor,
+            fullName: function () {  //method (phương thức) để tính toán dựa trên thuộc tính của đối tượng
+                return this.name + " " + this.model;
+            }
+        };
+        return vCarObject;  //trả lại đối tượng
+    }
+    function testJSO70() {
+        var vHocSinhNga = {
+            maHocSinh: "10",
+            tenHocSinh: "Nga",
+            lop: 12,
+            diemToanVanAnh: [10, 9, 8],
+            layDiemTrungBinh: function(){
+                return (this.diemToanVanAnh[0] + this.diemToanVanAnh[2]+this.diemToanVanAnh[1])/3;
+            },
+            xepLoaiHS: function(){
+                if(this.layDiemTrungBinh < 5){
+                    return "Kém";
+                }
+                else if (this.layDiemTrungBinh < 6.5){
+                    return "Trung bình";
+                }
+                else if(this.layDiemTrungBinh <8){
+                    return "Khá";
+                }
+                else{
+                    return "Giỏi";
+                }
+            }
+        };
+        console.log(vHocSinhNga);
+    }
+</script>
+
+<body>
+    <div class="container jumbotron">
+        <p id="cmt2dev"> Test Page for Javascrip Tasks. F5 to run code.</p>
+        <h2>Chạy thử - Đọc code của các ví dụ sau </h2>
+        <button onclick="testDoiTuongDonGianChiCoThuocTinh()" class="btn btn-info"> demo 1: Đối tượng đơn giản, chỉ có
+            thuộc tính !</button>
+        <button onclick="testDoiTuongCoThuocTinhVaMethod()" class="btn btn-success"> demo 2: Đối tượng có thuộc tính, và
+            đối tượng!</button>
+        <button onclick="testThayDoiThuocTinhVaMethodCuaDoiTuong()" class="btn btn-warning"> demo 3: Thay đổi thuộc
+            tính, method của đối tượng!</button>
+        <button onclick="testDoiTuongCoThuocTinhLaDoiTuong()" class="btn btn-primary"> demo 4: Đối tượng có thuộc tính
+            là đối tượng !</button>
+        <button onclick="testTruyenDoiTuongNhuThamSo()" class="btn btn-light"> demo 5: Truyền đối tượng như tham
+            số!</button>
+        <button onclick="testHamTraLaiDoiTuong()" class="btn btn-secondary"> demo 6: tạo đối tượng bằng hàm số!</button>
+        <button onclick="testDoiTuongDonGianChiCoThuocTinh2()" class="btn btn-info"> Bài Tập 715.10</button>
+        <button onclick="testDoiTuongCoThuocTinhVaMethod2()" class="btn btn-success"> Bài Tập 715.20</button>
+        <button onclick="testThayDoiThuocTinhVaMethodCuaDoiTuong2()" class="btn btn-warning"> Bài Tập 715.30</button>
+        <button onclick="testDoiTuongCoThuocTinhLaDoiTuong2()" class="btn btn-primary"> Bài Tập 715.40</button>
+        <button onclick="testHamTraLaiDoiTuong2()" class="btn btn-secondary"> Bài Tập 715.50</button>
+        <button onclick="testTruyenDoiTuongNhuThamSo2()" class="btn btn-light"> Bài Tập 715.60</button>
+    </div>
+</body>
+
+</html>

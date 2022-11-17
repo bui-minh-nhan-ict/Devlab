@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Task 12.35 </title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body onload="onPageLoading()">
+  <div class="container jumbotron border border-primary p-4 my-3">
+    <div class="row form-group">
+      <label id="label-first-name" class="col-md-2 col-form-label">First Name<span
+          class="text-danger">(*)</span></label>
+      <div class="col-md-4">
+        <input type="text" class="form-control bg-info text-light" placeholder="Bùi Minh...." id="input-first-name">
+      </div>
+    </div>
+    <div class="row form-group">
+      <label id="label-last-name" class="col-md-2 col-form-label">Last Name <span class="text-danger">(*)</span></label>
+      <div class="col-md-4">
+        <input type="text" class="form-control bg-info text-light" placeholder="Nhẫn..." id="input-last-name">
+      </div>
+    </div>
+    <div class="row form-group">
+      <label id="label-age" class="col-md-2 col-form-label">Age<span class="text-danger">(*)</span></label>
+      <div class="col-md-4">
+        <input type="number" class="form-control bg-info text-light" placeholder="31..." id="input-age">
+      </div>
+    </div>
+    <div class="row form-group">
+      <label id="label-first-name" class="col-md-2 col-form-label">Email<span class="text-danger">(*)</span></label>
+      <div class="col-md-4">
+        <input type="email" class="form-control bg-info text-light" placeholder="fullname@gmail.com" id="input-email">
+      </div>
+    </div>
+  </div>
+  <div class="container mb-2">
+    <button class="btn btn-info" onclick="onBtnAddedToTableClick()">Save Data</button>
+  </div>
+  <div class="container">
+    <table id="table-person" class="table border-light">
+      <thead class="bg-info text-light">
+        <!-- phần head, dòng tiêu đề  của bảng -->
+        <tr>
+          <td class="font-weight-bold">No.</td>
+          <td class="font-weight-bold"> First Name </td>
+          <td class="font-weight-bold"> Last Name </td>
+          <td class="font-weight-bold"> Age </td>
+        </tr>
+        <thead>
+        <tbody>
+          <!-- phần dữ liệu của bảng -->
+          <tr>
+            <td>1</td>
+            <td>Lê</td>
+            <td>Phong</td>
+            <td>18</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Bùi</td>
+            <td>Hoài Hương</td>
+            <td>29</td>
+          </tr>
+      <tbody>
+    </table>
+  </div>
+  <script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    // on page loading event handling function
+    function onPageLoading() {
+      // Access element
+      var vFirstName = document.getElementById("input-first-name");
+      var vLastName = document.getElementById("input-last-name");
+      var vAge = document.getElementById("input-age");
+      var vEmail = document.getElementById("input-email");
+      // Write element to console
+      console.log(vFirstName);
+      console.log(vFirstName.id);
+      console.log(vFirstName.placeholder);
+
+      console.log(vLastName);
+      console.log(vLastName.id);
+      console.log(vLastName.placeholder);
+
+      console.log(vAge);
+      console.log(vAge.id);
+      console.log(vAge.placeholder);
+      
+      console.log(vEmail);
+      console.log(vEmail.id);
+      console.log(vEmail.placeholder);
+    }
+
+    // on Save data button click event handling function
+    function onBtnAddedToTableClick() {
+      "use strict";
+      console.log("%cẤn nút Save Data!", "color:blue");
+      // Create table obj
+      const vEND_OF_TABLE = -1;
+      // Access to input Element
+      var vPersonTable = document.getElementById("table-person");
+      var vFirstName = document.getElementById("input-first-name");
+      var vLastName = document.getElementById("input-last-name");
+      var vAge = document.getElementById("input-age");
+      var vEmail = document.getElementById("input-email");
+
+      // validating input data
+      if (!validationString(vFirstName.value, 1)) {
+        alert("Vui lòng nhập họ");
+        vFirstName.focus();
+      }
+      else if (!validationString(vLastName.value, 1)) {
+        alert("Vui lòng nhập tên");
+        vLastName.focus();
+      }
+      else if (isNaN(vAge.value) || vAge.value < 1 || vAge.value > 150) {
+        alert("Vui lòng nhập tuổi");
+        vAge.focus();
+      }
+      else if (!validationString(vEmail.value, 4)) {
+        alert("Vui lòng nhập Email");
+        vEmail.focus;
+      }
+      else {
+        // insert to the end of table, thêm row mới vào bảng( <tr> </tr>)
+        var vNewRow = vPersonTable.insertRow(vEND_OF_TABLE);
+        // them moi 03 cell (03 ô) (<td> </td> 
+        var vCellNo = vNewRow.insertCell(0);
+        var vCellFirstName = vNewRow.insertCell(1);
+        var vCellLastName = vNewRow.insertCell(2);
+        var vCellAge = vNewRow.insertCell(3);
+        //gán giá trị cho các ô
+        vCellNo.innerHTML = vPersonTable.rows.length - 1;
+        //vCellNo.innerHTML = "3";
+        vCellFirstName.innerHTML = vFirstName.value;
+        vCellLastName.innerHTML = vLastName.value;
+        vCellAge.innerHTML = vAge.value;
+      }
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+
+    /*** String validating function
+      * paramInputStr: validating String
+      * paramValidType: How to validating
+      * 0: With space - Null
+      * 1: With space - Not Null
+      * 2: With No space - Null
+      * 3: With No space - Not Null
+      * 4: With Email format - Not null
+      * Return true if match pattern
+      * */
+    function validationString(paramInputStr, paramValidType) {
+      "use strict";
+      // Set parttern string to validate depend on paramValidType
+      var vPartternStr = "";
+      switch (paramValidType) {
+        case 0: // With space - Null
+          vPartternStr = /^[A-Za-z\s]*$/;
+          break;
+        case 1: // With space - Not Null
+          vPartternStr = /^[A-Za-z\s]+$/;
+          break;
+        case 2: // With No space - Null
+          vPartternStr = /^[A-Za-z]*$/;
+          break;
+        case 3: // With No space - Not Null
+          vPartternStr = /^[A-Za-z]+$/;
+          break;
+        case 4: // With Email - Not Null
+          vPartternStr = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+          break;
+        default:
+          vPartternStr = /^[A-Za-z\s]*$/;
+      }
+      // Set result
+      var vResult = false;
+
+      if (paramInputStr.match(vPartternStr)) {
+        vResult = true;
+      }
+
+      return vResult;
+    }
+  </script>
+
+</body>
+
+</html>

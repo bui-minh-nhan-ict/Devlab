@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TASK 20.20 BS GRID</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- TODO 0: Nhúng thư viện boostrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+<style>
+  .div-lavender {
+    background-color: lavender;
+  }
+
+  .div-red
+  {
+    background-color: red;
+  }
+
+  .div-blue
+  {
+    background-color: blue;
+  }
+
+  .div-yellow
+  {
+    background-color: yellow;
+  }
+
+  .color-style
+  {
+    color:white;
+  }
+  .div-lavenderblush {
+    background-color: lavenderblush;
+  }
+</style>
+</head>
+<body>
+<h3 class = "text-info"> Grid (lưới) của boootstrap chia màn hình thành các HÀNG ("row") và thành các CỘT("col")</h3>
+<h3 class = "text-primary"> Mỗi  HÀNG có thể chia thành nhiều CỘT (tổng   chiều rộng là 12)</h3>
+<h3 class = "text-secondary"> Có 05 cỡ cột, từ rất nhỏ (col-#) đến rất lớn (col-xm-#). <h3>
+<h3 class = "text-success" > Nếu màn hình không đủ chứa, các cột sẽ gộp lại, đè lên nhau (HÃY KÉO CHIỀU NGANG CỬA SỔ NHỎ LẠI)</h3>
+
+<div class="container-fluid">  <!-- container rộng hết ngang-->
+    <div class="row">  <!-- định nghĩa 1  hàng -->
+        <img src="co.the.chia.lam.12.cot.png"  width="50%" />
+        <img src="grid.system.five.class.png"  width="50%" />
+    </div>   
+</div>
+<hr> 
+<div class="container-fluid"> <!-- container rộng hết ngang-->
+  <h1 class = "text-warning"> Ví dụ chia 04 cột, mỗi cột rộng là 3 đơn vị ( 12 = 4 x 3 ), cột có <span class = " text-success">cỡ cho màn hình nhỏ (col-sm-#) </span> </h1>
+  <p>Kéo nhỏ browser lại để thấy tác động: màn hình có chiều ngang  nhỏ hơn  576 pixels (điểm ảnh), các cột sẽ đè lên nhau</p>
+
+  <div class="row">  <!-- mỗi div là một "row" hàng, mỗi hàng lại chia thành nhiều cột, cỡ các cột cộng lại là 12 -->
+    <div class="col-sm-3 div-lavender" >.col-sm-3</div> <!-- cột có chiều rộng 3 đơn vị, màu nền lavender -->
+    <div class="col-sm-3 div-lavenderblush" >.col-sm-3</div>
+    <div class="col-sm-3 div-lavender" >.col-sm-3</div>
+    <div class="col-sm-3 div-lavenderblush" >.col-sm-3</div>
+  </div>
+<hr> 
+<div class="container-fluid"> <!-- container rộng hết ngang-->
+  <h1 class = "text-warning"> ví dụ trên, chia cột đầu thành 6 cột , cột cuối thành 02 hàng </h1>
+  <div class="row">  <!-- mỗi div là một "row" hàng, mỗi hàng lại chia thành nhiều cột, cỡ các cột cộng lại là 12 -->
+    <div class="col-sm-3" > <!-- cột có chiều rộng 3 đơn vị, màu nền lavender -->
+        <div class = "row">
+          <div class="col-sm-2 div-lavender" > 1.1</div>
+          <div class="col-sm-2 div-lavenderblush" >1.2</div>
+          <div class="col-sm-2 div-lavender" >1.3</div>
+          <div class="col-sm-2 div-lavenderblush" > 1.4 </div>
+          <div class="col-sm-2 div-lavender" >1.5</div>
+          <div class="col-sm-2 div-lavenderblush" >1.6</div>
+        </div>
+    </div> 
+    <div class="col-sm-3 div-lavender" >.col-sm-3</div>
+    <div class="col-sm-3 div-lavenderblush" >.col-sm-3</div>
+    <div class="col-sm-3 div-lavender" > 
+        <div class ="row div-lavender">4.1</div>
+        <div class = "row div-lavenderblush">4.2</div>
+    </div>
+  </div>
+<hr> 
+</div>
+<h3 class = "text-info"> Hãy làm bài ở đưới đây </h3>
+<ul>
+  <li>20.20.a: thêm row (hàng)  mới;  hãy chia hành này thành hai cột, 1 cột cỡ 4, và 1 cột cỡ 8, cho màu nền khác nhau để phân biệt 
+  <div class="container-fluid">
+  <div class="row">  <!-- mỗi div là một "row" hàng, mỗi hàng lại chia thành nhiều cột, cỡ các cột cộng lại là 12 -->
+  <div class="col-sm-4 div-red color-style">.col-sm-4</div> <!-- cột có chiều rộng 3 đơn vị, màu nền lavender -->
+  <div class="col-sm-8 div-blue color-style">.col-sm-8</div>
+  </div>
+  </div>
+
+ 
+  <li> 20.20.b: (tiếp phần 20.20.a), với mỗi cột bài trên  chia thành 2 cột bằng nhau: cỡ 6 và cỡ 6. Cho màu nền khác nhau để phân biệt 
+  <div class="container-fluid">  
+  <div class="row">  
+      <div class="col-sm-6 div-red color-style">.col-sm-6</div> 
+      <div class="col-sm-6 div-blue color-style">.col-sm-6</div>
+  </div>
+  </div>
+  
+  
+  <li>20.20.c: thêm row (hàng) mới, hãy chia thành 2 cột cỡ 3 và cỡ 9, Cho màu nền khác nhau để phân biệt 
+  <div class="container-fluid">  
+  <div class="row"> 
+  <div class="col-sm-3 div-red color-style">.col-sm-3</div> 
+  <div class="col-sm-9 div-blue color-style">.col-sm-9</div>
+  </div>
+  </div>
+
+
+  <li>20.20.d: (tiếp phần 20.20.c) Cột đầu tiên chia thành hai cột cỡ 4, 8. Cột sau chia thành 3 hàng. Cho màu nền khác nhau để phân biệt
+
+  <div class="container-fluid"> <!-- container rộng hết ngang-->
+    <div class="row">  <!-- mỗi div là một "row" hàng, mỗi hàng lại chia thành nhiều cột, cỡ các cột cộng lại là 12 -->
+      <div class="col-sm-3" > <!-- cột có chiều rộng 3 đơn vị, màu nền lavender -->
+          <div class = "row">
+            <div class="col-sm-4 div-red color-style" > 4</div>
+            <div class="col-sm-8 div-blue color-style" >8</div>
+          </div>
+      </div> 
+      <div class="col-sm-9 div-lavender" > 
+          <div class ="row div-red color-style">1.1</div>
+          <div class = "row div-blue color-style">1.2</div>
+          <div class ="row div-yellow">1.3</div>
+      </div>
+    </div>
+  <hr> 
+  </div>
+
+
+
+</ul>
+</body>
+</html>

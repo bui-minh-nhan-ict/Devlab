@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Task 22.30B</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<body onload="onLoadPaging()">
+  <h1 class = "text-info"> URL và Tham số nhận được: </h1>
+  <div class="jumbotron">
+    <div class=" row form-group text-lg text-success" id="div-url"></div>
+    <div class=" row form-group text-lg text-danger" id="div-result"></div>
+    <div class="row"> <a class = "btn btn-primary" href="task 22.30A KhoiDong.goiTrangCoThamSo.html"> Quay lại trang A</a></div>
+  </div> 
+</body>
+<script>
+  "use strict";
+  
+  /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+  function onLoadPaging(){
+    "use strict";
+    var vUrlString = window.location.href; //đường đẫn gọi đến trang
+    console.log("%c URL là: " + vUrlString, "color:blue");
+    var vDivURL = document.getElementById("div-url");
+    vDivURL.innerHTML = "URL được gọi: " + vUrlString;
+    
+
+    //tạo đối tượng url để truy vấn tham số 
+    var vUrlObject = new URL(vUrlString);
+    //truy vấn
+    var vDivThamSo = document.getElementById("div-result");
+    //get a parameter
+    var vFirstName = vUrlObject.searchParams.get("firstname");
+    vDivThamSo.innerHTML = "Firstname = " + vFirstName + "<br>"; //hiện ra ở dưới
+    var vLastName = vUrlObject.searchParams.get("lastname");
+    vDivThamSo.innerHTML += "Lasttname = " + vLastName + "<br>"; //hiện ra ở dưới
+    var vID = vUrlObject.searchParams.get("id");
+    vDivThamSo.innerHTML += "ID = " + vID + "<br>"; //hiện ra ở dưới
+    // ghi thêm những param khác ra console
+    var vCountry = vUrlObject.searchParams.get("country");
+    vDivThamSo.innerHTML += "Country = " + vCountry + "<br>"; //hiện ra ở dưới
+    var vSubject = vUrlObject.searchParams.get("subject");
+    vDivThamSo.innerHTML += "Subject = " + vSubject + "<br>"; //hiện ra ở dưới
+    console.log("%c Ghi tất cả tham số ra console: ", "color:orange");
+    vUrlObject.searchParams.forEach(function (value, key) {
+      console.log(value, key);
+    });
+  }
+  
+  /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+
+</script>
+</html>

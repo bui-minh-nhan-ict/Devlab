@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Task 16.40</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body onload="onPageLoad()">
+        <div class="container">
+            <h2>Task 16.60 Lấy Dice bằng post API</h2>
+        <div class="row">
+            <div class="col-sm-9">
+                <label for="uname">User Name</label>&emsp;
+            </div>
+        <div class="col-sm-9">
+            <input type="text" id="inp-username" class="form-control" placeholder="..." reqired>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <label for="fname">First Name</label> &emsp;
+        </div>
+        <div class="col-sm-9">
+            <input type="text" id="inp-firstname" class="form-control" placeholder="..." required>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <label for="lname">Last Name</label>&emsp;
+            </div>
+            <div class="col-sm-9">
+                <input type="text" id="inp-lastname" class="form-control" placeholder="..." required>
+        </div>
+        </div>
+        <br>
+        <div class="row">
+            <button class="btn btn-success" onclick="onBtnGetNewDiceClick()"> Get New Dice</button>
+        </div>
+        <hr>
+        <div class="row bg bg-warning">
+            <!-- <label for="result">Result: </label> -->
+            <p id="p-result"> Paragragh result</p>
+        </div>
+    </div>
+    </body>
+<!-- file html dùng để thử tác động của javascript vào các thành phần trang web-->
+<script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+    const gBASE_URL = "http://203.171.20.210:8080/devcamp-lucky-dice/";
+    const gUTF8_TEXT_APPLICATON_HEADER = "application/json;charset=UTF-8";
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    // sự kiện Onpageload
+    function onPageLoad()
+    {
+        var vUserName = document.getElementById('inp-username');
+        var vFirstName = document.getElementById('inp-firstname');
+        var vLastName = document.getElementById('inp-lastname');
+        var vResult = document.getElementById('p-result');
+
+        console.log(vUserName.id);
+        console.log(vFirstName.id);
+        console.log(vLastName.id);
+        console.log(vResult.id);
+    }
+
+    //Nút new dice
+    function onBtnGetNewDiceClick()
+    {
+        console.log('Get new dice');
+        //Bước 0. Khai báo đối tượng Usre để trao đổi dữ liệu giữa các bước
+        var vUser =
+        {
+            username:'',
+            firstname:'',
+            lastname:''
+        }
+        //B1. thu thập dữ liệu
+        readDataUser(vUser);
+        //B2. Validate
+        var vKiemTraDuLieu = validateData(vUser);
+        if (vKiemTraDuLieu)
+        {
+        //B3. Gọi API
+        // tạo request
+            var vXmlHttpDice = new XMLHttpRequest();
+        //Chuyển object về chuỗi JSON
+            var vPersonJsonData = JSON.stringify(vUser);
+            callApiNewDice(vXmlHttpDice,vPersonJsonData);
+        //B4. Xử lý khi request thực hiện xong và thành công
+            vXmlHttpDice.onreadystatechange = function()
+            {
+                if(vXmlHttpDice.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && vXmlHttpDice.status == gREQUEST_STATUS_OK)
+                {
+                    handleNewDiceResponse(vXmlHttpDice); //gọi function xử lý
+                }
+            }
+        }
+    }
+
+   
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    // Hàm thực hiện gọi api get new dice (bước 3)
+    
+    function callApiNewDice(paramXmlHttpRequest, paramPersonJsonString){
+        "use strict";
+         // mở và gửi request đi
+         paramXmlHttpRequest.open("POST", gBASE_URL + "/dice", true);
+         paramXmlHttpRequest.setRequestHeader("Content-Type", gUTF8_TEXT_APPLICATON_HEADER);
+         paramXmlHttpRequest.send(paramPersonJsonString);
+    }
+    // hàm thực hiện xử lý response khi request đã thực hiện xong và thành công (bước 4)
+    function handleNewDiceResponse(paramXmlHttp){
+        "use strict";
+        console.log(paramXmlHttp.responseText);
+        //parsing json response to object
+        var vResponse = JSON.parse(paramXmlHttp.responseText);
+        var vDiceReady = vResponse.dice;
+        var vResultElement = document.getElementById('p-result');
+        var vResult ='';
+        //Kiểm tra xem có voucher không
+        if (vResponse.voucher === null)
+        {
+            vResult +='New Dice: '+vDiceReady+'<br>';
+            console.log('Không có voucher !');
+        }
+        else
+        {
+            vResult += 'id: '+ vResponse.voucher.id + '<br>';
+            vResult += 'maVoucher: '+ vResponse.voucher.maVoucher + '<br>';
+            vResult += 'phanTramGiamGia: '+ vResponse.voucher.phanTramGiamGia + '<br>';
+            vResult += 'ghiChu: '+ vResponse.voucher.ghiChu + '<br>';
+            vResult += 'ngayTao: '+ vResponse.voucher.ngayTao + '<br>';
+            vResult += 'ngayCapNhat: '+ vResponse.voucher.ngayCapNhat + '<br>';
+            vResult += 'new Dice: '+ vDiceReady + '<br>';
+        }
+        // Kiểm tra xem có price không
+        if(vResponse.prize != null)
+        {
+            vResult+= 'pirze: '+vResponse.prize + '<br';
+        }
+        else
+        {
+            console.log('Không có prize !')
+        }
+        vResultElement.innerHTML = vResult;
+    }
+
+    //đọc dữ liệu bước 1
+    function readDataUser(paramObjectUser)
+    {
+        var vUserName = document.getElementById('inp-username');
+        var vFirstName = document.getElementById('inp-firstname');
+        var vLastName = document.getElementById('inp-lastname');
+        paramObjectUser.firstname = vFirstName.value.trim(); // Chuẩn hóa dữ liệu và lưu vào biến
+        paramObjectUser.lastname = vLastName.value.trim(); // Chuẩn hóa dữ liệu và lưu vào biến
+        paramObjectUser.username = vUserName.value.trim(); // Chuẩn hóa dữ liệu và lưu vào biến
+    }
+
+
+    // Hàm kiểm tra dữ liệu được gán (bước 2)
+    // Input là đối tượng cần kiểm tra
+    // Output là true / false 
+    function validateData(paramObjectUser){
+        "use strict";
+        var vResult =  true; // Khởi tạo biến kểm tra là hợp lệ
+        if(paramObjectUser.firstname === ""){ // Nếu không gán dữ liệu firstname
+            alert("Firstname is empty!"); // Thì cảnh báo
+            vResult = false; // và gán giá trị kiểm tra là không hợp lệ
+        }
+        if(paramObjectUser.lastname === ""){ // Nếu không gán dữ liệu firstname
+            alert("Lastname is empty!"); // Thì cảnh báo
+            vResult = false; // và gán giá trị kiểm tra là không hợp lệ
+        }
+        if(paramObjectUser.username === ""){ // Nếu không gán dữ liệu firstname
+            alert("Username is empty!"); // Thì cảnh báo
+            vResult = false; // và gán giá trị kiểm tra là không hợp lệ
+        }
+
+        return vResult;
+    }
+
+</script>
+</html>

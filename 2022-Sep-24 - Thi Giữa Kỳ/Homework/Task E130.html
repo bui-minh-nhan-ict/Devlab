@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <title> Task E130</title>
+</head>
+
+<body>
+    <button onclick="onBtnTestCodeClick()"> Test Code Task E130 </button>
+</body>
+<script>
+    //function để test code
+    function onBtnTestCodeClick() {
+        console.log("%cKết quả: ", "color:blue");
+        //viết code của bạn ở đây
+        var vPerson = ["anastasia", "anna", "john", "peter", "cole", "jane", "william"];
+        var vCountPhanTuLonHon4 = 0;
+        for (var i = 0; i < vPerson.length; i++) {
+            console.log(i + ": " + vPerson[i]);
+            if (vPerson[i].length > 4) {
+                vCountPhanTuLonHon4++;
+            }
+        }
+        console.log("Tổng số phần tử có độ dài lớn hơn 4: " + vCountPhanTuLonHon4);
+
+    }
+</script>
+
+</html>

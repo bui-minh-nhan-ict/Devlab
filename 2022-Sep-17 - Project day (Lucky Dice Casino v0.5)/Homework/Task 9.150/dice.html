@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <title>Game Dice</title>
+</head>
+<body onload="onPageLoading()">
+    <!-- <img src="images/people-playing-casino.jpg" id = "img-bg-display" width = "700px"> <br>
+    <h1 id = "h1-dice">Chào Mừng Bạn Đã Đến Với Game My Lucky Dice</h1>
+    <img src="images/dice.png" id = "img-dice-display" width = "200px"> <br>
+    &emsp; &emsp; &emsp; <button id="dice-button" onclick="onNew1To6Click()">!!! GO !!!</button>
+    <h2 id="showMsg" style="display : none;color: blue;">...</h2> -->
+    
+
+
+
+    <div class="container">
+        <div class="row">
+          <div class="col-75">
+            <img src="images/people-playing-casino.jpg" id = "img-bg-display" width = "700px">
+          </div>
+          <div class="col-25">
+            <h1 id = "h1-dice">Chào Mừng Bạn Đã Đến Với Game My Lucky Dice</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <img src="images/dice.png" id = "img-dice-display" width = "200px"> <br><br>
+          </div>
+          <div class="row">
+          <div class="col-75">
+            <br><button class = "button" id="dice-button" onclick="onNew1To6Click()">!!! GO !!!</button>
+          </div>
+          </div>
+          <div class="col-75">
+            <h2 id="showMsg" style="display : none;color: blue;">...</h2>
+          </div>
+        </div>
+
+</body>
+<script >
+    "use strict"
+    /*
+    || Vùng 1: định nghĩa global variables (biến toàn cục)
+    */
+    
+    /*
+    || Vùng 2: event handlers - function xử lý sự kiện  
+    */
+  
+    // event handlers - ghi thong tin phần tử H1 ra màn hình
+    // gọi khi nào: gọi khi load/f5
+    function onPageLoading(){
+        console.log("%c Load trang tại đây", "color:blue");
+        var vImageElement = document.getElementById("img-dice-display");
+        var vH1Element = document.getElementById("h1-dice");
+        var vMessageElement = document.getElementById("showMsg");
+        var vButtonElement = document.getElementById("dice-button");
+        console.log(vH1Element.id);
+        console.log(vMessageElement.id);
+        console.log(vButtonElement.id);
+        console.log(vImageElement.src);
+    }
+
+    function onNew1To6Click() {
+        console.log("Tung Xúc Xắc");
+        var vSoMoi  = fRandomNumber1to6();
+        console.log("Số mới là: " + vSoMoi);
+
+        var vImgDice = document.getElementById("img-dice-display");
+        var vDice1To6 = document.getElementById("showMsg");
+        vDice1To6.style.display = "block";
+
+        if ( vSoMoi == 1) {
+            vImgDice.src = "images/1.png";
+            document.getElementById("showMsg").innerHTML = "<span style='color: orange;'>Cảm ơn bạn. Hãy cố gắng lần sau!</span>";
+        
+        }
+        else if ( vSoMoi == 2) {
+            vImgDice.src = "images/2.png";
+            document.getElementById("showMsg").innerHTML = "<span style='color: orange;'>Cảm ơn bạn. Hãy cố gắng lần sau!</span>";
+        }
+        else if ( vSoMoi == 3) {
+            vImgDice.src = "images/3.png";
+            document.getElementById("showMsg").innerHTML = "<span style='color: orange;'>Cảm ơn bạn. Hãy cố gắng lần sau!</span>";
+        }
+        else if ( vSoMoi == 4) {
+            vImgDice.src = "images/4.png";
+            document.getElementById("showMsg").innerHTML = "<span style='color: purple;'>Chúc mừng bạn. Hãy chơi ván nữa!</span>";
+
+        }
+        else if ( vSoMoi == 5) {
+            vImgDice.src = "images/5.png";
+            document.getElementById("showMsg").innerHTML = "<span style='color: purple;'>Chúc mừng bạn. Hãy chơi ván nữa!</span>";
+
+        }
+        else if ( vSoMoi == 6) {
+            vImgDice.src = "images/6.png";
+            document.getElementById("showMsg").innerHTML = "<span style='color: purple;'>Chúc mừng bạn. Hãy chơi ván nữa!</span>";
+
+        }
+    }
+    /*
+    || vùng 3: common function - function dùng chung, để gọi từ vùng 2, hoặc từ console
+    */
+    function fRandomNumber1to6 ()
+    {
+        var vRandomNumberFrom1To6 = Math.random(); // lấy số bất kỳ từ 0 đến 6 bằng Math.random()
+        console.log("Số bất kỳ từ 0 đến 6 là : "+vRandomNumberFrom1To6);
+        var vKetQua = Math.trunc(vRandomNumberFrom1To6 *6)+1; // nhân 6 rồi làm tròn xuống và + 1
+        return vKetQua;
+    }
+    
+
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> task 7.70a goy y: select element </title>
+</head>
+
+<body onload="onPageLoading()">
+    <h1 id="h1-noidung">Hello DevCamp 2022!</h1>
+    <div>
+        <label id="label-select-color">New Color</label>
+        <select id="select-color">
+            <option value="value-trong">...</option>
+            <option value="blue"> Xanh dương </option>
+            <option value="green"> Xanh Lá Cây</option>
+            <option value="red"> Đỏ </option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <button id="btn-alert-color" onclick="onBtnChangeColorClick()"> Đổi màu </button>
+    </div>
+</body>
+<script>
+    "use strict"
+    /*
+    || Vùng 1: định nghĩa global variables (biến toàn cục)
+    */
+    let gH1El = document.getElementById('h1-noidung');
+    let gLabel = document.getElementById("label-select-color");
+    let gSelectColor = document.getElementById("select-color");
+    let gButton = document.getElementById("btn-alert-color");
+    /*
+    
+    || Vùng 2: event handlers - function xử lý sự kiện  
+    */
+
+    // evant handlers - ghi thong tin phần tử H1 ra màn hình
+    // gọi khi nào: gọi khi load/f5
+    function onPageLoading() {
+        console.log(gH1El.id, gLabel.id, gSelectColor.id, gButton.id);
+        console.log(gH1El.innerHTML, gLabel.innerHTML, gSelectColor.options[gSelectColor.selectedIndex], gButton.innerHTML);
+    }
+
+    //xử lý sự kiện nút alert color click
+    function onBtnChangeColorClick() {
+        var vValueColorSelected = gSelectColor.options[gSelectColor.selectedIndex].value; //truy vấn option được chọn, và lấy value
+        var vTextColorSelected = gSelectColor.options[gSelectColor.selectedIndex].text;  //truy vấn option được chọn và lấy text
+        console.log('Nút change color được nhấn')
+        console.log(`Màu đang có value là ${vValueColorSelected},text được hiển thị là ${vTextColorSelected}`);
+        //alert ra các giá trị đọc được
+        if (vTextColorSelected === '...') {
+            alert('Vui lòng chọn màu để đổi');
+        } else {
+            gH1El.style.color = "" + vValueColorSelected;
+        }
+    }
+    /*
+    || vùng 3: common function - function dùng chung, để gọi từ vùng 2, hoặc từ console
+    */
+
+</script>
+
+</html>

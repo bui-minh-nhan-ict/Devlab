@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 19.10b</title>
+<style>
+#para1 {
+    color: red;
+    text-align: center;
+}
+
+#mybutton, #theirbutton {
+    color: blue !important;
+    text-align: center;
+}
+
+button:nth-of-type(2) {
+    color: red !important;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+    <pre> Đổi paragraph para1 thành màu đỏ, và căn giữa; ko ảnh hưởng paragraph khác</pre>
+    <pre> Đổi 02 button mybutton, their button thành chữ blue và căn giữa; không ảnh hưởng button khác</pre>
+
+    <p id="para1">Hello World!</p>
+    <p>Đây là paragraph khác, ko bị ảnh hưởng</p>
+
+    <button> your button </button>
+    <button id="mybutton"> my button </button>
+    <button id="theirbutton" style="color:green !important;"> their button </button>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task 26.10 Load all orders - Danh sách đơn hàng</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body onload="onPageLoading()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center">Danh sách đơn hàng</h2>
+                <table class="table text-center table-striped" id="table-order">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Kích cỡ combo</th>
+                            <th scope="col">Loại pizza</th>
+                            <th scope="col">Nước uống</th>
+                            <th scope="col">Thành tiền</th>
+                            <th scope="col">Họ và tên</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        "use strict";
+        /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+        const gREQUEST_STATUS_OK = 200;
+        const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+        const gREQUEST_CREATE_SUCCESS = 201; // status tạo thành công
+        const gEND_OF_TABLE_ROW = -1;
+        const gCOL_ORDER_CODE = 0;
+        const gCOL_COMBO_SIZE = 1;
+        const gCOL_PIZZA_TYPE = 2;
+        const gCOL_DRINK = 3;
+        const gCOL_TOTAL_AMOUNT = 4;
+        const gCOL_FULLNAME = 5;
+        const gCOL_PHONE_NUMBER = 6;
+        const gCOL_STATUS = 7;
+        const gCOL_ORDER_DETAIL = 8;
+
+        //lấy danh sách order
+        function onBtnGetAllOrderClick()
+    {
+        //base url
+        const vBASE_URL = 'http://203.171.20.210:8080/devcamp-pizza365/orders';
+        //create a request
+        var vXmlHttpGetAllOrder = new XMLHttpRequest();
+        vXmlHttpGetAllOrder.open('GET', vBASE_URL, true);
+        vXmlHttpGetAllOrder.send();
+        vXmlHttpGetAllOrder.onreadystatechange = function(){
+            if(this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status ==gREQUEST_STATUS_OK){
+                var vOrderList = vXmlHttpGetAllOrder.responseText;
+                console.log(vOrderList);
+            }
+
+        }
+    }
+
+        /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+        
+
+        /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+        // Hàm thực hiện khi load trang
+        function onPageLoading() {
+            getAllOrders();
+
+        }
+
+        // hàm xử lý sự kiện khi nút detail click
+        function onBtnOrderDetailClick(paramOrderDetailClick)
+        {
+            // lấy data ở dataset
+            var vId = paramOrderDetailClick.dataset.id;
+            var vOrderCode = paramOrderDetailClick.dataset.ordercode;
+            // send data vào console
+            console.log('ID : '+vId);
+            console.log('Order code :' +vOrderCode);
+        }
+
+
+        /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+        // Hàm thực hiện việc load all orders từ server và load vào table
+        function getAllOrders() {
+             /**
+            * Chia để trị - 04 bước cố gắng thành 04 functions riêng biệt
+            */
+            // B1: Thu thập dữ liệu (trong bài này bước này ko cần)
+            // B2: Validate dữ liệu (trong bài này bước này ko cần)
+            // B3: Thực hiện việc gọi API từ server Server
+            var vXmlHttpGetAllOrders = new XMLHttpRequest();
+            callApiToGetAllOrders(vXmlHttpGetAllOrders);
+
+            // B4: Xử lý trên front-end khi request xử lý xong và trả về response thành công
+            vXmlHttpGetAllOrders.onreadystatechange = function () {
+                if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                    loadOrderToTable(vXmlHttpGetAllOrders);
+                }
+            }
+        }
+
+        // hàm gọi api để lấy all orders
+        function callApiToGetAllOrders(paramXMLHttpGetAllOrders) {
+            const vBaseUrl = "http://203.171.20.210:8080/devcamp-pizza365/orders";
+            paramXMLHttpGetAllOrders.open("GET", vBaseUrl, true);
+            paramXMLHttpGetAllOrders.send();
+        }
+
+        // input: xml http request đã đươc trả lời
+        // ouptut/end: dữ liệu hiên thi trên bảng
+        function loadOrderToTable(paramXMLHttpAllOrder) {
+            //CODE Ở ĐÂY ĐỂ LOAD DATA VÀO TABLE
+            console.log(paramXMLHttpAllOrder.responseText);
+
+            // parsing data thành object
+            var vAllOrderArrObjs = JSON.parse(paramXMLHttpAllOrder.responseText);
+            var vOrderTable = document.getElementById('table-order');
+            var vOrderTableBody = vOrderTable.getElementsByTagName('tbody')[0];
+            // thêm dòng data vào table body 
+            for (var i =0; i < vAllOrderArrObjs.length; i++)
+            {
+                // thêm dòng 
+                var bNewOrderRow = vOrderTableBody.insertRow(gEND_OF_TABLE_ROW);
+                // thêm từng ô
+                var bOrderCodeCell = bNewOrderRow.insertCell(gCOL_ORDER_CODE);
+                var bComboSizeCell = bNewOrderRow.insertCell(gCOL_COMBO_SIZE);
+                var bPizzaTypeCell = bNewOrderRow.insertCell(gCOL_PIZZA_TYPE);
+                var bDrinkCell = bNewOrderRow.insertCell(gCOL_DRINK);
+                var bTotalAmountCell = bNewOrderRow.insertCell(gCOL_TOTAL_AMOUNT);
+                var bFullNameCell = bNewOrderRow.insertCell(gCOL_FULLNAME);
+                var bPhoneNumberCell = bNewOrderRow.insertCell(gCOL_PHONE_NUMBER);
+                var bStatusCell = bNewOrderRow.insertCell(gCOL_STATUS);
+                var bOrderDetailCell = bNewOrderRow.insertCell(gCOL_ORDER_DETAIL);
+
+                // thêm data cho từng cell
+                bOrderCodeCell.innerHTML = vAllOrderArrObjs[i].orderCode;
+                bComboSizeCell.innerHTML = vAllOrderArrObjs[i].kichCo;
+                bPizzaTypeCell.innerHTML = vAllOrderArrObjs[i].loaiPizza;
+                bDrinkCell.innerHTML = vAllOrderArrObjs[i].idLoaiNuocUong;
+                bTotalAmountCell.innerHTML = vAllOrderArrObjs[i].thanhTien;
+                bFullNameCell.innerHTML = vAllOrderArrObjs[i].hoTen;
+                bPhoneNumberCell.innerHTML = vAllOrderArrObjs[i].soDienThoai;
+                bStatusCell.innerHTML = vAllOrderArrObjs[i].trangThai;
+                // thêm nút chi tiết
+                var bDetailButton = document.createElement('button');
+                bDetailButton.textContent = 'Chi tiết';
+                bDetailButton.className = 'btn btn-info order-detail';
+
+                // gán data của order(id và orderCode) vào dataset của button
+                bDetailButton.setAttribute('data-id',vAllOrderArrObjs[i].id);
+                bDetailButton.setAttribute('data-ordercode',vAllOrderArrObjs[i].orderCode);
+                bOrderDetailCell.appendChild(bDetailButton);
+
+                // thêm sự kiện click cho nút detail 
+                bDetailButton.addEventListener('click', function(){
+                    onBtnOrderDetailClick(this);
+                });
+
+            }
+
+        }
+        
+    </script>
+</body>
+
+</html>

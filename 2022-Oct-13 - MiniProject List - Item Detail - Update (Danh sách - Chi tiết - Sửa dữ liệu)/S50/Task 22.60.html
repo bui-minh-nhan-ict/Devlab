@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Task 22.60</title>
+</head>
+<body onload="onLoadPaging()">
+    <div class="container jumbotron">
+        <h1 class="text-center"> Danh sách người dùng đăng ký</h1>
+        <table id="user-table" class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Mã người dùng</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Country</th>
+                    <th>Subject</th>
+                    <th>Customer Type</th>
+                    <th>Register Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+        </table>
+    </div>
+    
+    
+</body>
+</html>
+<script>
+    // REGION 1 - Vùng khai báo biến, hằng số, tham số Toàn Cục
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+    const gBASE_URL = 'http://203.171.20.210:8080/devcamp-register-java-api/users'
+    const gEND_OF_ROW_COL = -1;
+
+    // REGION 2 - Vùng gán thực thi sự kiện cho các elements
+
+
+    // REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện
+    function onLoadPaging()
+    {
+        // gọi server
+        var vXHTMLRequest = new XMLHttpRequest();
+        callApiGetUsers(vXHTMLRequest);
+        vXHTMLRequest.onreadystatechange = function ()
+        {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK)
+            {
+                //Xử lý hiển thị 
+                showDataOnTable(vXHTMLRequest);
+
+                // gán sự kiện click cho nút chi tiết
+                addEventInfoButton();
+            }
+        };
+    }
+    
+    // Hàm xử lý gọi api send request
+    function callApiGetUsers(paramXmlHttp)
+    {
+        paramXmlHttp.open('GET', gBASE_URL, true);
+        paramXmlHttp.send();
+    }
+
+
+    //Load data từ response server trả vào table, hiện các button chi tiết
+    function showDataOnTable(paramXmlHttpUser)
+    {
+        console.log(paramXmlHttpUser.responseText);
+        // Chuyển json sang object
+        var vResponse = JSON.parse(paramXmlHttpUser.responseText);
+        var vTable = document.getElementById('user-table');
+        var vTableBody = vTable.getElementsByTagName('tbody')[0];
+        for (var i = 0; i < vResponse.length; i++)
+        {
+            // Tạo dòng mới cho table và ghi vào các giá trị
+            var vNewRow = vTableBody.insertRow(gEND_OF_ROW_COL);
+            var vCellMaNguoiDung = vNewRow.insertCell(gEND_OF_ROW_COL);
+            var vCellFirstName = vNewRow.insertCell(gEND_OF_ROW_COL);
+            var vCellLastName = vNewRow.insertCell(gEND_OF_ROW_COL);
+            var vCellCountry = vNewRow.insertCell(gEND_OF_ROW_COL);
+            var vCellSubject = vNewRow.insertCell(gEND_OF_ROW_COL);
+            var vCellCustomerType = vNewRow.insertCell(gEND_OF_ROW_COL);
+            var vCellRegisterStatus = vNewRow.insertCell(gEND_OF_ROW_COL);
+            var vCellUserAction = vNewRow.insertCell(gEND_OF_ROW_COL);
+
+            vCellMaNguoiDung.innerHTML = vResponse[i].id;
+            vCellFirstName.innerHTML = vResponse[i].firstname;
+            vCellLastName.innerHTML = vResponse[i].lastname;
+            vCellCountry.innerHTML = vResponse[i].country;
+            vCellSubject.innerHTML = vResponse[i].subject;
+            vCellCustomerType.innerHTML = vResponse[i].customerType;
+            vCellRegisterStatus.innerHTML = vResponse[i].registerStatus;
+            
+
+
+            //button, chứa data của dòng
+            var vDetailButton = document.createElement('button');
+            vDetailButton.className = 'info-user btn btn-info';
+            vDetailButton.setAttribute('data-id',vResponse[i].id);
+            vDetailButton.setAttribute('data-firstname',vResponse[i].firstname);
+            vDetailButton.setAttribute('data-lastname',vResponse[i].lastname);
+            vDetailButton.setAttribute('data-country',vResponse[i].country);
+            vDetailButton.setAttribute('data-subject',vResponse[i].subject);
+            vDetailButton.setAttribute('data-customer-type',vResponse[i].customerType);
+            vDetailButton.setAttribute('data-registerStatus',vResponse[i].registerStatus);
+            vDetailButton.setAttribute('data-register-status',vResponse[i].registerStatus);
+            vDetailButton.innerHTML = 'Chi tiết';
+            vCellUserAction.appendChild(vDetailButton);
+        }
+    }
+
+        //add listener cho event handler
+        // Khi ấn nút sẽ gọi function onBtnChiTietClick
+        function addEventInfoButton()
+        {
+            // truy xuất tất cả các nút detail qua classname
+            var vDetailButtons = document.getElementsByClassName('info-user');
+            for (var i=0;i<vDetailButtons.length;i++)
+            {
+                vDetailButtons[i].addEventListener('click', function()
+                {
+                    onBtnChiTietClick(this);
+                });
+                
+            }
+        }
+
+        function onBtnChiTietClick(paramDetailButton)
+        {
+            // Thu thập data
+            var vUserId = paramDetailButton.dataset.id;
+            var vFirstName = paramDetailButton.dataset.firstname;
+            var vLastName = paramDetailButton.dataset.lastname;
+            var vCountry = paramDetailButton.dataset.country;
+            var vSubject = paramDetailButton.dataset.subject;
+            var vCustomerType = paramDetailButton.dataset.customerType;
+            var vRegisterStatus = paramDetailButton.dataset.registerStatus;
+
+            console.log('Thông tin user');
+            console.log('User ID: ' +vUserId);
+            console.log('First Name: '+vFirstName);
+            console.log('Last Name: '+vLastName);
+            console.log('Country: '+vCountry);
+            console.log('Subject: '+vSubject);
+            console.log('CustomerType: '+vCustomerType);
+            console.log('RegisterStatus: '+vRegisterStatus);
+
+        }
+</script>

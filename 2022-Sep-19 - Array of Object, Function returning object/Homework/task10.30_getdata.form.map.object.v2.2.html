@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title> Task 10.30 - Get data form and map to object</title>
+</head>
+<script>
+  "use strict";
+  /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+  /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+  /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+  function onBtnSenClick() {
+    var vProductObj={ 
+        maSanPham: "", 
+        tenSanPham: "",
+        nhomSanPham: "", 
+        soLuongNhap: 0, 
+        country: "", 
+        price: 0
+      }
+
+      var vProductCode = document.getElementById("input-product-code").value;
+      vProductObj.maSanPham = vProductCode.trim();
+
+
+      //vProductObj.maSanPham = document.getElementById("input-product-code").value.trim();
+      vProductObj.tenSanPham = document.getElementById("input-product-name").value.trim();
+      vProductObj.nhomSanPham = document.getElementById("select-category").value.trim();
+      vProductObj.soLuongNhap = document.getElementById("input-inport-number").value.trim();
+      vProductObj.country = document.getElementById("select-country").value.trim();
+      vProductObj.price = document.getElementById("input-inport-products").value.trim();
+      console.log("Thong tin san pham:");
+      console.log(vProductObj);
+
+  }
+  /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/  
+
+</script>
+
+<body>
+  <div class="container jumbotron p-4">
+    <div class="text-center mb-4">
+      <h4>Quản lý sản phẩm</h4>
+    </div> 
+      <div class="row form-group">
+        <div class="col-sm-3">
+          <label for="input-product-code">Mã sản phẩm</label>
+        </div>
+        <div class="col-sm-9">
+          <input type="text" id="input-product-code" name="productcode" placeholder="Product code .." class="form-control">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-3">
+          <label for="input-product-name">Tên sản phẩm</label>
+        </div>
+        <div class="col-sm-9">
+          <input type="text" id="input-product-name" name="productname" placeholder="Product Name .." class="form-control">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-3">
+          <label>Nhóm sản phẩm</label>
+        </div>
+        <div class="col-sm-3">
+          <select id="select-category" class="form-control">
+            <option value="dientu">Điện tử</option>
+            <option value="hanggiadung">Hàng gia dụng</option>
+            <option value="dienlanh">Điện lạnh</option>
+          </select>
+        </div>
+        <div class="col-sm-3">
+          <label>Số lượng nhập</label>
+        </div>
+        <div class="col-sm-3">
+          <input type="text" id="input-inport-number" placeholder="Number of products ..." class="form-control">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-3">
+          <label>Nước sản xuất</label>
+        </div>
+        <div class="col-sm-3">
+          <select id="select-country" class="form-control">
+            <option value="USA">Mỹ</option>
+            <option value="VietNam">Việt Nam</option>
+            <option value="China">Trung Quốc</option>
+            <option value="Australia">Australia</option>
+          </select>
+        </div>
+        <div class="col-sm-3">
+          <label>Giá bán</label>
+        </div>
+        <div class="col-sm-3">
+          <input type="text" id="input-inport-products" placeholder="price of products ..." class="form-control">
+        </div>
+      </div>
+      <div class="row form-group text-right">
+        <div class="col-sm-12">
+          <button class="btn btn-info" id="btn-send" onclick="onBtnSenClick()"> Send </button>
+        </div>
+      </div> 
+  </div>
+</body>
+
+</html>

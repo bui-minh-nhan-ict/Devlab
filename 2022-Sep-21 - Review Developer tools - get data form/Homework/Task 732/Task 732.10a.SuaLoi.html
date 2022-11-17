@@ -1,0 +1,71 @@
+<html>
+<header>
+    <title> Task: kỹ năng căn bản - tag - input - 610</title>
+</header>
+<body>
+    <h1> Kỹ năng xử lý tag input - phần tử text cho phép nhập vào giá trị </h1>
+    <p style="font-style: italic; color: red;">(Trước khi ấn các nút hãy nhập giá trị cho các ô text)</p>
+    
+    <!-- Hiển thị input text html căn bản - subtask 1 -->
+    <input id="input-firstname" type="text">
+    <!-- Hiển thị input text html cơ bản, có placeholder - subtask 2 -->
+    <input id="input-lastname" placeholder="Nhập vào giá trị lastname ..." type="text">
+    <!-- Hiển thị input ô text chỉ cho phép nhập vào số - subtask 3 -->
+    <input id="input-nam-sinh" placeholder="Nhập vào năm sinh ..." type="number">
+    <hr>
+    <!-- các nút để truy vấn, truy vấn phần tử, đọc giá trị, gán giá trị  -->
+    <button onclick="onBtnTruyVanPhanTuInputClick()"> truy vấn phần tử input</button>
+    <button onclick="onBtnDocGiaTriInputClick()"> Đọc giá trị input text </button>
+    <button onclick="onBtnDocGiaTriCutSpaceClick()"> Đọc giá trị input text có cut khoảng trắng </button>
+    <button onclick="onBtnLayGiaTriParseIntClick()"> Đọc giá trị input text và chuyển về kiểu số</button>
+    <button onclick="onBtnGanGiaTriInputClick()"> Gán giá trị input text </button>
+</body>
+<script>
+    // subTask 4: Truy vấn input bằng javascript thông qua id
+    function onBtnTruyVanPhanTuInputClick() {
+        // truy vấn phần tử input-firstname
+        var vInputFirstName = document.getElementById("input-firstname");
+        console.log("subtask 4: Phần tử input-firstname :....");
+        console.log(vInputFirstName);
+    }
+
+    // subtask 5: Lấy giá trị input text bằng javascript
+    function onBtnDocGiaTriInputClick() {
+        // truy vấn phần tử input-lastname
+        var vInputLastName = document.getElementById("input-lastname");
+        var vLastName = vInputLastName.value;
+        console.log("subtask 5: Phần tử input-lastname ...");
+        console.log("Giá trị = " + vLastName);
+    }
+
+    // subtask 6: Lấy giá trị input text có cắt khoảng trắng ở 2 đầu
+    function onBtnDocGiaTriCutSpaceClick() {
+        // truy vấn phần tử input-firstname
+        var vInputFirstName = document.getElementById("input-firstname");
+        // lấy giá trị first name, sử dụng hàm trim để cắt khoảng trắng ở 2 đầu
+        var vFirstName = vInputFirstName.value.trim();
+        console.log("subtask 6: Phần tử input-firstname");
+        console.log("Giá trị đã cắt khoảng trắng 2 đầu: " + vFirstName);
+    }
+    
+    // subtask 7: Lấy giá trị input text là số và chuyển về kiểu số
+    function onBtnLayGiaTriParseIntClick() {
+        // truy vấn phần tử input-nam-sinh
+        var vInputNamSinh = document.getElementById("input-nam-sinh");
+        // lấy giá trị chuỗi (text) năm sinh
+        var vNamSinhText = vInputNamSinh.value;
+        // chuyển giá trị chuỗi năm sinh về dạng số (number)
+        var vNamSinhNumber = parseInt(vNamSinhText);
+        console.log("subtask 7: Giá trị tuổi sau khi chuyển về số: " + vNamSinhNumber);
+    }
+
+    // subtask 8: Gán giá trị cho input text bằng javascript
+    function onBtnGanGiaTriInputClick() {
+        // truy vấn phần tử input-firstname
+        var vInputFirstName = document.getElementById("input-firstname");
+        // gán một giá trị cho phần tử input
+        vInputFirstName.value = "Trần Hoàng";
+    }
+    
+</script>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 3b.10 - Đoạn văn dài nhất</title>
+</head>
+<body>
+    <h3>Tìm số chiều dài của đoạn văn dài nhất</h3>
+</body>
+
+<script>
+    // Viết tiếp code Javascript xuống dưới đây
+    var Array = ["apple" , "mango", "banana", "ape", "application", "lime", "soap" , "orange", "open"];
+    var ChieuDaiChuoi = 0;
+    var ChuoiDaiNhat = "";
+    for (i = 0; i < Array.length; i++){
+        var len = Array[i].length
+        if(ChieuDaiChuoi < Array[i].length){
+            ChieuDaiChuoi = Array[i].length;
+            ChuoiDaiNhat = Array[i];
+        }
+    }
+    
+    console.log(ChuoiDaiNhat + " là phần tử có chiều dài lớn nhất, với " + ChieuDaiChuoi + " ký tự");
+</script>
+</html>

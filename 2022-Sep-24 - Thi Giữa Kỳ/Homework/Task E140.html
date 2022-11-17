@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <title> Task E140</title>
+</head>
+
+<body>
+    <button onclick="onBtnTestCodeClick()"> Test Code Task E140 </button>
+</body>
+<script>
+
+    //function để test code
+    function onBtnTestCodeClick() {
+        console.log("Kết Quả Test Code: ");
+        var vHSNga = gHSInfo("01", "Nhẫn", 8, 5, 1);
+        var vHSPhuong = gHSInfo("02", "My", 2, 9, 4);
+        var vHSToan = gHSInfo("03", "Đại", 8, 9, 9);
+
+        printHSInfo(vHSNga);
+        printHSInfo(vHSPhuong);
+        printHSInfo(vHSToan);
+    }
+    // Function get Hoc Sinh info
+    function gHSInfo(paramMaHS, paramTenHS, paramDiemToan, paramDiemVan, paramDiemAnh) {
+        var vHocSinh = {
+            maHocSinh: paramMaHS,
+            tenHocSinh: paramTenHS,
+            diemToanVanAnh: [paramDiemToan, paramDiemVan, paramDiemAnh],
+            tinhDiemTrungBinhMon: function () {
+                return (this.diemToanVanAnh[0] + this.diemToanVanAnh[1] + this.diemToanVanAnh[2]) / 3;
+            },
+            xepLoai: function () {
+                var vXepLoai = "";
+                if (this.tinhDiemTrungBinhMon() < 5) {
+                    vXepLoai = "Kém";
+                }
+                else if (this.tinhDiemTrungBinhMon() < 6.5) {
+                    vXepLoai = "Trung Bình";
+                }
+                else if (this.tinhDiemTrungBinhMon() < 8) {
+                    vXepLoai = "Khá";
+                }
+                else {
+                    vXepLoai = "Giỏi";
+                }
+                return vXepLoai;
+            }
+        };
+        return vHocSinh;
+    }
+
+    function printHSInfo(paramHocSinh) {
+        console.log(paramHocSinh);
+        console.log("Tên HS: " + paramHocSinh.tenHocSinh);
+        console.log("Điểm TB: " + paramHocSinh.tinhDiemTrungBinhMon());
+        console.log("Xếp loại: " + paramHocSinh.xepLoai());
+    }
+</script>
+
+</html>

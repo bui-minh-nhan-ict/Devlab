@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> task task 7.25: SAMPLE TEST FORM </title>
+</head>
+
+<body onload="onPageLoading()">
+    <h1 id="h1_chao_mung"> Test Form - DevCamp 120 </h1>
+    <p id="p_muc_tieu"> Để tiện cho test các function trên console.log !</p>
+    <button onclick="onBtnTestButton1Click()"> Test Button 1</button>
+</body>
+<script>
+    "use strict"
+    /*
+    || Vùng 1: định nghĩa global variables (biến toàn cục)
+    */
+
+    /*
+    || Vùng 2: event handlers - function xử lý sự kiện  
+    */
+    // event handler - function xử lý sự kiện
+    // gọi khi nào: click nút 
+    function onBtnTestButton1Click() {
+        console.log("Ấn nút và Test code tại đây..");
+
+    }
+    // evant handlers - ghi thong tin phần tử H1 ra màn hình
+    // gọi khi nào: gọi khi load/f5
+    function onPageLoading() {
+        console.log("%c Load trang tại đây", "color:blue");
+        testTask725();
+
+    }
+    /*
+    || vùng 3: common function - function dùng chung, để gọi từ vùng 2, hoặc từ console
+    */
+    function TestConsole1() {
+        console.log("....Gọi từ console để test tại đây ....");
+        var vLapTrinhRatHay = true;
+        console.log(typeof vLapTrinhRatHay);
+    }
+    // function để thử tính tổng các số trong 01 array
+    function testTask725() {
+        //THEO VẾT: bạn hãy ghi ra console đế biết là task725 bắt đầu
+        var myNumbers = [1, 2, 5, 6, 7, 5];
+        var sumNumber = 0;
+        /// code come here
+        for (var bViTriHienTai = 0; bViTriHienTai < myNumbers.length; bViTriHienTai++) {
+            sumNumber += myNumbers[bViTriHienTai];
+            //THEO VẾT: bạn hãy ghi ra console, Vị trí hiện tại, Giá trị của số hiện tại trong array, và sumNumber để THEO DÕI.
+            console.log(`Vị trí: ${bViTriHienTai + 1}, giá trị là ${myNumbers[bViTriHienTai]}, tổng là: ${sumNumber}`);
+        }
+        /// code ends here
+        console.log("sumNumber = " + sumNumber);
+    }
+</script>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- link để sử dụng jquery và boostsrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+    
+        <h1 id = "h1-chao-mung"> Chào bạn đến với Jquery !!!</h1>
+        <h1 id = "h1-jquery-doi-tuong" style="color:blue"> Jquery là đối tượng vỏ bao ra ngoài đối tượng DOM </h1>
+        <p id = "p-jquery-muc-tieu" style = "color:green" > Jquery sẽ giúp chúng ta lập trình được nhiều hơn, code ngắn hơn </p>
+        <button id = "btn-khau-hieu"> Ấn nút này để thử  </button>
+        <button id = "btn-doi-mau-h1-chao-mung"> Ấn nút này để đổi màu H1 chào mừng  </button>
+
+</body>
+<script>
+"use strict";
+$(document).ready(
+function () {
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC, gọi hàm khi load */
+    onPageLoading();
+
+    /*** Region 2: gán hàm xử lý sự kiện ***/
+    $("#btn-khau-hieu").click(onBtnKhauHieuClick);
+    $('#btn-doi-mau-h1-chao-mung').click(onBtnDoiMauH1ChaoMungClick);
+    
+    /*** Region 3: hàm xử lý sự kiện  */
+    //xử lý sự kiện nút khẩu hiểu
+    function onBtnKhauHieuClick() {
+        alert("Rèn luyện nhiều Jquery, Sẽ làm nhanh");
+    }
+
+    // xử lý sự kiện nút btn-doi-mau-h1-chao-mung
+    function onBtnDoiMauH1ChaoMungClick(){
+        console.log('Đổi màu h1 chào mừng - subtask 1');
+        $('h1:first').css('color', 'yellow');
+    }
+    /*** Region 4: hàm dùng chung*/
+    function onPageLoading () {
+        console.log("%c Loading Page ...Tải trang...", "color:orange");      
+    }
+
+}
+);
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> Task 3B.2 Function JS </title>
+</head>
+<body>
+    <h1 id="h1_chao_mung">  Test Function -  DevCamp 120 </h1>
+</body>
+<script >
+    // Khai báo function kiểm tra xem 1 số có chia hết cho 3 hay không?
+    function kiemTraChiaHetCho3 (paramSoInput) {
+        // khai báo biến chứa kết quả chia hết hay không chia hết
+        var ketQua;
+        // lấy phần dư của phép chia số đầu vào cho 3
+        var phanDu = paramSoInput % 3;
+        // nếu phần dư bằng 0 thì nghĩa là chia hết, cho kết quả = true
+        if (phanDu == 0) {
+            ketQua = true;
+        } // ngược lại thì không chia hết, cho kết quả = false
+        else {
+            ketQua = false;
+        }
+
+        return ketQua; // trả lại kết quả cho hàm là true hoặc false
+    }
+
+    // Câu 1
+    console.log(kiemTraChiaHetCho3(3));
+
+    // Câu 2
+    function tinhTong2So (num1 ,num2)
+    {
+        var ketquacau2 = num1+num2;
+        return ketquacau2;
+
+    }
+    console.log(tinhTong2So(2,3));
+
+    // Câu 3
+    var soThu1= 10;
+    var soThu2 = 15;
+    var tongHaiSo = tinhTong2So(soThu1, soThu2);
+    console.log(tongHaiSo);
+</script>
+
+</script>
+</html>

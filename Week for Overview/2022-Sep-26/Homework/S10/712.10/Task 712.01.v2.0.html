@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> task 712.01 Function JS </title>
+</head>
+
+<body onload="onPageLoading()">
+    <h1 id="h1_chao_mung"> Test Form - DevCamp 120 </h1>
+    <p id="p_muc_tieu"> Để tiện cho test các function trên console.log !</p> 
+    <button onclick="onBtnTinhDiemTrungBinhClick()"> Tính điểm trung bình</button>
+    <button onclick="onBtnChiaHetCho7()"> Kiểm tra chia hết cho 7</button>
+
+</body>
+<script>
+    "use strict"
+    /*
+    || Vùng 2: event handlers - function xử lý sự kiện  
+    */
+    // event handler - function xử lý sự kiện
+    // gọi khi nào: click nút 
+    function onBtnTinhDiemTrungBinhClick (){ 
+        var  vDiemToan = 8;
+        var  vDiemVan = 9;
+        var vKetQuaTinhDiemTrungBinh = tinhDiemTrungBinh(vDiemtoan,vDiemVan);
+        console.log("Điểm trung bình hai môn Toán và Văn là: " + vKetQuaTinhDiemTrungBinh);      
+    }
+    // evant handlers - ghi thong tin phần tử H1 ra màn hình
+    // gọi khi nào: gọi khi load/f5
+    function onPageLoading() {
+        console.log("%c Load trang tại đây", "color:blue");
+    }
+    /*
+    || vùng 3: common function - function dùng chung, để gọi từ vùng 2, hoặc từ console
+    */
+    function onBtnChiaHetCho7()
+    {
+        var vNumber = kiemTraChiaHetCho7(17);
+        console.log(vNumber);
+    }
+    // function để test length của string
+    function testStringLength() {
+        var vStr1 = "ABC 123";
+        console.log("length của:" + vStr1);
+        console.log(vStr1.length);
+
+        var vStr2 = "";
+        console.log("length của đoạn văn trắng");
+        console.log(vStr2.length);
+    }
+
+    // function tính lập phương của một số 
+    function tinhLapPhuong(paramSoInput) {
+        var vKetQua = paramSoInput * paramSoInput * paramSoInput; //tính lập phương
+        return vKetQua; // trả lại kết quả
+    }
+
+    //function kiểm tra số chia hết cho 3
+    function kiemTraChiaHetCho3(paramN) {
+        var vKetQua = (paramN % 3 === 0);
+        return vKetQua;
+    }
+
+    //function tính tổng các số trong array
+    function tinhTongCacSoTrongArray(paramArrayInput) {
+        var vSum = 0;
+        for (var bIndex = 0; bIndex < paramArrayInput.length; bIndex++) {
+            vSum += paramArrayInput[bIndex];
+        }
+        return vSum;
+    }
+
+    //function tính tổng các số trong array
+    function tangCacSoTrongArray(paramArrayInput) {
+        for (var bIndex = 0; bIndex < paramArrayInput.length; bIndex++) {
+            paramArrayInput[bIndex]++;
+        }
+    }
+
+    function kiemTraChiaHetCho7(paramN) {
+        var vKetQua = (paramN % 7 === 0);
+        return vKetQua;
+    }
+
+    function tinhDiemTrungBinh(paramDiemToan, paramDiemVan){
+        var  vDiemTrungBinh;
+        vDiemTrungBinh = (paramDiemToan + paramDiemVan) / 2;
+        return vDiemTrungBinh;
+    }
+
+
+</script>
+
+</html>

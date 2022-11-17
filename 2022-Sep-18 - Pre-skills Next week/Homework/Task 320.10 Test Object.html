@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> Task 320.10 Test Object </title>
+</head>
+<body onload="onPageLoading()">
+    <h1 id="h1_chao_mung">  Test Objects </h1>
+    <button id = "btn-test-object-10" onclick="onBtnTestObject10()"> Test tạo object</button>
+    <button id = "btn-test-object-20" onclick="onBtnTestObject20()"> Test tạo object qua hàm (function)</button> 
+    <hr>
+    <button id = "btn-new-object" onclick="onBtnNewObject()"> Tạo New Object</button>
+    <button id = "btn-thu-cung-object" onclick="onThuCungObject()"> Tạo new Objects thú cưng qua hàm (function)</button> 
+</body>
+<script >
+    "use strict"
+    /*
+    || Vùng 2: event handlers - function xử lý sự kiện  
+    */
+    // event handler - function xử lý sự kiện
+    // gọi khi nào: click nút test object 10
+    function onBtnTestObject10(){
+        console.log("Test object tại đây 10: ....");
+        var vOtoCuaToi = {
+                        thuongHieu: "Mazda",
+                        loai: "Mazda 6",
+                        namSanXuat: 2015,
+                        bks: "30a 22121"
+                    };
+        console.log(vOtoCuaToi);
+      
+    }
+
+    //tạo object mới 
+    function onBtnNewObject(){
+        console.log("New Object tại đây: ....");
+        var vMyDog = {
+                        loai: "Chó",
+                        ten: "Mike",
+                        namSinh: 2016,
+                        giong: "Corgi"
+                    };
+        console.log(vMyDog);
+      
+    }
+
+    // gọi khi ấn nút 
+    function onThuCungObject ()
+    {
+        var vThuCungA = getThuCungObject("Chó", "Bon", 2016, "Corgi");
+        var vThuCungB = getThuCungObject("Chó", "Mít", 2020, "Phú Quốc");
+        var vThuCungC = getThuCungObject("Mèo", "Doc", 2019, "Ba Tư");
+        console.log(vThuCungA);
+        console.log(vThuCungB);
+        console.log(vThuCungC);
+    }
+
+    // gọi khi ấn nút test object 20
+    function onBtnTestObject20() {
+        var vOtoA = getOtoObject("Mazda", "Mazda 6", 2015, "30a 22121");
+        var vOtoB = getOtoObject("Toyota", "Yaris", 2018, "30g 41983");
+        var vOtoC = getOtoObject("Fiat", "Siena", 2022, "99C 39293");
+        console.log(vOtoA);
+        console.log(vOtoB);
+        console.log(vOtoC);
+    }
+
+    // evant handlers - ghi thong tin phần tử H1 ra màn hình
+    // gọi khi nào: gọi khi load/f5
+    function onPageLoading(){
+        console.log("%c Load trang tại đây", "color:blue");
+    }
+    /*
+    || vùng 3: common function - function dùng chung, để gọi từ vùng 2, hoặc từ console
+    */
+    //tạo object
+    function getOtoObject (paramThuongHieu, paramLoaiXe, paramNamSanXuat, paramBKS){
+        var vOtoKetQua = {
+                        thuongHieu: paramThuongHieu,
+                        loai: paramLoaiXe,
+                        namSanXuat: paramNamSanXuat,
+                        bks: paramBKS
+                    };
+        return vOtoKetQua;
+
+    }
+
+    // tạo object thú cưng
+    function getThuCungObject (paramLoai, paramTen, paramNamSinh, paramGiong){
+        var vThuCungKetQua = {
+                        loai: paramLoai,
+                        ten: paramTen,
+                        namSinh: paramNamSinh,
+                        giong: paramGiong
+                    };
+        return vThuCungKetQua;
+
+    }
+
+    //tạo object tài khoản
+    function getTaiKhoan ( paramSTK, paramNganHang, paramChuTaiKhoan, paramSoDu ) {
+        var vTaiKhoanKetQua = {
+            soTaiKhoan: paramSTK,
+            nganHang: paramNganHang,
+            chuTaiKhoan: paramChuTaiKhoan,
+            soDu: paramSoDu,
+            // thêm method, function (ghi so du)
+            ghiSoDu: function () {
+                console.log("Số tài khoản: " + this.soTaiKhoan);
+                console.log("Có số dư là: " + this.soDu);
+            }  
+        }
+        return vTaiKhoanKetQua;
+    }
+
+
+
+</script>
+</html>

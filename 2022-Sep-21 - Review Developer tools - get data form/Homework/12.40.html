@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 12.40</title>
+</head>
+<body onload="onPageLoading()" style="width: 450px;">
+    <!--Bắt đầu vùng màu xám-->
+<div style ="background-color: darkgray;">
+    <label id="label-fname">FirstName<span style="color: red;">(*)</span></label>
+    <input type="text" placeholder="FirstName..." id="input-fname"> 
+    <br>
+    <label id="label-lname">LastName<span style="color:red;">(*)</span></label>
+    <input type="text" placeholder="LastName..." id="input-lname"> 
+    <br>
+    <label id="label-country">Country<span style="color:red;">(*)</span></label>
+    <select id="select-country">
+        <option value="all">Select Country</option>
+        <option value="vietnam">Việt Nam</option>
+        <option value="usa">Mỹ</option>
+        <option value="australia">Úc</option>.
+        <option value="china">Trung Quốc</option>
+    </select>
+    <br>
+    <button onclick="onBtnSendClick()" type="button" id="btn-send">Send</button>
+</div>
+
+<!-- Kết thúc vùng from màu xám
+
+Vùng hiển thị thông tin user -->
+<div id="div-container-user" style="background-color: aquamarine; display: none;"> <!--display: non không hiển thị ra-->
+    <div id="div-user-infor">...</div>
+</div>
+<script>
+     "use strict";
+    function onPageLoading()
+    {
+    var vElementLableFirstName = document.getElementById("lable-fname");
+    var vElementFirstName = document.getElementById("input-fname");
+    var vElementLabelLastName = document.getElementById("lable-lname");
+    var vElementLastName = document.getElementById("input-lname");
+    var vElementLableCoutry = document.getElementById("lable-country");
+    var vElementCountry = document.getElementById("select-country");
+    var vElementBtnSend = document.getElementById("btn-send");
+    var vElementDivUserInfor= document.getElementById("div-user-infor");
+    // debugger;
+    }
+
+    //Khi bấm nút send
+    function onBtnSendClick()
+    {
+        "use strict";
+        // debugger;
+        console.log("%c Nút send được ấn","color:violet");
+        //khai báo đối tượng user chứa data
+        var vUser = 
+        {
+            firstName:"",
+            lastName:"",
+            country:""
+        }
+        //B1. thu thập data
+        getUserInfor(vUser);
+        //B2. Kiểm tra data
+        var vIsValidate = validateDataUser(vUser);
+        //B3. ghi data ra web
+        if (vIsValidate ==true)
+        {
+            writeDataUser(vUser);
+        }
+    }
+
+    // Hàm thu thập thông tin user
+    function getUserInfor(paramObjectUser)
+    {
+        "use strict";
+        var vElementLastName = document.getElementById("input-lname");
+        var vElementFirstName = document.getElementById("input-fname");
+        var vElementCountry = document.getElementById("select-country");
+
+
+        var vFirstNameValue = vElementFirstName.value.trim();
+        var vLastNameValue = vElementLastName.value.trim();
+        var vCountryValue = vElementCountry.value;
+        paramObjectUser.firstName = vFirstNameValue;
+        paramObjectUser.lastName = vLastNameValue;
+        paramObjectUser.country = vCountryValue;
+    }
+        //Hàm kiểm tra thông tin user nhập vào
+        function validateDataUser(paramObjectUser)
+        {
+            "use strict";
+            if (paramObjectUser.firstName ==="")
+            {
+                console.assert(false, "Chưa nhập firstname ");
+                alert("Chưa nhập firstname");
+                return false;
+            }
+            if (paramObjectUser.lastName ==="")
+            {
+                console.assert(false,"Chưa nhập lastname");
+                alert("Chưa nhập lastname");
+                return false;
+            }
+            if (paramObjectUser.country === "")
+            {
+                console.assert(false, "Chưa nhập country");
+                alert("Chưa nhập country");
+                return false;
+            }
+            return true;
+        }
+    
+    function writeDataUser(paramObjectUser)
+    {
+        "use strict";
+        var vElementDivContainerUser = document.getElementById("div-container-user");
+        var vElementDivUserInfor = document.getElementById("div-user-infor");
+
+        //Hiển thị vùng div use lên
+        vElementDivContainerUser.style.display ='block';
+
+        //Ghi data user vào thẻ div user info
+        vElementDivUserInfor.innerHTML =
+        "firstname: " + paramObjectUser.firstName + "<br>"
+        + "lastname: " + paramObjectUser.lastName + "<br>"
+        + "country: " + paramObjectUser.country;
+    }
+</script>
+</body>
+</html>

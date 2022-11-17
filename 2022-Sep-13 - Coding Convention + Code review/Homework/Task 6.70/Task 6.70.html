@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 6.70</title>
+</head>
+<body onload="onPageLoading()">
+    <h1 id="h1-title">Chào mừng đến với Devcamp120</h1>
+    <img src="images/programing.png" id="img-programing"> <br> <br>
+    <label id="lbl-message">Message cho bạn 12 tháng tới</label> <br>
+    <input id="input-message" placeholder="Nhập message ..."> <br> <br>
+    <button id="btn-send-message" onclick="onBtnSendMessageClick()" >Gửi thông điệp</button>
+    <div id = "div-message-container"> 
+        <!-- <p id="p-message" style="color: blue; display: none;" >chỗ này hiển thị thông điệp</p> -->  <!-- để rỗng điv và add P vào -->
+    </div>
+       <img id="img-like" src="images/like-yellow-icon.png" style="width: 10%; display: none;" >
+</body>
+
+<script>
+    // hàm xử lý sự kiện khi tải trang
+    function onPageLoading() {
+        // Truy xuất các thẻ HTML theo id
+        var h1Title = document.getElementById("h1-title");
+        var imgProgramming = document.getElementById("img-programing");
+        var lblMessage = document.getElementById("lbl-message");
+        var inputMessage = document.getElementById("input-message");
+        var btnSendMessage = document.getElementById("btn-send-message");
+        var pMessage = document.getElementById("input-message");
+        var imgLikeYellow = document.getElementById("img-like");
+        // ghi thông tin id, innerHTML, src, .. ra console
+        console.log(h1Title.id);
+        console.log(h1Title.innerHTML);
+
+        console.log(imgProgramming.id);
+        console.log(imgProgramming.src);
+
+        console.log(lblMessage.id);
+        console.log(lblMessage.innerHTML);
+
+        console.log(inputMessage.id);
+        console.log(inputMessage.placeholder);
+
+        console.log(btnSendMessage.id);
+        console.log(btnSendMessage.innerHTML);
+
+        console.log(pMessage.id);
+        console.log(pMessage.innerHTML);
+
+        console.log(imgLikeYellow.id);
+        console.log(imgLikeYellow.src);
+    }
+
+    // hàm xử lý khi nút send message click
+    function onBtnSendMessageClick() {
+       console.log("Send meesage to me");
+       var inputMessage = document.getElementById("input-message");
+       var message = inputMessage.value;
+       console.log(message);
+
+       var pMessage = document.createElement("P");
+       pMessage.style.color = "blue";
+       pMessage.innerHTML = message;
+       pMessage.style.display="block";
+       var vDivContainer = document.getElementById("div-message-container");
+       vDivContainer.appendChild(pMessage);
+    }
+
+</script>
+
+</html>

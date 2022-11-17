@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Subject</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body onload="onPageLoading()">
+    <h3 class="text-center my-3">SỬA THÔNG TIN MÔN HỌC</h3>
+    <div class="container jumbotron py-5">
+        <div class="form-group row">
+            <label for="input-ma-mon" class="col-sm-2 col-form-label">Mã môn <span class="text-danger font-weight-bold">(*)</span></label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="input-ma-mon" placeholder="Mã môn">
+            </div>
+            <label for="input-so-tin-chi" class="col-sm-2 col-form-label">Số tín chỉ <span class="text-danger font-weight-bold">(*)</span></label>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" id="input-so-tin-chi" placeholder="Số tín chỉ">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="input-ten-mon" class="col-sm-2 col-form-label">Tên môn <span class="text-danger font-weight-bold">(*)</span></label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="input-ten-mon" placeholder="Tên môn">
+            </div>
+            <div class="col-sm-4">
+              <button class="btn btn-secondary" onclick="onBtnHuyClick()">Hủy</button>
+              <button class="btn btn-success" onclick="onBtnEditSubjectClick()">Sửa môn học</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_CREATE_OK = 201; // status 201 là tạo mới thành công
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+
+    const gBASE_URL = "https://62454a477701ec8f724fb923.mockapi.io/api/v1/";
+    var gSubjectId;
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    function onPageLoading() {
+        // B1: thu thập dữ liệu (trên querystring)
+        var vUrlParams = new URLSearchParams(window.location.search);
+        gSubjectId = vUrlParams.get('id');
+        // B2: validate dữ liệu
+        if(gSubjectId !== null) {
+            var vXhttp = new XMLHttpRequest();
+            // B3: gọi api để lấy thông tin môn học
+            callApiGetSubjectById(gSubjectId, vXhttp);
+            // B4: hiển thị thông tin môn học lên form
+            vXhttp.onreadystatechange = function () {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                hienThiThongTinMonHoc(vXhttp);
+            }
+        };
+        }
+        else {
+            alert("Thiếu tham số bắt buộc id");
+            window.location.href = "Task 24B.10.List Subjects.html";
+        }
+    }
+
+    // hàm xử lý sự kiện nút Hủy click
+    function onBtnHuyClick() {
+        window.location.href = "Task 24B.10.List Subjects.html";
+    }
+
+    // hàm xử lý sự kiện nút Sửa môn học click
+    function onBtnEditSubjectClick() {
+        // Khai báo đối tượng môn học để chứa dữ liệu trên form
+        var vSubjectObjRequest = {
+            subjectCode: "",
+            subjectName: "",
+            credit: 0
+        };
+        // B1: Thu thập dữ liệu
+        thuThapDuLieu(vSubjectObjRequest);
+        // B2: validate dữ liệu trên form
+        var vDuLieuHopLe = kiemTraDuLieu(vSubjectObjRequest);
+        if(vDuLieuHopLe) {
+            var vXmlHttp = new XMLHttpRequest();
+            // B3: gọi api để sửa thông tin môn học
+            goiApiDeSuaMonHoc(vSubjectObjRequest, vXmlHttp);
+            // B4: hiển thị kết quả và quay về danh sách môn học
+            vXmlHttp.onreadystatechange = function () {
+                if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                    hienThiKetQuaSuaMonHoc();
+                }
+            }
+        }
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    // hàm gọi api để lấy thông tin môn học dựa vào Id
+    function callApiGetSubjectById(paramSubjectId, paramXmlHttp) {
+        var vAPI_URL = gBASE_URL + "/subjects/";
+        paramXmlHttp.open("GET", vAPI_URL + paramSubjectId, true);
+        paramXmlHttp.send();
+    }
+
+    // hàm hiển thị thông tin môn học lên form
+    function hienThiThongTinMonHoc(paramXmlHttp) {
+        var vSubjectObj = JSON.parse(paramXmlHttp.responseText);
+
+        var vInputMaMon = document.getElementById("input-ma-mon");
+        var vInputTenMon = document.getElementById("input-ten-mon");
+        var vInputSoTinChi = document.getElementById("input-so-tin-chi");
+
+        vInputMaMon.value = vSubjectObj.subjectCode;
+        vInputSoTinChi.value = vSubjectObj.credit;
+        vInputTenMon.value = vSubjectObj.subjectName;
+    }
+
+    function thuThapDuLieu(paramSubjectObj) {
+        var vInputMaMon = document.getElementById("input-ma-mon");
+        var vInputTenMon = document.getElementById("input-ten-mon");
+        var vInputSoTinChi = document.getElementById("input-so-tin-chi");
+
+        paramSubjectObj.subjectCode = vInputMaMon.value.trim();
+        paramSubjectObj.subjectName = vInputTenMon.value.trim();
+        paramSubjectObj.credit = parseInt(vInputSoTinChi.value.trim());
+    }
+
+    function kiemTraDuLieu(paramSubjectObj) {
+        if(paramSubjectObj.subjectCode == "") {
+            alert("Mã môn chưa được nhập vào");
+            return false;
+        }
+
+        if(paramSubjectObj.subjectName == "") {
+            alert("Tên môn chưa được nhập vào");
+            return false;
+        }
+
+        if( isNaN(paramSubjectObj.credit) ) {
+            alert("Số tín chỉ nhập vào phải là số!");
+            return false;
+        }
+
+        return true;
+    }
+
+    function goiApiDeSuaMonHoc(paramSubjectObj, paramXmlHttp) {
+        const vAPI_URL = gBASE_URL + "/subjects/";
+        paramXmlHttp.open("PUT", vAPI_URL + gSubjectId, true);
+        paramXmlHttp.setRequestHeader("Content-Type", "application/json");
+        paramXmlHttp.send(JSON.stringify(paramSubjectObj));
+    }
+
+    function hienThiKetQuaSuaMonHoc() {
+        alert("Bạn đã sửa môn học thành công");
+        window.location.href = "Task 24B.10.List Subjects.html";
+    }
+</script>
+</html>

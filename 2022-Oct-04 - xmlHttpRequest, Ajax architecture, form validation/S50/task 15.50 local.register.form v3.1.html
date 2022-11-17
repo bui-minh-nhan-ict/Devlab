@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+</head>
+<body onload="onPageLoading()">
+  <div class="jumbotron container">
+      <div class="form-group">
+        <h3 class="text-center">Sample form: đăng kí visa</h3>
+      </div>
+      <div class="form-group">
+        <label  >First Name</label>
+        <input id= 'inp-first-name'type="text" name="firstname" class="form-control" placeholder="Your name..">
+      </div>
+      <div class="form-group">
+        <label  >Last Name</label>
+        <input id= 'inp-last-name' type="text"  name="lastname" class="form-control" placeholder="Your last name..">
+      </div>
+      <div class="form-group">
+        <label  >Country</label>
+        <select id = 'select-country' class="form-control" name="country">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label  >Subject</label>
+        <textarea name="subject" class="form-control" id='inp-subject' placeholder="Write something.." style="height:50px"></textarea>
+      </div>
+      <div class="form-group">
+        <button onclick="onBtnSubmitClick()" id='btn-submit' class="btn btn-primary">Submit Regisration Data</button>
+      </div>
+    <div id='div-result' class="bg-warning">
+      some result come here - kết quả có thể ghi ra đây
+    </div>
+  </div>
+</body>
+<script>
+
+  //viết code của bạn ở đây
+  function onPageLoading()
+  {
+    var vInpFirstName = document.getElementById("inp-first-name");
+    var vInpLastName = document.getElementById("inp-last-name");
+    var vSelectCountry = document.getElementById("select-country");
+    var vInpSubject = document.getElementById("inp-subject");
+    var vDivResult = document.getElementById('div-result');
+    var vButtonSubmit = document.getElementById('btn-submit');
+    console.log (vInpFirstName.id +" "+ vInpFirstName.value);
+    console.log(vInpLastName.id +" "+ vInpLastName.value);
+    console.log(vSelectCountry.id +" "+ vSelectCountry.value);
+    console.log(vInpSubject.id +" "+ vInpSubject.value);
+    console.log(vButtonSubmit.id +" "+ vButtonSubmit.value);
+    console.log(vDivResult.id +" "+ vDivResult.innerHTML);
+  }
+  // mô tả API bạn xem ở file: mo_ta_api.txt
+  // hàm gọi khi nhấn nút
+  function onBtnSubmitClick()
+  {
+    var vObjectUser = 
+    {
+      firstName: "",
+      lastName:"",
+      country: "",
+      subject:"",
+    }
+
+    //B1. Thu thập dữ liệu
+    readUserData(vObjectUser);
+    //B2. validate data
+    var vCheckResult = validateData(vObjectUser);
+    if(vCheckResult)
+    {
+      sendRequestServer(vObjectUser); // B3. gửi cho server yêu cầu
+    }
+  }
+
+
+  // tạo hàm request server
+  function sendRequestServer(paramObjectUser)
+  {
+    //Tiếp B3. gọi server
+    var vXmlHttp = new XMLHttpRequest();
+    var vLinkRequest = 'http://203.171.20.210:8080/devcamp-register-java-api/rest-api?firstname=' + paramObjectUser.firstName + "&lastname="
+    + paramObjectUser.lastName +"&country="+ paramObjectUser.country +"&subject="+ paramObjectUser.subject;
+    vXmlHttp.open('GET',vLinkRequest,false);
+    vXmlHttp.send();
+    //B4. Hiển thị thông tin
+    processResponse(vXmlHttp);
+  }
+
+  // hàm xử lý trả lời của server (B4. xử lý dữ liệu và hiển thị)
+  function processResponse(paramXmlHttp)
+  {
+    var vJsonStringResponse = paramXmlHttp.responseText;
+    console.log('responseText: '+paramXmlHttp.responseText);
+
+    //Chuyển sang Json Object và hiển thị lên thẻ Div
+    var vObjectResponse = JSON.parse(vJsonStringResponse);
+
+    var vDivResult = document.getElementById('div-result');
+    vDivResult.innerHTML = "ID: "+vObjectResponse.id +'<br>';
+    vDivResult.innerHTML = "First Name : "+vObjectResponse.firstName +'<br>';
+    vDivResult.innerHTML = "Last Name: "+vObjectResponse.lastName +'<br>';
+    vDivResult.innerHTML = "Country: "+vObjectResponse.country +'<br>';
+    vDivResult.innerHTML = "Subject: "+vObjectResponse.subject +'<br>';
+    vDivResult.innerHTML = "Customer Type: "+vObjectResponse.customerType +'<br>';
+    vDivResult.innerHTML = "Register status: "+vObjectResponse.registerStatus +'<br>';
+  }
+
+  //Hàm đọc data từ form vào đối tượng
+  function readUserData(paramObjectUser)
+  {
+    var vInpFirstName = document.getElementById("inp-first-name");
+    var vInpLastName = document.getElementById("inp-last-name");
+    var vSelectCountry = document.getElementById("select-country");
+    var vInpSubject = document.getElementById("inp-subject");
+
+    var vValueFirstName = vInpFirstName.value.trim();
+    var vValueLastName = vInpLastName.value.trim();
+    var vValueSelectCountry = vSelectCountry.value.trim();
+    var vValueSubject = vInpSubject.value.trim();
+
+    paramObjectUser.firstName = vValueFirstName;
+    paramObjectUser.lastName = vValueLastName;
+    paramObjectUser.country = vValueSelectCountry;
+    paramObjectUser.subject = vValueSubject;
+  }
+
+  // ValidateData
+  function validateData(paramObjectUser)
+  {
+    var vMessStr = "";
+    if(paramObjectUser.firstName==='')
+    {
+      vMessStr='100- Bạn chưa thêm first name';
+      alert(vMessStr);
+      console.assert(false,vMessStr);
+      return false;
+    }
+    if(paramObjectUser.lastName==='')
+    {
+      vMessStr='200- Bạn chưa thêm last name';
+      alert(vMessStr);
+      console.assert(false,vMessStr);
+      return false;
+    }
+    if(paramObjectUser.country==='')
+    {
+      vMessStr='300- Bạn chưa thêm country';
+      alert(vMessStr);
+      console.assert(false,vMessStr);
+      return false;
+    }
+    if(paramObjectUser.subject==='')
+    {
+      vMessStr='400- Bạn chưa thêm subject';
+      alert(vMessStr);
+      console.assert(false,vMessStr);
+      return false;
+    }
+    return true;
+  }
+</script>
+</html>

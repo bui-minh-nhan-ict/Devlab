@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+</head>
+ 
+<script>
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+    
+    // Mẫu gọi API - Get all users
+    function getAllUsers() {
+        //base url
+        const vBASE_URL = "https://jsonplaceholder.typicode.com/users/";
+        // create a request
+        var vXmlHttObj = new XMLHttpRequest();
+        vXmlHttObj.open("GET", vBASE_URL, true);
+        vXmlHttObj.send();
+        vXmlHttObj.onreadystatechange = function () {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                console.log(vXmlHttObj.responseText);
+            }
+        }
+
+    }
+
+    // Mẫu gọi API - Get detail user by id
+    function getUserById() {
+        //base url
+        const vBASE_URL = "https://jsonplaceholder.typicode.com/users/";
+        var vId = "5";
+        var vXmlHttpObj = new XMLHttpRequest();
+        vXmlHttpObj.open("GET", vBASE_URL + "/" + vId, true);
+        vXmlHttpObj.send();
+        vXmlHttpObj.onreadystatechange = function () {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                console.log(vXmlHttpObj.responseText);
+            }
+        }
+    }
+
+    // Mẫu gọi API Update user by Id
+    function updateUserById() {
+        const vBASE_URL = "https://jsonplaceholder.typicode.com/users/";
+        // id user sẽ update
+        var vUserId = "1";
+        // Object dữ liệu gửi đi
+        var vObjectRequestData = {
+                id: 1,
+                name: "Leanne Graham",
+                username: "Bret",
+                email: "Sincere@april.biz",
+                address: {
+                    street: "Kulas Light",
+                    suite: "Apt. 556",
+                    city: "Gwenborough",
+                    zipcode: "92998-3874",
+                    geo: {
+                        lat: "-37.3159",
+                        lng: "81.1496"
+                    }
+                },
+                phone: "1-770-736-8031 x56442",
+                website: "hildegard.org",
+                company: {
+                    name: "Romaguera-Crona",
+                    catchPhrase: "Multi-layered client-server neural-net",
+                    bs: "harness real-time e-markets"
+                }
+            };
+        var vXmlhttp = new XMLHttpRequest();
+
+        vXmlhttp.open("PUT", vBASE_URL + vUserId, true);
+        vXmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        vXmlhttp.send(JSON.stringify(vObjectRequestData));
+        
+        vXmlhttp.onreadystatechange = function() {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                console.log(this.responseText);
+            }
+        }
+    }
+
+</script>
+
+<body class="bg-light">
+   Sample Users API
+</body>
+
+</html>

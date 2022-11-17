@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- style dùng vưới bootstrap4-->
+  <title> Task kynangcoban.input.tag.BS4.640 - Get data form and map to object</title>
+</head>
+<script>
+  "use strict";
+  function onPageLoading()
+    {
+    var vMaSP = document.getElementById("input-product-code");
+    var vTenSP = document.getElementById("input-product-name");
+    var vNhomSP = document.getElementById("select-category");
+    var vSoLuong = document.getElementById("input-inport-number");
+    }
+
+    function onBtnSendClick()
+    {
+        "use strict";
+        // debugger;
+        console.log("%c Nút send được ấn","color:violet");
+        //khai báo đối tượng SanPhamInfo chứa data
+        var vSanPhamInfo = 
+        {
+            maSanPham:"",
+            tenSanPham:"",
+            nhomSanPham: "",
+            soLuong : ""
+        }
+
+        //B1. thu thập data
+        getSPInfor(vSanPhamInfo);
+        //B2. Kiểm tra data
+         var vIsValidate = validateDataSP(vSanPhamInfo);
+        //B3. Xuất ra 
+        if (vIsValidate ==true)
+        {
+          writeDataSP(vSanPhamInfo);
+        }
+    }
+
+
+
+// Hàm get sản phẩm info
+    function getSPInfor(paramObjectSP)
+    {
+        "use strict";
+        var vMaSP = document.getElementById("input-product-code");
+        var vTenSP = document.getElementById("input-product-name");
+        var vNhomSP = document.getElementById("select-category");
+        var vSoLuong = document.getElementById("input-inport-number");
+
+        var vMaSPValue = vMaSP.value.trim();
+        var vTenSPValue = vTenSP.value.trim();
+        var vNhomSPValue = vNhomSP.value;
+        var vSoLuongValue = vSoLuong.value;
+
+        paramObjectSP.maSanPham = vMaSPValue;
+        paramObjectSP.tenSanPham = vTenSPValue;
+        paramObjectSP.nhomSanPham = vNhomSPValue;
+        paramObjectSP.soLuong = vSoLuongValue;
+    }
+// hàm kiểm tra điều kiện đầu vào
+function validateDataSP(paramObjectSP)
+        {
+            "use strict";
+            if (paramObjectSP.maSanPham ==="")
+            {
+                console.assert(false, "Chưa nhập Mã SP ");
+                alert("Chưa nhập Mã SP");
+                return false;
+            }
+            if (paramObjectSP.tenSanPham ==="")
+            {
+                console.assert(false,"Chưa nhập Tên SP");
+                alert("Chưa nhập Tên SP");
+                return false;
+            }
+            if (paramObjectSP.soLuong === "")
+            {
+                console.assert(false, "Chưa nhập Số Lượng");
+                alert("Chưa nhập Số Lượng");
+                return false;
+            }
+            return true;
+        }
+
+
+
+// hàm xuất sản phẩm ra màn hình
+    function writeDataSP(paramObjectSP)
+    {
+        "use strict";
+        var vElementDivContainerSP = document.getElementById("div-container-sp");
+        var vElementDivSPInfor = document.getElementById("div-sp-infor");
+
+        //Hiển thị vùng div use lên
+        vElementDivContainerSP.style.display ='block';
+
+        //Ghi data user vào thẻ div user info
+        vElementDivSPInfor.innerHTML =
+        "Mã SP: " + paramObjectSP.maSanPham + "<br>"
+        + "Tên SP: " + paramObjectSP.tenSanPham + "<br>"
+        + "Nhóm SP: " + paramObjectSP.nhomSanPham + "<br>"
+        + "Số lượng: " + paramObjectSP.soLuong ;
+    }
+</script>
+
+<body>
+  <div class="container jumbotron p-4">
+      <div class="text-center mb-4">
+        <h4>Quản lý sản phẩm</h4>
+      </div> 
+      <div class="row form-group">  <!-- row: hàng, form-group: để giữ margin (khoảng cách) giữa phần tử với phần tử khác-->
+        <div class="col-sm-3">  <!-- col-sm-3: cột chiếm 25% chiều ngang -->
+          <label for="input-product-code">Mã sản phẩm</label>
+        </div>
+        <div class="col-sm-9"> <!-- col-sm-9: cột chiếm 75% chiều ngang-->
+          <input type="text" id="input-product-code" name="productcode" placeholder="Product code .." class="form-control">  <!--form-control: phần tử có style (định dạng) mặc định theo bootstrap4-->
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-3">
+          <label for="input-product-name">Tên sản phẩm</label>
+        </div>
+        <div class="col-sm-9">
+          <input type="text" id="input-product-name" name="productname" placeholder="Product Name .." class="form-control">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-3">
+          <label for="select-category">Nhóm sản phẩm</label>
+        </div>
+        <div class="col-sm-3">
+          <select id="select-category" name="category" class="form-control">
+            <option value="dientu">Điện tử</option>
+            <option value="hanggiadung">Hàng gia dụng</option>
+            <option value="dienlanh">Điện lạnh</option>
+          </select>
+        </div>
+        <div class="col-sm-3">
+          <label for="input-inport-number">Số lượng nhập</label>
+        </div>
+        <div class="col-sm-3">
+          <input type="text" id="input-inport-number" placeholder="Number of products ..." class="form-control">
+        </div>
+      </div>
+      <div class="row form-group text-right">  <!-- text-right: mọi thứ sẽ căn phải, ví dụ nút Send -->
+        <div class="col-sm-12"> <!-- col-sm-12: cột chiếm 100% chiều ngang-->
+          <button onclick="onBtnSendClick()" class="btn btn-info" id="btn-send"> Send </button>
+        </div>
+      </div> 
+  </div>
+  <!--Vùng hiển thị thông tin user-->
+  <div id="div-container-sp" style="background-color: aquamarine; display: none;"> <!--display: non không hiển thị ra-->
+      <div id="div-sp-infor">...</div>
+  </div>
+</body>
+
+</html>

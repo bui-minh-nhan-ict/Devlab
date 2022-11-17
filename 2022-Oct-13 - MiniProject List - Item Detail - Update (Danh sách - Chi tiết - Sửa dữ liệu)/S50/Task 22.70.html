@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Task 22.70</title>
+</head>
+<body>
+    <div class="container jumbotron">
+        <h1 class="text-center p-1g-1">Thông tin người dùng</h1>
+    <div class="form-group">
+        <label for="">First Name</label>
+        <input id="input-first-name" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="">Last Name</label>
+        <input id="input-last-name" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="">Country</label>
+        <input id="input-country" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="">Subject</label>
+        <textarea id="textarea-subject" name="" id="" class="form-control"></textarea>
+    </div>
+
+    <div class="form-row">
+        <div class="col">
+        <button id="button-edit" class="btn btn-success w-50">Sửa</button>
+    </div>
+    <div class="col">
+        <a class="nav justify-content-end">Quay lại</a>
+    </div>
+    </div>
+    </div>
+</body>
+</html>
+<script>
+    function onBtnChiTietClick(paramDetailButton)
+    {
+        //Thu thập dữ liệu
+        var vUserId = paramDetailButton.dataset.id;
+        var vFirstName = paramDetailButton.dataset.firstname;
+        var vLastName = paramDetailButton.dataset.lastname;
+        var vCountry = paramDetailButton.dataset.country;
+        var vSubject = paramDetailButton.dataset.subject;
+        var vCustomerType = paramDetailButton.dataset.customerType;
+        var vRegisterStatus = paramDetailButton.dataset.registerStatus;
+        console.log('Thông tin user');
+        console.log('User ID : ',vUserId);
+        console.log('First name: ',vFirstName);
+        console.log('Last name: ',vLastName);
+        console.log('Country: ',vCountry);
+        console.log('Subject: ',vSubject);
+        console.log('Customer Type: ',vCustomerType);
+        console.log('Register Status: ',vRegisterStatus);
+        const vDETAIL_FORM_URL = 'UserDetails.html'
+        var vUrlSiteToOpen = vDETAIL_FORM_URL + '?'+'id='+vUserId;
+        window.location.href = vUrlSiteToOpen;
+
+
+    }
+</script>

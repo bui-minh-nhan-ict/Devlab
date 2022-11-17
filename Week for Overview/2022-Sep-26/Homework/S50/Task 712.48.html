@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport", initial-scale=1.0">
+    <title>Task E110</title>
+</head>
+
+<body onload="onPageLoading()">
+    <label>Số Hạng A</label>
+    <input id="input-numberA" placeholder="Nhập vào số A"><br><br>
+    <button onclick="onBtnCheck()">Tính Bình Phương</button>
+
+</body>
+<script>
+    "use strict";
+    function onPageLoading()
+    {
+        var vInputValue = document.getElementById("input-numberA");
+        console.log("ID số A: "+vInputValue.id);
+        console.log("Placeholder số A: "+vInputValue.placeholder);
+    }
+
+
+    function onBtnCheck() 
+{   
+        var vInputMessageElementA = document.getElementById("input-numberA"); //truy vấn element
+        var vMesssageValueA = vInputMessageElementA.value;
+
+    //kiểm tra 
+    var vKetQuaKiemTra = validateNumber(vMesssageValueA);
+
+    //nếu đúng thì kiểm tra
+    if (vKetQuaKiemTra)
+    {
+        var tinhBinhPhuong = vMesssageValueA * vMesssageValueA;
+        alert ("Bình phương của "+vMesssageValueA+ " là : " +tinhBinhPhuong);
+    }
+    
+}
+
+    function validateNumber(paramNumber){
+    if(paramNumber === "")
+    {
+        alert ("Vui lòng không để giá trị rỗng");
+        return false;
+    }
+    else if (isNaN (paramNumber))
+    {
+        alert ("Giá trị không phải là số");
+        return false;
+    }
+    return true;
+       
+    }
+</script>
+
+</html>

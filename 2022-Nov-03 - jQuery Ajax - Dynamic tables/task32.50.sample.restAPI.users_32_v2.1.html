@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title> Sample API task 32</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+</head>
+ <body>
+    <div class = "jumbotron form-group">  
+     <h3 class = "text-primary form-control"> API mẫu dùng cho các bài  task 32</h3>
+     <button class = "btn btn-info form-control" onClick = "getAllUsers()"> Get all User / Lấy danh sách người dùng  </button>
+     <button class = "btn btn-success form-control" onclick = "getAllPhotoOfAlbum()"> get all photo of album / lấy danh sách ảnh album </button>
+    </div> 
+ </body>
+<script>
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+    
+    // Mẫu gọi API cho bài 32.50
+    function getAllUsers() {
+        //base url
+        const vBASE_URL = "http://203.171.20.210:8080/crud-api/users/";
+        // create a request
+        var vXmlHttObj = new XMLHttpRequest();
+        vXmlHttObj.open("GET", vBASE_URL, true);
+        vXmlHttObj.send();
+        vXmlHttObj.onreadystatechange = function () {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                console.log(vXmlHttObj.responseText);
+            }
+        }
+
+    }
+
+    // Mẫu gọi API cho bài 32.55
+    function getUserById() {
+        //base url
+        const vBASE_URL = "http://203.171.20.210:8080/crud-api/users/";
+        var vId = "446";
+        var vXmlHttpObj = new XMLHttpRequest();
+        vXmlHttpObj.open("GET", vBASE_URL + vId, true);
+        vXmlHttpObj.send();
+        vXmlHttpObj.onreadystatechange = function () {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                console.log(vXmlHttpObj.responseText);
+            }
+        }
+    }
+
+    // Mẫu gọi API cho bài 32.60
+    function getAllPhotoOfAlbum() {
+        //base url
+        const vBASE_URL = "https://jsonplaceholder.typicode.com/albums/3/photos";
+
+        var vXmlHttpObj = new XMLHttpRequest();
+        vXmlHttpObj.open("GET", vBASE_URL, true);
+        vXmlHttpObj.send();
+        vXmlHttpObj.onreadystatechange = function () {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                console.log(vXmlHttpObj.responseText);
+            }
+        }
+    }
+
+</script>
+
+ 
+
+</html>

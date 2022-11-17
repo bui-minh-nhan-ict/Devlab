@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> task 701.20d sua loi</title>
+</head>
+<body onload = "onLoadPage()">
+    <h1 id = "h1-chao-mung"> Chào mừng tới devcamp !!!</h1>
+    <label> Message: </label>
+    <input type = "text" id = "inp-message-to-display" placeholder="...">
+    <br>
+    <button onclick="khiNutSendDuocAn()"> Send </button>
+    
+    <hr>
+    <p style="color:red"> Sai ở chỗ, không điền gì cũng hiện cửa sổ rỗng </p>
+
+</body>
+
+<script>
+ //function xử lý sự kiện onload của body
+ function onLoadPage() {
+    console.log("%cFunction xử lý sự kiện onload ....","color:blue");
+    var vInputMessageElement = document.getElementById("inp-message-to-display"); //truy vấn element
+    console.log( " input element id = " + vInputMessageElement.id);
+    console.log( " input element placeholder = " + vInputMessageElement.placeholder);
+    
+ }  
+ // functpn xử lý sự kiện ấn nút Send
+ function khiNutSendDuocAn() {
+    console.log("%cFunction xử lý sự kiện onClick....", "color:orange");
+    var vInputMessageElement = document.getElementById("inp-message-to-display"); //truy vấn element
+    var vMesssageValue = vInputMessageElement.value;
+    //kiểm tra 
+    var vKetQuaKiemTra = kiemTraMessageDienVao(vMesssageValue);
+    //nếu đúng thì kiểm tra
+    if (vKetQuaKiemTra){
+        alert( vInputMessageElement.value); //hiện cửa sổ cảnh báo có message
+    }
+    
+
+ } 
+ // function dùng chung
+ function kiemTraMessageDienVao(paramMessageDienVao) {
+    if ( paramMessageDienVao === "") {
+        alert("phải điền mesage !!!");
+        return false; 
+    }
+    return true; 
+ }
+</script>
+</html>

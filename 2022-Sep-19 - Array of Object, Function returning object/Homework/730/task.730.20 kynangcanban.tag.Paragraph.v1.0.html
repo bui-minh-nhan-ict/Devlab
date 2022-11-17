@@ -1,0 +1,83 @@
+<html>
+<head>
+    <title> Task 730.20: kỹ năng căn bản - tag - Paragraph </title>
+</head>
+<body>
+    <h1> Kỹ năng xử lý tag Paragraph - phần tử text; Hãy tìm hiểu code và làm lại với paragraph #p-welcome-msg </h1>
+    <h2 id="h2-tag"> Hello everyone, my name is John</h2>
+    <p id="p-tag"> I'm a developer</p>
+
+    <hr>
+ 
+    <button onclick="onBtnTruyVanPhanTuPClick()">Truy vấn phần tử P</button>
+    <button onclick="onBtnDocNoiDungPhanTuPClick()">Đọc nội dung phần tử P</button>
+    <button onclick="onBtnVietNoiDungPhanTuPClick()">Viết vào nội dung phần tử P</button>
+    <button onclick="onBtnDoiMauTextNoiDungPhanTuPClick()">Đổi màu text nội dung phần tử P</button>
+
+    <hr>
+
+    <p id="p-welcome-msg"> Welcome to every JS developer ;)</p>
+
+    <hr>
+ 
+    <button onclick="onBtnTruyVanPhanTuPClick2()">Truy vấn phần tử P</button>
+    <button onclick="onBtnDocNoiDungPhanTuPClick2()">Đọc nội dung phần tử P</button>
+    <button onclick="onBtnVietNoiDungPhanTuPClick2()">Viết vào nội dung phần tử P</button>
+    <button onclick="onBtnDoiMauTextNoiDungPhanTuPClick2()">Đổi màu text nội dung phần tử P</button>
+
+    <hr>
+</body>
+<script>
+//truy vấn phần tử p và ghi ra console
+function onBtnTruyVanPhanTuPClick() {
+    var vPTag = document.getElementById("p-tag");
+    console.log("Phần tử p-tag :....");
+    console.log(vPTag);
+}
+//đọc nội dung phần tử p
+function onBtnDocNoiDungPhanTuPClick() {
+    var vPTag = document.getElementById("p-tag");
+    console.log("Nội dung InnerHTML phần tử p-tag");
+    console.log("Inner HTML = " + vPTag.innerHTML);
+}
+//viết nội dung phần tử p
+function onBtnVietNoiDungPhanTuPClick() {
+    var vPTag = document.getElementById("p-tag");
+    console.log("Viết nội dung InnerHTML phần tử p-tag");
+    vPTag.innerHTML = "I'm a junior developer"
+}
+//viết nội dung phần tử p
+function onBtnDoiMauTextNoiDungPhanTuPClick() {
+    var vPTag = document.getElementById("p-tag");
+    console.log("Đổi màu text nội dung InnerHTML phần tử p-tag");
+    vPTag.style.color = "red"
+}
+
+
+
+function onBtnTruyVanPhanTuPClick2() {
+    var vPTag = document.getElementById("p-welcome-msg");
+    console.log("Phần tử p-tag :....");
+    console.log(vPTag);
+}
+//đọc nội dung phần tử p
+function onBtnDocNoiDungPhanTuPClick2() {
+    var vPTag = document.getElementById("p-welcome-msg");
+    console.log("Nội dung InnerHTML phần tử p-tag");
+    console.log("Inner HTML = " + vPTag.innerHTML);
+}
+//viết nội dung phần tử p
+function onBtnVietNoiDungPhanTuPClick2() {
+    var vPTag = document.getElementById("p-welcome-msg");
+    console.log("Viết nội dung InnerHTML phần tử p-tag");
+    vPTag.innerHTML = "I'm a junior developer"
+}
+//viết nội dung phần tử p
+function onBtnDoiMauTextNoiDungPhanTuPClick2() {
+    var vPTag = document.getElementById("p-welcome-msg");
+    console.log("Đổi màu text nội dung InnerHTML phần tử p-tag");
+    vPTag.style.color = "red"
+}
+
+</script>
+</html>

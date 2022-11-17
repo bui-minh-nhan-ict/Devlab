@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title> task 21.08 </title> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Lucky Dice Casino  - Dice History (lịch sử xúc xắc)</h2>
+    <div class="row">
+      <button class = "btn btn-info" onclick="onCreateSampleDiceHistoryTableClick()"> Tạo bảng lịch sử chơi xúc xắc - Create Dice History Table</button>
+    </div>
+    <div class="row">
+      <table id="table-dice-history" class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Game</th>
+            <th>Dice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- tbody chưa có dòng dữ liệu nào-->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    'use strict';
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    const gEND_OF_ROW_COL = -1;
+    const gJsonDiceHistoryResponseText =                                         //lịch sử chơi dices, trả về như response
+                                `{
+                                    "dices":[6,5,5,1,4,5,5,2,2,6,6,2,4],                        
+                                    "status":"200"                              
+                                  }`;
+    const gCOL_GAMES = 0;   //số thứ tự cột games (lần chơi thứ mấy)
+    const gCOL_DICE = 1;    // số thứ tự cột dice, lần đó được xúc xắc nào
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    //create table of sample dice history
+    //tạo bảng trên dữ liệu Dice HIstory cho trước 
+    function onCreateSampleDiceHistoryTableClick() {
+      "use strict";
+      // subtask 1: chuyển JSON text sang Object
+      var vSampleDiceHistory = { dices: [-1], status: -1 };
+      vSampleDiceHistory = JSON.parse(gJsonDiceHistoryResponseText);
+      console.log("Đối tượng Json:")
+      console.log(vSampleDiceHistory);  //ghi dối tượgn ra connsole
+      console.log("Mảng lịch sử xác suất - history of dices ") 
+      console.log( vSampleDiceHistory.dices); //ghi mảng ra console
+      
+      // tìm element 
+      var vDiceHistoryTable = document.getElementById("table-dice-history");
+      // truy xuất được phần tử tbody trong table
+      // cách truy xuất là bằng TagName, với cách này ta sẽ có một mảng các tbody trong bảng. ta lấy phần tử số 0 của mảng này 
+      var vTableBody = vDiceHistoryTable.getElementsByTagName("tbody")[0];
+      
+      // -- thêm các dòng vào bảng 
+      // Gán giá trị các ô
+      for (var i =0 ; i<vSampleDiceHistory.dices.length;i++)
+      {
+        // Thêm các dòng vào bảng
+        var vNewRow = vTableBody.insertRow(gEND_OF_ROW_COL);
+        // Thêm mới 2 cell 
+        var vCellGame = vNewRow.insertCell(gCOL_GAMES);
+        var vCellDice = vNewRow.insertCell(gCOL_DICE);
+        // Điền dữ liệu vào từng ô
+        vCellGame.innerHTML = i+1;
+        vCellDice.innerHTML = vSampleDiceHistory.dices[i];
+      }
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+  </script>
+</body>
+
+</html>

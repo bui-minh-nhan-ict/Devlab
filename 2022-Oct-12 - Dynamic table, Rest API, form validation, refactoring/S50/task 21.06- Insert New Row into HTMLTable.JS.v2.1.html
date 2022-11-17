@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Task 21.06 </title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container p-4">
+    <p>Ấn nút để insert (trèn, thêm mới) dòng vào table (bảng)</p>
+    <!-- TODO 1: Thêm 1 dòng mới thủ công ở table trên (thêm thủ công  bằng HTML) -->
+    <table id="table-person" class="table table-bordered table-striped">
+      <thead>
+        <!-- phần head, dòng tiêu đề  của bảng -->
+        <tr>
+          <td> First Name </td>
+          <td> Last Name </td>
+          <td> Age </td>
+        </tr>
+        <thead>
+        <tbody>
+          <!-- phần dữ liệu của bảng -->
+          <tr>
+            <td>Bùi</td>
+            <td>Minh Nhẫn</td>
+            <td>31</td>
+          </tr>
+          <tr>
+            <td>Lê</td>
+            <td>Tiến Đạt</td>
+            <td>19</td>
+          </tr>
+      <tbody>
+    </table>
+    <button class="btn btn-info" onclick="onBtnInsertNewRowToTableClick()">Thêm dòng mới vào bảng:  "Mol", "An", "29"</button>
+    <button class="btn btn-warning" onclick="onBtnInsertNewRowToTableClick2()">Thêm dòng mới vào bảng:  "Alan", "Pham", "37"</button>  <!-- phải làm nút này -->
+  </div>
+  <script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    const gCOL_FIRSTNAME = 0;
+    const gCOL_LASTNAME = 1;
+    const gCOL_AGE = 2; 
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    
+    // TODO 2: đọc hiểu mã nguồn để rõ cách thức tạo ra table, thêm dòng sử dụng Js
+    // hàm xử lý sự kiện thêm mới dòng vào table
+    function onBtnInsertNewRowToTableClick() {
+      "use strict";
+      const vEND_OF_TABLE = -1;
+      var vPersonTable = document.getElementById("table-person");  //truy xuất bảng
+      var vPersonTableBody = document.getElementsByTagName("tbody")[0];  //truy xuất body của bảng 
+      // insert to the end of table, thêm row mới vào bảng( <tr> </tr>)
+      var vNewRow = vPersonTableBody.insertRow(vEND_OF_TABLE);
+      // them moi 03 cell (03 ô) (<td> </td> 
+      var vCellFirstName = vNewRow.insertCell(gCOL_FIRSTNAME);
+      var vCellLastName = vNewRow.insertCell(gCOL_LASTNAME);
+      var vCellAge = vNewRow.insertCell(gCOL_AGE);
+      //gán giá trị cho các ô
+      vCellFirstName.innerHTML = "Mol";
+      vCellLastName.innerHTML = "Ann";
+      vCellAge.innerHTML = "29";
+    }
+    
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    
+    function onBtnInsertNewRowToTableClick2(){
+      "use strict";
+      const vEND_OF_TABLE = -1;
+      var vPersonTable = document.getElementById("table-person");  //truy xuất bảng
+      var vPersonTableBody = document.getElementsByTagName("tbody")[0];  //truy xuất body của bảng 
+      // insert to the end of table, thêm row mới vào bảng( <tr> </tr>)
+      var vNewRow = vPersonTableBody.insertRow(vEND_OF_TABLE);
+      // them moi 03 cell (03 ô) (<td> </td> 
+      var vCellFirstName = vNewRow.insertCell(gCOL_FIRSTNAME);
+      var vCellLastName = vNewRow.insertCell(gCOL_LASTNAME);
+      var vCellAge = vNewRow.insertCell(gCOL_AGE);
+      //gán giá trị cho các ô
+      vCellFirstName.innerHTML = "Alan";
+      vCellLastName.innerHTML = "Pham";
+      vCellAge.innerHTML = "37";
+    }
+  </script>
+
+</body>
+
+</html>

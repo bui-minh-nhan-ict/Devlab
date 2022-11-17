@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Task 22.dataset thêm data vào HTML Tag + đọc ra </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+</head>
+
+<body>
+  <h1 class = "text-center"> Thêm thuộc tính dữ liệu (data-* property) vào phần tử HTML và Đọc thuộc tính dữ liệu, thông qua dataset </h1>
+  <h3 class = "text-info">Ở ví dụ này, ta thêm 03 thuộc tính firstname, lastname, studentid vào nút "Button with data-*...."</h3>
+  <h3> Mở console và lần lượt ấn các nút</h3>
+  <ul>
+    <li> Ban đầu, nút không có thuộc tính firstname, lastname, hay studentid </li>
+    <li> Sau khi, ấn nút thêm , nút  có thuộc tính firstname, lastname, hay studentid </li>
+    
+  </ul>
+  <div class="jumbotron">
+      <div class = "row m-1 bg-light"> 
+        <button id = "btn-with-data-properties" 
+          class = "btn btn-info"> Button with data-* property  - Nút có các thuộc tính dữ liệu đi kèm 
+        </button>
+      </div>
+
+      <div class = "row m-1">
+        <div col = "col-sm-4">
+          <button class = "btn btn-outline-primary" onclick = "onBtnWriteButtonWithDatasetToConssoleClick()"> Ghi nút Button with Data ra console </button>
+        </div>
+        <div col = "col-sm-4">
+          <button class = "btn btn-outline-success" onclick="onBtnAddDataPropertiesToButtonClick()"> Thêm thuộc tính dữ liệu (data-* property) vào nút Button with Data  </button>
+        </div>
+        <div col = "col-sm-4">
+          <button class = "btn btn-outline-secondary" onclick = "onBtnWriteDataPropertiesToConsoleClick()"> Ghi thuộc tính data-*  của Button with Data ra console </button>
+        </div>
+      </div>
+  </div>
+</body>
+
+
+<script>
+
+  // ghi nút có thuộc tính data-* ra console
+  function onBtnWriteButtonWithDatasetToConssoleClick() {
+    console.log("%c Ghi nút có data-* ra:" , "color:orange");
+    var vButtonWihtDataProperties  = document.getElementById("btn-with-data-properties");
+    console.log(vButtonWihtDataProperties);
+  }
+
+  //thêm thuộc tính data vào nút Button with data
+  function onBtnAddDataPropertiesToButtonClick() {
+    var vButtonWihtDataProperties  = document.getElementById("btn-with-data-properties");
+    //thêm data property firstname
+    vButtonWihtDataProperties.setAttribute("data-firstname","John");
+    vButtonWihtDataProperties.setAttribute("data-lastname","Parker");
+    vButtonWihtDataProperties.setAttribute("data-studentid","108");
+    vButtonWihtDataProperties.setAttribute("data-age","9");
+    //ghi nhận đã thêm
+    console.log("%c đã thêm thuộc tính vào nút. Nút sau khi thêm:" , "color:orange");
+    console.log(vButtonWihtDataProperties);
+
+  }
+  // onBtnChiTietClick, ấn nút chi tiết 
+  function onBtnWriteDataPropertiesToConsoleClick() {
+    var vButtonWihtDataProperties  = document.getElementById("btn-with-data-properties");
+    // thu thập dữ liệu
+    var vStudentID = vButtonWihtDataProperties.dataset.studentid;
+    var vFirstname = vButtonWihtDataProperties.dataset.firstname;
+    var vLastname = vButtonWihtDataProperties.dataset.lastname;
+    var vAge = vButtonWihtDataProperties.dataset.age;
+    // ghi ra console
+    console.log("%c Ghi data-* properties ra console: " , "color:blue");
+    console.log( "data-studentid = " + vStudentID);
+    console.log("data-firstname = " + vFirstname);
+    console.log("data-lastname = " + vLastname);
+    console.log("data-age = " + vAge);
+  }
+  
+  /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+
+</script>
+</body>
+
+</html>

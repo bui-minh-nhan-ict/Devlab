@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title> Task 10.30 - Get data form and map to object</title>
+</head>
+<script>
+  "use strict";
+  /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+  /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+  /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+  // hàm xử lý sự kiện nút send click
+  function onBtnSendClick() {
+    console.log("Bắt đầu Send (gửi) dữ liệu");
+    // 1. Khai báo đối tượng
+    var vProductObj = {
+      maSanPham: "",
+      tenSanPham: "",
+      nhomSanPham: "",
+      soLuongNhap: 0,
+      nuocSanXuat: "",
+      giaBan: 0
+    };
+
+    // 2. Thu thập dữ liệu trên form
+    // 2.1 Truy xuất phần tử theo Id
+    var vMaSanPhamInput = document.getElementById("input-product-code");
+    var vTenSanPhamInput = document.getElementById("input-product-name");
+    var vNhomSanPhamSelect = document.getElementById("select-category");
+    var vSoLuongNhapInput = document.getElementById("input-inport-number");
+    var vNuocSanXuatSelect = document.getElementById("select-country");
+    var vGiaBanInput = document.getElementById("input-price");
+    // 2.2 lấy giá trị và gán vào các thuộc tính của đối tượng
+    vProductObj.maSanPham = vMaSanPhamInput.value.trim();
+    vProductObj.tenSanPham = vTenSanPhamInput.value.trim();
+    vProductObj.nhomSanPham = vNhomSanPhamSelect.value;
+    vProductObj.soLuongNhap = parseInt(vSoLuongNhapInput.value.trim());
+    vProductObj.nuocSanXuat = vNuocSanXuatSelect.value;
+    vProductObj.giaBan = parseInt(vGiaBanInput.value.trim());
+    // 3: Ghi thông tin object vào console
+    console.log(vProductObj);
+  }
+  /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/  
+
+</script>
+
+<body>
+  <div class="container jumbotron p-4">
+    <div class="text-center mb-4">
+      <h4>Quản lý sản phẩm</h4>
+    </div> 
+      <div class="row form-group">
+        <div class="col-sm-3">
+          <label for="input-product-code">Mã sản phẩm</label>
+        </div>
+        <div class="col-sm-9">
+          <input type="text" id="input-product-code" name="productcode" placeholder="Product code .." class="form-control">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-3">
+          <label for="input-product-name">Tên sản phẩm</label>
+        </div>
+        <div class="col-sm-9">
+          <input type="text" id="input-product-name" name="productname" placeholder="Product Name .." class="form-control">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-3">
+          <label>Nhóm sản phẩm</label>
+        </div>
+        <div class="col-sm-3">
+          <select id="select-category" class="form-control">
+            <option value="dientu">Điện tử</option>
+            <option value="hanggiadung">Hàng gia dụng</option>
+            <option value="dienlanh">Điện lạnh</option>
+          </select>
+        </div>
+        <div class="col-sm-3">
+          <label>Số lượng nhập</label>
+        </div>
+        <div class="col-sm-3">
+          <input type="text" id="input-inport-number" placeholder="Number of products ..." class="form-control">
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-3">
+          <label>Nước sản xuất</label>
+        </div>
+        <div class="col-sm-3">
+          <select id="select-country" class="form-control">
+            <option value="us">Mỹ</option>
+            <option value="vn">Việt Nam</option>
+            <option value="cn">China</option>
+            <option value="au">Australia</option>
+          </select>
+        </div>
+        <div class="col-sm-3">
+          <label>Giá bán</label>
+        </div>
+        <div class="col-sm-3">
+          <input type="text" id="input-price" placeholder="Price ..." class="form-control">
+        </div>
+      </div>
+      <div class="row form-group text-right">
+        <div class="col-sm-12">
+          <button class="btn btn-info" onclick="onBtnSendClick()" id="btn-send"> Send </button>
+        </div>
+      </div> 
+  </div>
+</body>
+
+</html>

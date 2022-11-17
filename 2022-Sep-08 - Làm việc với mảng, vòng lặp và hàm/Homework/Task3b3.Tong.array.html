@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> Task 3B.3 Tổng dãy số </title>
+</head>
+<body>
+    <h3>  Hàm tính tổng các phần tử trong mảng </h3>
+</body>
+<script >
+    // viết code JS ở đây
+    function tinhtongHaiBien (dayHaiSo){
+        var tongHaiBien = 0;
+        for (var index = 0; index < dayHaiSo.length; index++)
+        {
+            tongHaiBien = tongHaiBien + dayHaiSo[index];
+        }
+        return tongHaiBien;
+    }
+    var haibienso = [12,4,-10,20,9];
+    var tong = tinhtongHaiBien(haibienso);
+    console.log(tong);
+</script>
+</html>

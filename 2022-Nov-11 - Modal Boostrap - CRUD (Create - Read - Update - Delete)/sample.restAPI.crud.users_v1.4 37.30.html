@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+</head>
+ 
+<script>
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_STATUS_DELETE_OK = 204;
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+    const gREQUEST_STATUS_CREATE_OK = 201;
+    const gBASE_URL = "http://203.171.20.210:8080/crud-api/users/";
+    
+    // Mẫu gọi API load all users
+    function getAllUsers() {
+        // create a request
+        var vXmlHttObj = new XMLHttpRequest();
+        vXmlHttObj.open("GET", gBASE_URL, true);
+        vXmlHttObj.send();
+        vXmlHttObj.onreadystatechange = function () {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                console.log(vXmlHttObj.responseText);
+            }
+        }
+    }
+
+    // Mẫu gọi API Get User by id
+    function getUserById() {
+        var vId = "13946";
+        var vXmlHttpObj = new XMLHttpRequest();
+        vXmlHttpObj.open("GET", gBASE_URL + vId, true);
+        vXmlHttpObj.send();
+        vXmlHttpObj.onreadystatechange = function () {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                console.log(vXmlHttpObj.responseText);
+            }
+        }
+    }
+
+    // Mẫu gọi API Update user by Id
+    function updateUserById() {
+        // id user sẽ update
+        var vUserId = "13946";
+        //data to be sent  (6 thuộc tính)
+        var vObjectRequestData = {
+                firstname: "Mike",
+                lastname: "Donasky",
+                subject: "On business 200",
+                country: "USA",
+                customerType: "Gold",
+                registerStatus: "Accepted"
+            };
+  
+        var vXmlhttp = new XMLHttpRequest();
+
+        vXmlhttp.open("PUT", gBASE_URL + vUserId, true);
+        vXmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        vXmlhttp.send(JSON.stringify(vObjectRequestData));
+        
+        vXmlhttp.onreadystatechange = function() {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                console.log(this.responseText);
+            }
+        }
+    }
+
+    // Mẫu gọi API Insert user (thêm user)
+    function insertUser() {
+        //data to be sent (4 thuộc tính)
+        var vObjectRequestData = {
+                firstname: "Mike",
+                lastname: "Donasky",
+                subject: "On business 200",
+                country: "USA"
+            };
+  
+        var vXmlhttp = new XMLHttpRequest();
+
+        vXmlhttp.open("POST", gBASE_URL, true);
+        vXmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        vXmlhttp.send(JSON.stringify(vObjectRequestData));
+
+        vXmlhttp.onreadystatechange = function() {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_CREATE_OK) {
+                console.log(this.responseText);
+            }
+        }
+    }
+
+    // Mẫu gọi API Delete user (xóa user)
+    function deleteUser() {
+        // id user sẽ xóa
+        var vUserId = "13956";
+        
+        var vXmlhttp = new XMLHttpRequest();
+        vXmlhttp.open("DELETE", gBASE_URL + vUserId, true);
+        vXmlhttp.send();
+
+        vXmlhttp.onreadystatechange = function() {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_DELETE_OK) {
+                console.log("Xóa thành công");
+            }
+        }
+    }
+
+</script>
+
+<body class="bg-light">
+   Sample API CRUD Users
+</body>
+
+</html>

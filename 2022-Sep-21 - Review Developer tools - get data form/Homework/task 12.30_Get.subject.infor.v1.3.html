@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Task 12.30 </title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head> 
+
+<body>
+  <!-- Bắt đầu vùng form màu xám -->
+  <div class="container jumbotron p-4 my-3">
+    <div class="row form-group">
+      <label id="label-ma-mon" class="col-md-2 col-form-label">Mã môn học <span class="text-danger">(*)</span></label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Nhập mã môn ..." id="input-ma-mon">
+      </div>
+    </div>
+    <div class="row form-group">
+      <label id="label-ten-mon" class="col-md-2 col-form-label">Tên môn <span class="text-danger">(*)</span></label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Nhập tên môn ..." id="input-ten-mon">
+      </div>
+    </div>
+    <div class="row form-group">
+      <label id="label-so-tin-chi" class="col-md-2 col-form-label">Số tín chỉ <span class="text-danger">(*)</span></label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Nhập số tín chỉ ..." id="input-tin-chi">
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-info" id="btn-save-data" onclick="onBtnSaveDataClick()">Save data</button>
+      </div>
+    </div>   
+  </div>
+
+  
+  <!-- Kết thúc vùng form màu xám -->
+
+  <!-- vùng hiển thị thông tin môn học -->
+  <div id="div-container-subject" class="container bg-info" style="display: none;">
+    <div id="div-subject-infor" class="text-white p-3">...</div>
+  </div>
+
+  <script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    function onBtnSaveDataClick() {
+      "use strict";
+      console.log(" lưu dữ liệu môn học");
+      // khai báo đối tượng môn học chứa dữ liệu
+      var vMonHoc = {
+        maMon: "",
+        tenMon: "",
+        soTinChi: 0
+      }
+      // B1: thu thập dữ liệu
+        getDataFromInput(vMonHoc);
+        console.log(vMonHoc);
+      // B2: kiểm tra dữ liệu
+        var vCheck = validateMonHoc(vMonHoc);
+        console.log(vCheck);
+      // B3: ghi dữ liệu vào vùng màu xanh
+      if(vCheck == true){
+        displayData(vMonHoc);
+      }
+      
+    }
+    
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    // Hàm hiển thị dữ liệu lên vùng xanh
+    // Input là dũ liệu môn học cần hiển thị
+    function displayData(paramObject){
+      "use strict";
+      var vWrapperDisplay = document.getElementById("div-container-subject");
+      // Hiển thị phần tử sẽ đổ dữ liệu
+      vWrapperDisplay.style.display = "block";
+      var vSubjectInfor = document.getElementById("div-subject-infor");
+      // Đổ dữ liệu vào
+      vSubjectInfor.innerHTML = "Mã môn: " + paramObject.maMon + "<br/>";
+      vSubjectInfor.innerHTML += "Tên môn: " + paramObject.tenMon + "<br/>";
+      vSubjectInfor.innerHTML += "Số tín chỉ : " + paramObject.soTinChi + "<br/>";
+    }
+    // Hàm kiểm tra dữ liệu thu thập
+    // Input là đối tượng dữ liệu cần kiểm tra
+    // Output là true / false ( hợp lệ hoặc không hợp lệ)
+    function validateMonHoc(paramObject){
+      "use strict";
+      var vResult = true; // Khởi tạo biến lưu kết quả kiểm tra
+      
+      var vMaMon = paramObject.maMon.trim(); // Chuẩn hóa dữ liệu trước khi kiểm tra
+      var vTenMon = paramObject.tenMon.trim(); // Chuẩn hóa dữ liệu trước khi kiểm tra
+      var vSoTinChi = paramObject.soTinChi.trim(); // Chuẩn hóa dữ liệu trước khi kiểm tra
+
+      // Kiểm tra mã môn bị rỗng?
+      if(vMaMon == ""){
+        alert("Mã môn bị rỗng!");
+        vResult = false;
+      }
+      // Kiểm tra tên môn bị rỗng?
+      if(vTenMon == ""){
+        alert("Tên môn bị rỗng!");
+        vResult = false;
+      }
+      // Kiểm tra số tín chỉ bị rỗng?
+      if(vSoTinChi == ""){
+        alert("Số tín chỉ bị rỗng!");
+        vResult = false;
+      }
+      // Kiểm tra số tín chỉ có phải là số ?
+      if(isNaN(vSoTinChi) == true){
+        alert("Số tín chỉ nhập vào không phải là số!");
+        vResult = false;
+      }
+      return vResult;
+    }
+
+    // Hàm thu thập dữ liệu môn học trên giao diện
+    // Input là đối tượng chữa dữ liệu thu thập
+    function getDataFromInput(paramObject){
+      "use strict";
+
+      var vMaMonInput = document.getElementById("input-ma-mon"); // Truy xuất phần tử thông qua id và lưu vào biến
+      var vTenMonInput = document.getElementById("input-ten-mon"); // Truy xuất phần tử thông qua id và lưu vào biến
+      var vSoTinChiInput = document.getElementById("input-tin-chi"); // Truy xuất phần tử thông qua id và lưu vào biến
+
+      paramObject.maMon = vMaMonInput.value; // Lấy giá trị lưu vào thuộc tính của đối tượng
+      paramObject.tenMon = vTenMonInput.value; // Lấy giá trị lưu vào thuộc tính của đối tượng
+      paramObject.soTinChi = vSoTinChiInput.value; // Lấy giá trị lưu vào thuộc tính của đối tượng
+    }
+  </script>
+</body>
+
+</html>

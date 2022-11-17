@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 14.40</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container jumbotron">
+        <h3>Chuyển dữ liệu từ JSON string, vào object</h3>
+        <h2 id="h2-json-person">...</h2>
+        <button class = "btn btn-success" onclick = "onBtnObjPersonToJSONClick()"> Person Object thành chuỗi JSON và ghi Name (tên) vào h2...</button>
+        <h2 id="h2-json-car">***</h2>
+        <button class = "btn btn-info" onclick = "onBtnObjCarToJSONClick()"> Car Object thành chuỗi JSON và ghi Name (tên) vào h2 *** </button>    
+    </div>
+
+</body>
+
+
+<script>
+    "use strict";
+
+// vùng 2. Event handlers
+
+//function xử lý sự kiện click của nút chuyển person object thành JSON
+function onBtnObjPersonToJSONClick() { 
+    // 1.định nghĩa JSON string
+    var vJSONPersonString = `{"name":"John Doe"; "age":31; "city":"New York"}`;
+
+    // 2.parsing, chuyển JSON string thành Object
+    var vPerson = JSON.parse(vJSONPersonString);
+
+    //3. viết  Person.name ra web
+    var vDemoJsonPersonElement = document.getElementById("h2-json-PERSON");
+    vDemoJsonPersonElement.innerHTML = myPerson.Name;
+}
+
+//functio xử lý sự kiện click của nút chuyển car object thành JSON
+function onBtnObjCarToJSONClick() {
+    // 1.định nghĩa JSON string
+    var vJSONCarString = `{"name":"Toyota"; "year":2017; "serie":"Yaris"}`;
+
+    // 2.parsing, chuyển JSON string thành Object
+    var vCar = JSON.parse(vJSONCarString);
+
+    //3. viết  Car.name ra web
+    var vDemoJsonCarElement = document.getElementById("h2-json-CAR");
+    vDemoJsonCarElement.innerHTML = myCar.Name;
+}
+</script>
+
+
+ 
+</html>

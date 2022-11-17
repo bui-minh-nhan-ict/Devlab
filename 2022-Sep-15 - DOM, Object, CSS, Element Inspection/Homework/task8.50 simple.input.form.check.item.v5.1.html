@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <head>
+
+    <script>
+      function onPageLoading()
+      {
+        console.log("%c subTask 1 : Ghi ra console ....", "color:orange");
+        var vInputEmailString = document.getElementById("inp-email-string");
+        console.log("Email string element ID = " +vInputEmailString.id + "\n placeholder =" +vInputEmailString.placeholder);
+      }
+
+      function onCheckEmailClick()
+      {
+        console.log("%c SubTask 3: ghi ra console...", "color:blue");
+        var vInputEmailString = document.getElementById("inp-email-string");
+        var vEmailString = vInputEmailString.value; //đọc value vào string
+        if (vEmailString.includes("@")) //nếu có chứa "@"
+        {
+          console.log("Có chứa @");
+          // viết vào p-output-message nội dung này
+          writeToHTMLLog("Email đã nhập là : "+vEmailString);
+        }
+        else 
+        {
+          console.log("Không chứa @");
+          // viết vào p-output-message nội dung này
+          writeToHTMLLog("Không phải email: "+vEmailString);
+        }
+      }
+
+      "use strict";
+      /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+      /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+      /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+      // hàm thực thi khi ấn nút Kiểm tra số điện thoại được click
+      // code để tham khảo
+      function onCheckPhoneNumberClick() {
+        // 01 truy vấn ô text myInputPhoneNumberString và lấy ra value
+        var vElementInputPhoneNUmber = document.getElementById("inp-input-phone-number-string");
+        var vInputStr = vElementInputPhoneNUmber.value; // đọc text ở ô input
+        
+        // 02 kiểm tra xem số điện thoại nhập vào có phải số hay ko (isNaN)
+        // nếu không phải thì trả lời không phải là số
+        if (isNaN(vInputStr)) {   //if is Not a Number - nếu không phải là số
+          writeToHTMLLog(vInputStr + " không phải là số điện thoại")
+        }
+        // 03 nếu là số thì viết thông tin số diện thoại ra
+        else {  
+          writeToHTMLLog("số điện thoại điền vào là: " + vInputStr);
+        }
+      }
+
+      // hàm thực thi khi ấn clear log
+      function onClearHTMLLogClick() {
+        var vElementInputParagraph = document.getElementById("p-output-message");
+        vElementInputParagraph.innerHTML = ">";
+      }
+
+      /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+      //write to HTML Log instead of to console.log
+      function writeToHTMLLog(paramStrToWrite) {
+        var vElementInputParagraph = document.getElementById("p-output-message");
+        vElementInputParagraph.innerHTML += paramStrToWrite + "<br>" + ">";
+      }
+
+    </script>
+
+  <body onload="onPageLoading()">
+    <div class="container jumbotron p-4">
+      <p id="cmt2dev">
+        Test Page for Javascript Tasks. Press F5 to run code.
+        Don't forget to Save your code before running. (Ctrl+S). </p>
+        <label id="labelinputphonenumber"> Số điện thoại (chỉ điền số) </label>
+        <div class="form-group">
+          <input class="form-control w-75" type="text" id="inp-input-phone-number-string" placeholder="So dien thoai ...">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary w-75" onclick="onCheckPhoneNumberClick()">Kiểm tra Số điện thoại !</button>
+        </div>
+      <hr>
+        <label> email: (ví dụ hoant10@gmail.com) </label>
+        <div class="form-group">
+          <input class="form-control w-75" id="inp-email-string" type="text" placeholder="Email ...">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-success w-75" onclick="onCheckEmailClick()" >Kiểm tra Email !</button>  <!-- bạn phải viết code cho nút này -->
+        </div>
+      <hr>
+        <button class="btn btn-warning w-75" onclick="onClearHTMLLogClick()">Clear HTML Log !</button>
+      <p id="p-output-message"> > </p>
+    </div>
+  </body>
+
+</html>

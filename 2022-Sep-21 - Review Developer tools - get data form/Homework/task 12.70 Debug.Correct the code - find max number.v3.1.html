@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> task 12.70 correct the code </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body onload="onPageLoading()">
+    <div class="container jumbotron">
+        <pre>
+        run code by press F5
+    </pre>
+    </div>
+</body>
+<script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+    
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    function onPageLoading() {
+        "use strict";
+        var vMess = "Mảng cần kiểm tra không có phần tử nào";
+        var vMaxNumberIndex = getMaxNumberIndex([6, 3, 11, 2, 6]);
+        if (vMaxNumberIndex ==-1)
+        {
+            console.log(vMess);
+        }
+        else
+        {
+            console.log("Vị trí có giá trị lớn nhất tại array 1 là vị trí thứ " + vMaxNumberIndex);
+        }
+        
+
+        vMaxNumberIndex = getMaxNumberIndex([5,2,5,6,9,4]);
+        if (vMaxNumberIndex == -1)
+        {
+            console.log(vMess);
+        }
+        else 
+        {
+            console.log("Vị trí có giá trị lớn nhất tại array 2 là vị trí thứ " + vMaxNumberIndex);
+        }
+       
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    function getMaxNumberIndex(paramArrayOfNumbers) {
+        var vIndexResult = 0;
+        // kiểm tra mảng input array of number có phần tử không
+        if (paramArrayOfNumbers.length > 0)
+        {
+            var vMaxNumber = paramArrayOfNumbers[vIndexResult];
+            for (var bViTriHienTai = 1; bViTriHienTai < paramArrayOfNumbers.length; bViTriHienTai++) 
+            {
+            if (vMaxNumber < paramArrayOfNumbers[bViTriHienTai]) 
+                {
+                    vIndexResult = bViTriHienTai;
+                    vMaxNumber = paramArrayOfNumbers[bViTriHienTai];
+                }
+            }
+        
+        }
+        else 
+        {
+            vIndexResult = -1 // Gán giá trị cho biến vIndexResult = -1
+        }
+        return vIndexResult; //trả ra giá trị của biến vIndexResult
+    }
+
+</script>

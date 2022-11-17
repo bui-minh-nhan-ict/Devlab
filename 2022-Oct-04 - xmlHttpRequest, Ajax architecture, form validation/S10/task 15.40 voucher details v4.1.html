@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> task 15.40 </title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container jumbotron"> 
+      <div class="form-group">
+        <h3 class="text-center">Kiểm tra mã giảm giá</h3>
+      </div>
+
+      <div class="form-group">
+        <label for="input-voucher-code">Mã giảm giá</label>
+        <input type="email" id="input-voucher-code" name="voucher" class="form-control" aria-describedby="voucherHelp"
+          placeholder="Nhập mã giảm giá..">
+        <small id="voucherHelp" class="form-text text-muted">hãy nhập mã giảm giá để có thể tiết kiệm lên đến 70%.</small>
+      </div>
+      <div class="form-group">
+        <button onclick="onVoucherCheckClick()" class="btn btn-primary">Kiểm tra</button>
+      </div> 
+    <div id="p-result-check" style=" word-break: break-all;"></div>
+  </div>
+
+  <script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    // trạng thái của server trả về, 200 = tìm thấy thành công!
+    const gREQUEST_STATUS_FINISH_AND_OK = 200;
+    
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    function onVoucherCheckClick() {
+      "use strict"
+      var vMaGiamGia = {
+        maGiamGia:''
+      }
+      // lấy giá trị nhập trên form
+      readDataFromForm(vMaGiamGia);
+      if (validateMaGiamGia(vMaGiamGia) == true){
+        // Thực hiện bước 3 và 4
+        var vXmlHttp = new XMLHttpRequest();
+        // gọi API (kết nối và gửi yêu cầu tới máy chủ)
+        callAPI (vXmlHttp, vMaGiamGia);
+        // Xử lý kết quả trả về
+        processResponseData (vXmlHttp);
+      }        
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    function readDataFromForm(paramMaGiamGia){
+      var vElementVoucherCode = document.getElementById("input-voucher-code");
+      var vVoucherCode = vElementVoucherCode.value;
+      paramMaGiamGia.maGiamGia = vVoucherCode;
+    }
+
+    // Kiểm tra dữ liệu
+    function validateMaGiamGia (paramMaGiamGia){
+      if (paramMaGiamGia.maGiamGia.trim().length===0){
+        alert ("Bạn chưa nhập mã giảm giá");
+        return false;
+      }
+      return true;
+    }
+
+    // gửi yêu cầu tới máy chủ
+    function callAPI (paramXmlHttp, paramMaGiamGia){
+      paramXmlHttp.open("GET", "http://203.171.20.210:8080/devcamp-pizza365/voucher_detail/" + paramMaGiamGia.maGiamGia, false);
+      paramXmlHttp.send();
+    }
+
+    // Xử lý dữ liệu trả về
+
+    function processResponseData(paramXmlHttp){
+         var vStatusCode = paramXmlHttp.status;  // Lấy mã trạng thái của biến paramXmlHttp,
+         var vResultCheckElement = document.getElementById("p-result-check");// Tìm thẻ có id = "p-result-check
+        // Kiểm tra mã trạng thái, nếu = 200 (gREQUEST_STATUS_FINISH_AND_OK) thì xử lý tiếp
+        if (vStatusCode == gREQUEST_STATUS_FINISH_AND_OK) {
+          console.log (paramXmlHttp.responseText); // Hiển thị nội dung trả về ra console
+          var vVoucherResponse = JSON.parse(paramXmlHttp.responseText); // Chuyển về dạng Object
+          var vHTML = '';
+          vHTML += "ID: " + vVoucherResponse.id;
+          vHTML += "<br/>Mã voucher: " + vVoucherResponse.maVoucher;
+          vHTML += "<br/>Phần trăm giảm giá: " + vVoucherResponse.phanTramGiamGia;
+          vHTML += "<br/>Ghi chú: " + vVoucherResponse.ghiChu;
+          vHTML += "<br/>Ngày tạo: " + vVoucherResponse.ngayTao;
+          vHTML += "<br/>Ngày cập nhật: " + vVoucherResponse.ngayCapNhat;
+          vResultCheckElement.innerHTML = vHTML;
+        } else {
+          vResultCheckElement.innerHTML = "Lỗi xảy ra: Không tìm thấy dữ liệu";
+        }
+    }
+  </script>
+
+</body>
+
+</html>

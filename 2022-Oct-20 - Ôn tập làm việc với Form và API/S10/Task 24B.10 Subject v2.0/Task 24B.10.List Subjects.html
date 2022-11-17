@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task 24.10B Danh sách môn học</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body onload="onPageLoading()">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center m-4">Danh sách Môn học</h2>
+                <table class="table text-center table-hover table-bordered table-striped" id="table-subjects">
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã môn học</th>
+                            <th scope="col">Tên môn học</th>
+                            <th scope="col">Số tín chỉ</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        "use strict";
+        /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+        const gREQUEST_STATUS_OK = 200;
+        const gREQUEST_CREATE_OK = 201; // status 201 là tạo mới thành công
+        const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+
+        const gBASE_URL = "https://62454a477701ec8f724fb923.mockapi.io/api/v1/";
+
+        const gEND_ROW_TABLE = -1;
+        const gCOL_STT = 0;
+        const gCOL_MA_MON = 1;
+        const gCOL_TEN_MON = 2;
+        const gCOL_SO_TIN_CHI = 3;
+        const gCOL_ACTION = 4;
+        /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+        // Hàm thực hiện khi load trang
+        function onPageLoading() {
+            loadDataSubjectToTable();
+        }
+
+        /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+       // hàm xử lý sự kiện nút edit subject click
+        function onBtnEditSubjectClick(paramEditButton) {
+            var vSubjectId = paramEditButton.dataset.id;
+            window.location.href = "editSubject.html?id=" + vSubjectId;
+       }
+
+        /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+        // hàm load dữ liệu vào table subject
+        function loadDataSubjectToTable() {
+            var vAPI_URL = gBASE_URL + "/subjects/";
+            var vXhttp = new XMLHttpRequest();
+            vXhttp.onreadystatechange = function () {
+                if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                    handleLoadSubjectArrayToTable(vXhttp);
+                }
+            };
+            vXhttp.open("GET", vAPI_URL, true);
+            vXhttp.send();
+        }
+
+        // hàm load dữ liệu subject lên table
+        function handleLoadSubjectArrayToTable(paramXmlHttp) {
+            var vSubjectArr = JSON.parse(paramXmlHttp.responseText);
+            var vSubjectTable = document.getElementById("table-subjects");
+            var vSubjectTableBody = vSubjectTable.getElementsByTagName("tbody")[0];
+            for(var bI = 0; bI < vSubjectArr.length; bI ++) {
+                var bNewRow = vSubjectTableBody.insertRow(gEND_ROW_TABLE);
+                
+                var bSTTCell = bNewRow.insertCell(gCOL_STT);
+                var bMaMonCell = bNewRow.insertCell(gCOL_MA_MON);
+                var bTenMonCell = bNewRow.insertCell(gCOL_TEN_MON);
+                var bSoTinChiCell = bNewRow.insertCell(gCOL_SO_TIN_CHI);
+                var bActionCell = bNewRow.insertCell(gCOL_ACTION);
+
+                bSTTCell.innerHTML = bI + 1;
+                bMaMonCell.innerHTML = vSubjectArr[bI].subjectCode;
+                bTenMonCell.innerHTML = vSubjectArr[bI].subjectName;
+                bSoTinChiCell.innerHTML = vSubjectArr[bI].credit;
+                
+                // Thêm nút Sửa
+                var bEditButton = document.createElement("button");
+                bEditButton.innerHTML = "Sửa";
+                bEditButton.className = "btn btn-info";
+                // thêm thông tin id môn học vào dataset của editbutton
+                bEditButton.setAttribute("data-id", vSubjectArr[bI].id);
+                // gán sự kiện click cho edit button
+                bEditButton.addEventListener("click", function() {
+                    onBtnEditSubjectClick(this);
+                });
+                bActionCell.appendChild(bEditButton);
+            }
+        }
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CRUD with Modal example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  
+  <script>
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+    $(document).ready(function() {
+        $("#btn-new-employee").click(function() {
+            onBtnNewEmployeeClick();
+        });
+        
+    });
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    // hàm xử lý sự kiện nút thêm mới nhân viên click
+    function onBtnNewEmployeeClick() {
+        $("#modal-add-employee").modal("show");
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+
+  </script>
+</head>
+<body>
+<div class="container">
+    <!-- Vùng header -->
+    <h2 class="text-center mt-3">Employee List</h2>
+    <div class="form-group">
+    <button class="btn btn-success" id="btn-new-employee"><i class="fa fa-plus"></i>&nbsp; New Employee</button>
+    </div>
+    <!-- Vùng Table -->
+    <table id="user-table" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+                <td>2011/04/25</td>
+                <td>$320,800</td>
+                <td>
+                <i class="fas fa-edit edit-employee" style="cursor: pointer;" data-toggle="tooltip" title="Edit Employee">&nbsp;</i>
+                <i class="fas fa-trash-alt delete-employee" style="cursor: pointer;" data-toggle="tooltip" title="Delete Employee"></i>
+                </td>
+            </tr>
+            <tr>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>63</td>
+                <td>2011/07/25</td>
+                <td>$170,750</td>
+                <td>
+                <i class="fas fa-edit edit-employee" style="cursor: pointer;" data-toggle="tooltip" title="Edit Employee">&nbsp;</i>
+                <i class="fas fa-trash-alt delete-employee" style="cursor: pointer;" data-toggle="tooltip" title="Delete Employee"></i>
+                </td>
+            </tr>
+            <tr>
+                <td>Ashton Cox</td>
+                <td>Junior Technical Author</td>
+                <td>San Francisco</td>
+                <td>66</td>
+                <td>2009/01/12</td>
+                <td>$86,000</td>
+                <td>
+                <i class="fas fa-edit edit-employee" style="cursor: pointer;" data-toggle="tooltip" title="Edit Employee">&nbsp;</i>
+                <i class="fas fa-trash-alt delete-employee" style="cursor: pointer;" data-toggle="tooltip" title="Delete Employee"></i>
+                </td>
+            </tr>
+            <tr>
+                <td>Cedric Kelly</td>
+                <td>Senior Javascript Developer</td>
+                <td>Edinburgh</td>
+                <td>22</td>
+                <td>2012/03/29</td>
+                <td>$433,060</td>
+                <td>
+                <i class="fas fa-edit edit-employee" style="cursor: pointer;" data-toggle="tooltip" title="Edit Employee">&nbsp;</i>
+                <i class="fas fa-trash-alt delete-employee" style="cursor: pointer;" data-toggle="tooltip" title="Delete Employee"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Vùng Modal: hãy tạo các modal ở bên dưới đây -->
+<!-- Modal thêm mới -->
+<div>
+    <div class="modal fade" id="modal-add-employee">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="h5-modal-title">Thêm mới nhân viên</h5>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <label>Form thêm mới nhân viên</label>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+            <button class="btn btn-primary" id="btn-save-add-employee">Thêm nhân viên</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- Modal sửa -->
+
+<!-- Modal confirm xóa -->
+
+</body>
+</html>

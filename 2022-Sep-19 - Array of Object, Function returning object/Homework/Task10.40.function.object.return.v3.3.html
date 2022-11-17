@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <title>Task 10.40</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+    /*** REGION 2 - Vùng gán / thực thi hàm xử lý sự kiện cho các elements */
+    
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    // hàm thực thi khi ấn nút get fixed person
+    function onBtnGetFixedPersonClick() {
+        "use strict";
+        var v1stPerson = getPerson();
+        //hãy dùng console.log viết ra thêm 02 property nữa là email và citizenID
+        console.log("%cPerson input 1: ", "color:orange");
+        console.log("firstName: " + v1stPerson.firstName);
+        console.log("lastName: " + v1stPerson.lastName);
+        console.log("age: " + v1stPerson.age);  
+        console.log("email: " + v1stPerson.email);  
+        console.log("citizenId: " + v1stPerson.citizenId);  
+
+    }
+
+    //thực thi khi ấn nút get parameterized person
+    function onBtnGetParameterizedPersonClick() {
+        "use strict";
+        var v2ndPerson = getPerson2();
+        //hãy dùng console.log viết ra thêm 02 property nữa là email và citizenID
+        console.log("%cPerson input 2: ", "color:green");
+        console.log("firstName: " + v2ndPerson.firstName);
+        console.log("lastName: " + v2ndPerson.lastName);
+        console.log("age: " + v2ndPerson.age);        
+    }
+  
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    // function getPerson trả lại 01 đối tượng: Object
+    // bạn hãy viết thêm  mã nguồn để thêm 02 thuộc tính citizenID và email, 
+    // đều là dạng string (chuỗi)
+    function getPerson() {
+        "use strict";
+        // get names from the database or API
+        var vFirstPerson = {
+            firstName: "Doe",
+            lastName: "Joe",
+            age: 39,
+            email: "buiminhnhan@gmail.com",
+            citizenId: "321385422"
+        }
+        // return values
+        return vFirstPerson;
+    }
+
+    function getPerson2() {
+        "use strict";
+        // get names from the database or API
+        var vSecondPerson = {
+            firstName: "Alan",
+            lastName: "Paker",
+            age: 20
+        }
+        // return values
+        return vSecondPerson;
+    }
+
+
+    // function getPersonParameterized trả lại 01 đối tượng
+    // tham số: paramFirstName, paramLastName, paramAge
+    // bạn hãy viết thêm  mã nguồn để thêm 02 thuộc tính citizenID và email, 
+    // đều là dạng string (chuỗi)
+    function getPersonParameterized(paramFirstName, paramLastName, paramAge, paramEmail, paramCitizenId) { 
+        "use strict";
+        // get names from the database or API
+        var vPersonInfo = {
+            firstName: paramFirstName,
+            lastName: paramLastName,
+            age: paramAge,
+            email: paramEmail,
+            citizenId: paramCitizenId
+        }
+        // return values
+        return vPersonInfo;     
+    }
+
+    function onPageLoading(){
+        "use strict";
+        console.log("%cLoad Page for testing", "color:violet");
+    }
+</script>
+
+<body onload="onPageLoading()" class="bg bg-light">
+    <div class="jumbotron">
+        <h3> Test Page for Devcamp Javascript Tasks </h3>
+        <button id = "btn-get-fixed-person" class = "btn btn-warning m-1" onclick="onBtnGetFixedPersonClick()"> 
+            get Fixed person/Tạo đối tượng cố định
+        </button>
+        <button id = "btn-get-parameterized-person" class = "btn btn-success m-1" onclick="onBtnGetParameterizedPersonClick()"> 
+            get Parameterized person/Tạo đối tượng có tham số
+        </button>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Task: kỹ năng căn bản - tag - input - 620</title>
+</head>
+<body>
+    <h1> Kỹ năng xử lý tag input - phần tử text cho phép nhập vào giá trị </h1>
+    <p style="font-style: italic; color: red;">(Trước khi ấn các nút hãy nhập giá trị cho các ô text)</p>
+    <input id="input-firstname" placeholder="Nhập vào giá trị firstname ..." type="text">
+    <input id="input-lastname" placeholder="Nhập vào giá trị lastname ..." type="text">
+    <input id="input-nam-sinh" placeholder="Nhập vào năm sinh ..." type="number"><br>
+    <br>
+    <input id="input-fullname" placeholder="Tên họ đầy đủ của bạn là " type="text" value="">
+    <input id="input-tuoi" placeholder="tuổi của bạn là" type="number" value="">
+    <hr>
+    <!-- subtask 9: Thêm một input text fullname (họ và tên), có placeholder -->
+    
+    <!-- subtask 10: Thêm một input text chỉ cho phép nhập vào số, hiển thị số tuổi, có placeholder -->
+    
+    <hr>
+    <button onclick="onBtnGetFullNameClick()">Lấy họ và tên</button>
+    <button onclick="onBtnGetAgeClick()">Lấy tuổi</button>
+</body>
+<script>
+    // VÙNG 2: XỬ LÝ SỰ KIỆN
+    // subtask 11: hàm xử lý sự kiện lấy họ và tên click
+    function onBtnGetFullNameClick() {
+        var vFirstName = document.getElementById('input-firstname').value;
+        var vLastName = document.getElementById('input-lastname').value;
+        var vFullName = vFirstName + " " + vLastName;
+        document.getElementById("input-fullname").value = vFullName;
+
+    }
+
+    // subtask 12: hàm xử lý sự kiện lấy tuổi click
+    // Ấn nút Lấy tuổi thì lấy được năm sinh và chuyển về dạng số. 
+    // Sau đó, tính ra số tuổi dựa vào năm sinh và gán vào ô số tuổi.
+    function onBtnGetAgeClick() {
+    var vYearOld = document.getElementById('input-nam-sinh').value;
+    document.getElementById('input-tuoi').value = tinhTuoi(vYearOld);
+
+    }
+    
+    // VÙNG 3: HÀM DÙNG CHUNG
+    // hàm tính số tuổi dựa vào năm sinh
+    function tinhTuoi(paramNamSinh) {
+        if(isNaN(paramNamSinh)) {
+            alert("Năm sinh phải là 1 số!");
+            return;
+        }
+        var vSoTuoi = 0;
+        // lấy được năm hiện tại
+        var vNamHienTai = new Date().getFullYear();
+        vSoTuoi = vNamHienTai - paramNamSinh;
+        return vSoTuoi;
+    }
+</script>
+</html>

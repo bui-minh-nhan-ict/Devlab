@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 4.25 Điền & Kiểm tra biển số xe</title>
+</head>
+<body onload="onPageLoad()">
+    <h3>TĐ - Điền Biển số xe</h3>
+    <label>Biển số (8-10 ký tự, phải bắt đầu là số, kết thúc là số)</label>
+    <input id="inp-bien-so" placeholder="60A-86748" >
+    <hr> <!--Dòng kẻ-->
+    <button id="btn-kiem-tra-bien-so" onclick="btnKiemTraBienSoXe()" >Kiểm tra</button>
+
+</body>
+<script>
+    "use strict";
+
+    // vùng 1: định nghĩa global variable
+
+    // vùng 2: event handler (hàm xử lý xự kiện)
+
+    // xử lý sự kiện load page (tải trang)
+    function onPageLoad(){
+        // khi tải trang, ghi thông tin input ra consol
+        var vInpBienSo = document.getElementById("inp-bien-so"); // tra cứu phần tử, bằng ID;
+        console.log("inp-bien-so: ID: " + vInpBienSo.id + "\ninnerHTML: "+ vInpBienSo.innerHTML);
+    }
+
+    // xử lý sự kiện onclick của nút Kiểm tra
+    function btnKiemTraBienSoXe(){
+        var vInpBienSo = document.getElementById("inp-bien-so"); // tra cứu phần tử bằng ID
+        var vKetQuaKiemTra = kiemTraBienSo(vInpBienSo.value);  // đưa giá trị của phần tử input vào function để kiểm tra
+        if(vKetQuaKiemTra){
+            alert("Biển hợp lệ: " + vInpBienSo.value);
+        }
+    } 
+
+    // vùng 3: gán event handler nếu cần
+    // vùng 4: function dùng chung
+    // Function để kiểm tra biển số
+    // tham số hình thức: paramBienSoCanInput
+    function kiemTraBienSo (paramBienSoCanInput){
+        if(paramBienSoCanInput.length <8 || paramBienSoCanInput.length >10){  // kiểm tra số ký tự của biển số
+            alert("Biển số quá ngắn hoặc quá dài");
+            return false; // trả về false nếu có vấn đề
+        }
+        else if (isNaN(paramBienSoCanInput.charAt(0))||isNaN(paramBienSoCanInput.charAt(paramBienSoCanInput.length-1))){ // kiểm tra ký tự đầu tiên và ký tự cuối cùng
+            alert("Phải bắt đầu và kết thúc bằng số");
+            return false;
+        }
+        return true;
+
+    }
+</script>
+</html>

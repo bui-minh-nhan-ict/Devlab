@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 760.10</title>
+</head>
+<body onload="onPageLoading()">
+        <label>Họ và Tên</label>&nbsp;&nbsp;
+        <input id="input-ho-ten" placeholder="Nhập họ và tên"></input><br><br>
+        <label>Năm Sinh</label>&nbsp;&nbsp;&nbsp;
+        <input id="input-namsinh" placeholder="Nhập năm sinh"></input><br><br>
+        <label>Lớp</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select id="select-lop">
+            <option value="0">Chọn lớp</option>
+            <option value="1">Lớp 1</option>
+            <option value="2">Lớp 2</option>
+            <option value="3">Lớp 3</option>
+            <option value="4">Lớp 4</option>
+            <option value="5">Lớp 5</option>
+            <option value="6">Lớp 6</option>
+            <option value="7">Lớp 7</option>
+            <option value="8">Lớp 8</option>
+            <option value="9">Lớp 9</option>
+            <option value="10">Lớp 10</option>
+            <option value="11">Lớp 11</option>
+            <option value="12">Lớp 12</option>
+        </select><br>
+        <br>
+        
+        <label>Giới Tính</label>&nbsp;&nbsp;&nbsp;
+        <select id="select-gioi-tinh">
+            <option value="0">Chọn giới tính</option>
+            <option value="1">Nam</option>
+            <option value="2">Nữ</option>
+        <br><br> </select><br><br>
+        <button onclick="onBtnListClick()">Liệt kê danh sách</button>
+        <button onclick="onBtnSendClick()">Gửi dữ liệu</button>
+        
+</body>
+<script>
+
+    var gDataList = [];
+    function onPageLoading()
+    {
+        var vSelectGioiTinh = document.getElementById("select-gioi-tinh"); 
+        var vSelectLop = document.getElementById("select-lop"); 
+        var vInpHoVaTen = document.getElementById("input-ho-ten");
+        var vInputNamSinh = document.getElementById("input-namsinh");
+        console.log("Giá trị của ô giới tính : " +vSelectGioiTinh.value); 
+        console.log("Giá trị của ô lớp: " +vSelectLop.id); 
+        console.log("Input ID của ô họ và tên: "+vInpHoVaTen.id);
+        console.log("Input ID của ô năm sinh: "+vInputNamSinh.id);
+        // console.log("Input ID : "+vInputSoLuong.id + ", và placeholder là: " +vInputSoLuong.placeholder);
+    }
+
+
+
+    function onBtnSendClick()
+    {
+        var vObjectInfo = 
+        {
+            HovaTen :"",
+            namSinh:"",
+            gioiTinh:"",
+            lop:""
+        }
+        readDataObject(vObjectInfo);
+        console.log("%c Ghi tạm ra console", "color:blue");
+        console.log(vObjectInfo);
+
+        var vCheckedResult = checkDataInput(vObjectInfo);
+        if (vCheckedResult==true)
+        {
+            console.log("%c Ghi tạm ra console", "color:red");
+            console.log(vObjectInfo.HovaTen);
+            console.log(vObjectInfo.namSinh);
+            console.log(vObjectInfo.gioiTinh);
+            console.log(vObjectInfo.lop);
+
+            writeDataToConsole(vObjectInfo);
+            gDataList.push(vObjectInfo);
+        }
+    }
+
+  
+// Đọc data trên web vào object
+        function readDataObject (paramInpData)
+        {   
+            var vSelectGioiTinh = document.getElementById("select-gioi-tinh"); 
+            var vValueGioiTinh = vSelectGioiTinh.value;
+            var vSelectLop = document.getElementById("select-lop"); 
+            var vValueLop = vSelectLop.value;
+            var vInpHoVaTen = document.getElementById("input-ho-ten");
+            var vValueHoVaTen = vInpHoVaTen.value;
+            var vInputNamSinh = document.getElementById("input-namsinh");
+            var vValueNamSinh = vInputNamSinh.value;
+
+            paramInpData.gioiTinh = vValueGioiTinh;
+            paramInpData.namSinh = vValueNamSinh;
+            paramInpData.HovaTen = vValueHoVaTen;
+            paramInpData.lop = vValueLop;
+
+
+        }
+
+
+
+        function writeDataToConsole(paramInpData)
+        {
+            console.log("%c Ghi dữ liệu học sinh", "color:red");
+            console.log("%c Họ và tên: "+paramInpData.HovaTen, "color:orange");
+            console.log("%c Năm sinh: "+paramInpData.namSinh, "color:blue");
+            console.log("%c Giới tính: "+paramInpData.gioiTinh, "color:orange");
+            console.log("%c Lớp: "+paramInpData.lop, "color:blue");
+
+        }
+
+
+    //Hàm kiểm tra thông tin nhập vào 
+    function checkDataInput(paramInpData)
+    {
+        if (parseInt(paramInpData.gioiTinh)==0)
+        {
+            alert("Chưa chọn giới tính");
+            return false;
+        }
+
+        if (paramInpData.lop == 0)
+        {
+            alert("Chưa chọn lớp");
+            return false;
+        }
+        if (paramInpData.HovaTen =="")
+        {
+            alert("Chưa nhập họ tên");
+            return false;
+        }
+        var vTransferNumber = Number(paramInpData.namSinh);
+        if (IntergerBigger0(vTransferNumber)==false)
+        {
+            alert("Năm sinh phải là số lớn hơn 0");
+            return false;
+        }
+        return true;
+    }
+
+
+    function IntergerBigger0(paramNumber)
+    {
+        if (!Number.isInteger(paramNumber)||paramNumber<1)
+        {
+        return false;
+        }
+        return true;
+    }
+
+
+    // liệt kê button
+    function onBtnListClick()
+    {
+        console.log("%c Danh sách học sinh đã lưu", "color:green");
+        for (var i =0; i<gDataList.length; i++)
+        {
+            console.log("Họ & tên : "+gDataList[i].HovaTen + ", Năm sinh: "+gDataList[i].namSinh + ", Lớp: "+gDataList[i].lop + ", Giới tính: "+gDataList[i].gioiTinh);
+        }
+    }
+</script>
+
+</html>

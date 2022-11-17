@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>sample bạn có thể xem mẫu căn form với CSS ở đây </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="styles/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body onload="onPageLoading()">
+  <div class="container"> <!-- có một hộp (container) bao ở ngoài, các class đều định nghĩa trong file style.css -->
+      <div class = "row">  <!-- hàng 1-->
+          <h1> Chào mừng đến với Devcamp 120 !</h1>
+      </div>
+      
+      <div class = "row"> <!-- hàng 2 -->
+        <div class = "col-75"> <!-- trong hàng 2, dùng một cột 75% chiều ngang -->
+          <img src = "https://upload.wikimedia.org/wikipedia/commons/3/36/Mount_Yu_Shan_-_Taiwan.jpg" width="50%"> <!-- image chiếm 100% chiều ngang của cột-->
+        </div>
+      </div>
+      
+      <div class="row"> <!-- hàng 3 -->
+        <div class = "col-35"> <!-- trong hàng 3, lấy 1 cột 75% chiều ngang-->
+          <input id="input-message" type="text"   name="firstname" placeholder="Your name.."> 
+        </div>
+      </div>  
+
+      </div class = "row"> <!-- hàng 4 -->
+        <button class = "button" onclick="onButtonMessageClick()"> Send data </button></div><br><br>
+      </div>
+
+      </div class = "row"> <!-- hàng 5 -->
+      <p id = "p-message" style="color:blue; display: none;">thông điệp xanh</p><br>
+      </div>
+      </div class = "row"> <!-- hàng 6 -->
+      <img id = "img-like-yellow" style="width: 100px; display: none;" src="images/like-yellow-icon.png"/>
+    </div>
+  </div>
+<script>
+  "use strict";
+    function onButtonMessageClick() 
+    {
+      "use strict";
+          console.log("Send Message to me");
+
+            //Sub-Task5: hiển thị input ra console
+            var inputMessage = document.getElementById("input-message");
+            console.log("input message value: " + inputMessage.value);
+
+            //Sub-Task6: hiển thị thông điệp
+            var pMessage = document.getElementById("p-message");
+            pMessage.innerHTML = inputMessage.value;//gán lại nội dung
+            pMessage.style.display = "block";//hiển thị lên web
+
+            //Sub-Task6: hiển thị ảnh like
+            var imgLikeYellow = document.getElementById("img-like-yellow");
+            imgLikeYellow.style.display = "block";
+  }
+    // //Sub-Task5: hiển thị input ra console
+    // var inputMessage = document.getElementById("input-message");
+    // console.log("p message, id = " + inputMessage.id);
+    // var vinputMessage = document.getElementById("input-message").value;
+    // console.log(vinputMessage);
+
+
+    //  //Sub-Task6: hiển thị thông điệp
+    // var pMessage = document.getElementById("p-message");
+    // pMessage.innerHTML = inputMessage.value;//gán lại nội dung
+    // pMessage.style.display = "block";//hiển thị lên web
+
+    // //Sub-Task6: hiển thị ảnh like
+    // var imgLikeYellow = document.getElementById("img-like-yellow");
+    // imgLikeYellow.style.display = "block";
+    function onPageLoading() {
+      "use strict";
+            //B1: truy suất vào các thành phần
+            var inputMessage = document.getElementById("input-message");
+            var pMessage = document.getElementById("p-message");
+            var imgLikeYellow = document.getElementById("img-like-yellow");
+
+            //B2: ghi nội dung ra console
+            console.log("input message, id = " + inputMessage.id);
+            console.log("input message, placeholder = " + inputMessage.placeholder);
+            console.log("input message, value = " + inputMessage.value);
+
+            console.log("p message, id = " + pMessage.id);
+            console.log("p message, innerHtml = " + pMessage.innerHTML);
+
+            console.log("img like yellow, id = " + imgLikeYellow.id);
+            console.log("img like yellow, src = " + imgLikeYellow.src);
+  }
+    
+</script>
+
+</html>

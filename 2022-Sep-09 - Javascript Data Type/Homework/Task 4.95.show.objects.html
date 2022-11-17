@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> Task 4.95 Show objects </title>
+</head>
+
+<script >
+    // Bạn viết code Javascript xuống dưới đây
+    var product = {code : "LG101", name: "TV LG101",category: "dientu", country:"US",price:"300"};
+    var person = {firstname : "Ngô Văn", lastname: "Nam", coutry: "VN", gender:"Nam",age:"21"};
+    var car = {make : "Toyota", model: "Corolla",year: "2018", color:"Silver",vID:"DN-2318"};
+
+    function onButtonCarClick()
+    {
+            console.log(car);            
+    }
+
+    function onButtonProductClick()
+    {
+            console.log("Tên Product: "+ product.name);
+            console.log("Giá Product: "+ product.price);            
+    }
+    function onButtonPersonClick()
+    {
+        console.log("Họ & Tên: "+ person.firstname +" "+person.lastname);     
+    }
+
+</script>
+
+<body>
+    <h3> Hiển thị thông tin đối tượng khi ấn nút </h3>
+    <button onclick="onButtonCarClick()">Hiển thị Car</button> 
+    <button onclick="onButtonProductClick()">Hiển thị Product</button> 
+    <button onclick="onButtonPersonClick()">Hiển thị Person</button>
+</body>
+</script>
+</html>

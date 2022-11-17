@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<title> Task 11.75 </title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- font -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<!-- Content -->
+<div class="container" >
+      <div id="plans" class="row">
+        <!-- Title what we offer -->
+        <div class="col-sm-12 text-center p-4 mt-4">
+          <h2><b class="p-1 border-bottom">Pricing Plans</b></h2>
+          <p><span class="p-2">Choose a pricing plan that fits your needs.</span></p>
+        </div>
+        <!-- Content what we offer -->
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="card">
+                <div class="card-header bg-dark text-white text-center">
+                  <h3>Basic</h3>
+                </div>
+                <div class="card-body text-center">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>10GB</b> Storage</li>
+                    <li class="list-group-item"><b>10</b> Emails</li>
+                    <li class="list-group-item"><b>10</b> Domains</li>
+                    <li class="list-group-item"><b>Endless</b> Support</li>
+                    <li class="list-group-item"><h1><b>$ 10</b></h1> per month</li>
+                  </ul>
+                </div>
+                <div class="card-footer text-center">
+                  <button id = "btn-plan-basic" class="btn btn-success" onclick = "onBtnPlanBasicClick()" data-is-selected = "N">  Sign Up </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card">
+                <div class="card-header bg-dark text-white text-center">
+                  <h3>Pro</h3>
+                </div>
+                <div class="card-body text-center">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>25GB</b> Storage</li>
+                    <li class="list-group-item"><b>25</b> Emails</li>
+                    <li class="list-group-item"><b>25</b> Domains</li>
+                    <li class="list-group-item"><b>Endless</b> Support</li>
+                    <li class="list-group-item"><h1><b>$ 25</b></h1> per month</li>
+                  </ul>
+                </div>
+                <div class="card-footer text-center">
+                  <button id = "btn-plan-pro" class="btn btn-success" onclick="onBtnPlanProClick()" data-is-selected = "N">Sign Up</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card">
+                <div class="card-header bg-dark text-white text-center">
+                  <h3>Premium</h3>
+                </div>
+                <div class="card-body text-center">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>50GB</b> Storage</li>
+                    <li class="list-group-item"><b>50</b> Emails</li>
+                    <li class="list-group-item"><b>50</b> Domains</li>
+                    <li class="list-group-item"><b>Endless</b> Support</li>
+                    <li class="list-group-item"><h1><b>$ 50</b></h1> per month</li>
+                  </ul>
+                </div>
+                <div class="card-footer text-center">
+                  <button id = "btn-plan-premium" onclick="onBtnPlanPremiumClick()" class="btn btn-success" data-is-selected = "N">Sign Up</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id = "div-contact-info" class = "row mt-4">
+        <div class = "form-group col-sm-3">
+          <label class = "form-control border-0" for = "inp-email"> Email</label>
+        </div>
+        <div class = "form-group col-sm-9">
+          <input class = "form-control" id = "inp-email" placeholder = "ví dụ email: abc@gmail.vidu.vn" />
+        </div>
+      </div>
+      <div class = "row mt-4">
+        <button class = "btn btn-info form-control" onclick="onBtnSendDataClick()"> Send Data</button>
+      </div>
+</div>
+</body>
+<script>
+"use strict";
+function onBtnSendDataClick()
+{
+  var vThongTinGoiDaChon = 
+  {
+    emailKhachHang : "",
+    planDaChon : getPlan("",null,null,null,null,null)
+  }
+  //đọc dữ liệu
+  // giá trị từ ô input email
+  var vInputEmail = document.getElementById("inp-email");
+  vThongTinGoiDaChon.emailKhachHang = vInputEmail.value.trim();
+  //Lấy selected plan
+  var vBtnPro = document.getElementById("btn-plan-pro");
+  var vPlanProDaChon = vBtnPro.getAttribute("data-is-selected");
+  var vBtnBasic = document.getElementById("btn-plan-basic");
+  var vPlanBasicDaChon = vBtnBasic.getAttribute("data-is-selected");
+  var vBtnPremium = document.getElementById("btn-plan-premium");
+  var vPlanPremiumDaChon = vBtnPremium.getAttribute("data-is-selected");
+
+  if (vPlanBasicDaChon === "Y")
+  {
+    vThongTinGoiDaChon.planDaChon = getPlan("Basic","10 GB",10, 10,"Endless" ,10);
+  }
+  else if (vPlanProDaChon === "Y")
+  {
+    vThongTinGoiDaChon.planDaChon = getPlan("Pro","25GB",25, 25,"Endless" ,25);
+  }
+  else if (vPlanPremiumDaChon === "Y")
+  {
+    vThongTinGoiDaChon.planDaChon = getPlan ("Premium","50GB",50, 50,"Endless" ,50);
+  }
+
+  console.log ("%c Send data", "color:orage" );
+  console.log ("Email: " +vThongTinGoiDaChon.emailKhachHang);
+  //Hiển thị gói ra console
+  vThongTinGoiDaChon.planDaChon.displayInConsoleLog();
+}
+/*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+/*** REGION 2 - Vùng gán / thực thi hàm xử lý sự kiện cho các elements */
+
+/*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+// Hàm thực thi khi plan premium được chọn (click)
+function onBtnPlanPremiumClick(){
+
+  changePlanButtonColor("Premium");
+   //tạo một đối tượng gói dịch vụ, được tham số hóa
+   var vSelectedPlanStructure = getPlan("Premium","50GB",50, 50,"Endless" ,50);
+  // gọi method hiển thị thông tin
+  vSelectedPlanStructure.displayInConsoleLog();
+}
+// Hàm thực thi khi plan pro được chọn (click)
+function onBtnPlanProClick(){
+  // chỉnh Plan, kế hoạch được chọn là Pro, đổi nút, và đánh dấu
+  // data-is-selected của nút Pro là Y, các nút khác là N
+  // đổi màu button
+  changePlanButtonColor("Pro");
+
+  //tạo một đối tượng gói dịch vụ, được tham số hóa
+  var vSelectedPlanStructure = getPlan("Pro","25GB",25, 25,"Endless" ,25);
+  // gọi method hiển thị thông tin
+  vSelectedPlanStructure.displayInConsoleLog();
+}
+// Hàm thực thi khi plan Basic được chọn (click)
+function onBtnPlanBasicClick(){
+  // chỉnh Plan, kế hoạch được chọn là Basic, đổi nút, và đánh dấu
+  // data-is-selected của nút Basic là Y, các nút khác là N
+  // đổi màu button
+  changePlanButtonColor("Basic");
+
+  //tạo một đối tượng gói dịch vụ, được tham số hóa
+  var vSelectedPlanStructure = getPlan("Basic","10GB",10, 10,"Endless" ,10);
+  
+  // gọi method hiển thị thông tin
+  vSelectedPlanStructure.displayInConsoleLog(); 
+}
+
+/*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+
+//function get Plans (lấy gói dịch vụ)
+//function trả lại một đối tượng plan (gói dịch vụ) được tham số  
+function getPlan(paramPlan, paramStorage,paramEmails,paramDomains,paramSupport, paramPricePerMonth){
+  // Define plan structure object
+  // TODO: Thiếu thông tin domain và support, bạn hãy thêm 2 thuộc tính này vào đối tượng và vào cả tham số 
+  var vSelectedPlanStructure = {
+    plan: paramPlan,
+    storage: paramStorage,
+    domain : paramDomains,
+    support : paramSupport,
+    emails: paramEmails,
+    pricePerMonthUSD: paramPricePerMonth,
+    //method: giá cả năm (phải được tính ra bằng cách nhân với 12, và bớt 10%, (nhân với 0.9))
+    priceAnnualUSD : function(){
+      // 10% discount
+      return this.pricePerMonthUSD * 12 * 0.9;  //nếu trả cả 12 tháng sẽ giảm giá 10%; this = "đối tượng này"
+    },
+    // method display plan infor - phương thức hiện thi gói dịch vụ máy chủ 
+    displayInConsoleLog() {
+      console.log("PLAN SELECTED")
+      console.log(this.plan);
+      console.log("storage: " + this.storage);
+      console.log("Emails: " + this.emails);
+      console.log("Domains: " + this.domain);
+      console.log("Support: " + this.support);
+      console.log("Price per month: " + "USD" + this.pricePerMonthUSD);
+      console.log("Annual price:" + "USD" + this.priceAnnualUSD());
+    }
+  }
+  return vSelectedPlanStructure;  //trả lại đối tượng, có đủ dữ liệu (attribute) và các methods (phương thức)
+}
+
+// đổi plan phù hợp
+//1. đổi màu button (sign-up) để phân biện gói được chọn
+//2. đổi thuộc tính data-is-selected phù hợp cho từng nút
+function changePlanButtonColor(paramPlan) {
+  var vBtnPro = document.getElementById("btn-plan-pro");  // truy vấn nút gói pro (sign - up)
+  var vBtnBasic = document.getElementById("btn-plan-basic"); //truy vấn nút gói basic (sign - up)
+  var vBtnPremium = document.getElementById("btn-plan-premium"); //truy vấn nút gói premium (sign - up)
+  
+  if (paramPlan === "Pro") {  //nếu chọn PRO thì thay màu nút Pro bằng màu cam (btn-warning), hai nút kia xanh (btn-success)
+      // code đổi màu 3 nút, khi gói pro được chọn, 
+      // đổi giá trị data-is-selected
+    vBtnBasic.className = "btn btn-success";
+    vBtnBasic.setAttribute("data-is-selected","N");
+    
+    vBtnPro.className = "btn btn-warning";
+    vBtnPro.setAttribute("data-is-selected","Y");
+
+    vBtnPremium.className = "btn btn-success";
+    vBtnPremium.setAttribute("data-is-selected","N");
+  }
+  else if (paramPlan === "Basic") {  //nếu chọn Basic thì thay màu nút Basic bằng màu cam (btn-warning), hai nút kia xanh (btn-success)
+    vBtnBasic.className = "btn btn-warning";
+    vBtnBasic.setAttribute("data-is-selected","Y");
+    
+    vBtnPro.className = "btn btn-success";
+    vBtnPro.setAttribute("data-is-selected","N");
+
+    vBtnPremium.className = "btn btn-success";
+    vBtnPremium.setAttribute("data-is-selected","N");
+  } 
+  else if (paramPlan === "Premium") { 
+    vBtnBasic.className = "btn btn-success";
+    vBtnBasic.setAttribute("data-is-selected","N");
+    
+    vBtnPro.className = "btn btn-success";
+    vBtnPro.setAttribute("data-is-selected","N");
+
+    vBtnPremium.className = "btn btn-warning";
+    vBtnPremium.setAttribute("data-is-selected","Y");
+
+  }
+}
+</script>
+
+</html>

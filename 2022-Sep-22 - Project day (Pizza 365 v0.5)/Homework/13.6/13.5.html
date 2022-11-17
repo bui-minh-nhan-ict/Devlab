@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Task 13.5 Pizza 365 - Booststrap template</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <!-- Menu -->
+  <div class="container-fluid bg-light">
+    <div class="row">
+      <div class="col-sm-12">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav nav-fill w-100">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#plans">Plans</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container" style="padding: 120px 0 50px 0;">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <!-- Title row home -->
+          <div class="col-sm-12">
+            <h1><b>Pizza 365</b></h1>
+            <p style="font-style: italic">Truly italian!</p>
+          </div>
+
+          <!-- Slide row home -->
+          <div class="col-sm-12">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img class="d-block w-100" src="./images/mon_y_1.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="./images/mon_y_2.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="./images/mon_y_3.jpg" alt="Third slide">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="./images/mon_y_4.jpg" alt="Fourth slide">
+                </div>
+                <div class="carousel-item">
+                  <img class="d-block w-100" src="./images/mon_y_5.jpg" alt="Fifth slide">
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Title what we offer -->
+          <div class="col-sm-12 text-center p-4 mt-4">
+            <h2><b class="p-2 border-bottom">Tại sao lại Pizza 365</b></h2>
+          </div>
+
+          <!-- Content what we offer -->
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-3 p-4 bg-primary text-white border">
+                <h3 class="p-2">Không ngừng cải tiến</h3>
+                <p class="p-2">Cải tiến sản phẩm, chất lượng và trải nghiệm khách hàng luôn là yếu tố tiên quyết trong
+                  chiến lược kinh doanh của chúng tôi nhằm thúc đẩy tăng trưởng và trở thành thương hiệu pizza hàng đầu.
+                </p>
+              </div>
+              <div class="col-sm-3 p-4 bg-success text-white border">
+                <h3 class="p-2">Trải nghiệm dễ dàng</h3>
+                <p class="p-2">Chúng tôi đơn giản hướng đến việc trở thành thương hiệu của mọi nhà, mọi lúc, mọi nơi.
+                </p>
+              </div>
+              <div class="col-sm-3 p-4 bg-warning text-white border">
+                <h3 class="p-2">Hướng đến sự vượt trội</h3>
+                <p class="p-2">"Vượt trội" không chỉ là một khái niệm lớn. Thay vào đó, giá trị này là cốt lõi trong mỗi
+                  con người của chúng tôi, trong mỗi công việc mà họ làm.</p>
+              </div>
+              <div class="col-sm-3 p-4 bg-info text-white border">
+                <h3 class="p-2">Thể hiện đam mê</h3><br>
+                <p class="p-2">Chúng tôi sẵn lòng hỗ trợ vô điều kiện và linh động điều chỉnh tùy theo thử thách để tìm
+                  ra giải pháp.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="plans" class="row">
+          <!-- Title what we offer -->
+          <div class="col-sm-12 text-center p-4 mt-4">
+            <h2><b class="p-1 border-bottom">Menu combo Pizza 365</b></h2>
+            <p><span class="p-2">Hãy chọn cỡ pizza phù hợp với bạn!</span></p>
+          </div>
+          <!-- Content what we offer -->
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-dark text-white text-center">
+                    <h3>S (Small size)</h3>
+                  </div>
+                  <div class="card-body text-center">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        Đường kính <b> 20 cm</b>
+                      </li>
+                      <li class="list-group-item">Sườn nướng <b>2</b></li>
+                      <li class="list-group-item">Salad <b>200 gr</b></li>
+                      <li class="list-group-item">Nước ngọt <b>2</b></li>
+                      <li class="list-group-item">
+                        <h1>VND <b>150.000</b></h1>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-footer text-center">
+                    <button class="btn btn-success" id="btn-small" onclick="onBtnSmallSizeClick()"
+                      data-is-selected-menu="N">
+                      Chọn
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-secondary text-white text-center">
+                    <h3>M (Medium size)</h3>
+                  </div>
+                  <div class="card-body text-center">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        Đường kính <b> 25 cm</b>
+                      </li>
+                      <li class="list-group-item">Sườn nướng <b>4</b></li>
+                      <li class="list-group-item">Salad <b> 300 gr</b></li>
+                      <li class="list-group-item">Nước ngọt <b>3</b></li>
+                      <li class="list-group-item">
+                        <h1>VND <b>200.000</b></h1>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-footer text-center">
+                    <button class="btn btn-success" id="btn-medium" onclick="onBtnMediumSizeClick()"
+                      data-is-selected-menu="N">
+                      Chọn
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-dark text-white text-center">
+                    <h3>L (Large size)</h3>
+                  </div>
+                  <div class="card-body text-center">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        Đường kính <b> 30 cm</b>
+                      </li>
+                      <li class="list-group-item">Sườn nướng <b>8</b></li>
+                      <li class="list-group-item">Salad <b> 500 gr</b></li>
+                      <li class="list-group-item">Nước ngọt <b>4</b></li>
+                      <li class="list-group-item">
+                        <h1>VND <b>250.000</b></h1>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-footer text-center">
+                    <button class="btn btn-success" id="btn-large" onclick="onBtnLargeSizeClick()"
+                      data-is-selected-menu="N">
+                      Chọn
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="about" class="row">
+          <!-- Title Who We Are -->
+          <div class="col-sm-12 text-center p-4 mt-4">
+            <h2><b class="p-2 border-bottom">Chọn loại pizza</b></h2>
+          </div>
+
+          <!-- Content Who We Are -->
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="card w-100" style="width: 18rem">
+                  <img src="images/pizza_type_1.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h3>Pizza Hawai</h3>
+                    <p>Món ăn thanh đạm</p>
+                    <p>
+                      Hãy thưởng thức món ăn với phong cách Alo Ha đến từ
+                      Hawai.
+                    </p>
+                    <p>
+                      <button class="btn btn-info w-100" id="btn-hawai" onclick="onBtnHawaiClick()"
+                        data-is-selected-pizza-type="N">
+                        Chọn
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card w-100" style="width: 18rem">
+                  <img src="images/pizza_type_2.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h3>Pizza Hải Sản</h3>
+                    <p>Món ăn đến từ biển</p>
+                    <p>
+                      Bạn đã thử pizza được chế biến từ nguyên liệu hải sản
+                      chưa ?
+                    </p>
+                    <p>
+                      <button class="btn btn-info w-100" id="btn-hai-san" onclick="onBtnHaiSanClick()"
+                        data-is-selected-pizza-type="N">
+                        Chọn
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card w-100" style="width: 18rem">
+                  <img src="images/pizza_type_3.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h3>Pizza Bacon</h3>
+                    <p>Món ăn đăc biệt</p>
+                    <p>
+                      Được chế biến từ thịt bacon. Mang đến hương vị mới lạ.
+                    </p>
+                    <p>
+                      <button class="btn btn-info w-100" id="btn-bacon" onclick="onBtnBaconClick()"
+                        data-is-selected-pizza-type="N">
+                        Chọn
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="contact" class="row">
+          <!-- Title Contact Us -->
+          <div class="col-sm-12 text-center p-4 mt-4">
+            <h2><b class="p-2 border-bottom">Thông tin đơn hàng</b></h2>
+          </div>
+
+          <!-- Content Contact Us -->
+          <div class="col-sm-12 p-2 jumbotron">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="inp-name">Họ và tên</label>
+                  <input type="text" class="form-control" id="inp-name" placeholder="Full Name">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" id="inp-email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <label for="inp-phone">Điện thoại</label>
+                  <input type="text" class="form-control" id="inp-phone" placeholder="Phone">
+                </div>
+                <div class="form-group">
+                  <label for="inp-address">Địa chỉ</label>
+                  <input type="text" class="form-control" id="inp-address" placeholder="Address">
+                </div>
+                <div class="form-group">
+                  <label for="message">Lời nhắn</label>
+                  <input type="text" class="form-control" id="inp-message" placeholder="Notes">
+                </div>
+                <div class="form-group">
+                  <label for="inp-voucher">Mã giảm giá ( Voucher ID)</label>
+                  <input type="text" class="form-control" id="inp-voucher" placeholder="Voucher code...">
+                </div>
+                <button type="button" class="btn btn-success w-100" id="btn-makeOder" onclick="onBtnCheckOrderClick()">
+                  Kiểm tra đơn
+                </button>
+
+              </div>
+            </div>
+          </div>
+          <!-- vùng hiển thị thông tin đơn hàng(order) -->
+          <div id="div-container-order" class="container bg-info p-2 jumbotron" style="display: none">
+            <div id="div-order-infor" class="text-white p-3">...</div>
+            <div class="p-2">
+              <button type="button" class="btn btn-warning w-100" onclick="onBtnSendOrderClick()">
+                Gửi đơn
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="container-fluid bg-light p-5">
+    <div class="row text-center">
+      <div class="col-sm-12">
+        <h4 class="m-2">Footer</h4>
+        <a href="#" class="btn btn-dark m-3"><i class="fa fa-arrow-up"></i>To the top</a>
+        <div class="m-2">
+          <i class="fa fa-facebook-official w3-hover-opacity"></i>
+          <i class="fa fa-instagram w3-hover-opacity"></i>
+          <i class="fa fa-snapchat w3-hover-opacity"></i>
+          <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+          <i class="fa fa-twitter w3-hover-opacity"></i>
+          <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  "use strict";
+  /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+  // Create menu obj
+  var gMenu = {
+    menuName: null,
+    diameterCM: null,
+    bakedRibs: null,
+    salads: null,
+    softDrinks: null,
+    priceVND: null,
+
+    // Show info to console
+    displayInConsoleLog() {
+      console.log("%cMENU SELECTED..", "color:blue");
+      console.log(this.menuName);  //this = "đối tượng này"
+      console.log("Diameter (cm): " + this.diameterCM);
+      console.log("Baked ribs: " + this.bakedRibs);
+      console.log("Salads: " + this.salads);
+      console.log("Soft-drinks:" + this.softDrinks);
+      console.log("Price (VND): " + "VND" + this.priceVND);
+    }
+  }
+
+  // Create Pizza type
+  var gPizzaType = {
+    type: null,
+    shortDescription: null,
+    description: null,
+    // method display plan infor - phương thức hiện thi gói dịch vụ máy chủ 
+    displayInConsoleLog() {
+      console.log("%cType Of Pizza..", "color:blue");
+      console.log(this.type);  //this = "đối tượng này"
+      console.log("Short description: " + this.shortDescription);
+      console.log("Description: " + this.description);
+    }
+  }
+
+  // Create order obj
+  var gOrder = {
+    menuName: null,
+    pizzaType: null,
+    fullName: null,
+    email: null,
+    phone: null,
+    address: null,
+    message: null,
+    voucher: null,
+    percentDiscount: null,
+    annualPriceVND: function () {
+      return gMenu.priceVND * (100 - this.percentDiscount);
+    },
+    // Show info to console
+    displayInConsoleLog() {
+      console.log("%cODER DETAILS..", "color:blue");
+      console.log(this.menuName);  //this = "đối tượng này"
+      console.log("Pizza type: " + this.pizzaType);
+      console.log("Full Name: " + this.fullName);
+      console.log("Email: " + this.email);
+      console.log("Phone:" + this.phone);
+      console.log("Address:" + this.address);
+      console.log("Message:" + this.message);
+      console.log("Voucher:" + this.voucher);
+      console.log("% Discount: " + "VND" + this.percentDiscount);
+      console.log("Payment: " + "VND" + this.annualPriceVND());
+
+    }
+  }
+
+  // danh sách các mã giảm giá
+  var gDiscountVouchers = [
+    { voucherID: "A1", percentDiscount: 20 },   // mã giảm giá là A1, phần trăm giảm giá 20%
+    { voucherID: "A2", percentDiscount: 10 },
+    { voucherID: "A3", percentDiscount: 5 },
+    { voucherID: "A4", percentDiscount: 30 },
+    { voucherID: "A5", percentDiscount: 20 },
+    { voucherID: "B1", percentDiscount: 25 },
+    { voucherID: "B2", percentDiscount: 15 },
+    { voucherID: "B3", percentDiscount: 5 },
+    { voucherID: "B4", percentDiscount: 30 },
+    { voucherID: "B5", percentDiscount: 40 }
+  ];
+
+  /*** REGION 2 - Vùng gán / thực thi hàm xử lý sự kiện cho các elements */
+
+  /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+  // on check order button click event handling function
+  function onBtnCheckOrderClick() {
+    // Access Order info from element
+    var vFullName = document.getElementById("inp-name");
+    var vEmail = document.getElementById("inp-email");
+    var vPhone = document.getElementById("inp-phone");
+    var vAddress = document.getElementById("inp-address");
+    var vMessage = document.getElementById("inp-message");
+    var vVoucher = document.getElementById("inp-voucher");
+    var vShowOrderContainer = document.getElementById("div-container-order");
+    var vShowOrderInfo = document.getElementById("div-order-infor");
+    var vCheckInput = "";
+
+    // Check Valid data: Menu, Pizza type, order info
+    if (gMenu.menuName == null) {
+      alert("Please choose pizza size!");
+    }
+    else if (gPizzaType.type == null) {
+      alert("Please choose pizza type!");
+    }
+    else if (validationString(vFullName.value)) {
+      alert("Please enter your full name!");
+      vFullName.focus();
+    }
+    else if (!validationString(vEmail.value, 4)) {
+      alert("Please enter your email!");
+      vEmail.focus();
+    }
+    else if (!validationString(vPhone.value, 5)) {
+      alert("Please enter your phone number!");
+      vPhone.focus();
+    }
+    else if (validationString(vAddress.value)) {
+      alert("Please enter your address!");
+      vAddress.focus();
+    }
+    else if (validationString(vMessage.value)) {
+      alert("Please enter your Message!");
+      vMessage.focus();
+    }
+    else if (vVoucher.value == "" || vVoucher.value == null ) {
+      alert("Please enter your voucher code");
+      vVoucher.focus();
+    }
+    else {
+      gOrder.menuName = gMenu.menuName;
+      gOrder.pizzaType = gPizzaType.type;
+      gOrder.fullName = vFullName.value;
+      gOrder.email = vEmail.value;
+      gOrder.phone = vPhone.value;
+      gOrder.address = vAddress.value;
+      gOrder.message = vMessage.value;
+      gOrder.voucher = vVoucher.value;
+      gOrder.percentDiscount = getpercentageDiscountByVID(vVoucher.value);
+
+      vShowOrderInfo.innerHTML = "Họ và tên: " + gOrder.fullName + "<br>Email: " + gOrder.email + "<br>Địa chỉ: " + gOrder.address
+        + "<br>Lời nhắn: " + gOrder.message + "<br>....................................." + "<br>Kích cỡ: " + gOrder.menuName
+        + "<br>Đường kính: " + gMenu.diameterCM + "<br>Sườn nướng: " + gMenu.bakedRibs + "<br>Salad: " + gMenu.salads + "<br>Nước ngọt: "
+        + gMenu.softDrinks + "<br>....................................." + "<br>Loại Pizza: " + gPizzaType.type + "<br>Mã Voucher: "
+        + gOrder.voucher + "<br>Giá vnd: " + gMenu.priceVND + "<br>Discount %: " + gOrder.percentDiscount + "<br>Phải thanh toán: " +
+        gOrder.annualPriceVND();
+      vShowOrderContainer.style.display = "block";
+    }
+  }
+
+  // on send order button click event handling function
+  function onBtnSendOrderClick() {
+    gOrder.displayInConsoleLog();
+  }
+
+  // on small size button click event handling function
+  function onBtnSmallSizeClick() {
+    //code - chọn size small
+    changeSizeButtonColor("Small");
+    // Create an obj
+    getPizzaSize("Small", 20, 2, 200, 2, 150000);
+    // Show info
+    gMenu.displayInConsoleLog();
+  }
+
+  // on medium size button click event handling function
+  function onBtnMediumSizeClick() {
+    //code - chọn gói Medium
+    changeSizeButtonColor("Medium");
+
+    // Create an obj
+    getPizzaSize("Medium", 25, 4, 300, 3, 200000);
+    // Show info
+    gMenu.displayInConsoleLog();
+  }
+
+  // on large size button click event handling function
+  function onBtnLargeSizeClick() {
+    // chỉnh Plan, kế hoạch được chọn là Basic, đổi nút, và đánh dấu
+    // data-is-selected của nút Basic là Y, các nút khác là N
+    // đổi màu button
+    changeSizeButtonColor("Large");
+
+    // Create an obj
+    getPizzaSize("Medium", 25, 4, 300, 3, 200000);
+    // Show info
+    gMenu.displayInConsoleLog();
+  }
+
+  // on Hawai button click event handling function
+  function onBtnHawaiClick() {
+    //code - chọn gói Premium
+    changeTypeButtonColor("Hawai");
+
+    // Create an obj
+    getPizzaType("Pizza Hawai", "Món ăn thanh đạm ", "Hãy thưởng thức món ăn với phong cách Alo Ha đến từ Hawai.");
+    // Show info
+    gPizzaType.displayInConsoleLog();
+  }
+
+  // on Hải Sản button click event handling function
+  function onBtnHaiSanClick() {
+    //code - chọn gói Pro
+    changeTypeButtonColor("HaiSan");
+    //tạo một đối tượng gói dịch vụ, được tham số hóa
+    getPizzaType("Pizza Hải Sản", "Món ăn đến từ biển", "Bạn đã thử pizza được chế biến từ nguyên liệu hải sản chưa?");
+    // gọi method hiển thị thông tin
+    gPizzaType.displayInConsoleLog();
+  }
+
+  // on Bacon button click event handling function
+  function onBtnBaconClick() {
+    // chỉnh Plan, kế hoạch được chọn là Basic, đổi nút, và đánh dấu
+    // data-is-selected của nút Basic là Y, các nút khác là N
+    // đổi màu button
+    changeTypeButtonColor("Bacon");
+
+    //tạo một đối tượng gói dịch vụ, được tham số hóa
+    getPizzaType("Pizza Bacon", "Món ăn đăc biệt", "Được chế biến từ thịt bacon. Mang đến hương vị mới lạ.");
+    // gọi method hiển thị thông tin
+    gPizzaType.displayInConsoleLog();
+  }
+
+  /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+  // Change Type Button color
+  function changeTypeButtonColor(paramPlan) {
+    var vBtnHawai = document.getElementById("btn-hawai");  // Access small size button (Chọn)
+    var vBtnHaiSan = document.getElementById("btn-hai-san"); // Access medium size button (Chọn)
+    var vBtnBacon = document.getElementById("btn-bacon"); // Access large size button (Chọn)
+    if (paramPlan === "Hawai") { // if Choose this size, change color to orange, others to green
+      // Change button color 
+      // Change data-is-selected value
+      vBtnHawai.className = "btn btn-warning w-100";
+      vBtnHawai.setAttribute("data-is-selected", "Y");
+
+      vBtnHaiSan.className = "btn btn-success w-100";
+      vBtnHaiSan.setAttribute("data-is-selected", "N");
+
+      vBtnBacon.className = "btn btn-success w-100";
+      vBtnBacon.setAttribute("data-is-selected", "N");
+    }
+    else if (paramPlan === "HaiSan") {  // if Choose this size, change color to orange, others to green
+      // Change button color 
+      // Change data-is-selected value
+      vBtnHawai.className = "btn btn-success w-100";
+      vBtnHawai.setAttribute("data-is-selected", "N");
+
+      vBtnHaiSan.className = "btn btn-warning w-100";
+      vBtnHaiSan.setAttribute("data-is-selected", "Y");
+
+      vBtnBacon.className = "btn btn-success w-100";
+      vBtnBacon.setAttribute("data-is-selected", "N");
+    }
+    else if (paramPlan === "Bacon") { // if Choose this size, change color to orange, others to green
+      // Change button color 
+      // Change data-is-selected value
+      vBtnHawai.className = "btn btn-success w-100";
+      vBtnHawai.setAttribute("data-is-selected", "N");
+
+      vBtnHaiSan.className = "btn btn-success w-100";
+      vBtnHaiSan.setAttribute("data-is-selected", "N");
+
+      vBtnBacon.className = "btn btn-warning w-100";
+      vBtnBacon.setAttribute("data-is-selected", "Y");
+    }
+  }
+
+  // Change Size Button color
+  function changeSizeButtonColor(paramPlan) {
+    var vBtnSmall = document.getElementById("btn-small");  // Access small size button (Chọn)
+    var vBtnMedium = document.getElementById("btn-medium"); // Access medium size button (Chọn)
+    var vBtnLarge = document.getElementById("btn-large"); // Access large size button (Chọn)
+    if (paramPlan === "Small") { // if Choose this size, change color to orange, others to green
+      // Change button color 
+      // Change data-is-selected value
+      vBtnSmall.className = "btn btn-warning";
+      vBtnSmall.setAttribute("data-is-selected-menu", "Y");
+
+      vBtnMedium.className = "btn btn-success";
+      vBtnMedium.setAttribute("data-is-selected-menu", "N");
+
+      vBtnLarge.className = "btn btn-success";
+      vBtnLarge.setAttribute("data-is-selected-menu", "N");
+    }
+    else if (paramPlan === "Medium") {  // if Choose this size, change color to orange, others to green
+      // Change button color 
+      // Change data-is-selected value
+      vBtnSmall.className = "btn btn-success";
+      vBtnSmall.setAttribute("data-is-selected-menu", "N");
+
+      vBtnMedium.className = "btn btn-warning";
+      vBtnMedium.setAttribute("data-is-selected-menu", "Y");
+
+      vBtnLarge.className = "btn btn-success";
+      vBtnLarge.setAttribute("data-is-selected-menu", "N");
+    }
+    else if (paramPlan === "Large") { // if Choose this size, change color to orange, others to green
+      // Change button color 
+      // Change data-is-selected value
+      vBtnSmall.className = "btn btn-success";
+      vBtnSmall.setAttribute("data-is-selected-menu", "N");
+
+      vBtnMedium.className = "btn btn-success";
+      vBtnMedium.setAttribute("data-is-selected-menu", "N");
+
+      vBtnLarge.className = "btn btn-warning";
+      vBtnLarge.setAttribute("data-is-selected-menu", "Y");
+    }
+  }
+
+  /*** get Size information function and put into an obj
+   * input: size, diameter, baked-ribs, salad, soft-drink, price
+   * output: pizza obj
+   */
+  function getPizzaSize(paramSize, paramDiameter, paramBakedRibs, paramSalad, paramSoftDrink, paramPrice) {
+    gMenu.menuName = paramSize;
+    gMenu.diameterCM = paramDiameter;
+    gMenu.bakedRibs = paramBakedRibs;
+    gMenu.salads = paramSalad;
+    gMenu.softDrinks = paramSoftDrink;
+    gMenu.priceVND = paramPrice;
+  }
+
+  /*** get pizza type information function and put into an obj
+   * input: size, diameter, baked-ribs, salad, soft-drink, price
+   * output: pizza obj
+   */
+  function getPizzaType(paramPizzaType, paramShortDescrition, paramDescription) {
+    gPizzaType.type = paramPizzaType;
+    gPizzaType.shortDescription = paramShortDescrition;
+    gPizzaType.description = paramDescription;
+  }
+
+  // Get percentageDiscount by Voucher ID 
+  function getpercentageDiscountByVID(paramVID) {
+    //Khởi tạo biến chứa Kết quả
+    var vKetQua = 0;
+    // Duyệt mảng dữ liệu
+    for (var bI = 0; bI < gDiscountVouchers.length; bI++) {
+      // Kiểm tra ID từng phần tử với tham số ID truyền vào
+      if (gDiscountVouchers[bI].voucherID == paramVID) {// Nếu tìm thấy
+        vKetQua = gDiscountVouchers[bI].percentDiscount;
+      }
+    }
+    return vKetQua;
+  }
+
+
+  /*** String validating function
+  * paramInputStr: validating String
+  * paramValidType: How to validating
+  * 0: With space - Null
+  * 1: With space - Not Null
+  * 2: With No space - Null
+  * 3: With No space - Not Null
+  * 4: With Email format - Not null
+  * Return true if match pattern
+  */
+  function validationString(paramInputStr, paramValidType) {
+    "use strict";
+    // Set parttern string to validate depend on paramValidType
+    var vPartternStr = "";
+    switch (paramValidType) {
+      case 0: // With space - Null
+        vPartternStr = /^[A-Za-z\s]*$/;
+        break;
+      case 1: // With space - Not Null
+        vPartternStr = /^[A-Za-z\s]+$/;
+        break;
+      case 2: // With No space - Null
+        vPartternStr = /^[A-Za-z]*$/;
+        break;
+      case 3: // With No space - Not Null
+        vPartternStr = /^[A-Za-z]+$/;
+        break;
+      case 4: // With Email - Not Null
+        vPartternStr = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        break;
+      case 5: // With Num - Not Null
+        vPartternStr = /^\d+$/;
+        break;
+      default:
+        vPartternStr = /^[^\\\/& ]*$/;
+    }
+    // Set result
+    var vResult = false;
+
+    if (paramInputStr.match(vPartternStr)) {
+      vResult = true;
+    }
+
+    return vResult;
+  }
+</script>
+
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Task 17.05 </title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head> 
+
+<body onload="onPageLoading()">
+  <!-- Bắt đầu vùng form nhập thông tin điểm -->
+  <div class="container jumbotron p-4 my-3 w-60">
+    <div class="text-center"><h3 class="mb-4">F500 - Quản lý bảng điểm</h3></div>
+    <div class="row form-group">
+      <label class="col-md-3 col-form-label">Sinh viên <span class="text-danger">(*)</span></label>
+      <div class="col-md-7">
+        <select id="select-sinh-vien" class="form-control">
+          <option value="0">-- Chọn sinh viên --</option>
+        </select>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="col-md-3 col-form-label">Điểm <span class="text-danger">(*)</span></label>
+      <div class="col-md-7">
+        <input type="text" class="form-control" placeholder="Nhập điểm ..." id="input-diem">
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="col-md-3 col-form-label">Môn học <span class="text-danger">(*)</span></label>
+      <div class="col-md-7">
+        <select id="select-mon-hoc" class="form-control">
+          <option value="0">-- Chọn môn học --</option>
+        </select>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="col-md-3 col-form-label">Ngày thi <span class="text-danger">(*)</span></label>
+      <div class="col-md-7">
+        <input type="text" class="form-control" placeholder="Ngày thi (dd/mm/yyyy) ..." id="input-ngay-thi">
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-info" id="btn-save-data" onclick="onBtnSaveDataClick()">Save data</button>
+      </div>
+    </div>
+  </div>
+  <!-- Kết thúc vùng form nhập thông tin điểm -->
+
+  <!-- vùng hiển thị thông tin điểm -->
+  <div id="div-container-grade" class="container bg-info w-60" style="display: none;">
+    <div id="div-grade-infor" class="text-white p-3">...</div>
+  </div>
+</body>
+
+<script>
+  "use strict";
+  /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+  const gREQUEST_STATUS_OK = 200;
+  const gREQUEST_CREATE_OK = 201; // status 201 là tạo mới thành công
+  const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+
+  const gBASE_URL = "https://62454a477701ec8f724fb923.mockapi.io/api/v1/";
+
+  /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+  /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+  function onBtnSaveDataClick()
+  {
+    //khai báo đối tượng môn học chứa data
+    var vGradeObj = 
+    {
+      studentId: -1,
+      studentName:"",
+      subjectId: -1,
+      subjectName:"",
+      ngayThi:"",
+      diem:-1
+
+    };
+
+    //B1. thu thập data
+    thuThapDataDiem(vGradeObj);
+    //B2. Kiểm tra data
+    var vDataHopLe = kiemTraDuLieuDiem(vGradeObj);
+    if(vDataHopLe)
+    {
+      hienThiThongTinDiem(vGradeObj);
+    }
+  }
+
+
+  // B1. Hàm thu thập data điểm
+  function thuThapDataDiem(paramGradeObj)
+  {
+    var vStudentSelect = document.getElementById('select-sinh-vien');
+    var vGradeInput = document.getElementById('input-diem');
+    var vSubjectSelect = document.getElementById('select-mon-hoc');
+    var vNgayThiInput = document.getElementById('input-ngay-thi');
+
+    paramGradeObj.studentId = parseInt(vStudentSelect.value);
+    paramGradeObj.studentName = vStudentSelect.options[vStudentSelect.selectedIndex].text;
+    paramGradeObj.diem = parseInt(vGradeInput.value.trim());
+    paramGradeObj.subjectId = parseInt(vSubjectSelect.value);
+    paramGradeObj.subjectName = vSubjectSelect.options[vSubjectSelect.selectedIndex].text;
+    paramGradeObj.ngayThi = vNgayThiInput.value.trim();
+
+    console.log(paramGradeObj.studentName );
+    console.log(paramGradeObj.diem );
+    console.log(paramGradeObj.subjectName );
+    console.log(paramGradeObj.ngayThi );
+
+  }
+
+  // B2. Hàm kiểm tra data điểm
+  function kiemTraDuLieuDiem(paramGradeObj)
+  {
+    if(paramGradeObj.studentId == 0)
+    {
+      alert('Bạn cần chọn sinh viên');
+      return false;
+    }
+    if(isNaN(paramGradeObj.diem))
+    {
+      alert('Bạn cần nhập vào điểm số');
+      return false;
+    }
+    if(paramGradeObj.subjectId == 0)
+    {
+      alert('Bạn cần chọn môn học');
+      return false;
+    }
+    if(paramGradeObj.ngayThi == '')
+    {
+      alert('Bạn cần nhập vào ngày thi');
+      return false;
+    }
+    return true;
+
+  }
+
+  //B3. Hàm hiển thị thông tin điểm vào vùng màu xanh
+  function hienThiThongTinDiem(paramGradeObj)
+  {
+    // debugger;
+    var vDivGradeContainer = document.getElementById('div-container-grade');
+    var vDivGradeInfo = document.getElementById('div-grade-infor');
+
+    vDivGradeContainer.style.display = 'block';
+    vDivGradeInfo.innerHTML = 'Sinh viên: '+ paramGradeObj.studentName + '<br>';
+    vDivGradeInfo.innerHTML += 'Môn học: '+ paramGradeObj.subjectName + '<br>';
+    vDivGradeInfo.innerHTML += 'Điểm: '+ paramGradeObj.diem + '<br>';
+    vDivGradeInfo.innerHTML += 'Ngày thi: '+ paramGradeObj.ngayThi + '<br>';
+
+  }
+
+  // Hàm xử lý sự kiện tải trang
+  function onPageLoading()
+  {
+    //load dữ liệu vào select sinh viên
+    callAPIAndLoadStudentSelect();
+    // load dữ liệu vào select môn học
+    callAPIAndLoadSubjectSelect();
+  }
+
+  /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+  // hàm thực hiện gọi api và load dữ liệu vào select sinh viên
+  function callAPIAndLoadStudentSelect()
+  {
+    var vAPI_URL = gBASE_URL + "/students/";
+    var vXhttp = new XMLHttpRequest();
+    vXhttp.open('GET',vAPI_URL,true);
+    vXhttp.send();
+
+    vXhttp.onreadystatechange = function()
+    {
+      if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK)
+      {
+        // hiển thị dữ liệu vào select sinh viên
+        loadDataToStudentSelect(vXhttp);
+      }
+    }
+  }
+
+ // hàm đẩy dữ liệu vào select sinh viên
+ function loadDataToStudentSelect(paramXmlHttp)
+  {
+    var vStudentObjs = JSON.parse(paramXmlHttp.responseText);
+    var vStudentSelect = document.getElementById('select-sinh-vien');
+    for(var i = 0 ; i < vStudentObjs.length; i++)
+    {
+      var bStudentOption = document.createElement("option");
+      bStudentOption.value = vStudentObjs[i].id;
+      bStudentOption.text = vStudentObjs[i].firstname + " " +vStudentObjs[i].lastname;
+      vStudentSelect.appendChild(bStudentOption);
+    }
+  }
+
+
+
+
+  // hàm thực hiện gọi api và load dữ liệu vào select môn học
+  function callAPIAndLoadSubjectSelect()
+  {
+    var vAPI_URL = gBASE_URL + "/subjects/";
+    var vXhttp = new XMLHttpRequest();
+    vXhttp.open('GET',vAPI_URL,true);
+    vXhttp.send();
+
+    vXhttp.onreadystatechange = function()
+    {
+      if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK)
+      {
+        // hiển thị dữ liệu vào select môn học
+        loadDataToSubjectSelect(vXhttp);
+      }
+    }
+  }
+  // hàm đẩy dữ liệu vào select môn học
+ function loadDataToSubjectSelect(paramXmlHttp)
+  {
+    var vSubjectObjs = JSON.parse(paramXmlHttp.responseText);
+    var vSubjectSelect = document.getElementById("select-mon-hoc");
+    for(var i =0 ; i <vSubjectObjs.length; i++)
+    {
+      var bSubjectOption = document.createElement("option");
+      bSubjectOption.value = vSubjectObjs[i].id;
+      bSubjectOption.text = vSubjectObjs[i].subjectName;
+      vSubjectSelect.appendChild(bSubjectOption);
+    }
+  }
+
+ 
+ 
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <script>
+        $(document).ready(function(){
+            "use strict";
+            /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+            
+            /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+                $("#btn_bat_den").on("click",function(){
+                    console.log("Click nút bật đèn");
+                    onBtnBatDen();
+                })
+                $("#btn_tat_den").on("click",function(){
+                    console.log("Click nút tắt đèn");
+                    onBtnTatDen();
+                })
+            /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+            // Hàm xử lý khi click nút bật đèn
+                function onBtnBatDen(){
+                    "use strict";
+                    $("#imgLight").prop("src","images/pic_bulbon.gif"); // Thay đổi giá trị cho thuộc tính src của thẻ ảnh
+                }
+            // Hàm xử lý khi click nút bật đèn
+                function onBtnTatDen(){
+                    "use strict";
+                    $("#imgLight").prop("src","images/pic_bulboff.gif"); // Thay đổi giá trị cho thuộc tính src của thẻ ảnh
+                }
+            /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+
+            })        
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <div class="d-flex align-items-end">
+                <button id="btn_bat_den" class="btn btn-warning">Bật đèn</button>
+                <img id="imgLight" src="images/pic_bulboff.gif" alt="light image" width="150px">
+                <button id="btn_tat_den" class="btn btn-secondary">Tắt đèn</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

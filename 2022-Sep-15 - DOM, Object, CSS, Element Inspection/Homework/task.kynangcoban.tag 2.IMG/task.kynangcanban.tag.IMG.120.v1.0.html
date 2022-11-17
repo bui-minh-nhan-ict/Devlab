@@ -1,0 +1,144 @@
+<html>
+<header>
+    <title> Task: kỹ năng căn bản - tag - IMG - 120</title>
+</header>
+<body>
+    <h1> Kỹ năng xử lý tag IMG - phần tử ảnh </h1>
+    <!-- hiện thị ảnh thông thường, cỡ tự nhiên; subtask 1-->
+    <img id = "img-mountain100" src="images/mountain.100.jpeg"  alt="ảnh mẫu"   /> 
+    <!-- hiện thị ảnh thông thường, cỡ có chỉnh; subtask 2-->
+    <img id = "img-mountain100sized" src="images/mountain.100.jpeg"  alt="ảnh mẫu" width = "400" /> 
+
+    <hr>
+    <!-- các nút để truy vấn, đọc nguồn, đổi nguồn, ẩn hiện, đổi cỡ  -->
+    <button onclick="onBtnTruyVanPhanTuImgClick()"> truy vấn phần tử IMG</button>
+    <button onclick="onBtnDocNguonCoAnhClick()"> Đọc nguồn (src), cỡ </button>
+    <button onclick="onBtnDoiNguonAnhClick()"> Đổi nguồn ảnh </button>
+    <button onclick="onBtnAnAnhClick()"> Ẩn ảnh </button>
+    <button onclick="onBtnHienAnhClick()"> Hiện ảnh </button>
+    <button onclick="onBtnDoiCoAnhClick()"> Đổi cỡ ảnh </button>
+    <hr>
+    <!-- hiện thị có chỉnh kích cỡ, ;-->
+    <img id = "img-girl100" src="images/img_girl.jpg"  alt="ảnh mẫu"  /> 
+   <!-- hiện thị ảnh thông thường, cỡ có chỉnh; subtask 2-->
+   <img id = "img-girl100sized" src="images/img_girl.jpg"  alt="ảnh mẫu" width = "400" /> 
+
+
+   <hr>
+   <!-- các nút để truy vấn, đọc nguồn, đổi nguồn, ẩn hiện, đổi cỡ  -->
+   <button onclick="onBtnTruyVanPhanTuImgClick2()"> truy vấn phần tử IMG</button>
+   <button onclick="onBtnDocNguonCoAnhClick2()"> Đọc nguồn (src), cỡ </button>
+   <button onclick="onBtnDoiNguonAnhClick2()"> Đổi nguồn ảnh </button>
+   <button onclick="onBtnAnAnhClick2()"> Ẩn ảnh </button>
+   <button onclick="onBtnHienAnhClick2()"> Hiện ảnh </button>
+   <button onclick="onBtnDoiCoAnhClick2()"> Đổi cỡ ảnh </button>
+   <hr>
+
+</body>
+<script>
+//truy vấn phần tử img và ghi ra console
+function onBtnTruyVanPhanTuImgClick() {
+    //truy vấn phần tử img-mountain100
+    var vImgMountain100 = document.getElementById("img-mountain100");
+    console.log("subtask 3: Phần tử img-mountain100 :....");
+    console.log(vImgMountain100);
+}
+// function phần tử img và ghi nguồn ảnh, kich cơ ra console
+function onBtnDocNguonCoAnhClick() {
+    //truy vấn phần tử img-mountain100
+    var vImgMountain100 = document.getElementById("img-mountain100");
+    console.log("subtask 4: Phần tử img-mountain100 nguồn, cỡ (width, heigh)");
+    console.log("src = " + vImgMountain100.src);
+    console.log("chiều rộng, width = " + vImgMountain100.width);
+    console.log("chiều cao, heigh = " + vImgMountain100.height);
+}
+// function ẩn ảnh
+function onBtnAnAnhClick() {
+    //truy vấn phần tử img-mountain100
+    var vImgMountain100 = document.getElementById("img-mountain100");
+    console.log("subtask 6: Phần tử img-mountain100 ẩn ảnh");
+    //ẩn ảnh bằng cách đổi thuộc tính style.display thành None
+    vImgMountain100.style.display = "None";
+}
+// function hiện ảnh
+function onBtnHienAnhClick() {
+    //truy vấn phần tử img-mountain100
+    var vImgMountain100 = document.getElementById("img-mountain100");
+    console.log("subtask 7: Phần tử img-mountain100 hiện ảnh");
+    // hiện ảnh bằng cách đổi thuộc tính style.display bằng "block"
+    vImgMountain100.style.display = "block";
+}
+// function đổi nguồn ảnh
+function onBtnDoiNguonAnhClick() {
+    //truy vấn phần tử img-mountain100
+    var vImgMountain100 = document.getElementById("img-mountain100");
+    console.log("subtask 5: Phần tử img-mountain100 đổi nguồn");
+    // đổi nguồn ảnh bằng cách đổi thuộc tính src thành đường dẫn vào ảnh khác
+    vImgMountain100.src = "images/mountain.200.jpeg"
+
+}
+// function đổi cỡ ảnh
+function onBtnDoiCoAnhClick() {
+    //truy vấn phần tử img-mountain100
+    var vImgMountain100 = document.getElementById("img-mountain100");
+    console.log("subtask 8: Phần tử img-mountain100 đổi cỡ ảnh");
+    // đổi nguồn ảnh bằng cách đổi thuộc tính width (chiều rộng) thành 600 pixel
+    vImgMountain100.width = "600";
+
+}
+//---------------- Chỉnh Sửa Ảnh Cô Gái ---------------------------
+
+//truy vấn phần tử img và ghi ra console
+function onBtnTruyVanPhanTuImgClick2() {
+    //truy vấn phần tử img-mountain100
+    var vImgGirl100 = document.getElementById("img-girl100");
+    console.log("subtask 3: Phần tử img-girl100 :....");
+    console.log(vImgGirl100);
+}
+// function phần tử img và ghi nguồn ảnh, kich cơ ra console
+function onBtnDocNguonCoAnhClick2() {
+    //truy vấn phần tử img-mountain100
+    var vImgGirl100 = document.getElementById("img-girl100");
+    console.log("subtask 4: Phần tử img-girl100 nguồn, cỡ (width, heigh)");
+    console.log("src = " + vImgGirl100.src);
+    console.log("chiều rộng, width = " + vImgGirl100.width);
+    console.log("chiều cao, heigh = " + vImgGirl100.height);
+}
+// function ẩn ảnh
+function onBtnAnAnhClick2() {
+    //truy vấn phần tử img-mountain100
+    var vImgGirl100 = document.getElementById("img-girl100");
+    console.log("subtask 6: Phần tử img-girl100 ẩn ảnh");
+    //ẩn ảnh bằng cách đổi thuộc tính style.display thành None
+    vImgGirl100.style.display = "None";
+}
+// function hiện ảnh
+function onBtnHienAnhClick2() {
+    //truy vấn phần tử img-mountain100
+    var vImgGirl100 = document.getElementById("img-girl100");
+    console.log("subtask 7: Phần tử img-girl100 hiện ảnh");
+    // hiện ảnh bằng cách đổi thuộc tính style.display bằng "block"
+    vImgGirl100.style.display = "block";
+}
+// function đổi nguồn ảnh
+function onBtnDoiNguonAnhClick2() {
+    //truy vấn phần tử img-mountain100
+    var vImgGirl100 = document.getElementById("img-girl100");
+    console.log("subtask 5: Phần tử img-girl100 đổi nguồn");
+    // đổi nguồn ảnh bằng cách đổi thuộc tính src thành đường dẫn vào ảnh khác
+    vImgGirl100.src = "images/img_girl_front.jpeg"
+
+}
+// function đổi cỡ ảnh
+function onBtnDoiCoAnhClick2() {
+    //truy vấn phần tử img-mountain100
+    var vImgGirl100 = document.getElementById("img-girl100");
+    console.log("subtask 8: Phần tử img-girl100 đổi cỡ ảnh");
+    // đổi nguồn ảnh bằng cách đổi thuộc tính width (chiều rộng) thành 600 pixel
+    vImgGirl100.width = "600";
+
+}
+
+
+</script>
+</html>

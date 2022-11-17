@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Task 20.10 container fixed - fluid - jumbtron</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Nhúng thư viện bootstrap 4-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+  
+  <!-- một số class CSS để dùng trong bài  -->
+  <style>
+      .devcamp-hop-xanhvang {
+        background-color: green;
+        color:greenyellow;
+      }
+
+      .devcamp-hop-timcam {
+        background-color: purple;
+        color:orange;
+      }
+      .devcamp-hop-xamdo {
+        background-color: grey;
+        color:red;
+      }
+  </style>
+</head>
+<body>
+<!-- các ví dụ -->
+<div class="container">
+  <h2>Container (hộp chứa) có <span class = "text-warning">chiều ngang cố định;</span> css Class là "container"</h2>
+  <p class ="text-info"> Tất cả mọi nội dung đều trong .container class </p> 
+  <p> Container class cho một ô chứa responsive, cố định chiều ngang </p> 
+  <p>kéo cửa sổ nhỏ lại đề nhìn thấy kích cỡ khung thay đổi</p>
+  <img src="mountain.jpg" width="100%"/>   <!-- ảnh có chiều ngang chiếm 100% hộp bọc -->
+</div>
+<hr> 
+<div class="container-fluid">
+  <h2>Hộp chứa có chiều <span class = "text-warning"> ngang dàn hết chỗ </span>- Full width (fluid) container - css class là "container-fluid" </h2>
+  <p> Khối có "container-fluid css class, sẽ chiếm hết chiều ngang </p>           
+  <img src="mountain.jpg"  width = "100%" />  <!-- ảnh có chiều ngang chiếm 100% hộp bọc -->
+</div>
+<hr> 
+<div class="jumbotron">
+  <h1>Hộp chứa nội dung nổi bật, cần nhấn mạnh - jumbotron container</h1>
+  <p>.jumbotron class cho một vùng nền xám, dàn hết chiều ngang.</p>           
+  <img src="mountain.jpg"  width = "100%" />  <!-- ảnh có chiều ngang chiếm 100% hộp bọc -->
+</div>
+
+<!-- div thêm class riêng của bạn: mẫu là devcamp-hop-xanhvang , style ở trên -->
+<div class="jumbotron, devcamp-hop-xanhvang">
+  <h1> Có thể tự làm Class riêng cho hộp, bằng CSS Class, "devcamp-hop-xanhvang", xem phần style ở trên (dòng 15) </h1>
+</div>
+<hr> 
+<h1  class = "text-info" > HÃY TIẾP LÀM CÁC Container CỦA BẠN DƯỚI ĐÂY</h1>
+<hr> 
+<!-- HÃY TỰ LÀM CỦA BẠN -->
+<h1>20.10.a container có chiều ngang cố định, ảnh nền countryside.jpg</h1>
+<div class="container">
+  <img src="countryside.jpg" width="100%"/>   <!-- ảnh có chiều ngang chiếm 100% hộp bọc -->
+</div>
+
+<h1>20.10.b container chứa nội dung nổi bật, ảnh nền golf.jpeg</h1>  
+<div class="jumbotron">        
+  <img src="golf.jpeg"  width = "100%" />  <!-- ảnh có chiều ngang chiếm 100% hộp bọc -->
+</div>
+
+
+<h1>20.10.c container có chiều ngang cố định, xám đỏ (có sẵn style ở trên)</h1>
+<div class="container">
+<h1 class="devcamp-hop-xamdo">
+  devcamp hộp xám đỏ
+</h1>
+</div>
+
+
+<h1>20.10.d container có dàn hết ngang, tím cam (bạn phải làm class mới)</h1>
+<h1 class="devcamp-hop-timcam">
+  devcamp hộp tím cam
+</h1>
+
+</body>
+</html>

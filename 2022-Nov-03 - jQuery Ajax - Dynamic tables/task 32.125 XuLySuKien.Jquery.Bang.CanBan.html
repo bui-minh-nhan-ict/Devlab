@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Task 33.125</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center my-4">
+      <h3 class = "text-info" >Danh sách người dùng</h3>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover" id = "tbl-users">
+      <thead>
+        <tr>
+          <th>Mã người dùng</th>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Age</th>  
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>13528</td>
+          <td>John</td>
+          <td>Doe</td>
+          <td>23</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <td>23528</td>
+          <td>Mary</td>
+          <td>Moe</td>
+          <td>42</td>
+          <td>...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  ​
+  <script>
+    "use strict";
+
+    /*** REGION 1 - Global variables - Vùng khai báo bViTriHienTaiến, hằng số, tham số TOÀN CỤC */
+    var gJsonUser = `{
+    "description": "Data user",
+    "users": [
+      {
+        "userId": 1,
+        "firstname": "Mike",
+        "lastname": "Jackson",
+        "age": 18
+      },
+      {
+        "userId": 2,
+        "firstname": "Nguyen",
+        "lastname": "Lan Huong",
+        "age": 19
+      },
+      {
+        "userId": 3,
+        "firstname": "Michael",
+        "lastname": "Lim",
+        "age": 18
+      },
+      {
+        "userId": 4,
+        "firstname": "Park",
+        "lastname": "Song",
+        "age": 20
+      },
+      {
+        "userId": 5,
+        "firstname": "Son",
+        "lastname": "Hoang",
+        "age": 21
+      }
+    ]
+  }`;
+
+    const gCOL_USERID = 0;
+    const gCOL_FIRSTNAME = 1;
+    const gCOL_LASTNAME = 2;
+    const gCOL_AGE = 3;
+    const gCOL_ACTION = 4;
+
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+    $(document).ready(function() {
+      //xóa dữ liệu của bảng
+      resetTableData();
+      //load dữ liệu lên table
+      loadTableUserData();
+
+    });
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    //hàm xử lý sự kiện click button detail
+    function onDetailButtonClick(paramSuKienClick) {
+      console.log("%cDetail button click. Sự kiện Click là: ....","color:orange");
+      console.log(paramSuKienClick);
+      console.log("Button tạo ra sự kiện là:")
+      var vButtonBiAn = paramSuKienClick.currentTarget;
+      console.log(vButtonBiAn); 
+
+      console.log("userid = " + $(vButtonBiAn).data("userid"));
+      console.log("firstname = " + $(vButtonBiAn).data("firstname"));
+      console.log("lastname = " + $(vButtonBiAn).data("lastname"));
+      console.log("age = " + $(vButtonBiAn).data("age"));
+
+    }
+
+    // xử lý sự kiện khi ấn vào ô First Name
+    // dùng this để xác định phần tử gây ra sự kiện
+    function onAnVaoTDFirstName() {
+      console.log("TD tạo ra sự kiện  là:")  //sử dụng this (this = đối tượng tạo ra sự kiện)
+      console.log(this); //this: chính là ô tạo ra sự kiện click
+      //
+      console.log("%cXin Chào " + $(this).text(), "color:blue");
+    }
+
+    // xử lý sự kiện fullName
+    function onFullNameButtonClick(paramSuKienClick) { 
+      console.log("%cFullName button click. Sự kiện Click là: ....","color:green");
+      console.log(paramSuKienClick); //sự kiện
+      var vTrChuaTD =  $(paramSuKienClick.currentTarget).closest("tr");
+      console.log("tr chứa là: ");
+      console.log(vTrChuaTD);
+      //tìm TD firstname, lastname, lấy giá trị text và nối lại 
+      var vFirstNameText = vTrChuaTD.find("td:eq(" + gCOL_FIRSTNAME +  ")").text(); //tra cứu cột firstname, và lấy text
+      var vLastNameText = vTrChuaTD.find("td:eq(" + gCOL_LASTNAME +  ")").text();
+      console.log( "%cFullName :" + vFirstNameText + " " + vLastNameText, "color:green" );
+    }
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    //hàm reset (xóa) dữ liệu của bảng user
+    function resetTableData() {
+      $("#tbl-users tbody").html("");  //truy câp bảng, rồi truy cập tbody, và xóa hết
+    }
+
+    //hàm load dữ liệu lên table
+    function loadTableUserData() {
+       var vArrayUsers = JSON.parse(gJsonUser);
+
+       for (var bViTriHienTai = 0; bViTriHienTai < vArrayUsers.users.length; bViTriHienTai++) {
+         //tạo row
+         var bNewRow = $("<tr>").appendTo("#tbl-users tbody"); 
+         //tao cell  
+         $("<td>")  //cell user id 
+          .html(vArrayUsers.users[bViTriHienTai].userId)
+          .appendTo(bNewRow);  //append vào hàng mới (nối vào hàng mới)
+
+        $("<td>")
+          .html(vArrayUsers.users[bViTriHienTai].firstname)
+          .click(onAnVaoTDFirstName)
+          .appendTo(bNewRow);
+          
+        $("<td>")
+          .html(vArrayUsers.users[bViTriHienTai].lastname)
+          .appendTo(bNewRow);
+          
+        $("<td>")
+          .html(vArrayUsers.users[bViTriHienTai].age)
+          .appendTo(bNewRow); 
+
+        // xử lý cột action (có nút)
+        var bColAction = $("<td>").addClass("btn-group").appendTo(bNewRow);//cột action
+        /* nút chi tiết */
+        var bDetailButton = 
+        $("<button>")
+          .addClass('btn btn-primary')
+          .html("Chi tiết") 
+          .appendTo(bColAction);
+
+        //thêm một số dữ liệu vào nút này 
+        bDetailButton.attr("data-userid", vArrayUsers.users[bViTriHienTai].userId)
+                      .attr("data-firstname", vArrayUsers.users[bViTriHienTai].firstname)
+                      .attr("data-lastname", vArrayUsers.users[bViTriHienTai].lastname)
+                      .attr("data-age", vArrayUsers.users[bViTriHienTai].age);  
+        // thêm sự kiện cho nút này
+        bDetailButton.click(onDetailButtonClick);
+
+        /*nút Full Name */
+        var bFullNameButton = 
+        $("<button>")
+          .addClass('btn btn-secondary')
+          .html("Họ và Tên") 
+          .appendTo(bColAction);
+        //thêm sự kiện cho nút này 
+        bFullNameButton.click(onFullNameButtonClick);  
+      }
+    }
+
+  </script>
+</body>
+
+</html>
+​

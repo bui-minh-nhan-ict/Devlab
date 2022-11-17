@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task 24B.20 </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        table.table-bordered{
+          border:1px solid #fff;
+          margin-top:20px;
+        }
+        table.table-bordered > thead > tr > th{
+          border:1px solid #fff;
+        }
+        table.table-bordered > tbody > tr > td{
+          border:1px solid rgb(190, 186, 186);
+        }
+
+        th {
+        background-color: #6caeda;
+        color: white;
+        } 
+        .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #b2d3e9
+        }
+    </style>
+</head>
+
+<body onload="onPageLoading()">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center m-4">Danh sách Sinh Viên</h2>
+                <table class="table text-center table-hover table-bordered table-striped" id="table-students">
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã sinh viên</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Họ và Tên</th>
+                            <th scope="col">Ngày sinh</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Năm nhập học</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+/*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_CREATE_OK = 201; // status 201 là tạo mới thành công
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+
+    const gBASE_URL = "https://62454a477701ec8f724fb923.mockapi.io/api/v1/";
+
+    const gEND_ROW_TABLE = -1;
+    const gCOL_STT = 0;
+    const gCOL_MA_SV = 1;
+    const gCOL_UserName = 2;
+    const gCOL_HoTen = 3;
+    const gCOL_NgaySinh = 4;
+    const gCOL_Email = 5;
+    const gCOL_NamNhapHoc = 6;
+    const gCOL_ACTION = 7;
+
+
+/*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+        // Hàm thực hiện khi load trang
+        function onPageLoading() {
+            loadDataStudentToTable();
+        }
+
+
+
+ /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+       // hàm xử lý sự kiện nút edit student click
+       function onBtnEditStudentClick(paramEditButton) {
+            var vStudentId = paramEditButton.dataset.id;
+            console.log (vStudentId);
+       }
+
+
+
+/*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+        // hàm load dữ liệu vào table student
+        function loadDataStudentToTable() {
+            var vAPI_URL = gBASE_URL + "/students/";
+            var vXhttp = new XMLHttpRequest();
+            vXhttp.onreadystatechange = function () {
+                if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                    handleLoadStudentArrayToTable(vXhttp);
+                }
+            };
+            vXhttp.open("GET", vAPI_URL, true);
+            vXhttp.send();
+        }
+
+        // hàm load dữ liệu student lên table
+        function handleLoadStudentArrayToTable(paramXmlHttp) {
+            var vStudentArr = JSON.parse(paramXmlHttp.responseText);
+            var vStudentTable = document.getElementById("table-students");
+            var vStudentTableBody = vStudentTable.getElementsByTagName("tbody")[0];
+            for(var bI = 0; bI < vStudentArr.length; bI ++) {
+                var bNewRow = vStudentTableBody.insertRow(gEND_ROW_TABLE);
+                
+                var bSTTCell = bNewRow.insertCell(gCOL_STT);
+                var bMaSVCell = bNewRow.insertCell(gCOL_MA_SV);
+                var bUserNameCell = bNewRow.insertCell(gCOL_UserName);
+                var bHoTenCell = bNewRow.insertCell(gCOL_HoTen);
+                var bNgaySinhCell = bNewRow.insertCell(gCOL_NgaySinh);
+                var bEmailCell = bNewRow.insertCell(gCOL_Email);
+                var bNamNhapHocCell = bNewRow.insertCell(gCOL_NamNhapHoc);
+                var bActionCell = bNewRow.insertCell(gCOL_ACTION);
+
+                bSTTCell.innerHTML = bI + 1;
+                bMaSVCell.innerHTML = vStudentArr[bI].studentCode;
+                bUserNameCell.innerHTML = vStudentArr[bI].username;
+                bHoTenCell.innerHTML = vStudentArr[bI].firstname + " " +vStudentArr[bI].lastname ;
+                bNgaySinhCell.innerHTML = vStudentArr[bI].birthday;
+                bEmailCell.innerHTML = vStudentArr[bI].email;
+                bNgaySinhCell.innerHTML = vStudentArr[bI].birthday;
+                bNamNhapHocCell.innerHTML = vStudentArr[bI].studyYear;
+
+                // Thêm nút Sửa
+                var bEditButton = document.createElement("button");
+                bEditButton.innerHTML = "Sửa";
+                bEditButton.className = "btn btn-info";
+                // thêm thông tin id sinh viên vào dataset của editbutton
+                bEditButton.setAttribute("data-id", vStudentArr[bI].id);
+                // gán sự kiện click cho edit button
+                bEditButton.addEventListener("click", function() {
+                    onBtnEditStudentClick(this);
+                });
+                bActionCell.appendChild(bEditButton);
+
+            }}
+
+
+
+</script>
+</body>
+</html>

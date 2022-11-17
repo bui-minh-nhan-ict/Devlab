@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+<title>
+Welcome Developer
+</title>
+<style>
+
+body {
+text-align: center;
+}
+</style>
+<script>
+    function onPageLoading() 
+    {
+    //S1. Truy xuất vào phần tử
+
+    var getInputTen = document.getElementById("input-ten");
+    var getInputTenPlaceholder = document.getElementById("input-ten").getAttribute('placeholder');
+
+    var getInputHo = document.getElementById("input-ho");
+    var getInputHoPlaceholder = document.getElementById("input-ho").getAttribute('placeholder');
+
+    //S2. Ghi ra console
+
+    // console.log("Input Ho ID= " + getInputHo.id);
+    // console.log("Input Ho, innerHTML = "+ getInputHo.innerHTML);
+
+    console.log("Input Ho, ID = " + getInputHo.id);
+    console.log("Placeholder Name = "+ getInputHoPlaceholder);
+    console.log("Input Ten, ID = " + getInputTen.id);
+    console.log("Placeholder First Name = "+ getInputTenPlaceholder);
+
+
+
+    }
+
+    // Hàm xử lý Click Send
+    function onButtonSendClick()
+    {
+            // Gửi lời chào khi nhấn button
+            console.log("Gửi lời chào tới Lập trình viên");
+
+            // Câu 4
+            //Lấy về giá trị nhập trong ô họ
+            var inputHo = document.getElementById("input-ho");
+            var getInputHoValue = inputHo.value;
+
+            //Lấy về giá trị nhập trong ô tên
+            var inputHo = document.getElementById("input-ten");
+            var getInputTenValue = inputHo.value;
+
+            alert("Xin Chào Developer "+getInputHoValue+" "+getInputTenValue);
+    }
+    
+
+</script>
+</head>
+<body onload = "onPageLoading()">
+    <h2 id="h2-title">Devcamp - Ứng Dụng Web Đầu Tiên</h2>
+    <label id="label-ho">Họ và đệm</label>
+    <input id="input-ho" placeholder="Input Your First Name"> <br> <br>
+    <label id="label-ten">Tên</label>
+    <input id="input-ten" placeholder="Input Your Name"> <br> <br>
+    <button id="button-send" onclick="onButtonSendClick()">Gửi Lời Chào</button>
+
+</body>
+ 
+</html>

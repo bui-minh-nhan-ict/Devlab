@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> All APIs sample cho Devcamp Project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .divider {
+        border-bottom: 2px solid #0163ee;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        width: 23rem;
+    }
+</style>
+<script>
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_CREATE_OK = 201; // status 201 là tạo mới thành công
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+
+    const gBASE_URL = "https://62454a477701ec8f724fb923.mockapi.io/api/v1/";
+    
+
+    // API lấy danh sách sinh viên (Students), để load vào Select sinh viên
+    function onGetStudentListClick() {
+        var vAPI_URL = gBASE_URL + "/students/";
+        var vXhttp = new XMLHttpRequest();
+        vXhttp.onreadystatechange = function () {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                console.log(vXhttp.responseText); // ghi response text ra console.log
+            }
+        };
+        vXhttp.open("GET", vAPI_URL, true);
+        vXhttp.send();
+    }
+    
+    // API lấy danh sách môn học (Subjects), để load vào Select môn học
+    function onGetSubjectListClick() {
+        var vAPI_URL = gBASE_URL + "/subjects/";
+        var vXhttp = new XMLHttpRequest();
+        vXhttp.onreadystatechange = function () {
+            if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                console.log(vXhttp.responseText); //ghi response text ra console.log
+            }
+        };
+        vXhttp.open("GET", vAPI_URL, true);
+        vXhttp.send();
+    }
+</script>
+
+<body>
+    <div class="container mt-4">
+        <div class="row form-group">
+            <strong class="text-danger"> Bật console log để nhìn rõ output </strong>
+        </div>
+        <div class="row form-group">
+            <p id="testP" class="h4"> Demo 02 API cho dự án Quản lý bảng điểm </p>
+        </div>
+        <div class="row form-group">
+            <button  class="btn btn-info m-1" onclick="onGetStudentListClick()">Lấy danh sách Sinh viên</button>
+            <button  class="btn btn-primary m-1" onclick="onGetSubjectListClick()">Lấy danh sách Môn học</button>
+        </div>
+    </div>
+</body>
+
+</html>
+Task 17.05_sample.restAPI.school_v1.1.html
+Đang hiển thị Task 17.05_sample.restAPI.school_v1.1.html.

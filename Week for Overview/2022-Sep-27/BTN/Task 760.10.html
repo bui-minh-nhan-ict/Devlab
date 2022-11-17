@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 760.10</title>
+</head>
+<body onload="onPageLoading()">
+        <label>Mã hàng</label>&nbsp;&nbsp;
+        <select id="select-ma-hang">
+            <option value="0">Chọn mã hàng</option>
+            <option value="10">TVSamsung 4K Crystal UHD 55 inch UA55AU8100</option>
+            <option value="20">Android Tivi QLED TCL 4K 55 inch 55Q726</option>
+            <option value="30">Smart Tivi LG 4K 55 inch 55UP7750PTB</option>
+            <option value="40">Android Tivi Casper 32 inch 32HG5200</option>
+            <option value="50">Máy lọc nước RO AOSmith C1 4 lõi</option>
+            <option value="60">Quạt điều hòa Kangaroo KG50F79N</option>
+        </select>
+        <br><br>
+        <label>Số Lượng</label>
+        <input id="input-so-luong" placeholder="Nhập số nguyên"></input>
+        <br><br>
+        <button onclick="onBtnSendClick()">Lưu dữ liệu</button>
+</body>
+<script>
+    function onPageLoading()
+    {
+        var vSelectMaHang = document.getElementById("select-ma-hang"); //truy cập ID mã hàng
+        var vInputSoLuong = document.getElementById("input-so-luong"); //truy cập ID input số lượng
+        console.log("Giá trị của ô select : " +vSelectMaHang.value); //lấy ra giá trị hiện tại của ô select
+        console.log("ID của ô select :" +vSelectMaHang.id); //lấy ra giá trị id của ô select
+        console.log("Input ID : "+vInputSoLuong.id + ", và placeholder là: " +vInputSoLuong.placeholder);
+    }
+
+
+    function onBtnSendClick()
+    {
+        var vObjectInfo = 
+        {
+            maHang :"",
+            soLuong:""
+        }
+        readDataObject(vObjectInfo);
+        console.log("%c Ghi tạm ra console", "color:blue");
+        console.log(vObjectInfo);
+
+        var vCheckedResult = checkDataInput(vObjectInfo);
+        if (vCheckedResult==true)
+        {
+            console.log("%c Ghi tạm ra console", "color:red");
+            console.log(vObjectInfo.maHang);
+            console.log(vObjectInfo.soLuong);
+
+        }
+    }
+
+  
+// Đọc data trên web vào object
+        function readDataObject (paramInpData)
+        {   
+            var vSelectMaHang = document.getElementById("select-ma-hang"); 
+            var vValueMaHang = vSelectMaHang.value;
+            var vInputSoLuong = document.getElementById("input-so-luong");
+            var vValueSoLuong = vInputSoLuong.value;
+            paramInpData.maHang = vValueMaHang;
+            paramInpData.soLuong = vValueSoLuong;
+
+        }
+
+
+
+
+
+
+    //Hàm kiểm tra thông tin nhập vào 
+    function checkDataInput(paramInpData)
+    {
+        if (parseInt(paramInpData.maHang)==0)
+        {
+            alert("Chưa chọn mã hàng");
+            return false;
+        }
+
+        if (paramInpData.soLuong==="")
+        {
+            alert("Bạn chưa nhập đủ số lượng");
+            return false;
+        }
+        if (isNaN(paramInpData.soLuong))
+        {
+            alert("Số lượng phải là số");
+            return false;
+        }
+        var vTransferNumber = Number(paramInpData.soLuong);
+        if (IntergerBigger0(vTransferNumber)==false)
+        {
+            alert("Số lượng nhập vào phải là số nguyên lớn hơn 0");
+            return false;
+        }
+        return true;
+    }
+
+
+    function IntergerBigger0(paramNumber)
+    {
+        if (!Number.isInteger(paramNumber)||paramNumber<1)
+        {
+        return false;
+        }
+        return true;
+    }
+</script>
+
+</html>

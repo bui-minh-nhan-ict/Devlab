@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h2>Responsive Form</h2>
+  <p>sample forms 02: multi colums</p>
+ 
+
+    <!-- Tạo first name  -->
+    <div class="row form-group">
+      <div class="col-sm-3">
+        <label for="fname">First Name</label>
+      </div>
+      <div class="col-sm-9">
+        <input type="text" id="inp-fname" name="firstname" placeholder="Your name.." class="form-control">
+      </div>
+
+    <!-- Tạo last name  -->
+    </div>
+    <div class="row form-group">
+      <div class="col-sm-3">
+        <label for="lname">Last Name</label>
+      </div>
+      <div class="col-sm-9">
+        <input type="text" id="inp-lname" name="lastname" placeholder="Your last name.." class="form-control">
+      </div>
+
+    <!-- Tạo Country  -->
+     </div>
+    <div class="row form-group">
+      <div class="col-sm-3">
+        <label for="country">Country</label>
+      </div>
+      <div class="col-sm-3">
+        <select id="select-country" name="country" class="form-control">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+      </div>
+
+
+      <!-- Tạo Region  -->
+      <div class="col-sm-3">
+        <label for="region">Region</label>
+      </div>
+      <div class="col-sm-3">
+        <input type="text" id="inp-region" name="regioninput" placeholder="Your region.." class="form-control">
+      </div>
+
+      
+      <!-- Tạo Age  -->
+    </div>
+    <div class="row form-group">
+    <div class="col-sm-3">
+      <label for="age">Age</label>
+    </div>
+    <div class="col-sm-3">
+      <input type="text" id="inp-age" name="ageinput" placeholder="Your age.." class="form-control">
+    </div>  
+
+
+   <!-- Tạo Address  -->
+   <div class="col-sm-3">
+    <label for="address">Address</label>
+  </div>
+  <div class="col-sm-3">
+    <input type="text" id="inp-address" name="addressinput" placeholder="Your address.." class="form-control">
+  </div>
+
+
+      <!-- Tạo Purpose  -->
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-3">
+        <label for="purpose">Purpose</label>
+      </div>
+      <div class="col-sm-3">
+        <select id="select-purpose" name="purpose" class="form-control">
+          <option value="business">Business</option>
+          <option value="private">Private</option>
+          <option value="tourist">Tourist</option>
+          <option value="medical">Medical</option>
+        </select>
+      </div>
+
+
+      <!-- Tạo Gender  -->
+
+  <div class="col-sm-3">
+    <label for="gender">Gender</label>
+  </div>
+  <div class="col-sm-3">
+    <select id="select-gender" name="gender" class="form-control">
+      <option value="Male">Male</option>
+      <option value="female">Female</option>
+    </select>
+  </div>
+
+
+ <!-- Tạo Button  -->
+      </div>
+      <div class="row form-group text-right">
+      <div class="col-sm-12">
+      <button class="btn btn-info" id="btn-send" onclick="btnSend()">Send</button>
+      </div>
+      </div> 
+</div> 
+</body>
+
+
+<script>
+  function btnSend(){
+  "use strict";
+    console.log("Bắt đầu Send dữ liệu");
+
+    var vObjInfo={ 
+        firstName: "", 
+        lastName: "",
+        country: "", 
+        region: "", 
+        age: 0, 
+        gender: "",
+        address:"",
+        purpose:""
+      }
+
+      vObjInfo.firstName = document.getElementById("inp-fname").value.trim();
+      vObjInfo.lastName = document.getElementById("inp-lname").value.trim();
+      vObjInfo.country = document.getElementById("select-country").value.trim();
+      vObjInfo.region = document.getElementById("inp-region").value.trim();
+      vObjInfo.age = document.getElementById("inp-age").value.trim();
+      vObjInfo.purpose = document.getElementById("select-purpose").value.trim();
+      vObjInfo.address = document.getElementById("inp-address").value.trim();
+      vObjInfo.gender = document.getElementById("select-gender").value.trim();
+      console.log("Thông Tin Object:");
+      console.log(vObjInfo);
+  }
+  /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+  
+  /*** REGION 2 - Vùng gán / thực thi hàm xử lý sự kiện cho các elements */
+  
+  /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+  
+  /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+  
+  </script>
+</html>
+
+

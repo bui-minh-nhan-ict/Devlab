@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- style dùng vưới bootstrap4-->
+    <title> Task E150</title>
+</head>
+<script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    // Create product obj
+    var gSPInfo = {
+        maSP: null,
+        tenSP: null,
+        nhomSP: null,
+        soLuongSP: null,
+        // display in console method
+        displayInConsole: function () {
+            console.log("%cThông tin SP được nhập vào", "color:blue");
+            console.log("Mã SP: " + this.maSP);
+            console.log("Tên SP: " + this.tenSP);
+            console.log("Nhóm SP: " + this.nhomSP);
+            console.log("Số Lượng: " + this.soLuongSP);
+        }
+    };
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    // On Send button click event handling function
+    function onBtnSendClick() {
+        "use strict";
+        console.log("%cThông tin SP", "color:blue");
+        console.log(gSPInfo);
+        var vInputMaSP = document.getElementById("input-product-code");
+        var vInputTenSP = document.getElementById("input-product-name");
+        var vInputSoLuongSP = document.getElementById("input-product-quantity");
+        var vInputNhomSP = document.getElementById("select-category");
+        var vInputNhomSPValue = vInputNhomSP.options[vInputNhomSP.selectedIndex].text;
+
+        // Kiểm tra giá trị đầu vào
+        if (validateString(vInputMaSP.value, 0) || vInputMaSP.value == "") {
+            alert("Vui lòng nhập mã sản phẩm !");
+            vInputMaSP.focus();
+        }
+        else if (validateString(vInputTenSP.value, 1) || vInputTenSP.value == "") {
+            alert("Vui lòng nhập tên sản phẩm !");
+            vInputTenSP.focus();
+        }
+        else if (validateString(vInputSoLuongSP.value, 3) || vInputSoLuongSP.value == "" || vInputSoLuongSP.value < 1) {
+            alert("Số lượng phải là số !");
+            vInputSoLuongSP.focus();
+        }
+        else { // If valid input
+            // Call push data into product obj function
+            getProductInfo(vInputMaSP.value, vInputTenSP.value, vInputNhomSPValue, vInputSoLuongSP.value);
+            // Display obj info
+            gSPInfo.displayInConsole();
+        }
+
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    function getProductInfo(paramMaSP, paramTenSP, paramNhomSP, paramSoLuongSP) {
+        "use strict";
+        gSPInfo.maSP = paramMaSP;
+        gSPInfo.tenSP = paramTenSP;
+        gSPInfo.nhomSP = paramNhomSP;
+        gSPInfo.soLuongSP = paramSoLuongSP;
+    }
+
+    /*** String validating function
+    * paramInputStr: validating String
+    * paramValidType: How to validating
+    * Return true if match pattern
+    */
+    function validateString(paramInputStr, paramValidType) {
+        "use strict";
+        var vPartternStr = "";
+        switch (paramValidType) {
+            case 0: 
+                vPartternStr = /^[^\\\/& ]*$/;
+                break;
+            case 1: 
+                vPartternStr = /^[^\\\/&]*$/;
+                break;
+            case 2:
+                vPartternStr = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+                break;
+            case 3: 
+                vPartternStr = /^\d+$/;
+                break;
+            default:
+                vPartternStr = /^[^\\\/& ]*$/;
+        }
+        // Set result
+        var vResult = true;
+        if (paramInputStr.match(vPartternStr)) {
+            vResult = false;
+        }
+        return vResult;
+    }
+</script>
+
+<body>
+    <div class="container jumbotron p-4">
+        <div class="text-center mb-4">
+            <h4>Quản lý sản phẩm</h4>
+        </div>
+        <div class="row form-group">
+            <!-- row: hàng, form-group: để giữ margin (khoảng cách) giữa phần tử với phần tử khác-->
+            <div class="col-sm-3">
+                <!-- col-sm-3: cột chiếm 25% chiều ngang -->
+                <label for="input-product-code">Mã sản phẩm</label>
+            </div>
+            <div class="col-sm-9">
+                <!-- col-sm-9: cột chiếm 75% chiều ngang-->
+                <input type="text" id="input-product-code" name="productCode" placeholder=""
+                    class="form-control">
+                <!--form-control: phần tử có style (định dạng) mặc định theo bootstrap4-->
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3">
+                <label for="input-product-name">Tên sản phẩm</label>
+            </div>
+            <div class="col-sm-9">
+                <input type="text" id="input-product-name" name="tenSP" placeholder=""
+                    class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3">
+                <label for="select-category">Nhóm sản phẩm</label>
+            </div>
+            <div class="col-sm-3">
+                <select id="select-category" name="category" class="form-control">
+                    <option value="dientu">Điện tử</option>
+                    <option value="hanggiadung">Hàng gia dụng</option>
+                    <option value="dienlanh">Điện lạnh</option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <label for="input-product-quantity">Số lượng nhập</label>
+            </div>
+            <div class="col-sm-3">
+                <input id="input-product-quantity" placeholder=""
+                    class="form-control">
+            </div>
+        </div>
+        <div class="row form-group text-right">
+            <!-- text-right: mọi thứ sẽ căn phải, ví dụ nút Send -->
+            <div class="col-sm-12">
+                <!-- col-sm-12: cột chiếm 100% chiều ngang-->
+                <button class="btn btn-info" id="btn-send" onclick="onBtnSendClick()"> Send </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

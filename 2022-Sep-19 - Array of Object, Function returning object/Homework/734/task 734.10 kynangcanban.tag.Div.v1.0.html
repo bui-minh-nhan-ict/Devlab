@@ -1,0 +1,106 @@
+<html>
+<header>
+    <title> Task: kỹ năng căn bản - tag - Div - 734.10</title>
+
+    <style>
+        .bg-div {
+            background-color: #ddd;
+        }
+    </style>
+</header>
+
+<body>
+    <h1> Kỹ năng xử lý tag Div - phần tử vùng </h1>
+
+    <div class="bg-div" id="div-tag">Div Tag</div>
+    <hr>
+
+    <button onclick="onBtnTruyVanPhanTuDivClick()">Truy vấn phần tử Div</button>
+    <button onclick="onBtnDocInnerHTMLPhanTuDivClick()">Đọc inner HTML phần tử Div</button>
+    <button onclick="onBtnAnHienPhanTuDivClick()">Ẩn/Hiện phần tử Div</button>
+    <button onclick="onBtnDoiCoPhanTuDivClick()">Đổi cỡ phần tử Div</button>
+
+    <hr>
+    <h1> Làm lại những nút trên, cho div dưới đây</h1>
+    <div class="bg-div" id="div-tag-exercise">Div Tag Exercise</div>
+    <hr>
+
+    <button onclick="onBtnTruyVanPhanTuDivClick2()">Truy vấn phần tử Div</button>
+    <button onclick="onBtnDocInnerHTMLPhanTuDivClick2()">Đọc inner HTML phần tử Div</button>
+    <button onclick="onBtnAnHienPhanTuDivClick2()">Ẩn/Hiện phần tử Div</button>
+    <button onclick="onBtnDoiCoPhanTuDivClick2()">Đổi cỡ phần tử Div</button>
+
+    <hr>
+
+</body>
+<script>
+    //truy vấn phần tử div và ghi ra console
+    function onBtnTruyVanPhanTuDivClick() {
+        var vDivElement = document.getElementById("div-tag");
+        console.log("Phần tử Div :....");
+        console.log(vDivElement);
+    }
+    //Đọc inner HTML phần tử Select
+    function onBtnDocInnerHTMLPhanTuDivClick() {
+        var vDivElement = document.getElementById("div-tag");
+        console.log("Inner HTML Phần tử Div :....");
+        console.log("Inner HTML = " + vDivElement.innerHTML);
+    }
+    //Ẩn/Hiện phần tử Div
+    function onBtnAnHienPhanTuDivClick() {
+        var vDivElement = document.getElementById("div-tag");
+        if (vDivElement.style.display === "none") {  //nếu đang ẩn thì hiện ra 
+            console.log("Hiện Phần tử Div :....");
+            vDivElement.style.display = "block"; //hiện ra 
+        } else {  //còn nếu đang hiện thì ẩn đi
+            console.log("Ẩn Phần tử Div :....");
+            vDivElement.style.display = "none";  //ẩn đi
+        }
+    }
+    //Đổi cỡ phần tử Div
+    function onBtnDoiCoPhanTuDivClick() {
+        var vDivElement = document.getElementById("div-tag");
+        console.log("Đổi cỡ phần tử Div :....");
+        
+        vDivElement.style.width = "200px";
+        vDivElement.style.height = "200px";
+    }
+
+
+
+    // new function
+
+    function onBtnTruyVanPhanTuDivClick2() {
+        var vDivElement = document.getElementById("div-tag-exercise");
+        console.log("Phần tử Div :....");
+        console.log(vDivElement);
+    }
+    //Đọc inner HTML phần tử Select
+    function onBtnDocInnerHTMLPhanTuDivClick2() {
+        var vDivElement = document.getElementById("div-tag-exercise");
+        console.log("Inner HTML Phần tử Div :....");
+        console.log("Inner HTML = " + vDivElement.innerHTML);
+    }
+    //Ẩn/Hiện phần tử Div
+    function onBtnAnHienPhanTuDivClick2() {
+        var vDivElement = document.getElementById("div-tag-exercise");
+        if (vDivElement.style.display === "none") {  //nếu đang ẩn thì hiện ra 
+            console.log("Hiện Phần tử Div :....");
+            vDivElement.style.display = "block"; //hiện ra 
+        } else {  //còn nếu đang hiện thì ẩn đi
+            console.log("Ẩn Phần tử Div :....");
+            vDivElement.style.display = "none";  //ẩn đi
+        }
+    }
+    //Đổi cỡ phần tử Div
+    function onBtnDoiCoPhanTuDivClick2() {
+        var vDivElement = document.getElementById("div-tag-exercise");
+        console.log("Đổi cỡ phần tử Div :....");
+        
+        vDivElement.style.width = "200px";
+        vDivElement.style.height = "200px";
+    }
+
+</script>
+
+</html>

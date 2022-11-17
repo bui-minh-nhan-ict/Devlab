@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> CAR DB </title>
+</head>
+<script>
+    "use strict";
+
+    const gCAR_DB = [
+        { make: "Ford", model: "Explorer", year: 2017, color: "white", vID: "AB-10111" },
+        { make: "Toyota", model: "Corolla", year: 2018, color: "silver", vID: "DN-23218" },
+        { make: "Mazda", model: "Mazda 6", year: 2020, color: "red", vID: "TZ-23212" },
+        { make: "Toyota", model: "Fortuna", year: 2016, color: "black", vID: "MN-48593" },
+        { make: "Mazda", model: "Mazda 3", year: 2019, color: "silver", vID: "MN-40593" }
+    ];
+
+    function onPageLoading()
+    {
+        console.log("% Load trang tại đây");
+        // var vElementInpMake = document.getElementById("inp-make");
+        // console.log(vElementInpMake.id);
+        // console.log(vElementInpMake.placeholder);
+
+        // var vElementInpModel = document.getElementById("inp-model");
+        // console.log(vElementInpModel.id);
+        // console.log(vElementInpModel.placeholder);
+
+        // var vElementInpYear = document.getElementById("inp-year");
+        // console.log(vElementInpYear.id);
+        // console.log(vElementInpYear.placeholder);
+
+        // var vElementInpColor = document.getElementById("inp-color");
+        // console.log(vElementInpColor.id);
+        // console.log(vElementInpColor.placeholder);
+
+        // var vElementInpVid = document.getElementById("inp-vid");
+        // console.log(vElementInpVid.id);
+        // console.log(vElementInpVid.placeholder);
+
+    }
+
+    function onButtonListClick()
+    {
+        for (var bCurrentLocation =0; bCurrentLocation<gCAR_DB.length; bCurrentLocation++)
+        {
+            console.log("Car VID = " + gCAR_DB[bCurrentLocation].vID);
+            console.log("Make = " + gCAR_DB[bCurrentLocation].make);
+            console.log("Model = " + gCAR_DB[bCurrentLocation].model);
+            console.log("Year = " + gCAR_DB[bCurrentLocation].year);
+            console.log("Color = " + gCAR_DB[bCurrentLocation].color);
+        }
+    }
+
+    function onButtonSearchClick()
+    {
+        var vElementInpVid = document.getElementById("inp-vid");
+        var vVidValue = vElementInpVid.value;
+        console.log("Đang tìm Car có VID: "+vVidValue);
+        var vCarB = getCarByVID(vVidValue); // trả về 1 đối tượng
+        // Nếu không thấy thì :
+        if (vCarB == null)
+        {
+            console.log("Car with vid = "+ vVidValue + " is not found");
+        }
+        else 
+        {
+            console.log("Car found by getCarByVid, VID = " +vVidValue);
+            console.log(vCarB.make);
+            console.log(vCarB.model);
+            console.log(vCarB.color);
+            console.log(vCarB.year);
+        }
+
+    }
+
+    function getCarByVID(paramCarVID)
+    {
+        "use strict";
+        var vCarIndex = 0; 
+        var vIsFound = false; // đã tìm thấy ô tô chưa ?
+        var vCarObj = null; // đối tượng chứa ô tô được tìm thấy
+        // Khi chưa tìm thấy car và chưa tìm hết car thì tìm tiếp
+        while (vIsFound == false && vCarIndex < gCAR_DB.length)
+        {
+            //tìm car tiếp
+            if(gCAR_DB[vCarIndex].vID == paramCarVID)
+            {
+                vIsFound = true;
+                vCarObj = gCAR_DB[vCarIndex];
+            }
+            else 
+            {
+                vCarIndex++;
+            }
+        }
+        return vCarObj;
+    }
+
+    function onBtnAddClick()
+    {
+        "use strict";
+        var vCaradd = getCar();
+        //Kiểm tra
+        if (vCaradd.make == "")
+        {
+            alert ("Chưa nhập make");
+            return;
+        }
+
+        if (vCaradd.model == "")
+        {
+            alert ("Chưa nhập model");
+            return;
+        }
+
+        if (vCaradd.year == "")
+        {
+            alert ("Chưa nhập year");
+            return;
+        }
+
+        if (isNaN(vCaradd.year))
+        {
+            alert ("Year phải là số");
+            return;
+        }
+
+        if (parseInt(vCaradd.year)<1000 || parseInt(vCaradd.year)>9999)
+            {
+                alert("Year phải là số có 4 chữ số");
+                return;
+            }
+        
+        if (vCaradd.color == "")
+        {
+            alert ("Chưa nhập color");
+            return;
+        }
+
+        if (vCaradd.vID == "")
+        {
+            alert ("Chưa nhập vID");
+            return;
+        }
+
+        //Ghi ra console
+        console.log("Sẽ thêm đối tượng car : ");
+        console.log("VID = "+vCaradd.vID);
+        console.log("make = "+vCaradd.make);
+        console.log("model = "+vCaradd.model);
+        console.log("color = "+vCaradd.color);
+        console.log("year = "+vCaradd.year);
+
+        //thêm data vào database
+        gCAR_DB.push(vCaradd);
+    }
+
+    function getCar()
+    {
+        "use strict";
+        var vElementInpMake = document.getElementById("inp-make");
+        var vMakeValue = vElementInpMake.value;
+        var vElementInpModel = document.getElementById("inp-model");
+        var vModelValue = vElementInpModel.value;
+        var vElementInpYear = document.getElementById("inp-year");
+        var vYearValue = vElementInpYear.value;
+        var vElementInpColor = document.getElementById("inp-color");
+        var vColorValue = vElementInpColor.value;
+        var vElementInpVid = document.getElementById("inp-vid");
+        var vVidValue = vElementInpVid.value;
+
+        var vCar = 
+        {
+            make : vMakeValue,
+            model : vModelValue,
+            year : vYearValue,
+            color : vColorValue,
+            vID : vVidValue
+        }
+        return vCar;
+
+    }
+
+
+</script>
+
+<body onload="onPageLoading()">
+
+        <label>Make</label>
+        <input type="text" id="inp-make" placeholder="Make...">
+        <br><br>
+
+        <label>Model</label>
+        <input type="text" id="inp-model" placeholder="Model...">
+        <br><br>
+
+        <label>Year</label>
+        <input type="text" id="inp-year" placeholder="Year...">
+        <br><br>
+
+        <label>Color</label>
+        <input type="text" id="inp-color" placeholder="Color...">
+        <br><br>
+
+        <label>VID</label>
+        <input type="text" id="inp-vid" placeholder="VID...">
+        <br><br>
+
+        <button id="btn-search" onclick="onButtonSearchClick()">Search/Tìm (search by VID)</button>
+        <button id="btn-list" onclick="onButtonListClick()">List/Danh Sách</button>
+        <button id="btn-add" onclick="onBtnAddClick()">Add/Thêm</button>
+
+
+</body>
+</html>

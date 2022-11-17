@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Task 760.30 </title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <!-- Content -->
+  <div class="container">
+    <table class="table">
+      <tr class="text-center">
+        <th colspan="4">
+          <h2><b class="p-1">Đăng ký gói cước viễn thông</b></h2>
+          <p><span class="p-2">Choose a pricing package that fits your needs - chọn gói đăng ký</span></p>
+        </th>
+      </tr> 
+      <tr class="text-center">
+        <td>
+          Gói
+        </td>
+        <td>
+         <b>Net 1 Basic</b> 
+        </td>
+        <td>
+          <b>Net 3 Plus</b>
+        </td>
+        <td>
+          <b>Fast 50</b>
+        </td>
+      </tr>
+      <tr class="text-center">
+        <td>
+          Băng thông trong nước
+        </td>
+        <td>
+          30 Mbps
+        </td>
+        <td>
+          80 Mbps
+        </td>
+        <td>
+          200 Mbps
+        </td>
+      </tr>
+      <tr class="text-center">
+        <td>
+          Băng thông quốc tế
+        </td>
+        <td>
+          10 Mbps
+        </td>
+        <td>
+          20 Mbps
+        </td>
+        <td>
+          40 Mbps
+        </td>
+      </tr>
+      <tr class="text-center">
+        <td>
+          Truyền hình
+        </td>
+        <td>
+          20 kênh
+        </td>
+        <td>
+          20 kênh
+        </td>
+        <td>
+          20 kênh
+        </td>
+      </tr>
+      <tr class="text-center">
+        <td>
+          Giá theo tháng (VND)
+        </td>
+        <td>
+          200 000
+        </td>
+        <td>
+          250 000
+        </td>
+        <td>
+          300 000
+        </td>
+      </tr>
+      <tr class="text-center">
+        <td> 
+        </td>
+        <td>
+          <button onclick="onBtnPlanBasicClick()" id="btn-package-basic" data-is-selected="N" class="btn btn-success" >Sign Up</button>
+        </td>
+        <td>
+          <button onclick="onBtnPlanPlusClick()" id="btn-package-plus" data-is-selected="N" class="btn btn-success" >Sign Up</button>
+        </td>
+        <td>
+          <button onclick="onBtnPlanFastClick()" id="btn-package-fast" data-is-selected="N" class="btn btn-success" >Sign Up</button>
+        </td>
+      </tr>
+    </table>
+     
+    <div id="div-contact-info" class="row mt-4">
+      <div class="form-group col-sm-3">
+        <label class="form-control border-0"> Họ và tên</label>
+      </div>
+      <div class="form-group col-sm-9">
+        <input class="form-control" id="inp-ho-va-ten" placeholder="ví dụ: Nguyễn Thị Nga" />
+      </div>
+    </div>
+    <div id="div-contact-info" class="row">
+      <div class="form-group col-sm-3">
+        <label class="form-control border-0"> Địa chỉ</label>
+      </div>
+      <div class="form-group col-sm-9">
+        <input class="form-control" id="inp-dia-chi" placeholder="ví dụ: Phường A, Quận B, Thành Phố C" />
+      </div>
+    </div>
+    <div id="div-contact-info" class="row">
+      <div class="form-group col-sm-3">
+        <label class="form-control border-0"> Email</label>
+      </div>
+      <div class="form-group col-sm-9">
+        <input class="form-control" id="inp-email" placeholder="ví dụ email: abc@gmail.vidu.vn" />
+      </div>
+    </div>
+    <div id="div-contact-info" class="row">
+      <div class="form-group col-sm-3">
+        <label class="form-control border-0"> Số điện thoại</label>
+      </div>
+      <div class="form-group col-sm-9">
+        <input class="form-control" id="inp-so-dien-thoai" placeholder="ví dụ: 0912345678" />
+      </div>
+    </div>
+    <button onclick="onBtnSendDataClick()"  class="btn btn-info form-control" id="btn-send-data"> Send Data (Gửi thông tin gói đăng ký đến Khách hàng) </button> <br>
+    <br><br><br>
+    <div id="div-container-order" class="container bg-info p-2 jumbotron" style="display: none">
+      <div id="div-order-infor" class="text-white p-3">...</div>
+    <div class="row mt-4">
+      
+    </div>
+  </div>
+</body>
+
+  <script>
+    "use strict";
+    var gMenu = {
+    menuName: null,
+    diameterCM: null,
+    bakedRibs: null,
+    salads: null,
+    softDrinks: null,
+    priceVND: null,
+
+    }
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    
+    /*** REGION 2 - Vùng gán / thực thi hàm xử lý sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    function onBtnPlanBasicClick() {
+      /* code cần viết- chọn gói Vip */
+      var vSelectedPackageStructure = getPackage("Basic", 30, 10, 20, 200000);
+      // gọi method hiển thị thông tin
+      vSelectedPackageStructure.displayInConsoleLog();
+      // đổi màu button
+      changePackageButtonColor("Basic");
+    }
+    // Hàm thực thi khi package Silver được chọn (click)
+    function onBtnPlanPlusClick() {
+      /* code cần viết- chọn gói Silver */
+      var vSelectedPackageStructure = getPackage("Plus", 80, 20, 20, 250000);
+      // gọi method hiển thị thông tin
+      vSelectedPackageStructure.displayInConsoleLog();
+      // đổi màu button
+      changePackageButtonColor("Plus");
+    }
+    // Hàm thực thi khi package basic được chọn (click)
+    function onBtnPlanFastClick() {
+      //tạo một đối tượng gói dịch vụ, được tham số hóa
+      var vSelectedPackageStructure = getPackage("Fast", 200, 40, 20, 300000);
+      // gọi method hiển thị thông tin
+      vSelectedPackageStructure.displayInConsoleLog();
+      // đổi màu button
+      changePackageButtonColor("Fast");
+    }
+
+    // khi ấn nút send data
+    function onBtnSendDataClick() {
+      //định nghĩa đối tượng dữ liệu
+      var vThongTinDangKyObj = {
+        packageDuocChon: null,
+        hoVaTen: "",
+        diaChi: "",
+        email:"",
+        soDienThoai: null
+      };
+      //1. đọc giá trị từ ô input họ và tên, ô input email, ô input năm sinh và global variable đã được lưu vào vThongTinDangKyObj
+      docDuLieuTuWebVaoObj(vThongTinDangKyObj);
+      //2. Kiểm tra
+      var vKetQuaKiemTra = kiemTraThongTinDangKy(vThongTinDangKyObj);
+      // ghi ra console kết quả kiểm tra
+      console.log("Kết quả kiểm tra : "+vKetQuaKiemTra);
+      //Xử lý hiển thị
+      if (vKetQuaKiemTra == true)
+      {
+
+        hienThiThongTinDangKyRaConsole(vThongTinDangKyObj);
+      }
+    }
+      /* code cần viết: tách đọc thành hàm riêng */
+      function docDuLieuTuWebVaoObj(paramThongTinDangKyObj){
+      var vInputHoVaTen = document.getElementById("inp-ho-va-ten");
+      paramThongTinDangKyObj.hoVaTen = vInputHoVaTen.value;
+      var vInputDiaChi = document.getElementById("inp-dia-chi");
+      paramThongTinDangKyObj.diaChi = vInputDiaChi.value;
+      var vInputEmail = document.getElementById("inp-email");
+      paramThongTinDangKyObj.email = vInputEmail.value;
+      var vInputSDT = document.getElementById("inp-so-dien-thoai");
+      paramThongTinDangKyObj.soDienThoai = vInputSDT.value;
+      // khai báo 2 thẻ div ẩn dùng để hiển thị thông tin gói cước đã đặt
+      var vShowOrderContainer = document.getElementById("div-container-order");
+      var vShowOrderInfo = document.getElementById("div-order-infor");
+      
+
+      var vBtnBasicPlan = document.getElementById("btn-package-basic");
+      var vBtnPlusPlan = document.getElementById("btn-package-plus");
+      var vBtnFastPlan = document.getElementById("btn-package-fast");
+      var vPackageSelected = null;
+
+      var vGoiBasicDuocChon = vBtnBasicPlan.getAttribute("data-is-selected");
+      var vGoiPlusDuocChon = vBtnPlusPlan.getAttribute("data-is-selected");
+      var vGoiFastDuocChon = vBtnFastPlan.getAttribute("data-is-selected");
+      if(vGoiBasicDuocChon === "Y") {
+        vPackageSelected = getPackage("Basic", 30, 10, 20, 200000);
+        paramThongTinDangKyObj.packageDuocChon = vPackageSelected;
+      }
+      else if(vGoiPlusDuocChon === "Y") {
+        // viết code xử lý tiếp
+        vPackageSelected = getPackage("Plus", 80, 20, 20, 250000);
+        paramThongTinDangKyObj.packageDuocChon = vPackageSelected;
+      }
+      else if(vGoiFastDuocChon === "Y") {
+        // viết code xử lý tiếp
+        vPackageSelected = getPackage("Fast", 200, 40, 20, 300000);
+        paramThongTinDangKyObj.packageDuocChon = vPackageSelected;
+      }
+
+    }
+
+      //2. Kiểm tra (chưa viết code kiểm tra)
+      /*code cần viết: cần có 1 hàm để kiểm tra có phải là email không và có 1 hàm kiểm tra năm sinh phải là số nguyên, phải lớn hơn 1900
+      // input là vThongTinDangKyObj
+      // output là ĐÚNG/SAI (true/false)  
+      */
+     function kiemTraThongTinDangKy(paramThongTinDangKyObj)
+     {
+      var vShowOrderContainer = document.getElementById("div-container-order");
+      var vShowOrderInfo = document.getElementById("div-order-infor");
+
+      if (paramThongTinDangKyObj.packageDuocChon == null)
+      {
+        alert("Chưa chọn gói");
+        return false;
+      }
+      if (paramThongTinDangKyObj.hoVaTen =="")
+      {
+        alert("Chưa nhập họ và tên");
+        return false;
+      }
+      if (paramThongTinDangKyObj.diaChi =="")
+      {
+        alert("Chưa nhập địa chỉ");
+        return false;
+      }
+      if (isEmail(paramThongTinDangKyObj.email)== false)
+      {
+        return false;
+      }
+      if (isSDT(paramThongTinDangKyObj.soDienThoai)== false)
+      {
+        return false;
+      }
+      else {
+      vShowOrderInfo.innerHTML = "Họ và tên: " +paramThongTinDangKyObj.hoVaTen+"<br>Email: " + paramThongTinDangKyObj.email + "<br>Địa chỉ: " + paramThongTinDangKyObj.diaChi
+      + "<br>Số điện thoại: " + paramThongTinDangKyObj.soDienThoai + "<br>....................................." 
+      vShowOrderInfo.innerHTML = "Băng thông trong nước: " + this.bandwithLocal + "Băng thông quốc tế: " + this.bandwithInternational +
+      "Truyền hình: " + this.TV + "Giá mỗi tháng: " + "VND " + this.pricePerMonthVND + "Giá 1 năm:" + "VND " + this.priceAnnualVND();
+      vShowOrderContainer.style.display = "block";
+      }
+      
+     }
+
+     // hàm kiểm tra email
+     function isEmail(paramEmail)
+     {
+      if (paramEmail< 3)
+      {
+        alert ("Nhập email....");
+        return false;
+      }
+      if (paramEmail.indexOf("@") === -1)
+      {
+        alert('Email phải có ký tự @');
+        return false;
+      }
+      if (paramEmail.startsWith("@")===true)
+      {
+        alert ('Email không bắt đầu bằng @');
+        return false;
+      }
+      if (paramEmail.endsWith("@")===true)
+      {
+        alert('Email kết thúc bằng @');
+        return false;
+      }
+      return true;
+     }
+
+     // kiểm tra năm sinh
+     function isSDT(paramSDT)
+     {
+      if (paramSDT=="")
+      {
+        alert('Chưa nhập SDT');
+        return false;
+      }
+      if (isNaN(paramSDT))
+      {
+        alert ('SDT phải là số');
+        return false;
+      }
+
+      //chuyển đổi năm sinh (string) sang kiểu number
+      var vChuyenDoiNumber = Number(paramSDT);
+      if (Number.isInteger(vChuyenDoiNumber)==false)
+      {
+        alert('Phải nhập SDT là số nguyên');
+        return false;
+      }
+      return true;
+     }
+      //3. Xử lý hiện thị  
+      function hienThiThongTinDangKyRaConsole(paramThongTinDangKyObj){
+      /*code cần viết: tách riêng thành hàm xử lý hiện thị*/
+      console.log("%c Send Data", "color:orange");
+      /* Đây là đoạn code cần Refactoring - đẩy việc xử lý hiện thị ra một hàm riêng*/ 
+      console.log("Họ và tên: " + paramThongTinDangKyObj.hoVaTen);
+      console.log("Địa chỉ: " + paramThongTinDangKyObj.diaChi);
+      console.log("Email: " + paramThongTinDangKyObj.email);
+      console.log("SDT: " + paramThongTinDangKyObj.soDienThoai);
+      //hiện thị gói dịch vụ ra console
+      paramThongTinDangKyObj.packageDuocChon.displayInConsoleLog();
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+
+    //function get Packages (lấy gói đăng ký)
+    //function trả lại một đối tượng package (gói đăng ký) được tham số hóa
+    function getPackage(paramPackage, paramBangThongLocal, paramBangThongQuocTe, paramBangTruyenHinh, paramPricePerMonth) {
+      var vSelectedPackageStructure = {  //Đối tượng: gói đăng ký gym được chọn
+        package: paramPackage, //package = gói đăng ký basic/silver/vip
+        bandwithLocal: paramBangThongLocal,
+        bandwithInternational: paramBangThongQuocTe, 
+        TV: paramBangTruyenHinh,
+        pricePerMonthVND: paramPricePerMonth, //giá 1 tháng
+        //method: giá cả năm (phải được tính ra bằng cách nhân với 12, và bớt 15%, (nhân với 0.85))
+        priceAnnualVND: function () {
+          // 15% discount (giảm giá 15% nếu lấy giả cả năm)
+          return this.pricePerMonthVND * 12;  //nếu trả cả 12 tháng sẽ giảm giá 15%; this = "đối tượng này"
+        },
+        
+        // method display plan infor - phương thức hiện thi gói đăng ký gym 
+        displayInConsoleLog() {
+          console.log("%cPACKAGE SELECTED - gói cước viễn thông được chọn..........", "color:blue");
+          console.log(this.package);  //this = "đối tượng này" 
+          console.log("Băng thông trong nước: " + this.bandwithLocal);
+          console.log("Băng thông quốc tế: " + this.bandwithInternational);
+          console.log("Truyền hình: " + this.TV);
+          console.log("Giá mỗi tháng: " + "VND " + this.pricePerMonthVND);
+          console.log("Giá 1 năm:" + "VND " + this.priceAnnualVND());
+        }
+      }
+      return vSelectedPackageStructure;  //trả lại đối tượng, có đủ dữ liệu (attribute) và các methods (phương thức)
+    }
+    // hàm đổi màu button (sign-up) để phân biệt gói được chọn với các gói khác
+    // input: paramPackage có thể là "Silver", "Basic", "Vip"
+    // hoạt động: tùy input sẽ làm nổi một nút ("btn-warning"), và chuyển hai nút còn lại bình thường ("btn-success")
+    function changePackageButtonColor(paramPackage) {
+      var vBtnBasic = document.getElementById("btn-package-basic"); //truy vấn nút gói basic (sign - up ) 
+      var vBtnPlus = document.getElementById("btn-package-plus");  // truy vấn nút gói Silver (sign - up )
+      var vBtnFast = document.getElementById("btn-package-fast"); //truy vấn nút gói Vip (sign - up ) 
+
+      if (paramPackage === "Plus") {  //nếu chọn Silver thì thay màu nút Silver bằng màu cam (btn-warning), hai nút kia xanh (btn-success)
+        /* code đổi màu 3 nút, khi gói Silver được chọn */
+        vBtnBasic.className = "btn btn-success";
+        vBtnBasic.setAttribute("data-is-selected", "N");
+        vBtnPlus.className = "btn btn-warning";
+        vBtnPlus.setAttribute("data-is-selected", "Y");
+        vBtnFast.className = "btn btn-success";
+        vBtnFast.setAttribute("data-is-selected", "N");
+      }
+      else if (paramPackage === "Basic") {  //nếu chọn Basic thì thay màu nút Basic bằng màu cam (btn-warning), hai nút kia xanh (btn-success)
+        vBtnBasic.className = "btn btn-warning";
+        vBtnBasic.setAttribute("data-is-selected", "Y");
+        vBtnPlus.className = "btn btn-success";
+        vBtnPlus.setAttribute("data-is-selected", "N");
+        vBtnFast.className = "btn btn-success";
+        vBtnFast.setAttribute("data-is-selected", "N");
+      }
+      else if (paramPackage === "Fast") { //nếu chọn Vip thì thay màu nút Vip bàng màu cam, hai nút kia xanh
+        /* code đổi màu 3 nút, khi gói Vip được chọn */
+        vBtnBasic.className = "btn btn-success";
+        vBtnBasic.setAttribute("data-is-selected", "N");
+        vBtnPlus.className = "btn btn-success";
+        vBtnPlus.setAttribute("data-is-selected", "N");
+        vBtnFast.className = "btn btn-warning";
+        vBtnFast.setAttribute("data-is-selected", "Y");
+      }
+    }
+
+
+
+
+  </script>
+
+</html>

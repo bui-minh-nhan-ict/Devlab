@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Task 16.40</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+
+<!-- file html dùng để thử tác động của javascript vào các thành phần trang web-->
+<script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+    const gBASE_URL = "http://203.171.20.210:8080/devcamp-lucky-dice/";
+    const gUTF8_TEXT_APPLICATON_HEADER = "application/json;charset=UTF-8";
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+   function myOnClickFunctionPostApi() {
+        "use strict";
+        //base url
+       
+        // Bước 0: data to be sent by post method
+            var vPersonDataObject = {
+                firstname: "",
+                lastname: "",
+                username: ""
+            }
+        // Bước 1: Gán dữ liệu 
+            getDataFromInput(vPersonDataObject);
+            console.log(vPersonDataObject);
+        // Bước 2: Kiểm tra dữ liệu
+            var vCheck = validateData(vPersonDataObject);
+            console.log(vCheck);
+        // Bước 3: Xử lý Ajax
+            if(vCheck == true){ // Nếu dữ liệu hợp lệ
+                // chuyển object về chuỗi JSON
+                var vPersonJsonData = JSON.stringify(vPersonDataObject);
+                 // create a request
+                var vXmlHttpDice = new XMLHttpRequest();
+                processAjax(vXmlHttpDice, vPersonJsonData);
+
+                vXmlHttpDice.onreadystatechange = function () {
+                    // Khi request đã xử lý xong và thành công!
+                    if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                        // Bước 4: Hiên thị kết quả
+                        displayData(vXmlHttpDice);
+                    }
+                }
+            }
+    }
+    
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    // Hàm hiển thị dữ liệu từ Server phản hồi
+    // Input là đối tượng request
+    function displayData(paramRequest){
+        "use strict";
+        // hãy REFACTORING ĐẨY MÃ NGUỒN XỬ LÝ RA FUNCTION KHÁC
+        console.log(paramRequest.responseText);
+        debugger;
+        // parsing to object
+        var vResponse = JSON.parse(paramRequest.responseText);
+        // sample:  response = JSON.parse(`{"voucher":{"id":12,"maVoucher":"86423","phanTramGiamGia":"20","ghiChu":null,"ngayTao":1614361849000,"ngayCapNhat":1614361849000},"dice":4,"prize":"Xe máy"}`);
+        // get result dice
+        var vDiceReady = vResponse.dice;
+        console.log("dice result:= " + vDiceReady);
+        var vVoucher = vResponse.voucher;
+        console.log("Voucher:= " + vVoucher);
+        var vPrize = vResponse.prize;
+        console.log("Prize:= " + vPrize);
+    }
+    // Hàm xử lý Ajax
+    // Input là đối tượng Request và dữ liệu
+    function processAjax(paramRequest, paramData){
+        "use strict";
+         // mở và gửi request đi
+         paramRequest.open("POST", gBASE_URL + "/dice", true);
+         paramRequest.setRequestHeader("Content-Type", gUTF8_TEXT_APPLICATON_HEADER);
+         paramRequest.send(paramData);
+    }
+    // Hàm nhập dữ liệu cho đối tượng person
+    // Input là đối tượng chữa dữ liệu được nhập
+    function getDataFromInput(paramObject){
+        "use strict";
+        paramObject.firstname = "Bùi";
+        paramObject.lastname = "Minh Nhẫn";
+        paramObject.username = "buiminhnhan";
+    }
+    // Hàm kiểm tra dữ liệu được gán
+    // Input là đối tượng cần kiểm tra
+    // Output là true / false 
+    function validateData(paramObject){
+        "use strict";
+        var vResult =  true; // Khởi tạo biến kểm tra là hợp lệ
+        
+        var vFirstname = paramObject.firstname.trim(); // Chuẩn hóa dữ liệu và lưu vào biến
+        var vLastname = paramObject.lastname.trim(); // Chuẩn hóa dữ liệu và lưu vào biến
+        var vUsername = paramObject.username.trim(); // Chuẩn hóa dữ liệu và lưu vào biến
+
+        if(vFirstname == ""){ // Nếu không gán dữ liệu firstname
+            alert("Firstname is empty!"); // Thì cảnh báo
+            vResult = false; // và gán giá trị kiểm tra là không hợp lệ
+        }
+        if(vLastname == ""){ // Nếu không gán dữ liệu firstname
+            alert("Lastname is empty!"); // Thì cảnh báo
+            vResult = false; // và gán giá trị kiểm tra là không hợp lệ
+        }
+        if(vUsername == ""){ // Nếu không gán dữ liệu firstname
+            alert("Username is empty!"); // Thì cảnh báo
+            vResult = false; // và gán giá trị kiểm tra là không hợp lệ
+        }
+
+        return vResult;
+    }
+
+</script>
+
+<body class="bg bg-light">
+    <div class="jumbotron container">
+        <div class="row form-group">
+            <p id="cmt2dev">Test Page for Javascrip Tasks. F5 to run code. </p>
+        </div>
+        <div class="row form-group">
+            <button onclick="myOnClickFunctionPostApi()" class="btn btn-success">Call post api!</button>
+        </div>
+        <div class="row form-group">
+            <p id="p-test" style="font-size:larger;">Demo gọi 01 post API!</p>
+        </div>
+        <div class="row form-group">
+            <p> Input: username, firstname, lastname</p>
+        </div>
+        <div class="row form-group">
+            <p> Response: dice, voucher, prize </p>
+        </div>
+
+    </div>
+</body>
+
+</html>

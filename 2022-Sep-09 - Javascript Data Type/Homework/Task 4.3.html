@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+<title>
+Alert() Method in JavaScript
+</title>
+<style>
+h1 {
+color: Blue;
+}
+ 
+h2 {
+font-family: Impact;
+}
+ 
+body {
+text-align: center;
+}
+</style>
+<script>
+    function onPageLoading() 
+    {
+    //S1. Truy xuất vào phần tử
+    var getH2Title = document.getElementById("h2-title");
+    var getLable = document.getElementById("label-message");
+    var getInputMessage = document.getElementById("input-message");
+    var getButton = document.getElementById("button-send");
+
+    //S2. Ghi ra console
+    console.log("h2-title, ID= " + getH2Title.id);
+    console.log("h2-title, innerHTML = "+ getH2Title.innerHTML);
+
+    console.log("Lable ID= " + getLable.id);
+    console.log("Lable, innerHTML = "+ getLable.innerHTML);
+
+    console.log("Input Message, ID= " + getInputMessage.id);
+    console.log("Input Message, innerHTML = "+ getInputMessage.innerHTML);
+
+    console.log("Button, id= " + getButton.id);
+    console.log("Button, innerHTML = "+ getButton.innerHTML);
+    }
+
+    // Hàm xử lý Click Send
+    function onButtonSendClick()
+    {
+        
+            console.log("send start - send bắt đầu…");
+            var inputMessageElement = document.getElementById("input-message");
+            //lấy về giá trị nhập trong o input
+            var inputMessage = inputMessageElement.value;
+            //hiển thị trên của sổ alert
+            alert(inputMessage);
+    }
+    
+
+</script>
+</head>
+<body onload = "onPageLoading()">
+    <h2 id="h2-title">TDD - Welcome to devcamp</h2>
+    <label id="label-message">Message</label>
+    <input id="input-message" placeholder="nhap gia tri ..."> <br> <br>
+    <button id="button-send" onclick="onButtonSendClick()">Send</button>
+
+</body>
+ 
+</html>

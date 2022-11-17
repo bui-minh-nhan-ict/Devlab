@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container mt-4">
+    <h2>Lucky Dice History</h2>
+      <div class="form-group">
+        <label for="username">User name:</label>
+        <input type="email" class="form-control" id="input-username" placeholder="Enter username" name="username">
+      </div>
+      <div class="form-group">
+        <button type="button" onclick="onBtnShowDiceHistoryClick()" class="btn btn-primary">Show Dice History Table</button>
+      </div>
+    <div id="log-result" class="mt-5"></div>
+    <div class="mt-5">
+      <table id="table-dice-history" class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Game</th>
+            <th>Dice</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-dice-history">
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    'use strict';
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    const gEND_OF_ROW_COL = -1;
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+    const gBASE_URL = "http://203.171.20.210:8080/devcamp-lucky-dice";
+
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    // hàm xử lý sự kiện nút show dice history click
+    function onBtnShowDiceHistoryClick() {
+      // Khai báo đối tượng để chứa dữ liệu trên form
+      var vUserObj = {
+        username: ""
+      };
+      // B1: thu thập dữ liệu lưu vào object
+      thuThapDuLieu(vUserObj);
+      // B2: validate, kiểm tra dữ liệu
+      var vDuLieuHopLe = kiemTraDuLieu(vUserObj);
+      if(vDuLieuHopLe) {
+        var vXmlHttpDiceHistory = new XMLHttpRequest();
+        // B3: gọi api để lấy lịch sử tung xúc xắc
+        goiApiLayLichSuTungXucXac(vUserObj, vXmlHttpDiceHistory);
+        // B4: hiển thị lịch sử tung xúc xắc lên table
+        vXmlHttpDiceHistory.onreadystatechange = function () {
+          if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+            hienThiLichSuTungXucXac(vXmlHttpDiceHistory);
+          }
+        }
+      }      
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    function thuThapDuLieu(paramUserObj) {
+      var vUserNameInput = document.getElementById("input-username");
+      paramUserObj.username = vUserNameInput.value.trim();
+    }
+
+    function kiemTraDuLieu(paramUserObj) {
+      if(paramUserObj.username == "") {
+        alert("Bạn cần nhập vào username!");
+        return false;
+      }
+
+      return true;
+    }
+
+    function goiApiLayLichSuTungXucXac(paramUserObj, paramXmlHttp) {
+      paramXmlHttp.open("GET", gBASE_URL + "/dice-history?username=" + paramUserObj.username, true);
+      paramXmlHttp.send();
+    }
+
+    function hienThiLichSuTungXucXac(paramXmlHttp) {
+      var vDiceHistoryObj = JSON.parse(paramXmlHttp.responseText);
+      var vDiceHistoryTable = document.getElementById("table-dice-history");
+      var vDiceHistoryTBody = vDiceHistoryTable.getElementsByTagName("tbody")[0];
+      // xóa trắng bảng dữ liệu
+      vDiceHistoryTBody.innerHTML = "";
+      
+      for(var bI = 0; bI < vDiceHistoryObj.dices.length; bI ++) {
+        // thêm 1 dòng mới và gắn vào table
+        var bNewRow = vDiceHistoryTBody.insertRow(gEND_OF_ROW_COL);
+        // thêm 2 ô trên dòng mới
+        var bGameCell = bNewRow.insertCell(0);
+        var bDiceCell = bNewRow.insertCell(1);
+        // điền dữ liệu cho từng ô
+        bGameCell.innerHTML = bI + 1;
+        bDiceCell.innerHTML = vDiceHistoryObj.dices[bI];
+      }
+    }
+
+  </script>
+
+
+</body>
+
+</html>

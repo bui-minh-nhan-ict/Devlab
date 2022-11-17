@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<title> Task 765.15b </title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<body>
+
+  <!-- Content -->
+  <div class="container">
+    <table class="table">
+      <tr class="text-center">
+        <th colspan="4">
+          <h2><b class="p-1">Gym membership - Đăng ký gói tập thể hình</b></h2>
+          <p><span class="p-2">Choose a pricing package that fits your needs - chọn gói đăng ký</span></p>
+        </th>
+      </tr> 
+      <tr class="text-center">
+        <td>
+          Gói
+        </td>
+        <td>
+         <b>Basic</b> 
+        </td>
+        <td>
+          <b>Silver</b>
+        </td>
+        <td>
+          <b>Vip</b>
+        </td>
+      </tr>
+      <tr class="text-center">
+        <td>
+          Giờ tập
+        </td>
+        <td>
+          24x7
+        </td>
+        <td>
+          24x7
+        </td>
+        <td>
+          24x7
+        </td>
+      </tr>
+      <tr class="text-center">
+        <td>
+          Số giờ huấn luyện viên cá nhân (PT)  / tuần
+        </td>
+        <td>
+           0
+        </td>
+        <td>
+           2
+        </td>
+        <td>
+          Theo đăng kí
+        </td>
+      </tr>
+      <tr class="text-center">
+        <td>
+          Giá theo tháng (VND)
+        </td>
+        <td>
+          500 000
+        </td>
+        <td>
+          800 000
+        </td>
+        <td>
+          1 500 000
+        </td>
+      </tr>
+      <tr class="text-center">
+        <td> 
+        </td>
+        <td>
+          <button id="btn-package-basic" data-is-selected="N" class="btn btn-success" onclick="onBtnPlanBasicClick()">Sign Up</button>
+        </td>
+        <td>
+          <button id="btn-package-silver" data-is-selected="N" class="btn btn-success" onclick="onBtnPlanSilverClick()">Sign Up</button>
+        </td>
+        <td>
+          <button id="btn-package-vip" data-is-selected="N" class="btn btn-success" onclick="onBtnPlanVipClick()">Sign Up</button>
+        </td>
+      </tr>
+    </table>
+     
+    <div id="div-contact-info" class="row mt-4">
+      <div class="form-group col-sm-3">
+        <label class="form-control border-0"> Họ và tên</label>
+      </div>
+      <div class="form-group col-sm-9">
+        <input class="form-control" id="inp-ho-va-ten" placeholder="ví dụ: Nguyễn Thị Nga" />
+      </div>
+    </div>
+    <div id="div-contact-info" class="row">
+      <div class="form-group col-sm-3">
+        <label class="form-control border-0"> Email</label>
+      </div>
+      <div class="form-group col-sm-9">
+        <input class="form-control" id="inp-email" placeholder="ví dụ email: abc@gmail.vidu.vn" />
+      </div>
+    </div>
+    <div id="div-contact-info" class="row">
+      <div class="form-group col-sm-3">
+        <label class="form-control border-0"> Năm sinh</label>
+      </div>
+      <div class="form-group col-sm-9">
+        <input class="form-control" id="inp-nam-sinh" placeholder="ví dụ: 2001" />
+      </div>
+    </div>
+    <div class="row mt-4">
+      <button class="btn btn-info form-control" id="btn-send-data" onclick="onBtnSendDataClick()"> Send Data (Gửi thông
+        tin gói đăng ký đến Khách hàng) </button>
+    </div>
+  </div>
+
+  <script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    
+    /*** REGION 2 - Vùng gán / thực thi hàm xử lý sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    // Hàm thực thi khi package Vip được chọn (click)
+    function onBtnPlanVipClick() {
+      /* code cần viết- chọn gói Vip */
+      var vSelectedPackageStructure = getPackage("Vip", "24x7", "Theo đăng ký", 1500000);
+      // gọi method hiển thị thông tin
+      vSelectedPackageStructure.displayInConsoleLog();
+      // đổi màu button
+      changePackageButtonColor("Vip");
+    }
+    // Hàm thực thi khi package Silver được chọn (click)
+    function onBtnPlanSilverClick() {
+      /* code cần viết- chọn gói Silver */
+      var vSelectedPackageStructure = getPackage("Silver", "24x7", 2, 800000);
+      // gọi method hiển thị thông tin
+      vSelectedPackageStructure.displayInConsoleLog();
+      // đổi màu button
+      changePackageButtonColor("Silver");
+    }
+    // Hàm thực thi khi package basic được chọn (click)
+    function onBtnPlanBasicClick() {
+      //tạo một đối tượng gói dịch vụ, được tham số hóa
+      var vSelectedPackageStructure = getPackage("Basic", "24x7", 0, 500000);
+      // gọi method hiển thị thông tin
+      vSelectedPackageStructure.displayInConsoleLog();
+      // đổi màu button
+      changePackageButtonColor("Basic");
+    }
+
+    // khi ấn nút send data
+    function onBtnSendDataClick() {
+      //định nghĩa đối tượng dữ liệu
+      var vThongTinDangKyObj = {
+        packageDuocChon: null,
+        email: "",
+        hoVaTen: "",
+        namSinh: null
+      };
+      //1. đọc giá trị từ ô input họ và tên, ô input email, ô input năm sinh và global variable đã được lưu vào vThongTinDangKyObj
+      docDuLieuTuWebVaoObj(vThongTinDangKyObj);
+      //2. Kiểm tra
+      var vKetQuaKiemTra = kiemTraThongTinDangKy(vThongTinDangKyObj);
+      // ghi ra console kết quả kiểm tra
+      console.log("Kết quả kiểm tra : "+vKetQuaKiemTra);
+      //Xử lý hiển thị
+      if (vKetQuaKiemTra == true)
+      {
+        hienThiThongTinDangKyRaConsole(vThongTinDangKyObj);
+      }
+    }
+      /* code cần viết: tách đọc thành hàm riêng */
+      function docDuLieuTuWebVaoObj(paramThongTinDangKyObj){
+      var vInputHoVaTen = document.getElementById("inp-ho-va-ten");
+      paramThongTinDangKyObj.hoVaTen = vInputHoVaTen.value;
+      var vInputEmail = document.getElementById("inp-email");
+      paramThongTinDangKyObj.email = vInputEmail.value;
+      var vInputNamSinh = document.getElementById("inp-nam-sinh");
+      paramThongTinDangKyObj.namSinh = vInputNamSinh.value;
+
+      var vBtnBasicPlan = document.getElementById("btn-package-basic");
+      var vBtnSilverPlan = document.getElementById("btn-package-silver");
+      var vBtnVipPlan = document.getElementById("btn-package-vip");
+      var vPackageSelected = null;
+
+      var vGoiBasicDuocChon = vBtnBasicPlan.getAttribute("data-is-selected");
+      var vGoiSilverDuocChon = vBtnSilverPlan.getAttribute("data-is-selected");
+      var vGoiVipDuocChon = vBtnVipPlan.getAttribute("data-is-selected");
+      if(vGoiBasicDuocChon === "Y") {
+        vPackageSelected = getPackage("Basic", "24x7", 0, 500000);
+        paramThongTinDangKyObj.packageDuocChon = vPackageSelected;
+      }
+      else if(vGoiSilverDuocChon === "Y") {
+        // viết code xử lý tiếp
+        vPackageSelected = getPackage("Silver", "24x7", 2, 800000);
+        paramThongTinDangKyObj.packageDuocChon = vPackageSelected;
+      }
+      else if(vGoiVipDuocChon === "Y") {
+        // viết code xử lý tiếp
+        vPackageSelected = getPackage("Vip", "24x7", "Theo đăng ký", 1500000);
+        paramThongTinDangKyObj.packageDuocChon = vPackageSelected;
+      }
+    }
+
+      //2. Kiểm tra (chưa viết code kiểm tra)
+      /*code cần viết: cần có 1 hàm để kiểm tra có phải là email không và có 1 hàm kiểm tra năm sinh phải là số nguyên, phải lớn hơn 1900
+      // input là vThongTinDangKyObj
+      // output là ĐÚNG/SAI (true/false)  
+      */
+     function kiemTraThongTinDangKy(paramThongTinDangKyObj)
+     {
+      if (paramThongTinDangKyObj.packageDuocChon == null)
+      {
+        alert("Chưa chọn gói");
+        return false;
+      }
+      if (paramThongTinDangKyObj.hoVaTen =="")
+      {
+        alert("Chưa nhập họ và tên");
+        return false;
+      }
+      if (isEmail(paramThongTinDangKyObj.email)== false)
+      {
+        return false;
+      }
+      if (isNamSinh(paramThongTinDangKyObj.namSinh)== false)
+      {
+        return false;
+      }
+      return true;
+     }
+
+     // hàm kiểm tra email
+     function isEmail(paramEmail)
+     {
+      if (paramEmail< 3)
+      {
+        alert ("Nhập email....");
+        return false;
+      }
+      if (paramEmail.indexOf("@") === -1)
+      {
+        alert('Email phải có ký tự @');
+        return false;
+      }
+      if (paramEmail.startsWith("@")===true)
+      {
+        alert ('Email không bắt đầu bằng @');
+        return false;
+      }
+      if (paramEmail.endsWith("@")===true)
+      {
+        alert('Email kết thúc bằng @');
+        return false;
+      }
+      return true;
+     }
+
+     // kiểm tra năm sinh
+     function isNamSinh(paramNamSinh)
+     {
+      if (paramNamSinh=="")
+      {
+        alert('Chưa nhập năm sinh');
+        return false;
+      }
+      if (isNaN(paramNamSinh))
+      {
+        alert ('Năm sinh phải là số');
+        return false;
+      }
+
+      //chuyển đổi năm sinh (string) sang kiểu number
+      var vChuyenDoiNumber = Number(paramNamSinh);
+      if (Number.isInteger(vChuyenDoiNumber)==false)
+      {
+        alert('Phải nhập năm sinh là số nguyên');
+        return false;
+      }
+      //kiểm tra giá trị ô nhập phải là số nguyên lớn hơn 1900
+      if (vChuyenDoiNumber<1901)
+      {
+        alert('Phải nhập năm sinh là số nguyên lớn hơn 1900');
+        return false;
+      }
+      return true;
+     }
+      //3. Xử lý hiện thị  
+      function hienThiThongTinDangKyRaConsole(paramThongTinDangKyObj){
+      /*code cần viết: tách riêng thành hàm xử lý hiện thị*/
+      console.log("%c Send Data", "color:orange");
+      /* Đây là đoạn code cần Refactoring - đẩy việc xử lý hiện thị ra một hàm riêng*/ 
+      console.log("Email: " + paramThongTinDangKyObj.email);
+      console.log("Họ và tên: " + paramThongTinDangKyObj.hoVaTen);
+      console.log("Năm sinh: " + paramThongTinDangKyObj.namSinh);
+      //hiện thị gói dịch vụ ra console
+      paramThongTinDangKyObj.packageDuocChon.displayInConsoleLog();
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+
+    //function get Packages (lấy gói đăng ký)
+    //function trả lại một đối tượng package (gói đăng ký) được tham số hóa
+    function getPackage(paramPackage, paramGymhours, paraPthours, paramPricePerMonth) {
+      var vSelectedPackageStructure = {  //Đối tượng: gói đăng ký gym được chọn
+        package: paramPackage, //package = gói đăng ký basic/silver/vip
+        gymhours: paramGymhours,
+        pthours: paraPthours, 
+        pricePerMonthVND: paramPricePerMonth, //giá 1 tháng
+        //method: giá cả năm (phải được tính ra bằng cách nhân với 12, và bớt 15%, (nhân với 0.85))
+        priceAnnualVND: function () {
+          // 15% discount (giảm giá 15% nếu lấy giả cả năm)
+          return this.pricePerMonthVND * 12 * 0.85;  //nếu trả cả 12 tháng sẽ giảm giá 15%; this = "đối tượng này"
+        },
+        // method display plan infor - phương thức hiện thi gói đăng ký gym 
+        displayInConsoleLog() {
+          console.log("%cPACKAGE SELECTED - gói đăng ký gym được chọn..........", "color:blue");
+          console.log(this.package);  //this = "đối tượng này" 
+          console.log("gym hours: " + this.gymhours);
+          console.log("package hours: " + this.pthours);
+          console.log("Price per month: " + "VND " + this.pricePerMonthVND);
+          console.log("Annual price:" + "VND " + this.priceAnnualVND());
+        }
+      }
+      return vSelectedPackageStructure;  //trả lại đối tượng, có đủ dữ liệu (attribute) và các methods (phương thức)
+    }
+    // hàm đổi màu button (sign-up) để phân biệt gói được chọn với các gói khác
+    // input: paramPackage có thể là "Silver", "Basic", "Vip"
+    // hoạt động: tùy input sẽ làm nổi một nút ("btn-warning"), và chuyển hai nút còn lại bình thường ("btn-success")
+    function changePackageButtonColor(paramPackage) {
+      var vBtnSilver = document.getElementById("btn-package-silver");  // truy vấn nút gói Silver (sign - up )
+      var vBtnBasic = document.getElementById("btn-package-basic"); //truy vấn nút gói basic (sign - up ) 
+      var vBtnVip = document.getElementById("btn-package-vip"); //truy vấn nút gói Vip (sign - up ) 
+
+      if (paramPackage === "Silver") {  //nếu chọn Silver thì thay màu nút Silver bằng màu cam (btn-warning), hai nút kia xanh (btn-success)
+        /* code đổi màu 3 nút, khi gói Silver được chọn */
+        vBtnBasic.className = "btn btn-success";
+        vBtnBasic.setAttribute("data-is-selected", "N");
+        vBtnSilver.className = "btn btn-warning";
+        vBtnSilver.setAttribute("data-is-selected", "Y");
+        vBtnVip.className = "btn btn-success";
+        vBtnVip.setAttribute("data-is-selected", "N");
+      }
+      else if (paramPackage === "Basic") {  //nếu chọn Basic thì thay màu nút Basic bằng màu cam (btn-warning), hai nút kia xanh (btn-success)
+        vBtnBasic.className = "btn btn-warning";
+        vBtnBasic.setAttribute("data-is-selected", "Y");
+        vBtnSilver.className = "btn btn-success";
+        vBtnSilver.setAttribute("data-is-selected", "N");
+        vBtnVip.className = "btn btn-success";
+        vBtnVip.setAttribute("data-is-selected", "N");
+      }
+      else if (paramPackage === "Vip") { //nếu chọn Vip thì thay màu nút Vip bàng màu cam, hai nút kia xanh
+        /* code đổi màu 3 nút, khi gói Vip được chọn */
+        vBtnBasic.className = "btn btn-success";
+        vBtnBasic.setAttribute("data-is-selected", "N");
+        vBtnSilver.className = "btn btn-success";
+        vBtnSilver.setAttribute("data-is-selected", "N");
+        vBtnVip.className = "btn btn-warning";
+        vBtnVip.setAttribute("data-is-selected", "Y");
+      }
+    }
+  </script>
+</body>
+
+</html>

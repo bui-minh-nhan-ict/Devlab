@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Task 25.40 order detail</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Detai!!!</h1>
+        <div class="form-group">
+          <label>0rder ID(mã đơn hàng):</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Có Combo:</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Đường kính Pizza:</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Sườn nướng(miếng)</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Đồ uống:</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Số lượng nước uống</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Voucher ID</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Loại pizza</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Salad</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Thành tiền</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Giảm giá</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Họ và tên(mã đơn hàng):</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Số điện thoại</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Địa chỉ</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Lời nhắn</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Trạng thái đơn hàng</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Ngày tạo đơn</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group">
+          <label>Ngày cập nhật</label>
+          <input type="text" class="form-control" placeholder="...">
+        </div>
+        <div class="form-row">
+          <div class="col">
+            <button id="btn-edit" class="btn btn-success w-25">Confirme</button>
+            <button class="btn btn-primary w-25" onclick="onBtnBackClick()">Cancel</button>
+          </div>
+          <div class="col">
+          </div>
+      </form>
+    </div>
+    <form>
+</body>
+  
+<script>
+    const baseUrl = "http://203.171.20.210:8080/devcamp-pizza365/orders/";
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+    const gREQUEST_CREATE_SUCCESS = 201;
+    const inputs = document.getElementsByTagName('input');
+    const btnEdit = document.getElementById('btn-edit')
+    const vUserObj = {
+      kichCo:"",
+      duongKinh:"",
+      suon:"",
+      salad:"",
+      loaiPizza:"",
+      idVourcher:"",
+      idLoaiNuocUong:"",
+      soLuongNuoc:"",
+      hoTen:"",
+      thanhTien:"",
+      email:"",
+      soDienThoai:"",
+      diaChi:"",
+      loiNhan:"",
+    }
+  // .............................................................................
+  onLoadDevcampDemo()
+  function onLoadDevcampDemo(){
+    var vUrl = location.href
+    console.log(vUrl)
+    var vSearchid = (new URL(document.location)).searchParams;
+    var vId = vSearchid.get("id");
+    console.log("id là: " + vId)
+        kiemTraId(vId)
+        var vXHTMLRequest = new XMLHttpRequest();
+        callApiGetUser(vXHTMLRequest, vId);
+        vXHTMLRequest.onreadystatechange = function(){
+              if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK){
+                    // showDataOnTable(vXHTMLRequest); 
+                    console.log(vXHTMLRequest.responseText);
+                    showDataOnTable(vXHTMLRequest);
+                    //button sửa
+                    btnEdit.addEventListener('click',function(){
+                      thuThapDuLieu(vUserObj);
+                      // B2: validate, kiểm tra dữ liệu
+                      var vDuLieuHopLe = kiemTraDuLieu(vUserObj);
+                      if(vDuLieuHopLe) {
+                      var vUserObject = JSON.parse(vXHTMLRequest.responseText);
+                      var orderId = vUserObject.id;
+                      // console.log(orderId);
+                      var objectRequest = {
+                              trangThai: "confirmed" //3 trang thai open, confirmed, cancel
+                          }
+                          var xmlHttpUpdateOrder = new XMLHttpRequest();
+                          xmlHttpUpdateOrder.open("PUT", baseUrl + orderId);
+                          xmlHttpUpdateOrder.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                          xmlHttpUpdateOrder.send(JSON.stringify(objectRequest));
+                          xmlHttpUpdateOrder.onreadystatechange =
+                              function () {
+                                  if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                                      var updatedOrder = xmlHttpUpdateOrder.responseText;
+                                      alert("Cập nhật thông tin thành công"); 
+                                      inputs[16].value = "Confirmed"
+                                      console.log(updatedOrder);
+                                  }
+                              }
+                    }
+                    })
+                  }
+                }
+              }  
+
+  function onBtnBackClick(){
+    window.location.href = "bangOrder.html";
+  }
+
+  function thuThapDuLieu(paramObj){
+    paramObj.orderCode = inputs[0].value.trim() ;
+    paramObj.kichCo =inputs[1].value.trim();
+    paramObj.duongKinh =inputs[2].value.trim();
+    paramObj.suon =inputs[3].value.trim();
+    paramObj.idLoaiNuocUong =inputs[4].value.trim();
+    paramObj.soLuongNuoc =inputs[5].value.trim();
+    paramObj.idVourcher =inputs[6].value;
+    paramObj.loaiPizza =inputs[7].value.trim();
+    paramObj.salad =inputs[8].value.trim();
+    paramObj.thanhTien =inputs[9].value.trim();
+    paramObj.giamGia =inputs[10].value.trim();
+    paramObj.hoTen =inputs[11].value.trim();
+    paramObj.email =inputs[12].value.trim();
+    paramObj.soDienThoai =inputs[13].value.trim();
+    paramObj.diaChi =inputs[14].value.trim();
+    paramObj.loiNhan =inputs[15].value;
+    paramObj.trangThai =inputs[16].value.trim();
+    paramObj.ngayTao =inputs[17].value.trim();
+    paramObj.ngayCapNhat =inputs[18].value.trim();
+  }
+
+  function callApiGetUser(paramXmlHttp, paramId){
+    paramXmlHttp.open("GET", baseUrl + paramId, true);
+    paramXmlHttp.send();
+  }
+
+  function showDataOnTable(paramXmlHttpUser){
+    var vUserObject = JSON.parse(paramXmlHttpUser.responseText);
+    inputs[0].value = vUserObject.orderCode;
+    inputs[1].value = vUserObject.kichCo;
+    inputs[2].value = vUserObject.duongKinh;
+    inputs[3].value = vUserObject.suon;
+    inputs[4].value = vUserObject.idLoaiNuocUong;
+    inputs[5].value = vUserObject.soLuongNuoc;
+    inputs[6].value = vUserObject.idVourcher;
+    inputs[7].value = vUserObject.loaiPizza;
+    inputs[9].value = vUserObject.thanhTien - vUserObject.giamGia;
+    inputs[10].value = vUserObject.giamGia;
+    inputs[11].value = `${vUserObject.hoTen}(${vUserObject.orderCode})`;
+    inputs[12].value = vUserObject.email;
+    inputs[13].value = vUserObject.soDienThoai;
+    inputs[14].value = vUserObject.diaChi;
+    inputs[15].value = vUserObject.loiNhan;
+    inputs[16].value = vUserObject.trangThai;
+    inputs[17].value = vUserObject.ngayTao;
+    inputs[18].value = vUserObject.ngayCapNhat;
+    inputs[8].value =vUserObject.salad;
+  }
+
+function kiemTraId(paramId){
+  if(paramId == null){
+    alert("ID: trống")
+    window.location.href = "bangOrder.html";
+  }
+  return true;
+}
+function kiemTraDuLieu(paramObj){
+       
+        if(paramObj.hoTen == "" || paramObj.email =="" || paramObj.soDienThoai =="" || paramObj.diaChi == ""||paramObj.orderCode==""||paramObj.kichCo==""||paramObj.duongKinh==""||paramObj.suon==""||paramObj.idLoaiNuocUong==""||paramObj.soLuongNuoc==""||paramObj.loaiPizza==""||paramObj.salad==""||paramObj.thanhTien==""||paramObj.giamGia==""||paramObj.trangThai==""||paramObj.ngayTao==""||paramObj.ngayCapNhat==""){
+          alert('Vui lòng điền đầy đủ thông tin khách hàng');
+          return false;
+        }
+        if(!isVietnamesePhoneNumberValid(paramObj.soDienThoai)){
+          alert('Số điện thoại không hợp lệ')
+          return false;
+        }
+        if(!validateEmail(paramObj.email)){
+          alert('Email không hợp lệ')
+          return false;
+        }
+        return true;
+      }
+  
+      function isVietnamesePhoneNumberValid(number) {
+      return /(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/.test(number);
+      }
+  
+      const validateEmail = (email) => {
+      return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+};
+</script>
+
+</html>

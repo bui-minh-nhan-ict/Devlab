@@ -1,0 +1,120 @@
+<html>
+<header>
+    <title> Task 731.20: kỹ năng căn bản - tag - Button </title>
+
+    <style>
+        .bg-red {
+            background-color: red;
+            color: yellow
+        }
+        .bg-green {
+            background-color: green;
+            color: purple
+        }
+    </style>
+</header>
+<body>
+    <h1> Kỹ năng xử lý tag Button - phần tử nút </h1>
+    
+    <input type="button" value="Input Button" id="input-button">  <!-- loại nút dùng input tag-->
+    <button id="tag-button">Tag Button</button>  <!-- loại nút dùng button tag, devcamp hay dùng loại này-->
+
+    <hr>
+    <h2>Hãy ấn thử các nút dưới đây - đây là các bài mẫu </h2> 
+    <button onclick="onBtnTruyVanPhanTuButtonClick()">Truy vấn phần tử Button</button>
+    <button onclick="onBtnDocValuePhanTuButtonClick()">Đọc value (title) phần tử Button</button>
+    <button onclick="onBtnDoiChuPhanTuButtonClick()">Đổi chữ phần tử Button</button>
+    <button onclick="onBtnDoiMauBangClassPhanTuButtonClick()">Đổi màu bằng class phần tử Button</button>
+
+    <hr>
+    <h1>Hãy làm như vậy với các nút sau </h1> 
+    <input type="button" value="Input Button Exercise" id="input-button-exercise">
+    <button id="tag-button-exercise">Tag Button Exercise</button>
+    <h1> Kỹ năng xử lý tag Button - phần tử nút </h1>
+    <hr>
+    <button onclick="onBtnTruyVanPhanTuButtonClick2()">Truy vấn phần tử Button</button>
+    <button onclick="onBtnDocValuePhanTuButtonClick2()">Đọc value (title) phần tử Button</button>
+    <button onclick="onBtnDoiChuPhanTuButtonClick2()">Đổi chữ phần tử Button</button>
+    <button onclick="onBtnDoiMauBangClassPhanTuButtonClick2()">Đổi màu bằng class phần tử Button</button>
+    <hr>
+
+</body>
+<script>
+//truy vấn phần tử button và ghi ra console
+function onBtnTruyVanPhanTuButtonClick() {
+    var vInputButton = document.getElementById("input-button");
+    var vTagButton = document.getElementById("tag-button");
+    console.log("Phần tử Button Input :....");
+    console.log(vInputButton);
+    console.log("Phần tử Button Tag :....");
+    console.log(vTagButton);
+}
+//Đọc Value (Title) Phần tử Button
+function onBtnDocValuePhanTuButtonClick() {
+    var vInputButton = document.getElementById("input-button");
+    var vTagButton = document.getElementById("tag-button");
+    console.log("Value (Title) phần tử Button Input :....");
+    console.log("Value input-button = " + vInputButton.value);
+    console.log("Value (Title) Phần tử Button Tag :....");
+    console.log("Value tag-button = " + vTagButton.innerHTML);
+}
+//Đổi nội dung chữ phần tử Button
+function onBtnDoiChuPhanTuButtonClick() {
+    var vInputButton = document.getElementById("input-button");
+    var vTagButton = document.getElementById("tag-button");
+    console.log("Đổi chữ phần tử Button Input :....");
+    vInputButton.value = "Button Input v2.0";
+    console.log("Đổi chữ Phần tử Button Tag :....");
+    vTagButton.innerHTML = "Button Tag v2.0";
+}
+//Đổi màu bằng Class phần tử Button
+function onBtnDoiMauBangClassPhanTuButtonClick() {
+    var vInputButton = document.getElementById("input-button");
+    var vTagButton = document.getElementById("tag-button");
+    console.log("Đổi màu bằng class phần tử Button Input :....");
+    vInputButton.className = "bg-red";
+    console.log("Đổi màu bằng class  Phần tử Button Tag :....");
+    vTagButton.className = "bg-green";
+}
+
+
+
+// New button
+function onBtnTruyVanPhanTuButtonClick2() {
+    var vInputButton = document.getElementById("input-button-exercise");
+    var vTagButton = document.getElementById("tag-button-exercise");
+    console.log("Phần tử Button Input :....");
+    console.log(vInputButton);
+    console.log("Phần tử Button Tag :....");
+    console.log(vTagButton);
+}
+//Đọc Value (Title) Phần tử Button
+function onBtnDocValuePhanTuButtonClick2() {
+    var vInputButton = document.getElementById("input-button-exercise");
+    var vTagButton = document.getElementById("tag-button-exercise");
+    console.log("Value (Title) phần tử Button Input :....");
+    console.log("Value input-button = " + vInputButton.value);
+    console.log("Value (Title) Phần tử Button Tag :....");
+    console.log("Value tag-button = " + vTagButton.innerHTML);
+}
+//Đổi nội dung chữ phần tử Button
+function onBtnDoiChuPhanTuButtonClick2() {
+    var vInputButton = document.getElementById("input-button-exercise");
+    var vTagButton = document.getElementById("tag-button-exercise");
+    console.log("Đổi chữ phần tử Button Input :....");
+    vInputButton.value = "Button Input v2.0";
+    console.log("Đổi chữ Phần tử Button Tag :....");
+    vTagButton.innerHTML = "Button Tag v2.0";
+}
+//Đổi màu bằng Class phần tử Button
+function onBtnDoiMauBangClassPhanTuButtonClick2() {
+    var vInputButton = document.getElementById("input-button-exercise");
+    var vTagButton = document.getElementById("tag-button-exercise");
+    console.log("Đổi màu bằng class phần tử Button Input :....");
+    vInputButton.className = "bg-red";
+    console.log("Đổi màu bằng class  Phần tử Button Tag :....");
+    vTagButton.className = "bg-green";
+}
+
+</script>
+</html>

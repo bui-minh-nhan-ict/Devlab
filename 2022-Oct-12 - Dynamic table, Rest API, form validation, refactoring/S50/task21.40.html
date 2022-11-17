@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container mt-4">
+    <h2>Lucky Dice History</h2>
+      <div class="form-group">
+        <label for="username">User name:</label>
+        <input type="email" class="form-control" id="user-name" placeholder="Enter username" name="username">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" onclick="onBtnCreateTableClick()">Sample Create Table</button>
+        <button type="button" class="btn btn-primary" onclick="onBtnCreateTableClick()">Sample : Create Dice History Table</button>
+        <button type="button" class="btn btn-primary" onclick="onBtnShowHistoryTableClick()">Show Voucher History Table</button>
+      </div>
+    <div id="log-result" class="mt-5"></div>
+    <div class="mt-5">
+      <table id="table-voucher-history" class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Mã Giảm Giá</th>
+            <th>Phần Trăm Giảm Giá</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    'use strict';
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+    const gBASE_URL = "http://203.171.20.210:8080/devcamp-lucky-dice";
+
+    const gCOL_MA_VOUCHER = 0     // Số thứ tự cột mã voucher
+    const gCOL_PHAN_TRAM_GIAM_GIA = 1; // Số thứ tự cột phần trăm giá
+    const gEND_OF_ROW_COL = -1;
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    function onBtnShowHistoryTableClick()
+    {
+      //Khai báo object để truyền data giữa các bước
+      var vObjectUser = {
+        userName:''
+      };
+      //B1. Thu thập data
+      readDataInput(vObjectUser);
+      //B2. Validate data đầu vào
+      var vIsCheck = validateDataInput(vObjectUser);
+      if(vIsCheck)
+      //B3. Gọi API
+      var vVoucherXmlHttp = new XMLHttpRequest();
+      callApiGetVoucherData(vVoucherXmlHttp, vObjectUser);
+      // B4. Xử lý hiển thị
+      vVoucherXmlHttp.onreadystatechange = function()
+      {
+        if(this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK)
+        {
+          handleVoucherResponse(vVoucherXmlHttp);
+        }
+      }
+    }
+
+
+    function onBtnCreateTableClick(){
+      var vUserFormObject ={
+        userName: ""
+      }
+      //debugger;
+      //B1. Hàm đọc dữ liệu
+      getUserFormData(vUserFormObject);
+      //B2 Hàm validate
+      var vIsValidate = validateUserDate(vUserFormObject);
+      if(vIsValidate){
+        var vXmlHttpDiceHistory = new XMLHttpRequest();
+        //B3. Hàm gọi api
+        callApiGetDiceHistory(vUserFormObject, vXmlHttpDiceHistory);
+        vXmlHttpDiceHistory.onreadystatechange =
+            function () {
+                if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK) {
+                  //B4. Hàm hiển thị(
+                    handleShowDiceHistory(vXmlHttpDiceHistory);
+                }
+            }
+      }
+
+    }
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    // Hàm thu thập data đầu vào
+    function readDataInput(paramObjectUser)
+    {
+      var vUserNameElement = document.getElementById('user-name');
+      paramObjectUser.userName = vUserNameElement.value.trim();
+    }
+
+    //Hàm kiểm tra data đầu vào
+    function validateDataInput(paramObjectUser)
+    {
+      if (paramObjectUser.userName=='')
+      {
+        alert('Cần điền username');
+        return false;
+      }
+      return true;
+    }
+
+
+
+    //Hàm xử lý gọi API send request
+    function callApiGetVoucherData(paramXmlHttp, paramObjectData)
+    {
+      paramXmlHttp.open('GET', gBASE_URL + '/voucher-history?username=' + paramObjectData.userName, true);
+      paramXmlHttp.send();
+    }
+
+    //Hàm xử lý hiển thị
+    function handleVoucherResponse(paramXmlHttp)
+    {
+      //Chuyển Json sang Oject
+      var vVoucherHistory = paramXmlHttp.responseText;
+      console.log(vVoucherHistory);
+      //Chuyển Json sang Object
+      var vVoucherHistory = JSON.parse(paramXmlHttp.responseText);
+      // Tìm element
+      var vVoucherHistoryTable = document.getElementById('table-voucher-history');
+      // Truy xuất được phần tử tbody trong table
+      // Cách truy xuất là bằng Tagname, với cách này ta sẽ có một mảng các tbody trong bảng, ta lấy phần tử thứ 0 của mảng này.
+      var vVoucherTableBody = vVoucherHistoryTable.getElementsByTagName('tbody')[0];
+      for (var i = 0; i< vVoucherHistory.vouchers.length; i++)
+      {
+        console.log ('maVoucher: '+ vVoucherHistory.vouchers[i].maVoucher);
+        console.log ('phantramgia: '+ vVoucherHistory.vouchers[i].phanTramGiamGia);
+        //Thêm dòng
+        var bNewRow = vVoucherTableBody.insertRow(gEND_OF_ROW_COL);
+        //Thêm 2 cells mã giảm giá và phần trăm giảm giá
+        var bMaGiamGiaCell = bNewRow.insertCell(gCOL_MA_VOUCHER);
+        var bPhanTranmGiaGiaCell = bNewRow.insertCell(gCOL_PHAN_TRAM_GIAM_GIA);
+        // Điền data cho 2 cells
+        bMaGiamGiaCell.innerHTML = vVoucherHistory.vouchers[i].maVoucher;
+        bPhanTranmGiaGiaCell.innerHTML = vVoucherHistory.vouchers[i].phanTramGiamGia + '%';
+      }
+    }
+
+
+
+
+
+
+
+    //Hàm thu thập dữ liệu
+    function getUserFormData(pareUserObject) {
+      pareUserObject.userName = document.getElementById("user-name").value.trim();
+    }
+    //Hàm kiểm tra dũ liệu
+    function validateUserDate(pareUserObject){
+      if (pareUserObject.userName === "") {
+        alert("Please enter a user name")
+        return false;
+      }
+      return true;
+    }
+    //get dữ liệu từ API
+    function callApiGetDiceHistory(pareUserObject, paraXmlHttp){
+      paraXmlHttp.open("GET", gBASE_URL + "/dice-history?username=" + pareUserObject.userName, true);
+      paraXmlHttp.send();
+    }
+    //hàm show dữ liệu ra
+    function handleShowDiceHistory(paraXmlHttp){
+      //debugger;
+      var vDiceResponseText = paraXmlHttp.responseText;
+      var vSampleDiceHistory = JSON.parse(vDiceResponseText);
+
+      var vDiceHistoryTable = document.getElementById("table-dice-history");
+      var vTableBody = vDiceHistoryTable.getElementsByTagName("tbody")[0];
+      // Xoá dữ liệu cũ nếu có
+      vTableBody.innerHTML = "";
+      for (var i = 0; i < vSampleDiceHistory.dices.length; i++) {
+        var vNewRow = vTableBody.insertRow(gEND_OF_ROW_COL);
+        //thêm ô
+        var vGameCell = vNewRow.insertCell(0);
+        var vDiceCell = vNewRow.insertCell(1);
+        vGameCell.innerHTML = i+1;
+        vDiceCell.innerHTML = vSampleDiceHistory.dices[i];
+      }
+    }
+  </script>
+
+
+</body>
+
+</html>

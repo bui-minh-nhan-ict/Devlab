@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> Task 7112.48 </title>
+</head>
+
+<body>
+    <h1> Diện tích hình vuông </h1>
+    <label> Chiều dài cạnh:</label>
+    <input id="dien_chieu_dai_canh" type="text" placeholder="...">   
+    <br>
+    <br>
+    <button id="btn_dien_tich_hinh_vuong" onclick="onBtnTinhDienTichHinhVuongClick()"> Tính diện tích</button>
+</body>
+<script type="text/javascript">
+    "use strict"
+    /*
+    ||Vùng 1: định nghĩa global variable & chạy code ngay khi load
+    */
+
+    /*
+    || Vùng 2. Định nghĩa Event Handers (xử lý sự kiện)
+    */
+
+    //eventHanlders: function được gọi khi click nút Tính diện tích hình vuông
+    //gọi khi ấn nút tính diện tích
+    function onBtnTinhDienTichHinhVuongClick(){
+        var vInpChieuDaiCanh = document.getElementById("dien_chieu_dai_canh"); //truy vấn phần tử số tự nhiên
+        var vValueChieuDaiCanh = vInpChieuDaiCanh.value;
+        var vKetQuaKiemTra = laSo(vValueChieuDaiCanh);
+        if ( vKetQuaKiemTra === true ) {
+            console.log("%cGhi diện tích ra console","color:red");
+            console.log("Độ dài cạnh = " + vValueChieuDaiCanh  ); //đọc value và ghi ra
+            console.log("Diện tích hình vuông = " + vValueChieuDaiCanh * vValueChieuDaiCanh + " (đơn vị diện tích)" ); //tính bình phương và ghi ra
+        }
+    }
+    
+
+     /*
+    || Vùng 3. common function - function dùng chung, để gọi từ vùng 2, hoặc từ console
+    */
+    // 
+
+    // hàm kiểm tra giá trị nhập vào phải khác rỗng, và phải là số
+    function laSo(paramNumber){
+        // Kiểm tra giá trị ô nhập phải khác rỗng
+        if (paramNumber === ""){
+            alert("Bạn chưa nhập số");
+            return false;
+        }
+        // Kiểm tra giá trị ô nhập phải là số
+        if (isNaN(paramNumber)) {
+            alert("Phải nhập là số");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</html>

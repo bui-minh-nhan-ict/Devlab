@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> task 5.42 </title>
+</head>
+<body onload="onPageLoad()">
+    <h1 id="h1_chao_mung"> Chào mừng đến với DevCamp 120 </h1>
+    <p id="p-target"> Bạn sẽ thành fullstack developer !</p>
+    <button id="btn-show-target" onclick="onBtnHienKhauHieuClick()">  Hiện khẩu hiệu </button>
+</body>
+<script >
+    "use strict"
+    /*
+    || Vùng 1: định nghĩa global variables (biến toàn cục)
+    */
+    // định nghĩa global variables, tìm sẵn các phần tử đề có thể sử dụng sau này
+    var vGreetingMgs = document.getElementById("h1_chao_mung"); // tìm phần tử h1 qua ID
+    var gPMucTieu = document.getElementById("p-target"); //tìm phần tử p mục tiêu qua ID
+    var gBtnHienKhauHieu = document.getElementById("btn-show-target");
+    /*
+    || Vùng 2: event handlers - function xử lý sự kiện  
+    */
+    // event handler - function xử lý sự kiện
+    // gọi khi nào: click nút btn_hien_khau_hieu$$$$
+    function onBtnHienKhauHieuClick() {
+        var vKhauHieu = gPMucTieu.innerHTML;
+        alert("Khẩu hiệu: " + vKhauHieu);
+    }
+    // evant handlers - ghi thong tin phần tử H1 ra màn hình
+    // gọi khi nào: gọi khi load/f5
+    function onPageLoad(){
+        console.log("Thông tin phần tử:");
+        console.log("H1  chào mừng" + vGreetingMgs.id + " " + vGreetingMgs.innerHTML);
+        console.log("p mục tiêu " + gPMucTieu.id + " " + gPMucTieu.innerHTML);
+    }
+</script>
+</html>

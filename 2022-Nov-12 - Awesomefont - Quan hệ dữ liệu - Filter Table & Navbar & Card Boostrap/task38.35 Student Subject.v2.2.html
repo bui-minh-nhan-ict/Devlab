@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    "use strict";
+    /* Mảng userObjects là mảng chứa dữ liệu user. Từng phần tử là object
+    */
+    var gStudents = [
+      {
+        id: 2, // tự tăng
+        studentCode: "1356783",
+        firstname: "Ngo Van",
+        lastname: "Quan",
+        age: 18,
+        email: "quan@gmail.com",
+        studyYear: 2015
+      },
+
+    ];
+
+    var gSubjects = [
+      {
+        id: 5, // tự tăng
+        subjectCode: "MATH101",
+        subjectName: "Toán cao cấp 1"
+      },
+      // điền thêm 04 môn học nữa
+    ];
+
+    var gGrades = [
+      {
+        id: 2, // tự tăng
+        studentId: 2,
+        subjectId: 5,
+        grade: 8,
+        examDate: "13/04/2021"
+      },
+      // điền thêm 9 kết quả thi nữa
+    ];
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="form-group">
+      <pre>
+        - Định nghĩa 03 đối tượng students (sinh viên), subjects (môn học) và grades (bảng điểm)
+        - Điền dữ liệu mẫu cho 03 đối tượng trên. 
+            + Student điền 5 sinh viên
+            + Subject điền 5 môn học
+            + Grades: điền 10 kết quả học tập cho các sinh viên và môn học ở trên
+        - Thực hiện load dữ liệu bảng điểm (grades)
+        - Thêm bộ lọc theo 2 ô select: Student và Subject
+      </pre>
+    </div>
+  </div>
+</body>
+
+</html>

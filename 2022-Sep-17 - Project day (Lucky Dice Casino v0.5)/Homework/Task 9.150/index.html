@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<style type="text/css">
+		h1,h2 {
+		  text-align: center;
+		}
+
+		/* .container {
+		  text-align: center;
+		} */
+
+        .imagecenter {
+             display: block;
+             margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .secondimagecenter {
+             display: block;
+             margin-left: auto;
+            margin-right: auto;
+            width: 20%;
+        }
+
+        .button {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 7.5%;
+            background-color: blue;
+            color: white;
+            padding: 6px 8px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            text-align: center;
+ 
+        }
+		
+	</style>
+</head>
+<body>
+    <div>
+	 <h1 id = "h1-dice">Chào Mừng Bạn Đã Đến Với Game My Lucky Dice</h1>
+    </div>
+
+    <div>
+     <img src="images/people-playing-casino.jpg" id = "img-bg-display" class="imagecenter">
+    </div>
+
+    <div>
+        <img src="images/dice.png" id = "img-dice-display" class="secondimagecenter">
+    </div>
+
+    <div class="button">
+        <button id="button" onclick="onNew1To6Click()">Lắc Xí Ngầu</button>
+    </div>
+
+    <div>
+        <h2 id="showMsg" style="display : none;color: blue;">...</h2>
+    </div>
+
+</body>
+
+<script >
+    "use strict"
+    /*
+    || Vùng 1: định nghĩa global variables (biến toàn cục)
+    */
+    
+    /*
+    || Vùng 2: event handlers - function xử lý sự kiện  
+    */
+  
+    // event handlers - ghi thong tin phần tử H1 ra màn hình
+    // gọi khi nào: gọi khi load/f5
+    function onPageLoading(){
+        console.log("%c Load trang tại đây", "color:blue");
+        var vImageElement = document.getElementById("img-dice-display");
+        var vH1Element = document.getElementById("h1-dice");
+        var vMessageElement = document.getElementById("showMsg");
+        var vButtonElement = document.getElementById("button");
+        console.log(vH1Element.id);
+        console.log(vMessageElement.id);
+        console.log(vButtonElement.id);
+        console.log(vImageElement.src);
+    }
+
+    function onNew1To6Click() {
+        console.log("Tung Xúc Xắc");
+        var vSoMoi  = fRandomNumber1to6();
+        console.log("Số mới là: " + vSoMoi);
+
+        var vImgDice = document.getElementById("img-dice-display");
+        var vDice1To6 = document.getElementById("showMsg");
+        vDice1To6.style.display = "block";
+        
+        if ( vSoMoi == 1) {
+            vImgDice.src = "images/1.png";
+            vDice1To6.innerHTML = "Cảm ơn bạn. Hãy cố gắng lần sau!";
+        }
+        else if ( vSoMoi == 2) {
+            vImgDice.src = "images/2.png";
+            vDice1To6.innerHTML = "Cảm ơn bạn. Hãy cố gắng lần sau!";
+        }
+        else if ( vSoMoi == 3) {
+            vImgDice.src = "images/3.png";
+            vDice1To6.innerHTML = "Cảm ơn bạn. Hãy cố gắng lần sau!";
+        }
+        else if ( vSoMoi == 4) {
+            vImgDice.src = "images/4.png";
+            vDice1To6.innerHTML = "Chúc mừng bạn. Hãy chơi ván nữa!";
+
+        }
+        else if ( vSoMoi == 5) {
+            vImgDice.src = "images/5.png";
+            vDice1To6.innerHTML = "Chúc mừng bạn. Hãy chơi ván nữa!";
+
+        }
+        else if ( vSoMoi == 6) {
+            vImgDice.src = "images/6.png";
+            vDice1To6.innerHTML = "Chúc mừng bạn. Hãy chơi ván nữa!";
+
+        }
+    }
+    /*
+    || vùng 3: common function - function dùng chung, để gọi từ vùng 2, hoặc từ console
+    */
+    function fRandomNumber1to6 ()
+    {
+        var vRandomNumberFrom1To6 = Math.random(); // lấy số bất kỳ từ 0 đến 6 bằng Math.random()
+        console.log("Số bất kỳ từ 0 đến 6 là : "+vRandomNumberFrom1To6);
+        var vKetQua = Math.trunc(vRandomNumberFrom1To6 *6)+1; // nhân 6 rồi làm tròn xuống và + 1
+        return vKetQua;
+    }
+    
+
+</script>
+</html>

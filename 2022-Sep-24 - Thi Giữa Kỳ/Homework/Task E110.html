@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport", initial-scale=1.0">
+    <title>Task E110</title>
+</head>
+
+<body>
+    <label>Số trẻ em đi kèm</label>
+    <input id="input-number" type="number" placeholder="..."><br>
+    <button onclick="onBtnCheck()">Kiểm tra</button>
+
+</body>
+<script>
+    "use strict";
+    function onBtnCheck() 
+    {
+        var vInputValue = document.getElementById("input-number").value;
+        var regexPattern = /^-?[0-9]+$/;
+    // check if the passed number is integer or float
+        var result = regexPattern.test(vInputValue);
+        if(result) {
+        alert(`${vInputValue} is an integer.`);
+        }
+        else {
+        alert(`${vInputValue} isn't an integer.`)
+        }
+    }
+</script>
+
+</html>

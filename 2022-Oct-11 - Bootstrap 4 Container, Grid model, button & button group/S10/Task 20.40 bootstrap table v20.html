@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Task 20.40 Bootstrap Table</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+​<h2> Định kiểu table (bảng dữ liệu).</h2>  
+<h3 class = "text-info"> Bạn hãy xem code các ví dụ này và làm bài tập dưới đây:</h3>
+​<h3> Một số ví dụ với <span class = "text-info"> class "table" </span> của bootstrap : </h3>  
+<div class="container">
+  <h3>Table: mặc định HTML </h3>
+  <table  >
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+​
+
+<div class="container">
+  <h3>1) Table: định kiểu bootstrap class = "table" </h3>
+  <table class = "table" >
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <h3>2) Table: định kiểu bootstrap  class = "table table-bordered" </h3>
+  <table class = "table table-bordered" >
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <h3> 3) Table: định kiểu bootstrap  class = "table table-bordered table-striped" </h3>
+  <table class = "table table-bordered table-striped" >
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <h3>4) Table: định kiểu bootstrap class = "table table-bordered table-striped table-hover" </h3>
+  <table class = "table table-bordered table-striped table-hover" >
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<hr>
+<h2 class = "text-info"> Bài tập a & b </h2>
+<div class="container">
+  <h3 class = "text-warning"> 20.40a Hãy định dạng lại bảng này theo 4 ví dụ trên đây </h3>
+  <table  >
+    <thead>
+      <tr>
+        <th>Mã hàng hóa</th>
+        <th>Tên hàng hóa</th>
+        <th>Số lượng</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>M20</td>
+        <td>Máy giặt LG 720E</td>
+        <td>120</td>
+      </tr>
+      <tr>
+        <td>G40</td>
+        <td>Tủ lạnh Hitachi S26040</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>S50</td>
+        <td>LCD 50 inches SS50-A1</Samp></td>
+        <td>45</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+</div>
+
+
+  <!-- Chuyển sang theo kiểu ví dụ 4 -->
+<div class="container">
+  <h3>Bài Làm </h3>
+  <table class = "table table-bordered table-striped table-hover" >
+    <thead>
+      <tr>
+        <th>Mã Hàng Hóa</th>
+        <th>Tên Hàng Hóa</th>
+        <th>Số Lượng</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>M20</td>
+        <td>Máy giặt LG 720E</td>
+        <td>120</td>
+      </tr>
+      <tr>
+        <td>G40</td>
+        <td>Tủ lạnh Hitachi S26040</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>S50</td>
+        <td>LCD 50 inches SS50-A1</td>
+        <td>45</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div class="container">
+  <h3 class = "text-primary"> 20.40b Hãy định dạng lại bảng này theo 4 ví dụ trên đây </h3>
+  <table  >
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Fullname</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>phuongnk</td>
+        <td>Nguyễn Khánh Phương</td>
+      </tr>
+      <tr>
+        <td>hoat</td>
+        <td>Trần Hoa</td>
+      </tr>
+      <tr>
+        <td>hant</td>
+        <td>Nguyễn Thanh Hòa</Samp></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<hr>
+
+<!-- Chuyển sang theo kiểu ví dụ 4 -->
+<div class="container">
+  <h3>Bài Làm </h3>
+  <table class = "table table-bordered table-striped table-hover" >
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Fullname</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>phuongnk</td>
+        <td>Nguyễn Khánh Phương</td>
+      </tr>
+      <tr>
+        <td>hoat</td>
+        <td>Trần Hoa</td>
+      </tr>
+      <tr>
+        <td>hant</td>
+        <td>Nguyễn Thanh Hòa</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
+​

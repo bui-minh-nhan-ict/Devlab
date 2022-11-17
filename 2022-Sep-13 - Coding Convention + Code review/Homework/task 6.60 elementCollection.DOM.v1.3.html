@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container jumbotron">
+        <h2>JavaScript HTML DOM: paragraph elements</h2>
+        <p id = "p-hello-world">Hello World!</p>
+        <p id = "p-hello-world">Hello Devcamp!  </p>
+        <p id = "p-text-vi-du"> text để ví dụ </p>
+        <button class = "btn-success" id = "btn-ghi-tat-ca-phan-tu-p" onclick="onBtnGhiTatCaPhanTuPClick()">Ghi tất cả phần tử P ra 
+    </div>
+    <div class="container jumbotron">
+        <h2>JavaScript HTML DOM:  h3 elements</h2>
+        <h3 id = "h3-hello-meta-world"> Hello Meta World!</h3>
+        <h3 id = "h3-demo">Hello Devcamp in H3!  </h3>
+        <button class = "btn-success" id = "btn-ghi-tat-ca-phan-tu-h3" onclick="onBtnGhiTatCaPhanTuH3PClick()">Ghi tất cả phần tử H3 ra 
+    </div>
+    <div class="container jumbotron">
+        <h2>JavaScript HTML DOM: img elements</h2>
+        <img id = "img-programmer" src = "https://cdn-icons-png.flaticon.com/512/320/320368.png" width = "100">
+        <img id = "img-girl" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFIftj7gaEaR8rLtEKyarAOgYLyvySUo5u7Q&usqp=CAU" width = "100"><br><br>
+        <button class = "btn-success" id = "btn-ghi-tat-ca-phan-tu-image" onclick="onBtnGhiTatCaPhanTuImagePClick()">Ghi tất cả phần tử Image ra 
+        
+    </div>    
+</body>
+<script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+  
+    
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    function onBtnGhiTatCaPhanTuPClick() {
+        showAllPParagraph();
+    }
+
+    function onBtnGhiTatCaPhanTuH3PClick() {
+        showAllH3Paragraph();
+    }
+
+    function onBtnGhiTatCaPhanTuImagePClick() {
+        showAllImageParagraph();
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    function showAllPParagraph() {
+        // Truy xuất tất cả các thẻ p có trong file html. Chú ý hàm là getElementsByTagName
+        // Hàm getElementsByTagName sẽ trả về 1 MẢNG các phần tử paragraph
+        var vMyPCollection = document.getElementsByTagName("p");
+        //chạy qua từng phần từ paragraph và ghi ra console
+        for (var bIndex = 0; bIndex < vMyPCollection.length ; bIndex ++) {
+            console.log("Phần tử P số " + bIndex  + " :");
+            console.log(vMyPCollection[ bIndex] );
+        }
+    }
+
+    function showAllH3Paragraph() {
+        // Truy xuất tất cả các thẻ p có trong file html. Chú ý hàm là getElementsByTagName
+        // Hàm getElementsByTagName sẽ trả về 1 MẢNG các phần tử paragraph
+        var vMyPCollection = document.getElementsByTagName("h3");
+        //chạy qua từng phần từ paragraph và ghi ra console
+        for (var bIndex = 0; bIndex < vMyPCollection.length ; bIndex ++) {
+            console.log("Phần tử H3 số " + bIndex  + " :");
+            console.log(vMyPCollection[ bIndex] );
+        }
+    }
+
+    function showAllImageParagraph() {
+        // Truy xuất tất cả các thẻ p có trong file html. Chú ý hàm là getElementsByTagName
+        // Hàm getElementsByTagName sẽ trả về 1 MẢNG các phần tử paragraph
+        var vMyPCollection = document.getElementsByTagName("img");
+        //chạy qua từng phần từ paragraph và ghi ra console
+        for (var bIndex = 0; bIndex < vMyPCollection.length ; bIndex ++) {
+            console.log("Phần tử Image số " + bIndex  + " :");
+            console.log(vMyPCollection[ bIndex] );
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        border: 1px solid #000;
+        width: 50%;
+        position: relative;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    button {
+        margin: 0 10px;
+        padding: 5px;
+    }
+</style>
+
+<body onload="onPageLoading()">
+
+    <div class="container">
+        <h1 id="h1-noidung">Hello DevCamp 2021</h1>
+        <button id="button-color-red" onclick="onBtnRedClick()">TO RED</button>
+        <button id="button-color-blue" onclick="onBtnBlueClick()">TO BLUE</button>
+        <button id="button-color-green" onclick="onBtnGreenClick()">TO GREEN</button>
+    </div>
+</body>
+<script>
+    "use strict"
+    let gH1NoiDung = document.getElementById("h1-noidung");
+    let gBtnRed = document.getElementById("button-color-red");
+    let gBtnBlue = document.getElementById("button-color-blue");
+    let gBtnGreen = document.getElementById("button-color-green");
+    function onPageLoading() {
+        console.log(gH1NoiDung.id, gH1NoiDung.innerHTML);
+        console.log(gBtnRed.id, gBtnRed.innerHTML, gBtnBlue.id, gBtnBlue.innerHTML, gBtnGreen.id, gBtnGreen.innerHTML);
+    }
+
+    function onBtnRedClick() {
+        let vChangeRed = gH1NoiDung.style = "color:red";
+        console.log('Nút đổi màu đỏ được ấn')
+    }
+    function onBtnBlueClick() {
+        let vChangeBlue = gH1NoiDung.style = "color:blue";
+        console.log('Nút đổi màu xanh dương được ấn')
+    }
+    function onBtnGreenClick() {
+        let vChangeGreen = gH1NoiDung.style = "color:green";
+        console.log('Nút đổi màu xanh lá được ấn')
+    }
+</script>
+
+</html>

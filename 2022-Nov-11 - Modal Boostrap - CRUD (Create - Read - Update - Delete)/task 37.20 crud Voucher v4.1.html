@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voucher CRUD</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- Data Table-->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<body onload="onPageLoading()">
+<!-- Vùng header -->
+<div class="container">
+  <div class="text-center">
+    <h2>F120 - Quản trị Voucher</h2>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success" id="btn-add-voucher"><i class="fa fa-plus"></i>&nbsp; New voucher</button>
+  </div>
+</div>
+<!-- Vouche Data Table -->
+<div class="container">
+  <table class="table table-bordered table-striped table-hover" id="voucher-table">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>ID</th>
+        <th>Mã Voucher</th>
+        <th>% giảm giá</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+<!-- Vùng Modal -->
+
+<!-- Create voucher modal -->
+<div>
+  <div id="create-voucher-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="h5-modal-title">Create new voucher</h5>
+          <button class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row form-group">
+              <div class="col-sm-4">
+                <label for="input-create-voucher-code">Voucher code</label>
+              </div>
+              <div class="col-sm-8">
+                <input type="text" id="input-create-voucher-code" name="vouchercodes" placeholder="Voucher code" class="form-control">
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-4">
+                <label for="input-create-discount">Discount</label>
+              </div>
+              <div class="col-sm-8">
+                <input type="number" id="input-create-discount" name="discount" placeholder="Discount" class="form-control">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="btn-create-cancel" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" id="btn-create-voucher">Create Voucher</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update voucher modal -->
+<div>
+  <div id="update-voucher-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="h5-modal-title">Update a Voucher</h5>
+          <button class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row form-group">
+              <div class="col-sm-4">
+                <label for="input-update-voucher-code">Voucher code</label>
+              </div>
+              <div class="col-sm-8">
+                <input type="text" id="input-update-voucher-code" name="vouchercodes" placeholder="Voucher code" class="form-control">
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-4">
+                <label for="input-update-discount">Discount</label>
+              </div>
+              <div class="col-sm-8">
+                <input type="number" id="input-update-discount" name="discount" placeholder="Discount" class="form-control">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="btn-update-cancel" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" id="btn-update-voucher">Update Voucher</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete confirm modal -->
+<div>
+  <div class="modal fade" tabindex="-1" id="delete-confirm-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="h5-modal-title">Voucher Delete Confirmation</h5>
+          <button class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <label>Bạn có chắc chắn muốn xóa voucher này không?</label>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" id="btn-confirm-delete-voucher">Confirm</button>
+          <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+​<script>
+  "use strict";
+  /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+  // Biến toàn cục để lưu trữ id voucher đang đc update or delete. Mặc định = 0;
+  var gVoucherId = 0;
+  // mảng chứa dữ liệu vouchers
+  var gVoucherObjects = [
+      {
+          "id": 10,
+          "voucherCode": "12456",
+          "discount": 20
+      },
+      {
+          "id": 13,
+          "voucherCode": "15678",
+          "discount": 10
+      },
+      {
+          "id": 14,
+          "voucherCode": "34215",
+          "discount": 15
+      },
+      {
+          "id": 16,
+          "voucherCode": "12785",
+          "discount": 15
+      },
+      {
+          "id": 17,
+          "voucherCode": "13785",
+          "discount": 10
+      },
+      {
+          "id": 18,
+          "voucherCode": "10385",
+          "discount": 20
+      }
+    ];
+
+    // Biến mảng hằng số chứa danh sách tên các thuộc tính
+  const gVOUCHER_COLS = ["stt", "id", "voucherCode", "discount", "action"];
+  
+  // Biến mảng toàn cục định nghĩa chỉ số các cột tương ứng
+  const gVOUCHER_STT_COL = 0;
+  const gVOUCHER_ID_COL = 1;
+  const gVOUCHER_VOUCHER_CODE_COL = 2;
+  const gVOUCHER_DISCOUNT_COL = 3;
+  const gVOUCHER_ACTION_COL = 4;
+  
+  // Biến toàn cục để hiển lưu STT
+  var gSTT = 1;
+  // Khai báo DataTable & mapping collumns
+  var gVoucherTable = $("#voucher-table").DataTable({
+    columns: [
+      { data: gVOUCHER_COLS[gVOUCHER_STT_COL] },
+      { data: gVOUCHER_COLS[gVOUCHER_ID_COL] },
+      { data: gVOUCHER_COLS[gVOUCHER_VOUCHER_CODE_COL] },
+      { data: gVOUCHER_COLS[gVOUCHER_DISCOUNT_COL] },
+      { data: gVOUCHER_COLS[gVOUCHER_ACTION_COL] }
+    ],
+    columnDefs: [
+      { // định nghĩa lại cột STT
+        targets: gVOUCHER_STT_COL,
+        render: function() {
+          return gSTT ++;
+        }
+      },
+      { // định nghĩa lại cột action
+        targets: gVOUCHER_ACTION_COL,
+        defaultContent: `
+          <img class="edit-voucher" src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" style="width: 20px;cursor:pointer;">
+          <img class="delete-voucher" src="https://cdn4.iconfinder.com/data/icons/complete-common-version-6-4/1024/trash-512.png" style="width: 20px;cursor:pointer;">
+        `
+      }
+    ]
+  });
+  
+  /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+  // 2 - C: gán sự kiện Create - Thêm mới voucher
+  $("#btn-add-voucher").on("click", function() {
+    onBtnAddNewVoucherClick();
+  });
+  // 3 - U: gán sự kiện Update - Sửa 1 voucher
+  $("#voucher-table").on("click", ".edit-voucher", function() {
+    onBtnEditVoucherClick(this);
+  });
+  
+  // gán sự kiện cho nút Create Voucher (trên modal)
+  $("#btn-create-voucher").on("click", function() {
+    onBtnCreateVoucherClick();
+  });
+
+  // gán sự kiện cho nút Update Voucher (trên modal)
+  $("#btn-update-voucher").on("click", function() {
+    onBtnUpdateVoucherClick();
+  });
+
+  /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+  // hàm thực thi khi trang được load
+  function onPageLoading() {
+    // 1 - R: Read / Load voucher to DataTable
+    loadDataToVoucherTable(gVoucherObjects);
+  }
+
+  // Hàm xử lý sự kiện khi nút Thêm mới đc click
+  function onBtnAddNewVoucherClick() {
+    // hiển thị modal trắng lên
+    $("#create-voucher-modal").modal("show");
+  }
+
+  // Hàm xử lý sự kiện khi icon edit voucher trên bảng đc click
+  function onBtnEditVoucherClick(paramBtnEdit) {
+    // lưu thông tin voucherId đang được edit vào biến toàn cục
+    gVoucherId = getVoucherIdFromButton(paramBtnEdit);
+    // load dữ liệu vào các trường dữ liệu trong modal
+    showVoucherDataToModal(gVoucherId);
+    // hiển thị modal lên
+    $("#update-voucher-modal").modal("show");
+  }
+
+  // hàm xử lý sự kiện create voucher modal click
+  function onBtnCreateVoucherClick() {  
+    // khai báo đối tượng chứa voucher data
+    var vVoucherObj = {
+      "id": 0,
+      "voucherCode": "",
+      "discount": -1
+    };
+    // B1: Thu thập dữ liệu
+    getCreateVoucherData(vVoucherObj);
+    // B2: Validate insert
+    var vIsVoucherValidate = validateVoucherData(vVoucherObj);
+    if(vIsVoucherValidate) {
+      // B3: insert voucher
+      insertVoucher(vVoucherObj);
+      // B4: xử lý front-end
+      alert("Thêm voucher thành công!");
+      loadDataToVoucherTable(gVoucherObjects);
+      resertCreateVoucherForm();
+      $("#create-voucher-modal").modal("hide");
+    }
+  }
+
+  // hàm xử lý sự kiện update voucher modal click
+  function onBtnUpdateVoucherClick() {  
+    // khai báo đối tượng chứa voucher data
+    var vVoucherObj = {
+      "id": 0,
+      "voucherCode": "",
+      "discount": -1
+    };
+    // B1: Thu thập dữ liệu
+    getUpdateVoucherData(vVoucherObj);
+    // B2: Validate update
+    var vIsVoucherValidate = validateVoucherData(vVoucherObj);
+    if(vIsVoucherValidate) {
+      // B3: update voucher
+      updateVoucher(vVoucherObj);
+      // B4: xử lý front-end
+      alert("Sửa voucher thành công!");
+      loadDataToVoucherTable(gVoucherObjects);
+      resertUpdateVoucherForm();
+      $("#update-voucher-modal").modal("hide");
+    }
+  }
+
+  /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+  /** load voucher array to DataTable
+   * in: voucher array
+   * out: voucher table has data
+   */  
+  function loadDataToVoucherTable(paramVoucherArr) {
+    gSTT = 1;
+    gVoucherTable.clear();
+    gVoucherTable.rows.add(paramVoucherArr);
+    gVoucherTable.draw();
+  }
+
+  // hàm show voucher obj lên modal
+  function showVoucherDataToModal(paramVoucherId){
+    var vVoucherIndex = getIndexFormVoucherId(paramVoucherId);
+    $("#input-update-voucher-code").val(gVoucherObjects[vVoucherIndex].voucherCode);
+    $("#input-update-discount").val(gVoucherObjects[vVoucherIndex].discount);
+  }
+
+  // hàm thu thập dữ liệu để create voucher
+  function getCreateVoucherData(paramVoucherObj) {
+    paramVoucherObj.id = getNextId();
+    paramVoucherObj.voucherCode = $("#input-create-voucher-code").val().trim();
+    paramVoucherObj.discount = parseInt($("#input-create-discount").val());
+  }
+
+   // hàm thu thập dữ liệu để update voucher
+   function getUpdateVoucherData(paramVoucherObj) {
+    paramVoucherObj.id = gVoucherId;
+    paramVoucherObj.voucherCode = $("#input-update-voucher-code").val().trim();
+    paramVoucherObj.discount = parseInt($("#input-update-discount").val());
+  }
+
+  // hàm validate data
+  function validateVoucherData(paramVoucherObj) {
+    if(paramVoucherObj.voucherCode === "") {
+      alert("Voucher code cần nhập");
+      return false;
+    }
+    if(isNaN(paramVoucherObj.discount)) {
+      alert("Discount cần nhập vào phải là số");
+      return false;
+    }
+    
+    if(paramVoucherObj.discount < 0 || paramVoucherObj.discount > 100) {
+      alert("Discount phải nhập trong khoảng từ 0 đến 100!");
+      return false;
+    }
+
+    return true;
+  }
+  
+  // hàm thực hiện insert voucher vào mảng
+  function insertVoucher(paramVoucherObj) {
+    gVoucherObjects.push(paramVoucherObj);
+  }
+
+   // hàm thực hiện update voucher vào mảng
+   function updateVoucher(paramVoucherObj) {
+    var vVoucherIndex = getIndexFormVoucherId(gVoucherId);
+    gVoucherObjects.splice(vVoucherIndex, 1, paramVoucherObj);
+  }
+
+  // hàm xóa voucher theo id voucher
+  function deleteVoucher(paramVoucherId) {
+    var vVoucherIndex = getIndexFormVoucherId(paramVoucherId);
+    gVoucherObjects.splice(vVoucherIndex, 1);
+  }
+
+  // hàm xóa trắng form create voucher
+  function resertCreateVoucherForm() {
+    $("#input-create-voucher-code").val("");
+    $("#input-create-discount").val("");
+  } 
+
+   // hàm xóa trắng form create voucher
+   function resertUpdateVoucherForm() {
+    $("#input-update-voucher-code").val("");
+    $("#input-update-discount").val("");
+  } 
+
+  /* get voucher index from voucher id
+  // input: paramVoucherId là voucherId cần tìm index
+  / output: trả về chỉ số (index) trong mảng voucher */
+  function getIndexFormVoucherId(paramVoucherId) {
+    var vVoucherIndex = -1;
+    var vVoucherFound = false;
+    var vLoopIndex = 0;
+    while(!vVoucherFound && vLoopIndex < gVoucherObjects.length) {
+      if(gVoucherObjects[vLoopIndex].id === paramVoucherId) {
+        vVoucherIndex = vLoopIndex;
+        vVoucherFound = true;
+      }
+      else {
+        vLoopIndex ++;
+      }
+    }
+    return vVoucherIndex;
+  }
+
+  // hàm lấy ra đc id voucher tiếp theo, dùng khi thêm mới voucher
+  function getNextId() {
+    var vNextId = 0;
+    // nếu mảng chưa có phần tử nào, thì id sẽ bắt đầu từ 1
+    if(gVoucherObjects.length == 0) {
+      vNextId = 1;
+    }
+    else { // id tiếp theo bằng id của phần tử cuối cùng cộng thêm 1
+      vNextId = gVoucherObjects[gVoucherObjects.length - 1].id + 1;
+    }
+    return vNextId;
+  }
+
+  // hàm dựa vào button detail (edit or delete) xác định đc id voucher
+  function getVoucherIdFromButton(paramButton) {
+    var vTableRow = $(paramButton).parents("tr");
+    var vVoucherRowData = gVoucherTable.row(vTableRow).data();
+    return vVoucherRowData.id;
+  }
+  
+</script>
+</body>
+</html>
