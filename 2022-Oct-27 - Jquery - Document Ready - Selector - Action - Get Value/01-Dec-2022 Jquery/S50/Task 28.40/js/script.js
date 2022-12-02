@@ -39,7 +39,7 @@ function onBtnCheckVoucherClick(){
         }
         else if (vXmlHttp.readyState === gREADY_STATE_REQUEST_DONE){
           var vDivResultCheck = $('#div-result-check');
-          vDivResultCheck.html('Mã giảm giá '+vVoucherObj.maGiamGia+ ' không tồn tại');
+          vDivResultCheck.html('Mã giảm giá '+vVoucherObj.maGiamGia+ 'không tồn tại');
         }
           
         
@@ -88,7 +88,6 @@ function processResponse(paramXmlHttp) {
   'use strict';
   // B1: nhận lại response dạng JSON ở xmlHttp.responseText
   var vJsonVoucherResponse = paramXmlHttp.responseText;
-  console.log (vJsonVoucherResponse);
   // B2: Parsing chuỗi JSON thành Object
   var vVoucherResObj = JSON.parse(vJsonVoucherResponse); 
   console.log(vJsonVoucherResponse);
