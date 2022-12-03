@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Task 22.20</title>
+  <title>Task 29.170</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -69,7 +69,6 @@
     const gCOLUMN_FIRSTNAME = 1;
     const gCOLUMN_LASTNAME = 2;
     const gCOLUMN_PHOTO = 3;
-    const gCOLUMN_ACTION = 4;
 
     /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
     
@@ -78,34 +77,36 @@
     // hàm xử lý sự kiện loading
     function onPageLoading() {
       // hiển thị dữ liệu lên table
-      showDataOnTable(gUserListObject.employee);
+      showDataOnTable(gUserListObject.employees.employee);
     }
 
      /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
      // hiển thị dữ liệu lên table
     function showDataOnTable(paramUserList) {
-      // debugger;
+      console.log('param: ',paramUserList);
       var vTable = document.getElementById("user-table");
       var vTableBody = vTable.getElementsByTagName("tbody")[0];
 
       for (var bIndex = 0; bIndex < paramUserList.length; bIndex++) {
         var vUser = paramUserList[bIndex];
-        // tạo dòng mưới cho bẳng và ghi vào các giá trị 
+        console.log (vUser);
+        // tạo dòng mới cho bẳng và ghi vào các giá trị 
         var row = vTableBody.insertRow(-1);
 
         var vCellUserId = row.insertCell(gCOLUMN_USER_ID);
         var vCellFirstname = row.insertCell(gCOLUMN_FIRSTNAME);
         var vCellLastname = row.insertCell(gCOLUMN_LASTNAME);
         var vCellPhoto = row.insertCell(gCOLUMN_PHOTO);
-        var vCellAction = row.insertCell(gCOLUMN_ACTION);
 
-        vCellUserId.innerHTML = employee.id;
-        vCellFirstname.innerHTML = employee.firstName;
-        vCellLastname.innerHTML = employee.lastName;
-        vCellPhoto.innerHTML = employee.photo;
+        vCellUserId.innerHTML = vUser.id;
+        vCellFirstname.innerHTML = vUser.firstName;
+        vCellLastname.innerHTML = vUser.lastName;
+        vCellPhoto.innerHTML = vUser.photo;
+
 
       }
     }
   </script>
+
 </body>
 </html>
