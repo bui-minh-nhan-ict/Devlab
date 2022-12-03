@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Task 30.180</title>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </head>
+   <style>
+      .div-background-picture {
+         background-image: url("https://file.tinnhac.com/crop/620x346/2016/12/19/54-0406.gif"),
+            url("https://img.thuthuatphanmem.vn/uploads/2018/09/24/anh-background-gif-tuyet-roi_053434816.gif");
+         height: 100%;
+         background-repeat: no-repeat;
+         background-size: cover;
+         background-position: center;
+         opacity: 0.7;
+      }
+   </style>
+   <body>
+      <div class="container-fluid div-background-picture">
+         <form id="form-login" action="#" method="post" autocomplete="off">
+            <div class="row align-items-center min-vh-100 d-flex">
+               <div class="col-sm-8 mx-auto text-center jumbotron">
+                  <div class="mb-5">
+                     <h3>Login to your account</h3>
+                  </div>
+                  <div>
+                     <div class="form-group">
+                        <input
+                           id="inp-login-username"
+                           type="text"
+                           name="username"
+                           placeholder="Username"
+                           class="form-control"
+                           autocomplete="on"
+                        />
+                     </div>
+                     <div class="form-group">
+                        <input
+                           id="pwd-login-password"
+                           type="password"
+                           name="password"
+                           placeholder="Password"
+                           class="form-control"
+                        />
+                     </div>
+                     <div class="form-group">
+                        <button id="btn-login" class="btn btn-block btn-log btn-info">Đăng Nhập</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </body>
+   <script>
+      /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+      /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+      $(document).ready(
+         //gán sự kiện click cho nút Login
+         $("#btn-login").on("click", function (event) {
+            onBtnLoginClick();
+            event.preventDefault();
+         })
+      );
+
+      /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+      //hàm thực thi sự kiện click button
+      function onBtnLoginClick() {
+         var vUser = {
+            username: "",
+            password: "",
+         };
+
+         //B1: Thu thập dữ liệu
+         getDataForm(vUser);
+         //B2: kiểm tra dữ liệu
+         var vValidate = validateData(vUser);
+         if (vValidate) {
+            //B3: xử lý hiển thị
+            showData(vUser);
+         }
+      }
+
+      /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+      //hàm thu thập dữ liệu
+      function getDataForm(paramUser) {
+         paramUser.username = $("#inp-login-username").val();
+         paramUser.password = $("#pwd-login-password").val();
+      }
+
+      //hàm kiểm tra dữ liệu
+      function validateData(paramUser) {
+         if (paramUser.username == "") {
+            alert("Nhập Username");
+            $("#inp-login-username").focus();
+            return false;
+         }
+         if (paramUser.password == "") {
+            alert("Nhập Password");
+            $("#pwd-login-password").focus();
+            return false;
+         }
+         return true;
+      }
+
+      //hàm xử lý hiển thị
+      function showData(paramUser) {
+         console.log(`Username là: ${paramUser.username}\nPassword là: ${paramUser.password}`);
+      }
+   </script>
+</html>

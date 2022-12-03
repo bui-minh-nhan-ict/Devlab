@@ -51,6 +51,9 @@
 </body>
 <script>
 //function mẫu - tạo list vật nuôi    
+   
+
+
 function onBtnTaoListVatNuoiClick() {    
     var vDanhSachVatNuoi = ["dog", "cat", "parrot", "rabbit"];
     $('#div-2')              //chọn div 2 
@@ -70,6 +73,21 @@ function onBtnTaoListVatNuoiClick() {
        $("<option/>").val(bVatNuoi).text( bVatNuoi.toUpperCase()).   //tạo option có value là bVatNuoi, có text là bVatNuoi chữ IN HOA
        appendTo($("#select-pets"));                                  //dính vào select có id là select-pets
     }
-}      
+}  
+
+$("<div>",{"class":"mt-2","id":"div-car"}).appendTo($("#div-2"))
+$("#div-car").append($("<button>",{class:"btn btn-primary",text:"Chọn Màu car", id:"btn-car", onclick:"onBtnColorCar()"}))
+
+    function onBtnColorCar(){
+    var vColorCar = ["Đen","Trắng","Bạc","Xanh Dương"]
+    $("#div-car").append($("<label>").html("Chọn màu car").addClass("ml-5")).append($("<select>",{id:"select-car"}))
+    
+        for (var bCar of vColorCar) {   //VỚI TỪNG giá trị trong mảng bDanhSachVatNuoi
+       $("<option/>").val(bCar).text( bCar.toUpperCase()).   
+       appendTo($("#select-car"));                                  
+    }
+        
+        
+}
 </script>    
 </head>

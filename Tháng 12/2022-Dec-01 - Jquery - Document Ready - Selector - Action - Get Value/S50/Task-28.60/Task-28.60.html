@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div class="container">
+         <div class="form-group">
+            <img src="hardwork.jpg" alt="" class="mb-4" />
+            <p>Message cho bạn 12 tháng tới</p>
+            <input type="text" id="inp-message" class="form-control w-50" />
+            <button id="btn-message" class="btn btn-success mt-2">Gửi thông điệp</button>
+         </div>
+         <div>
+            <p id="p-message" class="text-primary">...</p>
+            <img id="img-like" src="like.png" style="width: 10%" />
+         </div>
+      </div>
+   </body>
+   <script>
+      /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+      /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+      $(document).ready(function () {
+         onPageLoading();
+         $("#btn-message").on("click", onBtnMessageClick);
+         // $("#btn-test").on("click", onBtnTestClick);
+      });
+      /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+      function onPageLoading() {
+         $("#p-message").hide();
+         $("#img-like").hide();
+      }
+
+      function onBtnMessageClick() {
+         $("#p-message").html($("#inp-message").val());
+         $("#p-message").show();
+         $("#img-like").show();
+      }
+
+
+      /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+   </script>
+</html>

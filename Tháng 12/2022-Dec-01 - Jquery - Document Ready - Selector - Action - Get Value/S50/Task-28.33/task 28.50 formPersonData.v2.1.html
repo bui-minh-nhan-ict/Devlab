@@ -2,18 +2,17 @@
 <html>
 
 <head>
+  <title> Task 28.45-50 Dữ liệu cá nhân </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js
-  <script src="js/script.js"></script>
 
 </head>
 
 <body>
   <div class="container">
-    <h2 style="text-align: center;">Personal Data Submit Form</h2>
+    <h2 style="text-align: center;">Personal Data Submit Form - Dữ liệu cá nhân</h2>
 
     <div class="jumbotron container">
       <div class="row form-group">
@@ -42,17 +41,21 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12" style="text-align: right;">
+        <div class="col-sm-12 text-right">
           <button id="btn-submit-data" class="btn btn-info">Submit Data</button>
         </div>
+      </div>      
+    </div>
+    <div class="row bg-light">
+      <div class="col-sm-12 text-right">
+        <button id="btn-clear-log" class="btn btn-info">Clear html log</button>
       </div>
     </div>
     <!-- HTML Log -->
-    <hr>
-    <div style="text-align: right;">
-      <button id="btn-clear-log" class="btn btn-info"> Clear HTML Log </button>
+    <div id="div-p" class = "jumbotron text-left">
+      <p id="p-html-log">Devcamp120</p>
     </div>
-    <p id="p-html-log"></p>
+  </div>
   </div>
 </body>
 

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Bootstrap Example</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div class="container">
+         <h2>Striped Rows</h2>
+
+         <p>The .table-striped class adds zebra-stripes to a table:</p>
+         <table class="table table-striped">
+            <thead>
+               <tr>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Email</th>
+                  <th>Details</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>john@example.com</td>
+                  <td><button id="btn-info-1" class="btn btn-info">info 1</button></td>
+               </tr>
+               <tr>
+                  <td>Mary</td>
+                  <td>Moe</td>
+                  <td>mary@example.com</td>
+                  <td><button id="btn-info-2" class="btn btn-info">info 2</button></td>
+               </tr>
+               <tr>
+                  <td>July</td>
+                  <td>Dooley</td>
+                  <td>july@example.com</td>
+                  <td><button id="btn-info-3" class="btn btn-info">info 3</button></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </body>
+   <script>
+      "use strict";
+      /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+      /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+      $(document).ready(function () {
+         $("#btn-info-1").click(onBtnInfo1Click);
+         $("#btn-info-2").click(onBtnInfo2Click);
+         $("#btn-info-3").click(onBtnInfo3Click);
+      });
+
+      /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+      function onBtnInfo1Click() {
+         $("#btn-info-1").parents("tr").css({ color: "white", "background-color": "blue" });
+      }
+
+      function onBtnInfo2Click() {
+         //  $("#btn-info-2").parents("div.container").css({ border: "2px solid red" });
+         $("#btn-info-2").parents().find(".container").css({ border: "2px solid red" });
+      }
+
+      function onBtnInfo3Click() {
+         //  $("#btn-info-3").parents("tr").find("td:nth-last-child(2)").css("color", "red");//nth- last-chil (phần tử con của nó từ dưới lên bắt đầu từ 1)
+         $("#btn-info-3").parents("tr").find("td:nth-child(3)").css("color", "red"); // nth- chil (phan tu con cua no, bat dau tu 1)
+      }
+
+      /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+   </script>
+</html>

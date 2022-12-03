@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-5 signup=form mx-auto border border-danger" style="background-color: #e9ecef">
+               <div class="form-group"><h2>Sign Up</h2></div>
+               <div class="form-group">
+                  <p class="hint-text">Please fill in this form to create an account!</p>
+               </div>
+               <div class="form-group">
+                  <hr />
+               </div>
+               <div class="form-group">
+                  <div class="row">
+                     <div class="col">
+                        <input class="form-control" type="text" id="inp-firstname" placeholder="First Name" />
+                     </div>
+                     <div class="col">
+                        <input class="form-control" type="text" id="inp-lastname" placeholder="Last Name" />
+                     </div>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <input class="form-control" type="email" id="inp-email" placeholder="Email" />
+               </div>
+               <div class="form-group">
+                  <input class="form-control" type="password" id="inp-password" placeholder="Password" />
+               </div>
+               <div class="form-group">
+                  <input
+                     class="form-control"
+                     type="password"
+                     id="inp-confirm-password"
+                     placeholder="Confirm Password"
+                  />
+               </div>
+               <div class="form-group">
+                  <input type="checkbox" name="" id="checkbox" /> I accept the <a href="#">Term of Use</a> &
+                  <a href="#">Privacy Policy</a>
+                  <p id="p-agree-feedback" class="invalid-feedback">You must accpept before submitting</p>
+               </div>
+               <div class="form-group">
+                  <button id="btn-login" class="btn btn-log" style="background-color: #1877f2">Sign Up</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+   <script>
+      /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+      var gInpFirstName = $("#inp-firstname");
+      var gInpLastName = $("#inp-lastname");
+      var gInpEmail = $("#inp-email");
+      var gInpPassword = $("#inp-password");
+      var gInpConfirmPassword = $("#inp-confirm-password");
+      var gCheckbock = $("#checkbox");
+      var gBtnLogin = $("#btn-login");
+
+      /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+      $(document).ready(function () {
+         gBtnLogin.on("click", onBtnLoginClick);
+      });
+
+      /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+      //hàm thực hiện sự kiện nút login
+      function onBtnLoginClick() {
+         let vUserObj = {
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            checkbox: false,
+         };
+
+         //B1: thu thập thông tin trên form
+         getFormInputData(vUserObj);
+         //B2: Kiểm tra dữ liệu
+         if (ValidateForm(vUserObj)) {
+            //B3: Xử lý hiển thị
+            showDataUser(vUserObj);
+         }
+      }
+
+      /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+      //hàm thu thập thông tin
+      function getFormInputData(paraUser) {
+         paraUser.firstName = gInpFirstName.val().trim();
+         paraUser.lastName = gInpLastName.val().trim();
+         paraUser.email = gInpEmail.val().trim();
+         paraUser.password = gInpPassword.val();
+         paraUser.confirmPassword = gInpConfirmPassword.val();
+         paraUser.checkbox = gCheckbock.is(":checked");
+      }
+
+      //hàm validate User
+      function ValidateForm(paraUser) {
+         var vRegexStrEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+         if (paraUser.firstName == "") {
+            alert("Nhập FirstName");
+            gInpFirstName.focus();
+            return false;
+         }
+         if (paraUser.lastName == "") {
+            alert("Nhập LastName");
+            gInpLastName.focus();
+            return false;
+         }
+
+         if (paraUser.email == "") {
+            alert("Nhập Email");
+            gInpEmail.focus();
+            return false;
+         }
+         if (!vRegexStrEmail.test(paraUser.email)) {
+            alert("Nhập email đúng định dạng");
+            gInpEmail.focus();
+            return false;
+         }
+         if (paraUser.password == "") {
+            alert("Nhập Password");
+            gInpPassword.focus();
+            return false;
+         }
+         if (paraUser.password !== paraUser.confirmPassword) {
+            alert("Password không khớp! Nhập lại");
+            gInpConfirmPassword.focus();
+            return false;
+         }
+         if (!paraUser.checkbox) {
+            $("#p-agree-feedback").css("display", "block");
+            return false;
+         } else {
+            $("#p-agree-feedback").css("display", "none");
+         }
+         return true;
+      }
+
+      function showDataUser(para) {
+         console.log(
+            `FirstName =  ${para.firstName}\nLastName= ${para.lastName}\nEmail = ${para.email}\nPassword = ${para.password}\nConfirm = ${para.confirmPassword}\nI accpet = ${para.checkbox}`
+         );
+      }
+   </script>
+</html>

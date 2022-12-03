@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Bootstrap Example</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-12 text-center">
+               <h2>Pricing</h2>
+               <p>Choose a payment plan that works for you</p>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-12">
+               <div class="row">
+                  <div class="col-sm-4">
+                     <div id="Basic" class="card text-center">
+                        <div class="card card-header"><h3>Basic</h3></div>
+                        <div class="card-body">
+                           <ul class="list-group list-group-flush">
+                              <li class="list-group-item"><b>20</b> Lorem</li>
+                              <li class="list-group-item"><b>15</b> Ipsum</li>
+                              <li class="list-group-item"><b>5</b> Dolor</li>
+                              <li class="list-group-item"><b>2</b> Sit</li>
+                              <li class="list-group-item"><b>Endless</b> Amet</li>
+                           </ul>
+                        </div>
+                        <div class="card-footer">
+                           <h4>$19</h4>
+                           <h4>per month</h4>
+
+                           <button id="btn-basic" class="btn btn-info w-50">Sign Up</button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-sm-4">
+                     <div id="Pro" class="card text-center">
+                        <div class="card-header"><h3>Pro</h3></div>
+                        <div class="card-body">
+                           <ul class="list-group list-group-flush">
+                              <li class="list-group-item"><b>50</b> Lorem</li>
+                              <li class="list-group-item"><b>25</b> Ipsum</li>
+                              <li class="list-group-item"><b>10</b> Dolor</li>
+                              <li class="list-group-item"><b>5</b> Sit</li>
+                              <li class="list-group-item"><b>Endless</b> Amet</li>
+                           </ul>
+                        </div>
+                        <div class="card-footer">
+                           <h4>$29</h4>
+                           <h4>per month</h4>
+
+                           <button id="btn-pro" class="btn btn-info w-50">Sign Up</button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-sm-4">
+                     <div id="Premium" class="card text-center">
+                        <div class="card-header"><h3>Premium</h3></div>
+                        <div class="card-body">
+                           <ul class="list-group list-group-flush">
+                              <li class="list-group-item"><b>100</b> Lorem</li>
+                              <li class="list-group-item"><b>50</b> Ipsum</li>
+                              <li class="list-group-item"><b>25</b> Dolor</li>
+                              <li class="list-group-item"><b>10</b> Sit</li>
+                              <li class="list-group-item"><b>Endless</b> Amet</li>
+                           </ul>
+                        </div>
+                        <div class="card-footer">
+                           <h4>$49</h4>
+                           <h4>per month</h4>
+                           <button id="btn-premium" class="btn btn-info w-50">Sign Up</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+   <script>
+      $(document).ready(function () {
+         $("#btn-basic").click(onBtnBasicClick);
+         $("#btn-pro").click(onBtnProClick);
+         $("#btn-premium").click(onBtnPremiumClick);
+      });
+
+      function onBtnBasicClick() {
+         $("#btn-basic").prop("class", "btn btn-warning w-50");
+         $("#btn-pro").prop("class", "btn btn-info w-50");
+         $("#btn-premium").prop("class", "btn btn-info w-50");
+
+         console.log($("#Basic h3").text());
+         $("#Basic li").each(function () {
+            console.log($(this).text());
+         });
+         console.log($("#Basic h4:nth-child(1)").text() + " " + $("#Basic h4:nth-child(2)").text());
+      }
+
+      function onBtnProClick() {
+         $("#btn-basic").prop("class", "btn btn-info w-50");
+         $("#btn-pro").prop("class", "btn btn-warning w-50");
+         $("#btn-premium").prop("class", "btn btn-info w-50");
+
+         console.log($("#Pro h3").text());
+         $("#Pro li").each(function (index, value) {
+            console.log(index + " " + value.innerText + " " + $(this).text());
+         });
+         console.log($("#Pro h4:nth-child(1)").text() + " " + $("#Basic h4:nth-child(2)").text());
+      }
+
+      function onBtnPremiumClick() {
+         $("#btn-basic").prop("class", "btn btn-info w-50");
+         $("#btn-pro").prop("class", "btn btn-info w-50");
+         $("#btn-premium").prop("class", "btn btn-warning w-50");
+
+         console.log($("#Premium h3").text());
+         $("#Premium li").each(function (index, value) {
+            console.log($(this).text());
+         });
+         console.log($("#Premium h4:nth-child(1)").text() + " " + $("#Basic h4:nth-child(2)").text());
+      }
+   </script>
+</html>

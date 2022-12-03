@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </head>
+
+   <body>
+      <div class="container">
+         <h2 style="text-align: center">Personal Data Submit Form</h2>
+
+         <div class="jumbotron container">
+            <div class="row form-group">
+               <div class="col-sm-3">
+                  <label for="input-first-name">First Name</label>
+               </div>
+               <div class="col-sm-9">
+                  <input
+                     type="text"
+                     id="inp-first-name"
+                     name="firstname"
+                     placeholder="Your first name ..."
+                     class="form-control"
+                  />
+               </div>
+            </div>
+            <div class="row form-group">
+               <div class="col-sm-3">
+                  <label for="inp-last-name">Last Name</label>
+               </div>
+               <div class="col-sm-9">
+                  <input
+                     type="text"
+                     id="inp-last-name"
+                     name="lastname"
+                     placeholder="Your last name.."
+                     class="form-control"
+                  />
+               </div>
+            </div>
+            <div class="row form-group">
+               <div class="col-sm-3">
+                  <label for="age">Age</label>
+               </div>
+               <div class="col-sm-9">
+                  <input type="number" id="inp-age" name="age" placeholder="Your age ..." class="form-control" />
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-12" style="text-align: right">
+                  <button id="btn-submit-data" class="btn btn-info">Submit Data</button>
+               </div>
+            </div>
+         </div>
+         <!-- HTML Log -->
+         <hr />
+         <div style="text-align: right">
+            <button id="btn-clear-log" class="btn btn-info">Clear HTML Log</button>
+         </div>
+         <p id="p-html-log"></p>
+      </div>
+      <script>
+         /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+         /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+         $(document).ready(function () {
+            $("#btn-submit-data").click(onBtnSumbmitClick);
+
+            $("#btn-clear-log").click(onBtnClearLogClick);
+         });
+         /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+         function onBtnSumbmitClick() {
+            var vDataObj = {
+               firstname: "",
+               lastname: "",
+               age: "",
+            };
+            //B1: THU THẬP DỮ LIỆU
+            getData(vDataObj);
+            //B2: KIỂM TRA
+            if (validateData(vDataObj)) {
+               //B3: XỬ LÝ HIỂN THỊ
+               processData(vDataObj);
+            }
+         }
+
+         function onBtnClearLogClick() {
+            $("#p-html-log").html(">");
+         }
+
+         /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+         function getData(paramObj) {
+            paramObj.firstname = $("#inp-first-name").val();
+            paramObj.lastname = $("#inp-last-name").val();
+            paramObj.age = $("#inp-age").val();
+         }
+
+         function validateData(paramObj) {
+            if (paramObj.firstname == "") {
+               alert("Nhập họ");
+               return false;
+            }
+            if (paramObj.lastname == "") {
+               alert("Nhập tên");
+               return false;
+            }
+            if (paramObj.age == "") {
+               alert("Nhập tuổi");
+               return false;
+            }
+            if (paramObj.age > 200 || paramObj.age < 0) {
+               alert("Tuổi từ 0 tới 200");
+               return false;
+            }
+            return true;
+         }
+
+         function processData(paramObj) {
+            $("#p-html-log").html("> Firstname: " + paramObj.firstname + "<br>");
+            $("#p-html-log").append("> Lastname: " + paramObj.lastname + "<br>");
+            $("#p-html-log").append("> Age: " + paramObj.age);
+         }
+      </script>
+   </body>
+</html>

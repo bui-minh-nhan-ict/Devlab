@@ -1,0 +1,133 @@
+body {
+    margin-left: 7%;
+    margin-right: 7%;
+}
+
+.mg-t10 {
+    margin-top: 10%;
+}
+
+.mg-t5 {
+    margin-top: 5%;
+}
+
+h1 {
+    font-size: 500%;
+}
+
+h2 {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.p-ovacity {
+    opacity: 0.5;
+    font-size: x-large;
+}
+
+.a-dow {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    opacity: 0.5;
+    font-weight: bolder;
+    color: black;
+    font-size: large;
+}
+
+.btn-radio {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    border-radius: 50px;
+    height: 50px;
+
+}
+
+.text-md {
+    font-size: large;
+
+}
+
+.img-phone {
+    border: 14px solid #ddd;
+    border-radius: 50px;
+    padding: 5px;
+    margin-top: 50px;
+}
+
+.box-icon {
+    width: 40px;
+}
+
+.a-title {
+    font-size: x-large;
+    color: black;
+}
+
+.icon-color {
+    color: blue;
+    margin-top: 20px;
+}
+
+.text-bold {
+    font-weight: bold;
+    margin-top: 200px;
+}
+
+hr {
+    background-color: rgb(62, 11, 245);
+    border: 0 none;
+    color: rgb(206, 15, 15);
+    height: 3px;
+    width: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.container {
+    margin-top: 10px;
+}
+
+.rounded-circle {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width: 50%;
+}
+
+.center {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+}
+
+
+.fa-sm {
+    position: relative;
+    font-size: 25px;
+    left: 10px;
+    bottom: 15px;
+}
+
+.main-footer {
+    size: 25px;
+    opacity: 0.6;
+}
+
+.card w-100 {
+    height: 500px;
+    width: 100px;
+
+}
+
+.pricing {
+    position: relative;
+    font-size: 25px;
+    left: 180px;
+}
+
+h6 {
+    opacity: 0.6;
+}
