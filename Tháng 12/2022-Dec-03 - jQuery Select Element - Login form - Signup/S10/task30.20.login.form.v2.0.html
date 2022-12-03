@@ -23,7 +23,7 @@
                         </div>
                         <div class="form-group">
                             <input name="password" id="pwd-login-password" placeholder="Password" 
-                             class="form-control" value="" autocomplete="inp-current-password">
+                             class="form-control" value="" autocomplete="inp-current-password" type="password">
                         </div>
                         <div class="form-group">
                             <input type="checkbox" name="rememberusername" id="ckb-remember-username" class="form-check-input">
@@ -32,7 +32,7 @@
                             <a class="float-right" href="#">Lost password?</a>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-log btn-block btn-info">Đăng nhập</button>
+                            <button class="btn btn-log btn-block btn-info" id="btn-login">Đăng nhập</button>
                         </div>
                     </div>
 
@@ -43,5 +43,34 @@
     </div>
    
 </body>
+<script>
+    $("#btn-login").click(function(event) {
+        // debugger;
+        //event.preventDefault();
+        var vUserName = $("#inp-login-username").val();
+        var vPassword = $("#pwd-login-password").val();
+        var vRemember = $("#ckb-remember-username").val();
+        console.log(vUserName, vPassword, vRemember);
+        var isValidate = validateInput(vUserName, vPassword, vRemember);
+        if (isValidate) {
+            console.log("Dữ liệu hợp lệ");
+        }else{
+            console.log("Dữ liệu không hợp lệ");
+        }
 
+    });
+    function validateInput(paraUserName, paraPassword, paraRemember) {
+        var vResult = true;
+        if(paraUserName.trim().length ==0 ){
+            alert("Please enter your name")
+            vResult = false;
+        }
+        if(paraPassword.trim().length ==0){
+            alert("Please enter your password")
+            vResult = false;
+        }
+        return vResult;
+    }
+
+</script>
 </html>

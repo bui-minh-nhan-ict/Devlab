@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body onload = "onPageLoading();">
 <div class="container">
   <h2>Registration Car Form</h2>
 
@@ -61,7 +61,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12" style="text-align: right;">
-        <button class="btn btn-info"> Send </button>
+        <button class="btn btn-info" id="btn-send"> Send </button>
       </div>
     </div>
   </div>
@@ -104,10 +104,52 @@
   var gObjectCarData = JSON.parse(gJsonCarData);
 
   /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+  $("#car-select").on("change", function() {
+    onSelectChangeValue(this);
+  })
+  $("#btn-send").on("click", function() {
+    onBtnSendClick();
+  })
 
   /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+  function onPageLoading() {
+    //debugger;
+    for (var i = 0; i < gObjectCarData.length;i++){
+      const elements = gObjectCarData[i];
+      $("#car-select").append($("<option>",{
+        value: elements.brandId,
+        text: elements.brandName
+      }))
+    }
+    
+  }
+  function onBtnSendClick() {
+    debugger;
+    var vBrandId = $("#car-select").val();
+    var vBrandName = $("#car-select option:selected").text();
+    console.log(vBrandId, vBrandName);
+    var vTypeId = $("#car-type-select").val();
+    var vTypeName = $("#car-type-select option:selected").text();
+    console.log(vTypeId, vTypeName);
+  }
 
   /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+  function onSelectChangeValue(paramsElement) {
+    debugger;
+    var vBrandId = $(paramsElement).val();
+    console.log(vBrandId);
+    $("#car-type-select").removeAttr("disabled");
+    $("#car-type-select").empty();
+    var vBrandType = getBrandTypeByBrandID(vBrandId);
+    for (var i = 0; i < vBrandType.length;i++){
+      const elements = vBrandType[i];
+      $("#car-type-select").append($("<option>",{
+        value: elements.typeId,
+        text: elements.typeName
+      }))
+    }
+  }
+
   /**
    * get brandType by brandId
    * input: brandId of a car

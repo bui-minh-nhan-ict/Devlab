@@ -3,52 +3,45 @@
 $(document).ready(function(){
 
 $('#btn-submit-data').on('click',onBtnSubmitClick);
+$('#btn-clear-log').on('click',onBtnClearHTMLClick);
 
 function onBtnSubmitClick() {
-  // Access Order info from element
+  // Hiển thị dữ liệu vào div
   var vFirstName = $("#inp-first-name");
   var vFirstNameVal = $("#inp-first-name").val();
   var vLastName = $("#inp-last-name");
   var vLastNameVal = $("#inp-last-name").val();
   var vAge = $("#inp-age");
   var vAgeVal = $("#inp-age").val();
-  console.log(vFirstNameVal);
-  console.log(vLastNameVal);
-  console.log(vAgeVal);
+  var vDivShow = $('#p-html-log');
+  
+
+  // Validate dữ liệu input
+  var isValidate = validateInput(vFirstNameVal, vLastNameVal, vAgeVal);
+  if (isValidate) {
+    vDivShow.html('First Name: ' +vFirstNameVal +'<br>'+ 'Last Name: ' +vLastNameVal +'<br>'+ 'Age: ' +vAgeVal +'<br>');
+  }
+
+};
+function validateInput(paraFirstName, paraLastName, paraAge) {
+  var vResult = true;
+  if(paraFirstName.trim().length ==0 ){
+      alert("Please enter your first name")
+      vResult = false;
+  }
+  if(paraLastName.trim().length ==0){
+      alert("Please enter your last name")
+      vResult = false;
+  }
+  if(isNaN(paraAge) || paraAge < 0 || paraAge > 200){
+    alert("Please enter your age")
+    vResult = false;
+}
+  return vResult;
+}
 
 
-  // var vEmail = document.getElementById("inp-email");
-  // var vPhone = document.getElementById("inp-phone");
-  // var vAddress = document.getElementById("inp-address");
-  // var vMessage = document.getElementById("inp-message");
-  // var vVoucher = document.getElementById("inp-voucher");
-  // var vCheckInput = "";
+  function onBtnClearHTMLClick() {
+    $("#p-html-log").empty();
 
-  // // Check Valid data: Menu, Pizza type, order info
-  // if (gMenu.menuName == null) {
-  //   alert("Please choose pizza size!");
-  // }
-  // else if (gPizzaType.type == null) {
-  //   alert("Please choose pizza type!");
-  // }
-  // else if (validationString(vFullName.value)) {
-  //   alert("Please enter your full name!");
-  //   vFullName.focus();
-  // }
-  // else if (!validationString(vEmail.value, 2)) {
-  //   alert("Please enter your email!");
-  //   vEmail.focus();
-  // }
-  // else if (!validationString(vPhone.value, 3)) {
-  //   alert("Please enter your phone number!");
-  //   vPhone.focus();
-  // }
-  // else if (validationString(vAddress.value)) {
-  //   alert("Please enter your address!");
-  //   vAddress.focus();
-  // }
-  // else if (validationString(vMessage.value)) {
-  //   alert("Please enter your Message!");
-  //   vMessage.focus();
-  // }
 }});
