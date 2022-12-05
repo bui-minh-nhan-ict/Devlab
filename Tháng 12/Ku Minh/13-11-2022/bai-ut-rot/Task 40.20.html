@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 40.20</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Import Datatable sau jquery -->
+  <!-- Import them style bootstrap cho datatable -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <h2 class="text-center">Danh sách giảng viên </h2>
+        </div>
+        <button class="btn btn-success form-group" id="btn-add-user" data-toggle="modal"
+          data-target="#insert-user-modal">Thêm User</button>
+        <table class="table table-bordered table-striped table-hover" id="table-user">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Course Code</th>
+              <th scope="col">Course Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Discount Price</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Level</th>
+              <th scope="col">Cover Image</th>
+              <th scope="col">Teacher Name</th>
+              <th scope="col">Teacher Photo</th>
+              <th scope="col">Is Popular</th>
+              <th scope="col">Is Trending</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Vùng Modal -->
+
+  <!-- Create user modal -->
+  <div>
+    <div id="insert-user-modal" class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="h5-modal-title">Thêm User</h5>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Course Code</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-course-code" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Course Name</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-course-name" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Price</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-price" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Discount Price</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-discount-price" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Duration</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-duration" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Level</label>
+                </div>
+                <div class="col-sm-8">
+                  <select class="form-control" id="select-level">
+                    <option value="NOT">Chọn level</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Cover Image</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-cover-image" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Teacher Name</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-teacher-name" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Teacher Photo</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-teacher-photo" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Is Popular</label>
+                </div>
+                <div class="col-sm-8">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <input type="radio" name="select-popular" id="true-popular" value="true">
+                      <label for="radio">True</label>
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="radio" name="select-popular" id="fasle-popular" value="fasle">
+                      <label for="radio">Fasle</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Is Trending</label>
+                </div>
+                <div class="col-sm-8">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <input type="radio" name="select-trending" id="true-trending" value="true">
+                      <label for="radio">True</label>
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="radio" name="select-trending" id="fasle-trending" value="fasle">
+                      <label for="radio">Fasle</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="btn-create-user">Insert User</button>
+            <button class="btn btn-secondary" id="btn-create-cancel" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Update user modal -->
+  <div>
+    <div id="update-user-modal" class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="h5-modal-title">Update User</h5>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Id</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-id-update" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Course Code</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-course-code-update" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Course Name</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-course-name-update" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Price</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-price-update" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Discount Price</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-discount-price-update" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Duration</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-duration-update" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Level</label>
+                </div>
+                <div class="col-sm-8">
+                  <select class="form-control" id="select-level-update">
+                    <option value="NOT">Chọn level</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Cover Image</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-cover-image-update" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Teacher Name</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-teacher-name-update" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Teacher Photo</label>
+                </div>
+                <div class="col-sm-8">
+                  <input type="text" id="input-teacher-photo-update" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Is Popular</label>
+                </div>
+                <div class="col-sm-8">
+                  <select class="form-control" name="select-modal-popular" id="select-update-modal-popular">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-sm-4">
+                  <label>Is Trending</label>
+                </div>
+                <div class="col-sm-8">
+                  <select class="form-control" name="select-modal-trending" id="select-update-modal-trending">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                  </select>
+                </div>
+              </div>
+              
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="btn-update-user">Update User</button>
+            <button class="btn btn-secondary" id="btn-update-cancel" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete confirm modal -->
+  <div>
+    <div class="modal fade" tabindex="-1" id="delete-confirm-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="h5-modal-title">User Delete Confirmation</h5>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <label>Bạn có chắc chắn muốn xóa user này không?</label>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" id="btn-confirm-delete-user">Confirm</button>
+            <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    
+      /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+      const gDATA_COLUMN = [
+        "id",
+        "courseCode",
+        "courseName",
+        "price",
+        "discountPrice",
+        "duration",
+        "level",
+        "coverImage",
+        "teacherName",
+        "teacherPhoto",
+        "isPopular",
+        "isTrending",
+        "action",
+      ];
+      const gID = 0;
+      const gCOURSE_CODDE = 1;
+      const gCOURSE_NAME = 2;
+      const gPRICE = 3;
+      const gPRICE_DISCOUNT = 4;
+      const gDURATION = 5;
+      const gLEVEL = 6;
+      const gCOVER_IMAGE = 7;
+      const gTEACHER_NAME = 8;
+      const gTEACHER_PHOTO = 9;
+      const gIS_POPULAR = 10;
+      const gIS_TRENDING = 11;
+      const gACTION = 12;
+
+      var vTable = $("#table-user").DataTable({
+        "columns": [
+          { "data": gDATA_COLUMN[gID] },
+          { "data": gDATA_COLUMN[gCOURSE_CODDE] },
+          { "data": gDATA_COLUMN[gCOURSE_NAME] },
+          { "data": gDATA_COLUMN[gPRICE] },
+          { "data": gDATA_COLUMN[gPRICE_DISCOUNT] },
+          { "data": gDATA_COLUMN[gDURATION] },
+          { "data": gDATA_COLUMN[gLEVEL] },
+          { "data": gDATA_COLUMN[gCOVER_IMAGE] },
+          { "data": gDATA_COLUMN[gTEACHER_NAME] },
+          { "data": gDATA_COLUMN[gTEACHER_PHOTO] },
+          { "data": gDATA_COLUMN[gIS_POPULAR] },
+          { "data": gDATA_COLUMN[gIS_TRENDING] },
+          { "data": gDATA_COLUMN[gACTION] },
+        ],
+        columnDefs: [
+          {
+            targets: gCOVER_IMAGE,
+            render: function (data) {
+              return `<img src="${data}" class="card-img-top">`;
+            }
+          },
+          {
+            targets: gTEACHER_PHOTO,
+            render: function (data) {
+              return `<img src="${data}" class="card-img-top">`;
+            }
+          },
+          {
+            targets: gACTION,
+            defaultContent: ` <button class='btn btn-primary btn-edit'>Sửa</button>
+                    <button class='btn btn-danger btn-delete' data-toggle="modal">Xóa</button> `}
+        ],
+        autoWidth: false
+      });
+  
+      var gIdUsers = "";
+      /*** REGION 2 - Vùng gán / thực thi hàm xử lý sự kiện cho các elements */
+      $(document).ready(function () {
+        onPageLoading();
+      });
+     
+      $(document).on("click", "#table-user .btn-edit", function () {
+        onBtnEditClick(this);
+      })
+      $(document).on("click", "#table-user .btn-delete", function () {
+        onBtnDeleteClick(this);
+      })
+      $("#btn-add-user").on("click", function () {
+        onBtnAddUserClick();
+      })
+      $("#btn-create-user").on("click", function () {
+        onBtnCreateUserClick();
+      })
+      $("#btn-update-user").on("click", function () {
+        onBtnUpdateUserClick();
+      })
+      $("#btn-confirm-delete-user").on("click", function () {
+        onBtnConfirmDeleteUserClick();
+      });
+      /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+      function onPageLoading() {
+        getApiToTable();
+        
+      }
+      function getApiToTable() {
+        $.ajax({
+          url: "https://624abe0dfd7e30c51c110ac6.mockapi.io/api/v1/" + "/courses",
+          type: "GET",
+          dataType: "json",
+          success: function (res) {
+            loadDataToTable(res);
+          },
+          error: function (ajaxContext) {
+            alert(ajaxContext.responseText);
+          }
+        })
+      }
+      function loadDataToTable(paramUser) {
+        var vTable = $("#table-user").DataTable();
+        vTable.clear();
+        vTable.rows.add(paramUser);
+        vTable.draw();
+      }
+      function onBtnEditClick(paramUser) {
+        var vRowClick = $(paramUser).parents("tr");
+        var vTable = $("#table-user").DataTable();
+        var vDataRow = vTable.row(vRowClick).data();
+        console.log("Button Edit Click!");
+  
+        gIdUsers = vDataRow.id;
+        $("#update-user-modal").modal("show");
+        $("#input-id-update").val(vDataRow.id);
+        $("#input-course-code-update").val(vDataRow.courseCode);
+        $("#input-course-name-update").val(vDataRow.courseName);
+        $("#input-price-update").val(vDataRow.price);
+        $("#input-discount-price-update").val(vDataRow.discountPrice);
+        $("#input-duration-update").val(vDataRow.duration);
+        $("#select-level-update").val(vDataRow.level);
+        $("#input-cover-image-update").val(vDataRow.coverImage);
+        $("#input-teacher-name-update").val(vDataRow.teacherName);
+        $("#input-teacher-photo-update").val(vDataRow.teacherPhoto);
+        $("#select-update-modal-popular").val(vDataRow.isPopular);
+        $("#select-update-modal-trending").val(vDataRow.isTrending);
+        if (vDataRow.isPopular == true) {
+          $("#select-update-modal-popular").val("true");
+        } else {
+          $("#select-update-modal-popular").val("false");
+        }
+        if (vDataRow.isTrending == true) {
+          $("#select-update-modal-trending").val("true");
+        } else {
+          $("#select-update-modal-trending").val("false");
+        }
+      }
+      function onBtnDeleteClick(paramUser) {
+        var vRowClick = $(paramUser).parents("tr");
+        var vTable = $("#table-user").DataTable();
+        var vDataRow = vTable.row(vRowClick).data();
+        console.log("Button Delete Click!");
+        console.log("User id: " + vDataRow.id);
+        gIdUsers = vDataRow.id;
+        $("#delete-confirm-modal").modal("show");
+
+      }
+      function onBtnAddUserClick() {
+        $("#insert-user-modal").modal("show");
+      }
+      function onBtnCreateUserClick() {
+        var vUserObj = {
+          courseCode: "",
+          courseName: "",
+          price: "",
+          discountPrice: "",
+          duration: "",
+          level: "",
+          coverImage: "",
+          teacherName: "",
+          teacherPhoto: "",
+          isPopular: false,
+          isTrending: false,
+        }
+        getUserDataCreate(vUserObj);
+        var vIsUserValidate = validateInsertData(vUserObj);
+        if (vIsUserValidate) {
+          postUserApi(vUserObj);
+          location.reload();
+          resertCreateUserForm();
+          $("#insert-user-modal").modal("hide");
+        }
+      }
+      function onBtnUpdateUserClick() {
+        var vUserObj = {
+          courseCode: "",
+          courseName: "",
+          price: "",
+          discountPrice: "",
+          duration: "",
+          level: "",
+          coverImage: "",
+          teacherName: "",
+          teacherPhoto: "",
+          isPopular: false,
+          isTrending: false,
+        }
+        console.log(gIdUsers)
+        getUserDataUpdate(vUserObj);
+        var vIsUserValidate = validateInsertData(vUserObj);
+        if (vIsUserValidate) {
+          putUserApi(vUserObj);
+          location.reload();
+          resertUpdateUserForm();
+          $("#update-user-modal").modal("hide");
+        }
+      }
+      function onBtnConfirmDeleteUserClick() {
+        deleteUserApi(gIdUsers);
+        location.reload();
+        $("#delete-confirm-modal").modal("hide");
+      }
+      /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    
+    function getUserDataCreate(paramUserObj) {
+      paramUserObj.courseCode = $("#input-course-code").val().trim();
+      paramUserObj.courseName = $("#input-course-name").val().trim();
+      paramUserObj.price = $("#input-price").val().trim();
+      paramUserObj.discountPrice = $("#input-discount-price").val();
+      paramUserObj.duration = $("#input-duration").val().trim();
+      paramUserObj.level = $("#select-level").val()
+      paramUserObj.coverImage = $("#input-cover-image").val().trim();
+      paramUserObj.teacherName = $("#input-teacher-name").val().trim();
+      paramUserObj.teacherPhoto = $("#input-teacher-photo").val().trim();
+
+      var vIsPopular = $("input[name='select-popular']");
+      for (var bI = 0; bI < vIsPopular.length; bI++) {
+        if (vIsPopular[bI].checked == true) {
+          paramUserObj.isPopular = vIsPopular[bI].value;
+        }
+      }
+      var vIsTrending = $("input[name='select-trending']");
+      for (var bI = 0; bI < vIsTrending.length; bI++) {
+        if (vIsTrending[bI].checked == true) {
+          paramUserObj.isTrending = vIsTrending[bI].value;
+        }
+      }
+    }
+    function getUserDataUpdate(paramUserObj) {
+      paramUserObj.courseCode = $("#input-course-code-update").val().trim();
+      paramUserObj.courseName = $("#input-course-name-update").val().trim();
+      paramUserObj.price = $("#input-price-update").val().trim();
+      paramUserObj.discountPrice = $("#input-discount-price-update").val();
+      paramUserObj.duration = $("#input-duration-update").val().trim();
+      paramUserObj.level = $("#select-level-update").val()
+      paramUserObj.coverImage = $("#input-cover-image-update").val().trim();
+      paramUserObj.teacherName = $("#input-teacher-name-update").val().trim();
+      paramUserObj.teacherPhoto = $("#input-teacher-photo-update").val().trim();
+      paramUserObj.isPopular = $("#select-update-modal-popular").val()
+      paramUserObj.isTrending = $("#select-update-modal-trending").val()
+
+    }
+    function validateInsertData(paramUserObj) {
+      if (paramUserObj.courseCode == "") {
+        alert("Cần nhập courseCode");
+        return false;
+      }
+      if (paramUserObj.courseCode.length < 10) {
+        alert("courseCode chứa ít nhất 10 ký tự");
+        return false;
+      }
+      if (paramUserObj.courseName == "") {
+        alert("Cần nhập courseName");
+        return false;
+      }
+      if (paramUserObj.courseName.length < 20) {
+        alert("courseName chứa ít nhất 20 ký tự");
+        return false;
+      }
+      if (paramUserObj.price == "") {
+        alert("Cần nhập price");
+        return false;
+      }
+      if (isNaN(paramUserObj.price)) {
+        alert("price Là số nguyên > 0");
+        return false;
+      }
+      if (paramUserObj.price < 1) {
+        alert("price Là số nguyên > 0");
+        return false;
+      }
+      var vprice = Number(paramUserObj.price)
+      if (Number.isInteger(vprice) == false) {
+        alert("price Là số nguyên > 0");
+        return false;
+      }
+
+      if (paramUserObj.discountPrice == "") {
+        alert("Cần nhập discountPrice");
+        return false;
+      }
+      if (isNaN(paramUserObj.discountPrice)) {
+        alert("discountPrice Là số nguyên >= 0");
+        return false;
+      }
+      if (paramUserObj.discountPrice < 0) {
+        alert("discountPrice Là số nguyên >= 0");
+        return false;
+      }
+      var vdiscountPrice = Number(paramUserObj.discountPrice)
+      if (Number.isInteger(vdiscountPrice) == false) {
+        alert("discountPrice Là số nguyên >= 01");
+        return false;
+      }
+      if (paramUserObj.duration == "") {
+        alert("Cần nhập duration");
+        return false;
+      }
+      if (paramUserObj.level == "NOT") {
+        alert("Cần chọn level");
+        return false;
+      }
+      if (paramUserObj.coverImage == "") {
+        alert("Cần nhập coverImage");
+        return false;
+      }
+      if (paramUserObj.teacherName == "") {
+        alert("Cần nhập teacherName");
+        return false;
+      }
+      if (paramUserObj.teacherPhoto == "") {
+        alert("Cần nhập teacherPhoto");
+        return false;
+      }
+      return true;
+    }
+    function postUserApi(paramUserObj) {
+      $.ajax({
+        async: false,
+        url: "https://624abe0dfd7e30c51c110ac6.mockapi.io/api/v1/" + "/courses",
+        type: "POST",
+        data: JSON.stringify(paramUserObj),
+        contentType: "application/json",
+        success: function (res) {
+          console.log(res);
+          alert("Thêm user thành công!");
+        },
+        error: function (error) {
+          alert(error.responseText);
+        }
+      })
+    }
+    function putUserApi(paramUserObj, paramId) {
+      $.ajax({
+        async: false,
+        url: "https://624abe0dfd7e30c51c110ac6.mockapi.io/api/v1/" + "/courses/" + gIdUsers,
+        type: "PUT",
+        data: JSON.stringify(paramUserObj),
+        contentType: "application/json",
+        success: function (res) {
+          console.log(res);
+          alert("Thêm user thành công!");
+        },
+        error: function (error) {
+          alert(error.responseText);
+        }
+
+      })
+    }
+    function deleteUserApi(paramId) {
+      $.ajax({
+        async: false,
+        url: "https://624abe0dfd7e30c51c110ac6.mockapi.io/api/v1/" + "/courses/" + paramId,
+        type: "DELETE",
+        success: function (res) {
+          console.log(res);
+          alert("Đã xóa user thành công!");
+        },
+        error: function (error) {
+          alert(error.responseText);
+        }
+
+      })
+    }
+    function resertCreateUserForm() {
+      $("#input-id-update").val("");
+      $("#input-course-code").val("");
+      $("#input-course-name").val("");
+      $("#input-price").val("");
+      $("#input-discount-price").val("");
+      $("#input-duration").val("");
+      $("#select-level").val("NOT");
+      $("#input-cover-image").val("");
+      $("#input-teacher-name").val("");
+      $("#input-teacher-photo").val("");
+
+    }
+    function resertUpdateUserForm() {
+      $("#input-id-update").val("");
+      $("#input-course-code-update").val("");
+      $("#input-course-name-update").val("");
+      $("#input-price-update").val("");
+      $("#input-discount-price-update").val("");
+      $("#input-duration-update").val("");
+      $("#select-level-update").val("NOT");
+      $("#input-cover-image-update").val("");
+      $("#input-teacher-name-update").val("");
+      $("#input-teacher-photo-update").val("");
+
+    }
+  </script>
+</body>
+
+</html>

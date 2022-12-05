@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+<body onload="onPageLoading()">
+    <div class="container">
+        <div class="text-center">
+            <h2>Danh sách người dùng đăng ký</h2>
+        </div>
+
+        <table class="table table-bordered table-striped table-hover" id="table-users">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Country</th>
+
+                    <th>Subject</th>
+                    <th>Customer Type</th>
+                    <th>Register Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</body>
+<script>
+    'use strict';
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    
+     
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+    // gán sự kiện cho nút sửa
+    $('#table-users').on('click', '.btn-edit', onBtnEditClick);
+    // gán sự kiện cho nút xóa
+    $('#table-users').on('click', '.btn-delete', onBtnDeleteClick);
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    function onPageLoading() {
+        calAPIGetDataUser();
+    }
+    function calAPIGetDataUser() {
+        'use strict';
+        $.ajax({
+            url: "http://203.171.20.210:8080/crud-api/users/",
+            type: "GET",
+            dataType: "json",
+            success: function(res) {
+                console.log(res);
+                loadDataUserToTable(res);
+            },
+            error: function(ajaxContext) {
+                alert(ajaxContext.responseText);
+            },
+        });
+    }
+    function onBtnEditClick() {
+        'use strict';
+        var vId =  $(this).data('id');
+        console.log('Bấm nút sửa, id của user tương ứng là: ' + vId);
+        const vDETAIL_FORM_URL = 'updateUser.html';
+        var vUrlToOpenPage = vDETAIL_FORM_URL + '?' + 'id=' + vId;
+        window.location.href = vUrlToOpenPage
+    }
+    function onBtnDeleteClick() {
+        'use strict';
+        console.log('Bấm nút xóa, id của user tương ứng là: ' + $(this).data('id'));
+    }
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    function loadDataUserToTable(paramDataUser) {
+        for(var bI = 0; bI < paramDataUser.length; bI ++) {
+            // tạo hàng
+            var bNewRow = $('<tr>').appendTo('#table-users tbody');
+            // tạo cột
+            $('<td>').html(paramDataUser[bI].id).appendTo(bNewRow);
+            $('<td>').html(paramDataUser[bI].firstname).appendTo(bNewRow);
+            $('<td>').html(paramDataUser[bI].lastname).appendTo(bNewRow);
+            $('<td>').html(paramDataUser[bI].country).appendTo(bNewRow);    
+
+            $('<td>').html(paramDataUser[bI].subject).appendTo(bNewRow);
+            $('<td>').html(paramDataUser[bI].customerType).appendTo(bNewRow); 
+            $('<td>').html(paramDataUser[bI].registerStatus).appendTo(bNewRow);
+            
+                // tạo cột chứa nút chi tieits và xóa
+            var bColAction = $('<td>').appendTo(bNewRow);
+            // tạo nút sửa
+            var bButtonEdit = $('<button>')
+                .attr('class', 'btn btn-primary col-6 btn-edit')
+                .html('Sửa');
+            bButtonEdit.attr('data-id', paramDataUser[bI].id);
+            bButtonEdit.attr('data-firstname', paramDataUser[bI].firstname);
+            bButtonEdit.attr('data-lastname', paramDataUser[bI].lastname);
+            bButtonEdit.attr('data-country', paramDataUser[bI].country);
+            
+            bButtonEdit.attr('data-subject', paramDataUser[bI].subject);
+            bButtonEdit.attr('data-customerType', paramDataUser[bI].customerType);
+            bButtonEdit.attr('data-registerStatus', paramDataUser[bI].registerStatus);
+            // thêm vào cột action
+            bButtonEdit.appendTo(bColAction);
+            // tạo nút xóa
+            var bButtonDelete = $('<button>')
+                .attr('class', 'btn btn-danger col-6 btn-delete')
+                .html('Xóa');
+            bButtonDelete.attr('data-id', paramDataUser[bI].id);
+            bButtonDelete.attr('data-firstname', paramDataUser[bI].firstname);
+            bButtonDelete.attr('data-lastname', paramDataUser[bI].lastname);
+            bButtonDelete.attr('data-country', paramDataUser[bI].country);
+            
+            bButtonDelete.attr('data-subject', paramDataUser[bI].subject);
+            bButtonDelete.attr('data-customerType', paramDataUser[bI].customerType);
+            bButtonDelete.attr('data-registerStatus', paramDataUser[bI].registerStatus);
+            // thêm vào cột action
+            bButtonDelete.appendTo(bColAction); 
+            
+        }
+    }
+</script>
+</html>

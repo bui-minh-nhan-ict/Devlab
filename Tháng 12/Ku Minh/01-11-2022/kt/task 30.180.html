@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .div-background-picture {
+            background-image: url("anh1.jpg");
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.7;
+        }
+    </style>
+    <script>
+        "use strict";
+        /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+        /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+        $(document).ready(function() {
+            $("#frm-login").on("submit", function(event) {
+                event.preventDefault();
+                onFrmLoginSubmit();
+            })
+        });
+        
+        /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+        //hàm xử lý sự kiên submit form
+        function onFrmLoginSubmit() {
+            //B1: thu thập dữ liệu
+            var vLoginObj = {
+                username:"",
+                password:"",
+                isRemember:false
+            }
+
+            getLoginData(vLoginObj);
+
+            //B2: kiểm tra dữ liệu
+            var vValid = validateLoginData(vLoginObj);
+
+            if (vValid) {
+                //B3: hiển thị
+                login(vLoginObj);
+            }
+            
+        }
+        /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+
+        //hàm thu thập dữ liệu trên form
+        function getLoginData(paramLoginObj) {
+            paramLoginObj.username = $("#inp-login-username").val().trim();
+            paramLoginObj.password = $("#pwd-login-password").val().trim();
+            paramLoginObj.isRemember = $("#ckb-remember-username").is(":checked");
+        }
+
+        //hàm kiểm tra dữ liệu login
+        function validateLoginData(paramLoginObj) {
+            if (paramLoginObj.username == "") {
+                alert("Phải nhập vào username");
+                $("#inp-login-username").focus();
+                return false;
+            }
+
+            if (paramLoginObj.password == "") {
+                alert("Phải nhập vào password");
+                $("#pwd-login-password").focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        //hàm thực hiện khi click nút login
+        function login(paramLoginObj) {
+            console.log(paramLoginObj);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid div-background-picture">
+        <form id="frm-login">
+            <div class="row d-flex align-items-center min-vh-100">
+                <div class="col-sm-8 text-center mx-auto my-0 jumbotron">
+                    <div class="mb-5">
+                        <h3 class="text-center">Login to your account</h3>
+                    </div>
+            
+                    <div>
+                        <div class="form-group">
+                            <input type="text" name="username" placeholder="Username" id="inp-login-username"
+                                class="form-control" value="" autocomplete="username" required>
+                        </div>
+                        <div class="form-group">
+                            <input name="password" type="password" id="pwd-login-password" placeholder="Password" 
+                             class="form-control" value="" autocomplete="inp-current-password" required>
+                        </div>
+                       
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-log btn-block btn-info">Đăng nhập</button>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+   
+</body>
+
+</html>

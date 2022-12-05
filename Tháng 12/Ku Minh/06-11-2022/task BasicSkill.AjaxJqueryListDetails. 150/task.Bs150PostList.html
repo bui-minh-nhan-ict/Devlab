@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Task 150 post lists </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row my-4">
+      <h3 class = "col-sm-12 text-info text-center " >Danh sách bình luận của 1 user</h3>
+    </div>
+    <div class = "row form-group">
+        <div class = "col-sm-2"> 
+          <label class = "form-control border border-0 text-dark" for="inp-user-id"> Điền user id: </label>
+        </div>
+        <div class = "col-sm-10"> 
+          <input type="text" class = "form-control" id = "inp-user-id" placeholder="...gợi ý id đúng: 3, 4, 5..." >
+        </div> 
+    </div>
+    <div class = "row">
+      <div class="col-sm-4">
+        <button class = "btn btn-success form-control" id = "btn-get-user-posts"> Lấy danh sách bình luận của user từ sever </button>
+      </div>
+    </div>  
+    <table class="table table-bordered table-striped table-hover" id = "tbl-user-comment">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Post ID</th>
+          <th>Email</th>
+          <th>Name(nhan đề)</th>
+          <th>Body(nội dung)</th> 
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+      </tbody>
+    </table>
+  </div>
+
+<script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo hằng số, tham số TOÀN CỤC */
+
+    const gUSER_COMMENT_TABLE_ID = "tbl-user-comment";
+    const gCOL_POSTID = 0;
+    const gCOL_POSTTITLE = 1;
+    const gCOL_POSTBODY = 2;
+    const gCOL_ACTION = 3
+
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+    
+    $(document).ready(function() {
+      //gán event handler cho nút 
+      $("#btn-get-user-posts").click(onBtnGetUserCommentClick);
+    });
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+
+    // hàm xử lý khi ấn nút lấy danh sách bình luận
+    function onBtnGetUserCommentClick () {
+      //1.đọc dữ liệu
+      var vUserIdObject = {  userId : "" };
+      readDataUserIdObject(vUserIdObject); 
+      //2.kiểm tra
+      var vKetQuaKiemTra = validateUserIdObject(vUserIdObject);
+      if (!vKetQuaKiemTra) {
+        console.assert("Dữ liệu ko đạt chuẩn");
+        return; //không làm nữa, thoát ra
+      }
+      //3. gọi server 
+      getAllCommentsOfUser(vUserIdObject);
+    }
+    
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    //hàm reset (xóa) dữ liệu của bảng user
+   
+  // read data
+  function readDataUserIdObject(paramUserIdObject) {
+    paramUserIdObject.userId = $("#inp-user-id").val().trim();
+  }
+  // validate data
+  function validateUserIdObject(paramUserIdObject) {
+    if (paramUserIdObject.userId === "") {
+      alert ("Dữ liệu cần nhập vào !");
+      return false;
+    } 
+    if ( isNaN( paramUserIdObject.userId)) {
+      alert ("Dữ liệu là số nguyên !");
+      return false;
+    } 
+    if (paramUserIdObject.userId < 1 ) {
+      alert ("Id không tồn tại!");
+      return false;
+    }  
+    return true;
+  }
+
+  function getAllCommentsOfUser(paramUserIdObject) {
+  const vBASE_URL = "https://jsonplaceholder.typicode.com/users/" + paramUserIdObject.userId +"/comments";
+    $.ajax({
+      url: vBASE_URL,
+      type: 'GET',
+      dataType: 'json', // added data type
+      success: function (responseObject) {
+        // hàm xử lý load dữ liệu vào table
+        loadTableUserCommentData(responseObject)  // responseObject là array các posts
+      },
+      error: function (ajaxContext) {
+        alert(ajaxContext.responseText)
+      }
+    });
+  }
+  
+  // hàm xử lý load dữ liệu vào table
+  function loadTableUserCommentData(paramUserCommentsArray) {
+    //xóa dữ liệu của bảng
+    resetTableData();
+    //đổ dữ liệu
+    for (var bViTriHienTai = 0; bViTriHienTai < paramUserCommentsArray.length; bViTriHienTai++) {
+      //tạo row
+      var bNewRow = $("<tr>").appendTo($("#" + gUSER_COMMENT_TABLE_ID + "  tbody")); 
+      //tao cell  
+    $("<td>") 
+    .html(paramUserCommentsArray[bViTriHienTai].id)
+    .appendTo(bNewRow); 
+
+    $("<td>")
+      .html(paramUserCommentsArray[bViTriHienTai].postId)
+      .appendTo(bNewRow);
+      
+    $("<td>")
+      .html(paramUserCommentsArray[bViTriHienTai].email)
+      .appendTo(bNewRow);
+
+    $("<td>")
+    .html(paramUserCommentsArray[bViTriHienTai].name)
+    .appendTo(bNewRow);
+    
+    $("<td>")
+    .html(paramUserCommentsArray[bViTriHienTai].body)
+    .appendTo(bNewRow);
+
+    // xử lý cột action (có nút)
+    var bColAction = $("<td>").addClass("btn-group").appendTo(bNewRow);//cột action
+    /* nút chi tiết */
+    var bDetailButton = 
+    $("<button>")
+      .addClass('btn btn-primary')
+      .html("Chi tiết") 
+      .appendTo(bColAction);
+
+    //thêm một số dữ liệu vào nút này 
+    bDetailButton.attr("data-id", paramUserCommentsArray[bViTriHienTai].id)
+                  .attr("data-postid", paramUserCommentsArray[bViTriHienTai].postId)
+    // thêm sự kiện cho nút này
+    bDetailButton.click(onDetailButtonClick);
+    }
+  }
+  //hàm xử lý sự kiện click button detail
+  function onDetailButtonClick(paramSuKienClick) {
+    var vButtonBiAn = paramSuKienClick.currentTarget;
+    const vFORM_TO_OPEN = "task.Bs150PostDetail.html"  //đây là form sẽ mở
+    var vUrlToOpenPage = vFORM_TO_OPEN + "?" + "id=" + $(vButtonBiAn).data("id");       
+    window.location.href = vUrlToOpenPage;
+  }  
+  // hàm xử lý xóa table khi gọi id mới
+  function resetTableData() {
+    $("#" + gUSER_COMMENT_TABLE_ID + "  tbody").html("");  //truy câp bảng, rồi truy cập tbody, và xóa hết
+  }
+</script>
+</body>
+</html>
+

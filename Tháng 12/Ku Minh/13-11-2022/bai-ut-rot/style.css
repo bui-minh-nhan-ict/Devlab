@@ -1,0 +1,36 @@
+.search__form {
+    position: relative;
+    display: flex;
+}
+.search__icon {
+    position: absolute;
+    padding: 5px;
+}
+.card-footer {
+    display: flex;
+    position: relative;
+    
+}
+.card-footer span {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    background: aqua;
+    margin-right: 12px;
+    overflow: hidden;
+   
+}
+.card-footer p {
+    padding: 5px 8px;
+}
+.card-footer span img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.card-footer__icon i{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+   
+}

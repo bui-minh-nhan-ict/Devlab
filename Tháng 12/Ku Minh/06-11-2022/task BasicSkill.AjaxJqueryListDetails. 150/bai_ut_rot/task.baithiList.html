@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Task 150 post lists </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row text-center my-4">
+      <h3 class = "text-info" >DANH SÁCH  bình luận (comment) của 1 users</h3>
+    </div>
+    <div class = "row form-group">
+        <div class = "col-sm-4"> 
+          <label class = "form-control border border-0 text-dark"> Điền user id: </label>
+        </div>
+        <div class = "col-sm-8"> 
+          <input type="text" class = "form-control" id = "inp-user-id" placeholder="...gợi ý id đúng: 3, 4, 5..." >
+        </div> 
+    </div>
+    <div class = "row">
+      <button class = "btn btn-secondary form-control" id = "btn-get-user-id"> Lấy danh sách bình luận của user từ server </button>
+    </div>  
+    <table class="table table-bordered table-striped table-hover" id = "tbl-user-id">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Post ID</th>
+          <th>Email</th>
+          <th>Name</th>
+          <th>Body (nội dung)</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>11</td>
+          <td>Eliseo@gardner.biz</td>
+          <td>id labore ex et quam laborum</td>
+          <td>laudantium enim quasi est quidem magnam voluptate ipsam eos</td>
+          <td>Action</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>14</td>
+          <td>Jayne_Kuhic@sydney.com</td>
+          <td>quo vero reiciendis velit similique earum</td> 
+          <td>est natus enim nihil est dolore omnis voluptatem numquam</td>
+          <td>Action</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<script>
+    "use strict";
+
+    /*** REGION 1 - Global variables - Vùng khai báo hằng số, tham số TOÀN CỤC */
+    
+    const gUSER_POST_TABLE_ID = "tbl-user-id";
+    const gCOL_POSTID = 0;
+    const gCOL_POSTTITLE = 1;
+    const gCOL_POSTBODY = 2;
+    const gCOL_ACTION = 3
+    
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+    $(document).ready(function() {
+      //gán event handler cho nút 
+      $("#btn-get-user-id").click(onBtnGetUserIdClick);
+    });
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    // hàm xử lý sự kiện lấy UserId của người dùng (4 bước xử lý)
+    function onBtnGetUserIdClick () {
+        //1.đọc dữ liệu
+        var vUserIdObject = {  userId : "" };
+        readDataUserIdObject(vUserIdObject); 
+        //2.kiểm tra
+        var vKetQuaKiemTra = validateUserIdObject(vUserIdObject);
+        if (!vKetQuaKiemTra) {
+          console.assert("Dữ liệu ko đạt chuẩn");
+          return; //không làm nữa, thoát ra
+        }
+        //3. gọi server 
+        //base url
+        const vURL_GET_ID = "https://jsonplaceholder.typicode.com/users/" + vUserIdObject.userId +"/comments";
+        $.ajax({
+          url: vURL_GET_ID,
+          type: 'GET',
+          dataType: 'json', // added data type
+          success: function (responseObject) {
+            console.log(JSON.stringify(responseObject));  //response text
+            //4 xử lý hiện thị
+            
+            loadTableUserIdData(responseObject)  // responseObject là array các ID
+          },
+          error: function (ajaxContext) {
+            alert(ajaxContext.responseTe) 
+          }
+        });
+    }
+    //hàm xử lý sự kiện click button detail
+    function onDetailButtonClick(paramSuKienClick) {
+      console.log("%cDetail button click. Sự kiện Click là: ....","color:orange");
+      var vButtonBiAn = paramSuKienClick.currentTarget;
+      const vFORM_TO_OPEN = "task.baithiDetail.html"  //đây là form sẽ mở
+      var vUrlToOpenPage = vFORM_TO_OPEN + "?"
+                                         + "id=" + $(vButtonBiAn).data("id");
+      window.location.href = vUrlToOpenPage;
+    }  
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    //hàm reset (xóa) dữ liệu của bảng user
+    function resetTableData() {
+      $("#" + gUSER_POST_TABLE_ID + "  tbody").html("");  //truy câp bảng, rồi truy cập tbody, và xóa hết
+    }
+  //hàm load dữ liệu lên table
+  function loadTableUserIdData(paramUserIdArray) {
+       //xóa dữ liệu của bảng
+       resetTableData();
+       //đổ dữ liệu
+       for (var bViTriHienTai = 0; bViTriHienTai < paramUserIdArray.length; bViTriHienTai++) {
+         //tạo row
+         var bNewRow = $("<tr>").appendTo($("#" + gUSER_POST_TABLE_ID + "  tbody")); 
+         //tao cell  
+         $("<td>")  //cell user id 
+          .html(paramUserIdArray[bViTriHienTai].id)
+          .appendTo(bNewRow);  //append vào hàng mới (nối vào hàng mới)
+
+        $("<td>")
+          .html(paramUserIdArray[bViTriHienTai].postId)
+          .appendTo(bNewRow);
+        
+        $("<td>")
+          .html(paramUserIdArray[bViTriHienTai].email)
+          .appendTo(bNewRow);
+
+        $("<td>")
+          .html(paramUserIdArray[bViTriHienTai].name)
+          .appendTo(bNewRow);
+        
+        $("<td>")
+          .html(paramUserIdArray[bViTriHienTai].body)
+          .appendTo(bNewRow);  
+        // xử lý cột action (có nút)
+        var bColAction = $("<td>").addClass("btn-group").appendTo(bNewRow);//cột action
+        /* nút chi tiết */
+        var bDetailButton = 
+        $("<button>")
+          .addClass('btn btn-primary')
+          .html("Chi tiết") 
+          .appendTo(bColAction);
+
+        //thêm một số dữ liệu vào nút này 
+        bDetailButton.attr("data-id", paramUserIdArray[bViTriHienTai].id)
+                      .attr("data-postid", paramUserIdArray[bViTriHienTai].postId)
+                      .attr("data-email", paramUserIdArray[bViTriHienTai].email)
+                      .attr("data-name", paramUserIdArray[bViTriHienTai].name)
+                      .attr("data-body", paramUserIdArray[bViTriHienTai].body); 
+        // thêm sự kiện cho nút này
+        bDetailButton.click(onDetailButtonClick);
+      }
+  }
+  // read data
+  function readDataUserIdObject(paramUserIdObject) {
+    paramUserIdObject.userId = $("#inp-user-id").val().trim();
+  }
+  // validate data
+  function validateUserIdObject(paramUserIdObject) {
+    if (paramUserIdObject.userId === "") {
+      alert ("Dữ liệu cần nhập vào !");
+      return false;
+    } 
+    if ( isNaN( paramUserIdObject.userId)) {
+      alert ("Dữ liệu là số nguyên !");
+      return false;
+    } 
+    if (paramUserIdObject.userId < 1 ) {
+      alert ("Id không tồn tại!");
+      return false;
+    }  
+    return true;
+  }
+</script>
+</body>
+</html>
+

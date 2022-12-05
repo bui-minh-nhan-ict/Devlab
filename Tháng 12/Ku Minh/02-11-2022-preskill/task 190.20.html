@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Task 390.20 Jquery - Class Selector button </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body onload = "onPageLoad()">
+    <h1> Jquery: button data and click handlers</h1>
+    <div class = "form-group">
+      <button class  = "btn btn-primary  user-data-class"> Dữ liệu User 1</button>
+      <button class  = "btn btn-secondary user-data-class"> Dữ liệu User 2</button>
+      <button class  = "btn btn-success user-data-class" > Dữ liệu User 3</button>
+    </div>  
+    <div class = "form-group">
+      <button class  = "btn btn-secondary car-data-class" > Dữ liệu Ô tô 1</button>
+      <button class  = "btn btn-success car-data-class"> Dữ liệu Ô tô 2</button>
+      <button class  = "btn btn-secondary car-data-class"> Dữ liệu Ô tô 3</button>
+    </div>
+</body>
+  ​
+  <script>
+    "use strict";
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    // hàm xử lý sự kiện tải trang
+    function onPageLoad() {
+        // xử lý nút động: User Data
+        // 1) Dữ liệu đi kèm nút
+        // 2) Hàm xử lý click 
+
+        //user data button 1. gán dữ liệu cho nút userdata
+        addDataToUserButton();
+        //user data button 2. gán hàm xử lý sự kiện cho nút user data
+        addEventClickToUserDataButton();
+
+        addDataToCarButton();
+        addEventClickToCarButton();
+    }
+    // hàm xử lý sự kiện nút UserData click
+    function onBtnUserDataClick(paramUserDataButton) {
+      console.log("Nút UserData được ấn ....!");
+      var vUserId = $(paramUserDataButton).data("userid");
+      var vUserName = $(paramUserDataButton).data("username");
+    
+      console.log("Userid: " + vUserId);
+      console.log("UserName: " + vUserName);
+    }
+    function onBtnCarDataClick(paramCarDataButton) {
+    console.log("Nút CarData được ấn ....!");
+      var vCarYear = $(paramCarDataButton).data("year");
+      var vCarName = $(paramCarDataButton).data("carname");
+    
+      console.log("Năm sản xuất: " + vCarYear);
+      console.log("Loại xe: " + vCarName);
+    }
+
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    // gán dữ liệu cho nút User Data
+    function addDataToUserButton() {
+      $(".user-data-class").first()   //.user-data-class là class selector 
+      .data("userid", "NgaNT")  //gán data vào nút
+      .data("username",  "Nguyễn Thị Nga");
+
+      $(".user-data-class").first().next()  //chọn nút tiếp Jquery Object
+      .data("userid", "PhuongHA")  //gán data vào nút
+      .data("username",  "Hoàng Anh Phương");
+      
+      $(".user-data-class").first().next().next()  //chọn nút tiếp vào Jquery Object
+      .data("userid", "NamT")  //gán data vào nút
+      .data("username",  "Trần Nam");
+    }
+    
+    // hàm gán sự kiện cho các nút detail
+    function addEventClickToUserDataButton() {
+      $(".user-data-class")          //chọn tất cả button với class này vào JQuery Object
+      .on("click", function() {   // gán hàm xử lý click 
+        onBtnUserDataClick(this);   //tham số this = nút này (DOM button)
+      });
+    }
+
+    function addDataToCarButton() {
+        $('.car-data-class').first()
+        .data('year', '2016')
+        .data('carname', 'mazda');
+
+        $('.car-data-class').first().next()
+        .data('year', '2017')
+        .data('carname', 'honda');
+
+        $('.car-data-class').first().next().next()
+        .data('year', '2018')
+        .data('carname', 'toyota');
+    }
+
+    function addEventClickToCarButton() {
+        $(".car-data-class").on('click', function() {
+            onBtnCarDataClick(this);
+        })     
+    }
+  </script>
+
+
+</html>
+​
