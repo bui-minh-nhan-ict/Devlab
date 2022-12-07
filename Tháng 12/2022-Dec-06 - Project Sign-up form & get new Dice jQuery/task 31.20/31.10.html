@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
 
-    <title>Task 30.35</title>
+    <title>Task 30.</title>
 </head>
 <style>
     .div-background-picture {
-        background-image: url("anh_nen.jpg");
+        background-image: url("signup-bg.jpg");
         height: 100%;
         background-size: cover;
     }
@@ -24,25 +24,25 @@
             <div class="jumbotron signup-form col-sm-6 mx-auto " style="top: 120px">
                 <div class="form-group">
                     <!-- col 1.1.1.1 -->
-                    <h2 class="text-center">Tạo tài khoản</h2>
+                    <h2 class="text-center">CREATE ACCOUNT</h2>
                     <hr>
                 </div>
                
                 <div class="form-group">
                     <!-- col 1.1.1.4 -->
                     <input type="text" class="form-control" id="input-full-name" placeholder="Your name"/>
-                    <p id="p-input-fullname" class="invalid-feedback"> Bạn cần điều họ và tên.</p>
+                    <p id="p-input-fullname" class="invalid-feedback"> You need input username.</p>
                 </div>
                 
                 <div class="form-group">
                     <!-- col 1.1.1.5 -->
                     <input type="email" class="form-control" id="input-email" placeholder="Email"/>
-                    <p id="p-input-email" class="invalid-feedback"> Bạn chưa nhập email hoặc email không hợp lệ.</p>
+                    <p id="p-input-email" class="invalid-feedback"> Email is missing or invalid.</p>
                 </div>
                 <div class="form-group">
                     <!-- col 1.1.1.6 -->
                     <input type="password" class="form-control" id="input-password" placeholder="Password"/>
-                    <p id="p-input-fullname" class="invalid-feedback"> Bạn chưa nhập mật khẩu.</p>
+                    <p id="p-input-fullname" class="invalid-feedback"> Missing password or password doesn't match.</p>
                 </div>
                 <div class="form-group">
                     <!-- col 1.1.1.7 -->
@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group">
                     <!-- col 1.1.1.9 -->
-                    <button id="btn-sign-up" class="btn btn-success btn-lg btn-block">Đăng ký</button>
+                    <button id="btn-sign-up" class="btn btn-success btn-lg btn-block">SIGN UP</button>
                 </div>
                 <div class="form-group text-center" style="margin-top: 100px">
                     
@@ -170,7 +170,7 @@
         } 
         else if(!vRegexStr.test(paramEmail)) {
           
-            console.assert(false, 'Email đã nhập không hợp lệ');
+            console.assert(false, 'Your email is invalid');
             return false;
         }
         return true;
@@ -179,7 +179,7 @@
     function isPassword(paramPassword) {
         var vRegexPassword = /"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/
         if(!vRegexPassword.test(paramPassword)){
-            console.log('Password không chính xác');
+            console.log('Incorrect Password');
         }
     }
 </script>
