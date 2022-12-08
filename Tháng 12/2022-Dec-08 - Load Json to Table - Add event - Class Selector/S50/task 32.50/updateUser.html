@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+<body onload="onPageLoading()">
+    <div class="container jumbotron">
+        <div class="text-center mb-4">
+            <!-- row 1 -->
+            <h3>Chi tiết User</h3>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <!-- col 2.1 -->
+                <label for="">Firstname</label>
+            </div>
+            <div class="col-sm-8">
+                <!-- col 2.2 -->
+                <input type="text" class="form-control" placeholder="..." id="input-firstname">
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <!-- col 3.1 -->
+                <label for="">Lastname</label>
+            </div>
+            <div class="col-sm-8">
+                <!-- col 3.2 -->
+                <input type="text" class="form-control" placeholder="..." id="input-lastname">
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <!-- col 4.1 -->
+                <label for="">Subject</label>
+            </div>
+            <div class="col-sm-8">
+                <!-- col 4.2 -->
+                <input type="text" class="form-control" placeholder="..." id="input-subject">
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <!-- col 5.1 -->
+                <label for="">Country</label>
+            </div>
+            <div class="col-sm-8">
+                <!-- col 5.2 -->
+                <select name="" class="form-control" id="select-country">
+                    <option value="VN">Việt Nam</option>
+                    <option value="USA">USA</option>
+                    <option value="AUS">Autralia</option>
+                    <option value="CAN">Canada</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <!-- col 6.1 -->
+                <label for="">Customer type</label>
+            </div>
+            <div class="col-sm-8">
+                <!-- col 6.2 -->
+                <select class="form-control" id="select-customer-type">
+                    <option value="Standard">Standard</option>
+                    <option value="Gold">Gold</option>
+                    <option value="Premium">Premium</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <!-- col 7.1 -->
+                <label for="">Register status</label>
+            </div>
+            <div class="col-sm-8">
+                <!-- col 7.2 -->
+                <select class="form-control" id="select-register-status">
+                    <option value="Accepted">Accepted</option>
+                    <option value="Denied">Denied</option>
+                    <option value="Standard">Standard</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <!-- col 8.1 -->
+                <label for="">Firstname</label>
+            </div>
+            <div class="col-sm-8">
+                <!-- col 8.2 -->
+                <button type="button" class="btn btn-success w-25" id="btn-update-user">
+                    Update user
+                </button>
+                <button type="button" class="btn btn-danger w-25" id="btn-delete-user">
+                    Xóa
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+     /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    
+     
+     /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+ 
+     /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    function onPageLoading() {
+        'use strict';
+        var vUrlString = window.location.href;
+        var vUrl = new URL(vUrlString);
+
+        var vId = vUrl.searchParams.get('id');
+        console.log(vId);
+        callAPIToGetDataUserById(vId);
+    }
+     /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    function callAPIToGetDataUserById(paramUserId) {
+        $.ajax({
+            url: "http://203.171.20.210:8080/crud-api/users/" + paramUserId ,
+            type: 'GET',
+            dataType: 'json',
+            success: function(DataUserObj) {
+                console.log(DataUserObj);
+                // gọi hàm hiển thị thông tin user lên form
+                showDataUserToForm(DataUserObj);
+            },
+            error: function(ajaxContext) {
+                alert(ajaxContext.responseText);
+            },
+        });
+    }
+    // hàm xử lý load dữ liệu lên form
+    function showDataUserToForm(paramDataUser) {
+        'use strict';
+        $('#input-firstname').val(paramDataUser.firstname);
+        $('#input-lastname').val(paramDataUser.lastname);
+        $('#input-subject').val(paramDataUser.subject);
+        $('#select-country').val(paramDataUser.country);
+
+        $('#select-customer-type').val(paramDataUser.customerType);
+        $('#select-register-status').val(paramDataUser.registerStatus);
+    }
+
+</script>
+</html>
