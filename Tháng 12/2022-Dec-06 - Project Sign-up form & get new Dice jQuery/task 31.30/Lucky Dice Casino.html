@@ -128,7 +128,135 @@
     </div>
 </body>
 <script>
+    const gEND_OF_ROW_COL = -1;
+    const gREQUEST_STATUS_OK = 200;
+    const gREQUEST_READY_STATUS_FINISH_AND_OK = 4;
+    const gBASE_URL = "http://203.171.20.210:8080/devcamp-lucky-dice/";
+    const gUTF8_TEXT_APPLICATION_HEADER = "application/json;charset=UTF-8";
+    $(document).ready(function() {
+            $("#btn-dice").on("click", function() {
+                onBtnNemClick();
 
+            })
+        });
+    function onBtnNemClick(){
+        var vUserObj ={
+            username: "",
+            firstname: "",
+            lastname: "",
+        }
+        getData(vUserObj);
+        var vIsCheck = validateData(vUserObj);
+        if(vIsCheck){
+            var vXmlHttpDice = new XMLHttpRequest();
+            callApiServerDice(vXmlHttpDice, vUserObj);
+            vXmlHttpDice.onreadystatechange = function(){
+                if (this.readyState == gREQUEST_READY_STATUS_FINISH_AND_OK && this.status == gREQUEST_STATUS_OK){
+                    processReponse(vXmlHttpDice);
+                }
+            }
+        }
+    }
+    function getData(paramDataUser){
+
+        paramDataUser.username = $("#inp-user-name").val().trim();
+        paramDataUser.firstname = $("#inp-first-name").val().trim();
+        paramDataUser.lastname = $("#inp-last-name").val().trim();
+    }  
+    function validateData(paramDataUser){
+        if(paramDataUser.username == ""){
+            alert("Cần nhập UserName !!!")
+            return false;
+        }
+        if(paramDataUser.firstname == ""){
+            alert("Cần nhập FirstName !!!")
+            return false;
+        }
+        if(paramDataUser.lastname == ""){
+            alert("Cần nhập LastName !!!")
+            return false;
+        }
+        return true;
+    }
+    function callApiServerDice(paramXmlHttpDice, paramDataUser){
+        paramXmlHttpDice.open("POST", gBASE_URL + "/dice", true);
+        paramXmlHttpDice.setRequestHeader("Content-Type", gUTF8_TEXT_APPLICATION_HEADER);
+        paramXmlHttpDice.send(JSON.stringify(paramDataUser));  
+    }
+    function processReponse(paramXmlHttpDice){
+        console.log(paramXmlHttpDice.responseText);
+        var vResponseToObj = JSON.parse(paramXmlHttpDice.responseText);
+        console.log(vResponseToObj);
+        var vDiceReady = vResponseToObj.dice;
+        console.log("dice result: " + vDiceReady);
+        changeDice(vDiceReady);
+        changeNotification(vDiceReady);
+        changeVoucherId(vResponseToObj);
+        changeGift(vResponseToObj);
+    }  
+    function changeDice(paramDice){
+        var vImgDice = $("#img-dice");
+        switch(paramDice){
+            case 1:
+                vImgDice.attr("src","LuckyDiceImages/1.png");
+                break;
+            case 2:
+                vImgDice.attr("src","LuckyDiceImages/2.png");
+                break; 
+            case 3:
+                vImgDice.attr("src","LuckyDiceImages/3.png");
+                break;
+            case 4:
+                vImgDice.attr("src","LuckyDiceImages/4.png");
+                break;
+            case 5:
+                vImgDice.attr("src","LuckyDiceImages/5.png");
+                break;
+            default:
+                vImgDice.attr("src","LuckyDiceImages/6.png"); 
+        }
+    }
+    function changeNotification(paramDice){
+        var vNotification = $("#p-notification-dice");
+        if(paramDice < 4){
+            vNotification.html("Chúc mừng bạn may mắn lần sau !!!")
+        }
+        else{
+            vNotification.html("Chúc mừng bạn hãy chơi tiếp lần nữa !!!")      
+        }
+    }
+    function changeVoucherId(paramResponseVoucher){
+        var vVoucherId = $("#p-voucher-id");
+        var vVoucherPercent = $("#p-voucher-percent");
+        if(paramResponseVoucher.voucher != null){
+            vVoucherId.html(paramResponseVoucher.voucher.maVoucher);
+            vVoucherPercent.html(paramResponseVoucher.voucher.phanTramGiamGia + "%");
+        }
+        else{
+            vVoucherId.html("");
+            vVoucherPercent.html("");  
+        }
+    }
+    function changeGift(paramResponsePrize){
+        var vImgPresent =  $("#img-present");
+        var vTenPhanThuong = paramResponsePrize.prize;
+        switch(vTenPhanThuong){
+            case "Mũ":
+                vImgPresent.attr("src","LuckyDiceImages/hat.jpg");
+                break;
+            case "Áo":
+                vImgPresent.attr("src","LuckyDiceImages/t-shirt.jpg");
+                break;
+            case "Xe máy":
+                vImgPresent.attr("src","LuckyDiceImages/xe-may.jpg");
+                break; 
+            case "Ô tô":
+                vImgPresent.attr("src","LuckyDiceImages/car.jpg");
+                break;  
+            default:
+            vImgPresent.attr("src","LuckyDiceImages/no-present.jpg");
+        }
+    }
 </script>
 
 </html>
