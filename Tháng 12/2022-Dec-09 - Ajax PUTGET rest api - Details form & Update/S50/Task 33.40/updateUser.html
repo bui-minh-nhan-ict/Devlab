@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body onload="onPageLoading()">
+    <div class="container jumbotron">
+        <div class="text-center mb-4">
+            <h3>Chi tiết User</h3>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label for="">First Name</label>
+            </div>
+            <div class="col-sm-8">
+                <input class="form-control" placeholder="First Name" id="input-firstname" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label for="">Last Name</label>
+            </div>
+            <div class="col-sm-8">
+                <input class="form-control" placeholder="Last Name" id="input-lastname"type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label for="">Subject</label>
+            </div>
+            <div class="col-sm-8">
+                <input class="form-control" placeholder="Subject" id="input-subject"type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label for="">Country</label>
+            </div>
+            <div  class="col-sm-8">
+                <select class="form-control" name="" id="select-country">
+                    <option value="VN"> Việt Nam</option>
+                    <option value="USA"> USA</option>
+                    <option value="AUS"> Australia</option>
+                    <option value="CANA"> Cannada</option>
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label for="">Customer Type</label>
+            </div>
+            <div  class="col-sm-8">
+                <select class="form-control" name="" id="select-customertype">
+                    <option value="Standard"> Standard</option>
+                    <option value="Gold"> Gold</option>
+                    <option value="Premium"> Premium</option>
+                    
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label for="">Register Status</label>
+            </div>
+            <div  class="col-sm-8">
+                <select class="form-control" name="" id="select-registerstatus">
+                    <option value="Accepted"> Accepted</option>
+                    <option value="Denied"> Denied</option>
+                    <option value="Standard"> Standard</option>
+                    
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-4">
+                
+            </div>
+            <div class="col-sm-8">
+                <button type="button" class="btn btn-success w-25" id="btn-update-user">Update user</button>
+                <a class="btn btn-link" href="Task 33.40.html">Cancel</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function onPageLoading() {
+        var vUrlString = window.location.href;
+        var vUrl = new URL(vUrlString);
+        var vId = vUrl.searchParams.get("id");
+        console.log(vId);
+        callAPIGetDataUserById(vId);       
+        }
+    $("#btn-update-user").click(function(){
+       console.log("Update user clicked....");
+       var vDateObj = getFormData();
+       var vIsValidate = validateFormData(vDateObj);
+       if(vIsValidate){
+        callAjaxRestApiUpdate(vDateObj);
+       } 
+    })
+    function callAPIGetDataUserById(paramUserId){
+        $.ajax({
+            url: "http://203.171.20.210:8080/crud-api/users/" + paramUserId,
+            type: "GET",
+            dataType: "json",
+            success: function(DataUserObj){
+                console.log(DataUserObj);
+                showDataUserToForm(DataUserObj);
+            },
+            error: function(ajaxContext){
+                alert(ajaxContext.responseText);
+            }
+        })       
+    } 
+    function showDataUserToForm(paramUserObj){
+        $("#input-firstname").val(paramUserObj.firstname);
+        $("#input-lastname").val(paramUserObj.lastname);
+        $("#input-subject").val(paramUserObj.subject);
+        $("#select-country").val(paramUserObj.country);
+        $("#select-customertype").val(paramUserObj.customerType);
+        $("#select-registerstatus").val(paramUserObj.registerStatus);
+    } 
+    function getFormData(){
+        var vUpdateInfoObj = new Object();
+
+        vUpdateInfoObj.firstname = $("#input-firstname").val().trim();
+        vUpdateInfoObj.lastname =  $("#input-lastname").val().trim();
+        vUpdateInfoObj.country = $("#select-country").val().trim();
+        vUpdateInfoObj.customerType =  $("#select-customertype").val().trim();
+        vUpdateInfoObj.subject = $("#input-subject").val().trim();
+        vUpdateInfoObj.registerStatus = $("#select-registerstatus").val().trim();
+        return vUpdateInfoObj;
+    }  
+    function validateFormData(paramUserObj){
+        if(paramUserObj.firstname == ""){
+            alert("Hãy nhập firstname ");
+            return false;
+        }
+        if(paramUserObj.lastname == ""){
+            alert("Hãy nhập lastname ");
+            return false;
+        }
+        if(paramUserObj.subject == ""){
+            alert("Hãy nhập subject ");
+            return false;
+        }
+        if(paramUserObj.customerType == ""){
+            alert("Hãy nhập customerType ");
+            return false;
+        }
+        if(paramUserObj.country == ""){
+            alert("Hãy nhập customerType ");
+            return false;
+        }
+        if(paramUserObj.registerStatus == ""){
+            alert("Hãy nhập registerStatus ");
+            return false;
+        }
+        return true;
+    }
+    function callAjaxRestApiUpdate(paramObj){
+        "use strict";
+      // 1. Đọc dữ liệu
+      var vUrlString = window.location.href;
+      var vUrl = new URL(vUrlString);
+      var vId = vUrl.searchParams.get("id");
+      var vUserId = vId;
+      //data to be sent 
+      var vObjectRequestData = paramObj;
+      //2 . Kiểm tra
+      //3. Gọi server  phải implement ajax put call tại đây (gọi rest API by Ajax)
+      $.ajax({
+        url:"http://203.171.20.210:8080/devcamp-register-java-api/users/" + vUserId,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(vObjectRequestData),
+        success: getUserByIdResponseProcess,
+        error:getUserByIdError
+      })  
+    }
+    function getUserByIdResponseProcess(paramObj){
+    alert("Cập nhập thành công...");
+    console.log(paramObj);
+    console.log(Object.entries(paramObj));
+    window.location.href = "Task 33.40.html"
+  }
+  function getUserByIdError(paramError){
+    alert(paramError.responseText);
+  }
+</script>
+</html>

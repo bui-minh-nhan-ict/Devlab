@@ -59,7 +59,7 @@
     //sample function get user data by id
     function getUserDataById() {
       "use strict";
-      var vUserId = "446";
+      var vUserId = "75956";
       var vXhttp = new XMLHttpRequest();
       vXhttp.onreadystatechange = function () {
         if (this.readyState == gREQUEST_READY_STATE_FINISH_OK && this.status == gREQUEST_STATUS_OK) {
@@ -93,25 +93,31 @@
     //sample function get user data by id
     function getAjaxUserDataById() {
       "use strict";
-      var vUserId = "446";
+      var vUserId = "75956";
 
       $.ajax({
         url: "http://203.171.20.210:8080/devcamp-register-java-api/users/" + vUserId,
         type: 'GET',
         dataType: 'json', // added data type
-        success: function (res) {
-          console.log(res);
-        },
-        error: function (ajaxContext) {
-          alert(ajaxContext.responseText)
-        }
-      });
-    }
+        success: getUserByIdResponseProcess,
+        error: getUserByIdErrorHandle
+      });}
+    
+      //call back : xử lý khi thành công
+      function getUserByIdResponseProcess(paramResponse){
+        console.log(paramResponse);
+      }
+
+      //call back: xử lý khi có error
+      function getUserByIdErrorHandle(paramAjaxContext){ //xử lý lỗi
+        alert(paramAjaxContext.responseText)
+      }
+
 
     //update user info
     function callRestApiUpdate() {
       "use strict";
-      var vUserId = "446";
+      var vUserId = "75956";
       //data to be sent 
       var vObjectRequestData = {
         firstname: "Mike",  //bạn có thể sửa các giá trị này để thử, và lại get lại data 
@@ -135,9 +141,9 @@
     //update user info, ajax call 
     function callAjaxRestApiUpdate() {
       "use strict";
-
+      const cUrlUpdateInfo = "http://203.171.20.210:8080/devcamp-register-java-api/users/";
       // 1. Đọc dữ liệu
-      var vUserId = "446";
+      var vUserId = "75956";
       //data to be sent 
       var vObjectRequestData = {
         firstname: "Mike",  //bạn có thể sửa các giá trị này để thử, và lại get lại data 
@@ -145,22 +151,23 @@
         subject: "On business 200",
         country: "USA"
       };
-      var vJSONRequestData = JSON.stringify(vObjectRequestData);
       //2 . Kiểm tra
+      //3. Gọi server  phải implement ajax put call tại đây (gọi rest API by Ajax)
       $.ajax({
-        url: "http://203.171.20.210:8080/devcamp-register-java-api/users/" + vUserId,
-        type: "PUT",
-       contentType: 'application/json',
-        data: vJSONRequestData,
-        success: function (res) {
-          console.log(res);
+        url: cUrlUpdateInfo + vUserId,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(vObjectRequestData), // chuyển object thành json string
+        success: function (responseObject){
+      //4. Xử lý hiển thị ( khi chạy ok)
+      console.log(responseObject);
+      console.log(Object.entries(responseObject));
         },
-        error: function (ajaxContext) {
+        error: function(ajaxContext){
+      //5. Xử lý hiển thị khi có lỗi
           alert(ajaxContext.responseText)
         }
       })
-      //3. Gọi server  phải implement ajax put call tại đây (gọi rest API by Ajax)
-      /***  ..............code của bạn ở đây ......................****/
      
          
     }

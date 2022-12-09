@@ -83,8 +83,13 @@
             if (validateData(vDataObj)) {
                //B3: XỬ LÝ HIỂN THỊ
                processData(vDataObj);
+               console.log ('Data is valid, ready for display',vDataObj);
             }
-         }
+             else{
+               console.log('Data input is not valid')
+             }
+            }
+         
 
          function onBtnClearLogClick() {
             $("#p-html-log").html(">");
@@ -99,19 +104,19 @@
 
          function validateData(paramObj) {
             if (paramObj.firstname == "") {
-               alert("Nhập họ");
+               alert("Please input your first name")
                return false;
             }
             if (paramObj.lastname == "") {
-               alert("Nhập tên");
+               alert("Please input your last name")
                return false;
             }
             if (paramObj.age == "") {
-               alert("Nhập tuổi");
+               alert("Please input your age")
                return false;
             }
-            if (paramObj.age > 200 || paramObj.age < 0) {
-               alert("Tuổi từ 0 tới 200");
+            if (paramObj.age > 200 || paramObj.age <= 0) {
+               alert("Your age is invalid");
                return false;
             }
             return true;
