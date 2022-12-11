@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Task bs150 detail of posts</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body onload = "onPageLoad()">
+  <div class="jumbotron bg-light">
+    <div class="row text-center my-4">
+      <h3 class = "text-info" >Chi tiết Post - Chi tiết bài đăng</h3>
+    </div>
+    <div class = "row form-group">
+        <div class = "col-sm-4"> 
+          <label class = "form-control border border-0 text-dark"> Post (bài viết) id: </label>
+        </div>
+        <div class = "col-sm-8"> 
+          <input type="text" class = "form-control" id = "inp-post-id" placeholder="..." >
+        </div> 
+    </div>
+    <div class = "row form-group">
+      <div class = "col-sm-4"> 
+        <label class = "form-control border border-0 text-dark"> post title (nhan đề): </label>
+      </div>
+      <div class = "col-sm-8"> 
+        <input type="text" class = "form-control" id = "inp-post-title"  >
+      </div> 
+    </div>
+    <div class = "row form-group">
+      <div class = "col-sm-4"> 
+        <label class = "form-control border border-0 text-dark"> Body (nội dung): </label>
+      </div>
+      <div class = "col-sm-8"> 
+        <textarea  class = "form-control" placeholder="nội dung post" id = "area-post-body">  </textarea>
+      </div> 
+    </div>
+  </div>
+</body>
+<script>
+  /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+
+  /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+  // hàm xử lý sự kiện lấy post của người dùng (4 bước xử lý)
+  function onPageLoad() {
+        //1.đọc dữ liệu
+        var vpostIdObject = {  postId : "" };
+        readDatapostIdObject(vpostIdObject); 
+        //2.kiểm tra
+        var vKetQuaKiemTra = validatepostIdObject(vpostIdObject);
+        if (!vKetQuaKiemTra) {
+          console.assert("Dữ liệu ko đạt chuẩn");
+          return; //không làm nữa, thoát ra
+        }
+        //3. gọi server 
+        //base url
+        const vURL_GET_POST_DETAIL = "https://jsonplaceholder.typicode.com/posts/" + vpostIdObject.postId;
+        $.ajax({
+          url: vURL_GET_POST_DETAIL,
+          type: 'GET',
+          dataType: 'json', // added data type
+          success: function (responseObject) {
+            console.log(JSON.stringify(responseObject));  //response text
+            //bước 4. xử lý hiện thị 
+            hienThiDuLieuPost(responseObject);  //chính là post object
+          },
+          error: function (ajaxContext) {
+            alert(ajaxContext.responseText);
+          }
+        });
+    }
+  //hiện thị dữl iệu pôst
+  function hienThiDuLieuPost(paramPostObject) {
+    $("#inp-post-id").val(paramPostObject.id);
+    $("#inp-post-title").val(paramPostObject.title);
+    $("#area-post-body").val(paramPostObject.body);
+
+  }
+  // read data
+  function readDatapostIdObject(parampostIdObject) {
+    var vUrlString = window.location.href;
+    var vURL = new URL(vUrlString);
+    var vPostId = vURL.searchParams.get("id");
+
+    parampostIdObject.postId = vPostId;
+  }
+  // validate data
+  function validatepostIdObject(parampostIdObject) {
+    if (parampostIdObject.postId === "") {
+      alert ("Dữ liệu cần truyền vào !");
+      return false;
+    } 
+    if ( isNaN( parampostIdObject.postId)) {
+      alert ("Dữ liệu là số nguyên !");
+      return false;
+    } 
+    return true;
+  }
+</script>
+</html>
+
