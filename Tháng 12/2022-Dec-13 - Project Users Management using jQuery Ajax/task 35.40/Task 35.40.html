@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 35.40</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body onload="onPageLoading()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center">Danh sách Người dùng</h2>               
+                <div class="container jumbotron">
+                    <div class="row">
+                        <div class = "col-sm-2"> 
+                        <label > Điền Name cần tìm : </label>
+                        </div>
+                        <div class = "col-sm-8"> 
+                        <input class = "col-sm-8" type="text" id ="inp-name" placeholder="Gợi ý Name đúng: Ervin Howell..." >
+                        </div> 
+                        <div class = "col-sm-2 "> 
+                            <button class = "btn btn-success form-control" id = "btn-get-user-name"> Lọc User </button>
+                        </div>
+                    </div>
+                </div>                 
+                <table class="table table-bordered table-striped table-hover" id="table-user">
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Zip code</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Company</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        "use strict";
+        /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+        const gUSER_TABLE = "table-user";
+        /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+        
+
+        /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+        // Hàm thực hiện khi load trang
+        function onPageLoading() {
+            getAllOrders();
+        }
+        $("#table-user").on("click", ".btn-edit", onBtnDetailClick);
+
+        $("#btn-get-user-name").on("click", onBtnGetUserNameClick);
+        function onBtnGetUserNameClick () {
+            //1.đọc dữ liệu
+            var vUserNameObject = {  userName : "" };
+            readDataUserNameObject(vUserNameObject); 
+            //2.kiểm tra
+            var vKetQuaKiemTra = validateUserNameObject(vUserNameObject);
+            if (!vKetQuaKiemTra) {
+                console.assert("Dữ liệu ko đạt chuẩn");
+                return; 
+            }
+            
+            //3. gọi server 
+            $.ajax({
+                url: "https://jsonplaceholder.typicode.com/users/",
+                type: 'GET',
+                dataType: 'json', // added data type
+                success: function (responseObject) {
+                    console.log(responseObject)
+                    //xóa dữ liệu
+                    resetTableData();
+            //4. xử lý hiện thị
+                    var vKetQuaTim = findUserByFilter(responseObject, vUserNameObject.userName)
+                    if(vKetQuaTim){
+                        alert("Tìm thấy " + vKetQuaTim.length + " kết quả");
+                        
+                        showAllDataToTable(vKetQuaTim)
+                    }else{
+                        alert("Không tìm thấy kết quả phù hợp");
+                    return false;
+                    }
+                    
+                },
+                error: function (ajaxContext) {
+                    alert(ajaxContext.responseTe) 
+                }
+            });
+        }
+        /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+        function resetTableData() {
+            $("#" + gUSER_TABLE + "  tbody").html("");  //truy câp bảng, rồi truy cập tbody, và xóa hết
+        }
+        // Hàm thực hiện việc load all orders từ server và load vào table
+        function getAllOrders() {
+             /**
+            * Chia để trị - 04 bước cố gắng thành 04 functions riêng biệt
+            */
+            // B1: Thu thập dữ liệu (trong bài này bước này ko cần)
+            // B2: Validate dữ liệu (trong bài này bước này ko cần)
+            // B3: Thực hiện việc gọi API từ server Server
+          $.ajax({
+            url: "https://jsonplaceholder.typicode.com/users/",
+            type: "GET",
+            dataType: "json",
+            success: function(res){
+                console.log(res);
+                showAllDataToTable(res);
+            },
+            error: function(ajaxContext){
+                alert(ajaxContext.responseText);
+            }
+          })
+        }
+        function onBtnDetailClick(){
+            console.log('Nút chi tiết được ấn');
+            console.log("Id của user được chọn là: " + $(this).data("id"));
+            const URL = "userDetail.html";
+            var vOpenUrl = 
+            URL + "?" + "id=" +  $(this).data("id");
+            window.location.href = vOpenUrl;
+        }
+        // input: xml http request đã đươc trả lời
+        // ouptut/end: dữ liệu hiên thi trên bảng
+        function showAllDataToTable(paramArray) {
+            //CODE Ở ĐÂY ĐỂ LOAD DATA VÀO TABLE
+            for(var bI = 0; bI < paramArray.length; bI ++) {
+                var bNewRow = $("<tr>").appendTo("#table-user");
+                $("<td>").html( bI + 1).appendTo(bNewRow);
+                $("<td>").html(paramArray[bI].name).appendTo(bNewRow);
+                $("<td>").html(paramArray[bI].username).appendTo(bNewRow);    
+                $("<td>").html(paramArray[bI].email).appendTo(bNewRow);
+                $("<td>").html(paramArray[bI].address.suite + ", " + paramArray[bI].address.street + ", " + paramArray[bI].address.city).appendTo(bNewRow);
+                $("<td>").html(paramArray[bI].address.zipcode).appendTo(bNewRow);
+                $("<td>").html(paramArray[bI].phone).appendTo(bNewRow);
+                $("<td>").html(paramArray[bI].company.name).appendTo(bNewRow);        
+                
+                var bCloAction = $("<td>").appendTo(bNewRow);
+                var bEditButton = $("<button>")
+                    .attr("class", "btn btn-warning  btn-edit")
+                    .html("Chi tiết");
+                bEditButton.attr("data-id",  paramArray[bI].id);
+                bEditButton.appendTo(bCloAction);    
+            }  
+        }
+        function readDataUserNameObject(paramObj){
+            paramObj.userName = $("#inp-name").val().trim();
+        }
+        function validateUserNameObject(paramObj){
+            if(paramObj.userName == "" || paramObj.userName == "."){
+                alert("Hãy nhập Name...")
+            }
+            else{
+                return true;
+            }
+           
+        }
+        function findUserByFilter(paramResponseObject,paramArray){   
+            var vArrResultObj = [] ;
+            for(let i = 0; i < paramResponseObject.length; i ++){
+                if(paramResponseObject[i].name.search(paramArray) != -1){
+                    vArrResultObj.push(paramResponseObject[i])
+                }
+            }
+            return vArrResultObj;
+        }
+    </script>
+</body>
+
+</html>

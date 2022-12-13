@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Detail</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body onload="onPageLoading()">
+    <div class="container jumbotron w-50">
+        <div class="row form-group">
+        <div class="col-sm-12 text-center">
+        <!-- Row 1 -->
+            <h3>Chi tiết User</h3>
+            <a id="'input-id"></a>
+        </div>
+        </div>
+        <div class="row form-group">
+        <!-- Row 2 -->
+            <div class="col-sm-3">
+                <!-- Col 2.1 -->
+                <label for="">Name</label>
+            </div>
+            <div class="col-sm-9">
+                <!-- Col 2.2 -->
+                <input class="form-control" id="input-name" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 3 -->
+            <div class="col-sm-3">
+                <!-- Col 3.1 -->
+                <label for="">Username</label>
+            </div>
+            <div class="col-sm-9">
+                <!-- Col 3.2 -->
+                <input class="form-control" id="input-username" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 4 -->
+            <div class="col-sm-3">
+                <!-- Col 4.1 -->
+                <label for="">Email</label>
+            </div>
+            <div class="col-sm-9">
+                <!-- Col 4.2 -->
+                <input class="form-control" id="input-email">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 5 -->
+            <div class="col-sm-3">
+                <!-- Col 5.1 -->
+                <label for="">Address: </label>
+            </div>
+            <div class="col-sm-9">
+                <!-- Col 5.2 -->
+                <div class="row form-group">
+                    <div class="col-sm-2">
+                        <!-- Col 5.2.1.1 -->
+                        <label for="suite">Suite</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <!-- Col 5.2.1.2 -->
+                <input class="form-control" id="input-suite" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-2">
+                <!-- Col 5.2.2.1 -->
+                <label for="street">Street</label>
+            </div>
+            <div class="col-sm-10">
+                <!-- Col 5.2.2.2 -->
+                <input class="form-control" id="input-street" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-2">
+                <!-- Col 5.2.3.1 -->
+                <label for="city">City</label>
+            </div>
+            <div class="col-sm-10">
+                <input class="form-control" id="input-city" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-2">
+                <!-- Col 5.2.4.1 -->
+                <label for="zipcode">Zip code</label>
+            </div>
+            <div class="col-sm-10">
+                <!-- Col 5.2.4.2 -->
+                <input class="form-control" id="input-zipcode" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Col 5.2.5 -->
+            <div class="col-sm-2">
+                <!-- Col 5.2.5.1 -->
+                <label for="geo">Geo: </label>
+            </div>
+            <div class="col-sm-10">
+                <!-- Col 5.2.5.2 -->
+                <div class="row form-group">
+                    <div class="col-sm-2">
+                        <label for="lat">lat</label>
+                        </div>
+                    <div class="col-sm-10">
+                <input class="form-control" id="input-lat" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-2">
+                <label for="lng">lng</label>
+            </div>
+            <div class="col-sm-10">
+                <input class="form-control" id="input-geo-lng" type="text">
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+        <div class="row form-group">
+            <!-- Row 6 -->
+            <div class="col-sm-3">
+                <label for="">Phone</label>
+            </div>
+            <div class="col-sm-9">
+                <input class="form-control" id="input-phone" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 7 -->
+            <div class="col-sm-3">
+                <label for="">Website</label>
+            </div>
+            <div class="col-sm-9">
+                <input class="form-control" id="input-website" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 8 -->
+            <div class="col-sm-3">
+                <!-- Col 8.1 -->
+                <label for="">Company: </label>
+            </div>
+            <div class="col-sm-9">
+                <!-- Col 8.2 -->
+                <div class="row form-group">
+                    <div class="col-sm-3">
+                        <label for="">Name</label>
+                        </div>
+                        <div class="col-sm-9">
+                <input class="form-control" id="input-company-name" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3">
+                <label for="">Catch Phrase</label>
+            </div>
+            <div class="col-sm-9">
+                <input class="form-control" id="input-catchphrase" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3">
+                <label for="bs">bs</label>
+            </div>
+            <div class="col-sm-9">
+                <input class="form-control" id="input-bs" type="text">
+    </div>
+</div>
+    </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 9 -->
+            <div class="col-sm-12" style="text-align:right;">
+                <button id="btn-huy" class="btn btn-success w-25">Quay lại</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function onPageLoading() {
+        // get data from query string
+        var vUrlString = window.location.href; // đường dẫn gọi đến trang
+        console.log(vUrlString);
+        var vUrl = new URL(vUrlString);
+        //get parameters
+        var vId = vUrl.searchParams.get("id");
+        console.log(vId);
+
+        // B1. thu thập data: là vId
+        // B2. Kiểm tra (validate data)
+        var vIsValidate = validateData(vId);
+        if(vIsValidate)
+        {
+            //B3. Khi data hợp lệ, call api server get user data
+            $.ajax({
+            url: "https://jsonplaceholder.typicode.com/users/" + vId,
+            type: "GET",
+            dataType: "json", //added data type
+            success: function(dataUserObj){
+                console.log(dataUserObj);
+                showDataUserToForm(dataUserObj);
+            },
+            error: function(ajaxContext){
+                alert(ajaxContext.responseText);
+            }
+        })      
+        }       
+        }
+
+        // Hàm thực thi việc xác thực data
+        function validateData(paramIdDetail)
+        {
+            if (paramIdDetail ===''||paramIdDetail ===null){
+                alert('Không có ID');
+                return false;
+            }
+            return true;
+        }
+    $("#btn-huy").click(function(){
+       alert("Nhấn Ok để quay lại trang chủ");
+       window.location.href = "Task 35.20.html" 
+    })
+
+    function showDataUserToForm(paramUserObj){
+        $("#input-name").val(paramUserObj.name);
+        $("#input-username").val(paramUserObj.username);
+        $("#input-email").val(paramUserObj.email);
+        $("#input-suite").val(paramUserObj.address.suite);
+        $("#input-street").val(paramUserObj.address.street);
+        $("#input-city").val(paramUserObj.address.city);
+        $("#input-zipcode").val(paramUserObj.address.zipcode);
+        $("#input-lat").val(paramUserObj.address.geo.lat);
+        $("#input-geo-lng").val(paramUserObj.address.geo.lng);
+        $("#input-phone").val(paramUserObj.phone);
+        $("#input-website").val(paramUserObj.website);
+        $("#input-company-name").val(paramUserObj.company.name);
+        $("#input-catchphrase").val(paramUserObj.company.catchPhrase);
+        $("#input-bs").val(paramUserObj.company.bs);
+    }
+    
+</script>
+</html>

@@ -17,14 +17,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center">Danh sách Người dùng </h2>               
+                <h2 class="text-center">Danh sách Người dùng</h2>               
                 <div class="container jumbotron">
                     <div class="row">
                         <div class = "col-sm-2"> 
-                        <label > Điền Name: </label>
+                        <label > Điền Name cần tìm : </label>
                         </div>
                         <div class = "col-sm-8"> 
-                        <input class = "col-sm-8" type="text" id ="inp-user-name" placeholder="...gợi ý name đúng: Leanne Graham..." >
+                        <input class = "col-sm-8" type="text" id ="inp-user-name" placeholder="Gợi ý Name đúng: Ervin Howell..." >
                         </div> 
                         <div class = "col-sm-2 "> 
                             <button class = "btn btn-success form-control" id = "btn-get-user-name"> Lọc User </button>
@@ -65,50 +65,9 @@
         function onPageLoading() {
             getAllOrders();
         }
-        $("#table-user").on("click", ".btn-edit", onBtnEditClick);
-        $("#btn-get-user-name").on("click", onBtnGetUserNameClick);
-        
-        function onBtnGetUserNameClick () {
-            //1.đọc dữ liệu
-            
-            var vUserNameObject = {  userName : "" };
-            readDataUserNameObject(vUserNameObject); 
-            //2.kiểm tra
-            var vKetQuaKiemTra = validateUserNameObject(vUserNameObject);
-            if (!vKetQuaKiemTra) {
-                console.assert("Dữ liệu ko đạt chuẩn");
-                return; //không làm nữa, thoát ra
-            }
-            
-            //3. gọi server 
-            $.ajax({
-                url: "https://jsonplaceholder.typicode.com/users/",
-                type: 'GET',
-                dataType: 'json', // added data type
-                success: function (responseObject) {
-                    console.log(responseObject)
-                    //xóa dữ liệu của bảng
-                    resetTableData();
-                    //4 xử lý hiện thị
-                    var vKetQuaTim = findUserByFilter(responseObject, vUserNameObject.userName)
-                    if(vKetQuaTim.length > 0){
-                        alert("Tìm thấy " + vKetQuaTim.length + " kết quả");
-                        loadOrderToTable(vKetQuaTim)
-                    }else{
-                        alert("Không tìm thấy kết quả phù hợp");
-                    return false;
-                    }
-                    
-                },
-                error: function (ajaxContext) {
-                    alert(ajaxContext.responseTe) 
-                }
-            });
-        }
+        $("#table-user").on("click", ".btn-edit", onBtnEditClick);  
         /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
-        function resetTableData() {
-            $("#" + gUSER_TABLE + "  tbody").html("");  //truy câp bảng, rồi truy cập tbody, và xóa hết
-        }
+        
         // Hàm thực hiện việc load all orders từ server và load vào table
         function getAllOrders() {
              /**
@@ -123,7 +82,7 @@
             dataType: "json",
             success: function(res){
                 console.log(res);
-                loadOrderToTable(res);
+                showAllDataToTable(res);
             },
             error: function(ajaxContext){
                 alert(ajaxContext.responseText);
@@ -131,53 +90,31 @@
           })
         }
         function onBtnEditClick(){
-            console.log("Bấm nút chi tiết, Id của user tương ứng là: " + $(this).data("id"));
-            const URL = "userDetail.html";
-            var vOpenUrl = 
-            URL + "?" + "id=" +  $(this).data("id");
-            window.location.href = vOpenUrl;
+           console.log('Nút chi tiết được ấn');
+           console.log("Id của user được chọn là: " + $(this).data("id"));
         }
         // input: xml http request đã đươc trả lời
         // ouptut/end: dữ liệu hiên thi trên bảng
-        function loadOrderToTable(paramUser) {
+        function showAllDataToTable(paramArray) {
             //CODE Ở ĐÂY ĐỂ LOAD DATA VÀO TABLE
-            for(var bI = 0; bI < paramUser.length; bI ++) {
+            for(var bI = 0; bI < paramArray.length; bI ++) {
                 var bNewRow = $("<tr>").appendTo("#table-user");
-
                 $("<td>").html( bI + 1).appendTo(bNewRow);
-                $("<td>").html(paramUser[bI].name).appendTo(bNewRow);
-                $("<td>").html(paramUser[bI].username).appendTo(bNewRow);    
-                $("<td>").html(paramUser[bI].email).appendTo(bNewRow);
-                $("<td>").html(paramUser[bI].address.suite + ", " + paramUser[bI].address.street + ", " + paramUser[bI].address.city).appendTo(bNewRow);
-                $("<td>").html(paramUser[bI].address.zipcode).appendTo(bNewRow);
-                $("<td>").html(paramUser[bI].phone).appendTo(bNewRow);
-                $("<td>").html(paramUser[bI].company.name).appendTo(bNewRow);        
+                $("<td>").html(paramArray[bI].name).appendTo(bNewRow);
+                $("<td>").html(paramArray[bI].username).appendTo(bNewRow);    
+                $("<td>").html(paramArray[bI].email).appendTo(bNewRow);
+                $("<td>").html(paramArray[bI].address.suite + ", " + paramArray[bI].address.street + ", " + paramArray[bI].address.city).appendTo(bNewRow);
+                $("<td>").html(paramArray[bI].address.zipcode).appendTo(bNewRow);
+                $("<td>").html(paramArray[bI].phone).appendTo(bNewRow);
+                $("<td>").html(paramArray[bI].company.name).appendTo(bNewRow);        
                 
                 var bCloAction = $("<td>").appendTo(bNewRow);
                 var bEditButton = $("<button>")
-                    .attr("class", "btn btn-primary  btn-edit")
+                    .attr("class", "btn btn-warning  btn-edit")
                     .html("Chi tiết");
-                bEditButton.attr("data-id",  paramUser[bI].id);
+                bEditButton.attr("data-id",  paramArray[bI].id);
                 bEditButton.appendTo(bCloAction);    
             }  
-        }
-        function readDataUserNameObject(paramObj){
-            paramObj.userName = $("#inp-user-name").val().trim();
-        }
-        function validateUserNameObject(paramObj){
-            if(paramObj.userName == ""){
-                alert("Hãy nhập name...")
-            }
-            return true;
-        }
-        function findUserByFilter(paramResponseObject,paramUser){   
-            var vArrResultObj = [] ;
-            for(let bI = 0; bI < paramResponseObject.length; bI ++){
-                if(paramResponseObject[bI].name.search(paramUser) != -1){
-                    vArrResultObj.push(paramResponseObject[bI])
-                }
-            }
-            return vArrResultObj;
         }
     </script>
 </body>

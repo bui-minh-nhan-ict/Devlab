@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Detail</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body onload="onPageLoading()">
+    <div class="container jumbotron w-50">
+        <div class="row form-group">
+        <div class="col-sm-12 text-center">
+        <!-- Row 1 -->
+            <h3>Chi tiết User</h3>
+            <a id="'input-id"></a>
+        </div>
+        </div>
+        <div class="row form-group">
+        <!-- Row 2 -->
+            <div class="col-sm-3">
+                <!-- Col 2.1 -->
+                <label for="">Name</label>
+            </div>
+            <div class="col-sm-9">
+                <!-- Col 2.2 -->
+                <input class="form-control" id="input-name" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 3 -->
+            <div class="col-sm-3">
+                <!-- Col 3.1 -->
+                <label for="">Username</label>
+            </div>
+            <div class="col-sm-9">
+                <!-- Col 3.2 -->
+                <input class="form-control" id="input-username" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 4 -->
+            <div class="col-sm-3">
+                <!-- Col 4.1 -->
+                <label for="">Email</label>
+            </div>
+            <div class="col-sm-9">
+                <!-- Col 4.2 -->
+                <input class="form-control" id="input-email">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 5 -->
+            <div class="col-sm-3">
+                <!-- Col 5.1 -->
+                <label for="">Address: </label>
+            </div>
+            <div class="col-sm-9">
+                <!-- Col 5.2 -->
+                <div class="row form-group">
+                    <div class="col-sm-2">
+                        <!-- Col 5.2.1.1 -->
+                        <label for="suite">Suite</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <!-- Col 5.2.1.2 -->
+                <input class="form-control" id="input-suite" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-2">
+                <!-- Col 5.2.2.1 -->
+                <label for="street">Street</label>
+            </div>
+            <div class="col-sm-10">
+                <!-- Col 5.2.2.2 -->
+                <input class="form-control" id="input-street" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-2">
+                <!-- Col 5.2.3.1 -->
+                <label for="city">City</label>
+            </div>
+            <div class="col-sm-10">
+                <input class="form-control" id="input-city" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-2">
+                <!-- Col 5.2.4.1 -->
+                <label for="zipcode">Zip code</label>
+            </div>
+            <div class="col-sm-10">
+                <!-- Col 5.2.4.2 -->
+                <input class="form-control" id="input-zipcode" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Col 5.2.5 -->
+            <div class="col-sm-2">
+                <!-- Col 5.2.5.1 -->
+                <label for="geo">Geo: </label>
+            </div>
+            <div class="col-sm-10">
+                <!-- Col 5.2.5.2 -->
+                <div class="row form-group">
+                    <div class="col-sm-2">
+                        <label for="lat">lat</label>
+                        </div>
+                    <div class="col-sm-10">
+                <input class="form-control" id="input-lat" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-2">
+                <label for="lng">lng</label>
+            </div>
+            <div class="col-sm-10">
+                <input class="form-control" id="input-geo-lng" type="text">
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+        <div class="row form-group">
+            <!-- Row 6 -->
+            <div class="col-sm-3">
+                <label for="">Phone</label>
+            </div>
+            <div class="col-sm-9">
+                <input class="form-control" id="input-phone" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 7 -->
+            <div class="col-sm-3">
+                <label for="">Website</label>
+            </div>
+            <div class="col-sm-9">
+                <input class="form-control" id="input-website" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 8 -->
+            <div class="col-sm-3">
+                <!-- Col 8.1 -->
+                <label for="">Company: </label>
+            </div>
+            <div class="col-sm-9">
+                <!-- Col 8.2 -->
+                <div class="row form-group">
+                    <div class="col-sm-3">
+                        <label for="">Name</label>
+                        </div>
+                        <div class="col-sm-9">
+                <input class="form-control" id="input-company-name" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3">
+                <label for="">Catch Phrase</label>
+            </div>
+            <div class="col-sm-9">
+                <input class="form-control" id="input-catchphrase" type="text">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3">
+                <label for="bs">bs</label>
+            </div>
+            <div class="col-sm-9">
+                <input class="form-control" id="input-bs" type="text">
+    </div>
+</div>
+    </div>
+        </div>
+        <div class="row form-group">
+            <!-- Row 9 -->
+            <div class="col-sm-12" style="text-align:right;">
+                <button type="button" class="btn btn-success w-25" id="btn-update-user">Update</button>
+                <button id="btn-huy" class="btn btn-success w-25">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function onPageLoading() {
+        // get data from query string
+        var vUrlString = window.location.href; // đường dẫn gọi đến trang
+        console.log(vUrlString);
+        var vUrl = new URL(vUrlString);
+        //get parameters
+        var vId = vUrl.searchParams.get("id");
+        console.log(vId);
+
+        // B1. thu thập data: là vId
+        // B2. Kiểm tra (validate data)
+        var vIsValidate = validateData(vId);
+        if(vIsValidate)
+        {
+            //B3. Khi data hợp lệ, call api server get user data
+            $.ajax({
+            url: "https://jsonplaceholder.typicode.com/users/" + vId,
+            type: "GET",
+            dataType: "json", //added data type
+            success: function(dataUserObj){
+                console.log(dataUserObj);
+                showDataUserToForm(dataUserObj);
+            },
+            error: function(ajaxContext){
+                alert(ajaxContext.responseText);
+            }
+        })      
+        }       
+        }
+
+    // Thực thi action khi nhấn nút Cancel
+    $("#btn-huy").click(function(){
+       alert("Nhấn Ok để quay lại trang chủ");
+       window.location.href = "Task 35.30.html" 
+    })
+
+    function showDataUserToForm(paramUserObj){
+        $("#input-name").val(paramUserObj.name);
+        $("#input-username").val(paramUserObj.username);
+        $("#input-email").val(paramUserObj.email);
+        $("#input-suite").val(paramUserObj.address.suite);
+        $("#input-street").val(paramUserObj.address.street);
+        $("#input-city").val(paramUserObj.address.city);
+        $("#input-zipcode").val(paramUserObj.address.zipcode);
+        $("#input-lat").val(paramUserObj.address.geo.lat);
+        $("#input-geo-lng").val(paramUserObj.address.geo.lng);
+        $("#input-phone").val(paramUserObj.phone);
+        $("#input-website").val(paramUserObj.website);
+        $("#input-company-name").val(paramUserObj.company.name);
+        $("#input-catchphrase").val(paramUserObj.company.catchPhrase);
+        $("#input-bs").val(paramUserObj.company.bs);
+    }
+    
+        // Hàm thực thi việc xác thực data
+            function validateData(paramIdDetail)
+        {
+            if (paramIdDetail ===''||paramIdDetail ===null){
+                alert('Không có ID');
+                return false;
+            }
+            return true;
+        }
+
+    // Thực thi action khi nhấn nút Update
+    $("#btn-update-user").click(function(){
+       console.log("Update user clicked....");
+       var vDateObj =  {
+                name: "",
+                username: "",
+                email: "",
+                address: {
+                    street: "",
+                    suite: "",
+                    city: "",
+                    zipcode: "",
+                    geo: {
+                        lat: "",
+                        lng: ""
+                    }
+                },
+                phone: "",
+                website: "",
+                company: {
+                    name: "",
+                    catchPhrase: "",
+                    bs: ""
+                }
+            };
+        getFormData(vDateObj);    
+        var vIsValidate = validateFormData(vDateObj);
+        if(vIsValidate){
+            callAjaxRestApiUpdate(vDateObj);
+        } 
+    })
+    function getFormData(paramUserObj){
+        paramUserObj.name = $("#input-name").val().trim();
+        paramUserObj.username =  $("#input-username").val().trim();
+        paramUserObj.email = $("#input-email").val().trim();
+        paramUserObj.address.suite = $("#input-suite").val().trim();
+        paramUserObj.address.street = $("#input-street").val().trim();
+        paramUserObj.address.city = $("#input-city").val().trim();
+        paramUserObj.address.zipcode = $("#input-zipcode").val().trim();
+        paramUserObj.address.geo.lat = $("#input-lat").val().trim();
+        paramUserObj.address.geo.lng = $("#input-geo-lng").val().trim();
+        paramUserObj.phone = $("#input-phone").val().trim();
+        paramUserObj.website = $("#input-website").val().trim();
+        paramUserObj.company.name = $("#input-company-name").val().trim();
+        paramUserObj.company.catchPhrase = $("#input-catchphrase").val().trim();
+        paramUserObj.company.bs =  $("#input-bs").val().trim();
+
+        
+    }
+    function validateFormData(paramUserObj){
+        if(paramUserObj.name == ""){
+            alert("Hãy nhập name ");
+            return false;
+        }
+        if(paramUserObj.username == ""){
+            alert("Hãy nhập username ");
+            return false;
+        }
+        if(paramUserObj.email == ""){
+            alert("Hãy nhập email ");
+            return false;
+        }
+        if(paramUserObj.address.suite == ""){
+            alert("Hãy nhập suite ");
+            return false;
+        }
+        if(paramUserObj.address.street == ""){
+            alert("Hãy nhập street ");
+            return false;
+        }
+        if(paramUserObj.address.city == ""){
+            alert("Hãy nhập city ");
+            return false;
+        }
+        if(paramUserObj.address.zipcode == ""){
+            alert("Hãy nhập zipcode ");
+            return false;
+        }
+        if(paramUserObj.address.geo.lat == ""){
+            alert("Hãy nhập geo lat ");
+            return false;
+        }
+        if(paramUserObj.address.geo.lng == ""){
+            alert("Hãy nhập geo lng ");
+            return false;
+        }
+        if(paramUserObj.phone == ""){
+            alert("Hãy nhập phone ");
+            return false;
+        }
+        if(paramUserObj.website == ""){
+            alert("Hãy nhập website ");
+            return false;
+        }
+        if(paramUserObj.company.name == ""){
+            alert("Hãy nhập company name ");
+            return false;
+        }
+        if(paramUserObj.company.catchPhrase == ""){
+            alert("Hãy nhập company catchPhrase ");
+            return false;
+        }
+        if(paramUserObj.company.bs == ""){
+            alert("Hãy nhập company bs ");
+            return false;
+        }
+        return true;
+    } 
+    function callAjaxRestApiUpdate(paramObj){
+        "use strict";
+      // 1. Đọc dữ liệu
+      var vUrlString = window.location.href;
+      var vUrl = new URL(vUrlString);
+      var vId = vUrl.searchParams.get("id");
+      var vUserId = vId;
+      //data to be sent 
+      var vObjectRequestData = paramObj;
+      //2 . Kiểm tra
+      //3. Gọi server  phải implement ajax put call tại đây (gọi rest API by Ajax)
+      $.ajax({
+        url:"https://jsonplaceholder.typicode.com/users/" + vUserId,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(vObjectRequestData),
+        success: getUserByIdResponseProcess,
+        error:getUserByIdError
+      })  
+    }
+    function getUserByIdResponseProcess(paramObj){
+        alert("Cập nhập thành công...");
+        console.log(paramObj);
+        console.log(Object.entries(paramObj));
+        // chuyển về trang chủ
+        window.location.href = "Task 35.30.html"
+    }
+    function getUserByIdError(paramError){
+        alert(paramError.responseText);
+    }   
+</script>
+</html>
