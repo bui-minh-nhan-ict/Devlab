@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<title>task 37.40</title>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!-- Data Table-->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+<body>
+    <div class="container">
+        <div class="text-center my-4">
+            <h2>Danh sách người dùng đăng ký</h2>
+        </div>
+        <button class="btn btn-success form-group" id="btn-add-user" data-toggle="modal"
+            data-target="#create-user-modal">Create User</button>
+        <table class="table table-bordered table-striped table-hover text-center" id="user-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Country</th>
+                    <th>Subject</th>
+                    <th>Customer Status</th>
+                    <th>Register Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- Vùng Modal -->
+
+    <!-- Create user modal -->
+    <div id="create-user-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="h5-modal-title">Create New User</h5>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="input-first-name">First name</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="input-first-name" name="" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="input-last-name">Last name</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="input-last-name" name="" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="input-subject">Subject</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="input-subject" name="" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="input-country">Country</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select name="" id="select-country" class="form-control">
+                                    <option value="NOT_SELECT_COUNTRY">Select Country</option>
+                                    <option value="VN">Việt Nam</option>
+                                    <option value="USA">USA</option>
+                                    <option value="AUS">Australia</option>
+                                    <option value="CAN">Canada</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label class="col-form-label col-sm-4" for="select-create-customer-type">Customer
+                                Type</label>
+                            <div class="col-sm-8">
+                                <select id="select-create-customer-type" class="form-control">
+                                    <option value="Standard">Standard</option>
+                                    <option value="Gold">Gold</option>
+                                    <option value="Premium">Premium</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="btn-create-user">Insert User</button>
+                    <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    'use strict';
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+    const gBASE_URL = "http://203.171.20.210:8080/crud-api/users/";
+
+    // Biến toàn cục để lưu trữ id user đang được update or delete. Mặc định = 0;
+    var gUserId = 0;
+
+    // Biến mảng hằng số chứa danh sách tên các thuộc tính
+    const gUSER_COLS = ['id', 'firstname', 'lastname', 'country', 'subject', 'customerType', 'registerStatus', 'action'];
+
+    // biến mảng toàn cục định nghĩa chỉ số các cột tương ứng
+    const gUSER_ID_COL = 0;
+    const gUSER_FIRSTNAME_COL = 1;
+    const gUSER_LASTNAME_COL = 2;
+    const gUSER_COUNTRY_COL = 3;
+    const gUSER_SUBJECT_COL = 4;
+    const gUSER_CUSTOMER_TYPE_COL = 5;
+    const gUSER_REGISTER_STATUS_COL = 6;
+    const gUSER_ACTION_COL = 7;
+
+    // Khai báo datatable & mapping columns
+    var gUserTable = $('#user-table').DataTable({
+        columns: [
+            { data: gUSER_COLS[gUSER_ID_COL] },
+            { data: gUSER_COLS[gUSER_FIRSTNAME_COL] },
+            { data: gUSER_COLS[gUSER_LASTNAME_COL] },
+            { data: gUSER_COLS[gUSER_COUNTRY_COL] },
+            { data: gUSER_COLS[gUSER_SUBJECT_COL] },
+            { data: gUSER_COLS[gUSER_CUSTOMER_TYPE_COL] },
+            { data: gUSER_COLS[gUSER_REGISTER_STATUS_COL] },
+            { data: gUSER_COLS[gUSER_ACTION_COL] },
+        ],
+        columnDefs: [
+            { //Định nghĩa lại cột action
+                targets: gUSER_ACTION_COL,
+                defaultContent: `
+                <img class="edit-user" src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" style="width: 20px;cursor:pointer;">
+                <img class="delete-user" src="https://cdn4.iconfinder.com/data/icons/complete-common-version-6-4/1024/trash-512.png" style="width: 20px;cursor:pointer;">
+                `
+            }]
+    });
+
+
+    /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+    $(document).ready(function () {
+        onPageLoading();
+    });
+
+    //2-C: gán sự kiện Create - Thêm mới user
+    $('#btn-add-user').on('click', function () {
+        onBtnAddNewUserClick();
+    });
+
+
+    //3-U: gán sự kiện update  - Sửa 1 user
+    $('#user-table').on('click', '.edit-user', function () {
+        onBtnEditUserClick(this);
+    });
+
+    //4-D: gán sự kiện delete - Xóa 1 user
+    $('#user-table').on('click', '.delete-user', function () {
+        onBtnDeleteUserClick(this);
+    });
+
+    // Gán sự kiện cho nút Create User (trên Modal)
+    $('#btn-create-user').on('click', function () {
+        onBtnCreateUserClick();
+    });
+
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    // Hàm thực thi khi trang được load
+    function onPageLoading() {
+        //1-R : Read / Load user to Datatable
+        getAllUsers();
+    }
+
+    // Hàm xử lý sự kiện khi nút thêm mới được click
+    function onBtnAddNewUserClick() {
+        // Hiển thị modal trắng lên
+        $('#create-user-modal').modal('show');
+    }
+
+    //Hàm xử lý sự kiện khi icon edit user trên bảng được click
+    function onBtnEditUserClick(paramBtnEdit) {
+        // Lưu thông tin userid đang được edit vào biến toàn cục
+        gUserId = getUserIdFromButton(paramBtnEdit);
+        console.log('Id của user tương ứng: ' + gUserId);
+    }
+
+    //Hàm xử lý sự kiện khi icon delete user trên bảng được click
+    function onBtnDeleteUserClick(paramBtnDelete) {
+        // Lưu thông tin userid đang được delete vào biến toàn cục
+        gUserId = getUserIdFromButton(paramBtnDelete);
+        console.log('Id của user tương ứng: ' + gUserId);
+    }
+
+
+    //Xử lý front-end khi thêm user thành công
+    function handleInsertUserSuccess() {
+        alert('Added user successful');
+        getAllUsers();
+        resertCreateUserForm();
+        $('#create-user-modal').modal('hide');
+
+        // Hàm xóa trắng form create user
+        function resertCreateUserForm() {
+            $('#input-first-name').val('');
+            $('#input-last-name').val('');
+            $('#select-country').val('VN');
+            $('#input-subject').val('');
+            $('#select-create-customer-type').val('Standard');
+        }
+    }
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    function loadDataToUserTable(paramObjectUsers) {
+        gUserTable.clear();
+        gUserTable.rows.add(paramObjectUsers);
+        gUserTable.draw();
+    }
+    // Hàm gọi API để lấy all danh sách user đăng ký
+    function getAllUsers() {
+        $.ajax({
+            url: gBASE_URL,
+            type: 'GET',
+            success: function (paramObjectUsers) {
+                //Ghi response ra console
+                console.log(paramObjectUsers);
+                loadDataToUserTable(paramObjectUsers);
+            },
+            error: function (paramErr) {
+                console.log(paramErr.status);
+            }
+
+        });
+    }
+
+    // Hàm dựa vào button detail (edit or delete) xác định được id user
+    function getUserIdFromButton(paramButton) {
+        var vTableRow = $(paramButton).parents('tr');
+        var vUserRowData = gUserTable.row(vTableRow).data();
+        return vUserRowData.id;
+    }
+
+    // Hàm thu thập data để create user
+    function getInsertUserData(paramUserObj) {
+        paramUserObj.firstname = $('#input-first-name').val().trim();
+        paramUserObj.lastname = $('#input-last-name').val().trim();
+        paramUserObj.country = $('#select-country').val();
+        paramUserObj.subject = $('#input-subject').val().trim();
+        paramUserObj.customerType = $('#select-create-customer-type').val();
+    }
+
+    // Hàm validate data
+    function validateUserData(paramUserObj) {
+        if (paramUserObj.firstname === '') {
+            alert('Please input first name');
+            return false;
+        }
+
+        if (paramUserObj.lastname === '') {
+            alert('Please input last name');
+            return false;
+        }
+
+        if (paramUserObj.subject === '') {
+            alert('Please input subject');
+            return false;
+        }
+        return true;
+    }
+
+    // Hàm xử lý sự kiện create user modal click
+    function onBtnCreateUserClick() {
+        //khai báo đối tượng chứa user data
+        var vObjectRequestData = {
+            firstname: '',
+            lastname: '',
+            subject: '',
+            country: '',
+            customerType: ''
+        };
+        // B1: Thu thập dữ liệu
+        getInsertUserData(vObjectRequestData);
+        // B2: Validate insert
+        var vIsValidate = validateUserData(vObjectRequestData);
+        // Ghi ra console giá trị trả ra của hàm validateUserData
+        console.log(vIsValidate);
+        if (vIsValidate) {
+            // B3: Insert User
+            $.ajax({
+                url: gBASE_URL,
+                type: 'POST',
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify(vObjectRequestData),
+                success: function (paramRes) {
+                    // Ghi response ra console
+                    console.log(paramRes);
+                    // B4: Xử lý front-end
+                    handleInsertUserSuccess();
+                },
+                error: function (paramErr) {
+                    console.log(paramErr.status);
+                }
+            });
+        }
+    }
+</script>
+
+</html>
