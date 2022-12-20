@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="UTF-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Course</title>
+
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+</head>
+
+<body>
+   <!-- 1. Header - Navbar menu -->
+   <div id="header" class="container-fluid">
+      <nav class="navbar navbar-light bg-light navbar-expand-lg fixed-top">
+         <!--Logo-->
+         <a href="#" class="navbar-brand">
+            <img src="images/Ionic_logo.png" />
+         </a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+
+         <!--item-->
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item active">
+                  <a class="nav-link" href="#">Home</a>
+               </li>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                     Browse courses
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                     <a class="dropdown-item" href="#">Web Development </a>
+                     <a class="dropdown-item" href="#">Mobile App </a>
+                     <a class="dropdown-item" href="#">Desktop App </a>
+                  </div>
+               </li>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                     About us
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                     <a class="dropdown-item" href="#">Vision & Mission</a>
+                     <a class="dropdown-item" href="#">Team</a>
+                     <a class="dropdown-item" href="#">Contact Us</a>
+                  </div>
+               </li>
+            </ul>
+            <form class="form-inline">
+               <!-- <i class="fa-solid fa-magnifying-glass"> </i> -->
+               <input class="form-control mr-2" type="search" placeholder="Search Courses" />
+               <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+         </div>
+      </nav>
+   </div>
+
+   <!-- 2. Slide body -->
+   <div class="container-fluid bg-info mt-5" id="slide-body">
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-6 my-auto text-white">
+               <h1>Welcome to Ionic Course365 Learning Center</h1>
+               <p>
+                  Ionic Course365 is an online learning and teaching marketplace with over 5000 courses and 1 million
+                  students. Instructor and expertly crafted courses, designed for the modern students and
+                  entrepreneur.
+               </p>
+               <button class="btn btn-warning">Browse Courses</button>
+               <button class="btn btn-light">Become an Instructor</button>
+            </div>
+            <div class="col-sm-6">
+               <img src="images/ionic-207965.png" alt="" style="width: 50%" />
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- 3. Courses content -->
+   <div class="container-fluid my-5" id="content">
+      <!--Recommend courses-->
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-12">
+               <h3>Recommend courses</h3>
+            </div>
+         </div>
+         <div class="row mt-2">
+            <div class="col-sm-3">
+               <div class="card">
+                  <img src="images/courses/course-angular.jpg" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                     <h6 class="card-title text-primary">How to easily create a website with Angular</h6>
+                     <p class="card-text">
+                        <span><i class="far fa-clock"></i></span>
+                        <span>3h 56m</span>
+                        <span>Beginner</span>
+                     </p>
+                     <p class="card-text" style="font-size: 20px">
+                        <span class="font-weight-bold">$600</span>
+                        <span> <s>$750</s> </span>
+                     </p>
+                  </div>
+                  <div class="card-footer">
+                     <div class="form-inline justify-content-around">
+                        <img src="images/teacher/morris_mccoy.jpg" class="rounded-circle" style="width: 30px" />
+
+                        <label>Morris Mccoy</label>
+
+                        <i class="fa-regular fa-bookmark"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-3">
+               <div class="card">
+                  <img src="images/courses/course-python.jpg" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                     <h6 class="card-title text-primary">The Python Course: build web application</h6>
+                     <p class="card-text">
+                        <span><i class="far fa-clock"></i></span>
+                        <span>4h 30m</span>
+                        <span>Advanced</span>
+                     </p>
+                     <p class="card-text" style="font-size: 20px">
+                        <span class="font-weight-bold">$900</span>
+                        <span> <s>$1050</s> </span>
+                     </p>
+                  </div>
+                  <div class="card-footer">
+                     <div class="form-inline justify-content-around">
+                        <img src="images/teacher/claire_robertson.jpg" class="rounded-circle" style="width: 30px" />
+
+                        <label>Claire Robertson</label>
+
+                        <i class="fa-regular fa-bookmark"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-sm-3">
+               <div class="card">
+                  <img src="images/courses/course-graphql.jpg" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                     <h6 class="card-title text-primary">GraphQL: introduction to graphQL for beginners</h6>
+                     <p class="card-text">
+                        <span><i class="far fa-clock"></i></span>
+                        <span>2h 15m</span>
+                        <span>Intermediate</span>
+                     </p>
+                     <p class="card-text" style="font-size: 20px">
+                        <span class="font-weight-bold">$650</span>
+                        <span> <s>$850</s> </span>
+                     </p>
+                  </div>
+                  <div class="card-footer">
+                     <div class="form-inline justify-content-around">
+                        <img src="images/teacher/ted_hawkins.jpg" class="rounded-circle" style="width: 30px" />
+
+                        <label>Ted Hawkins</label>
+
+                        <i class="fa-regular fa-bookmark"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-sm-3">
+               <div class="card">
+                  <img src="images/courses/course-javascript.jpg" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                     <h6 class="card-title text-primary">Getting Started with JavaScript</h6>
+                     <p class="card-text">
+                        <span><i class="far fa-clock"></i></span>
+                        <span>3h 34m</span>
+                        <span>Beginner</span>
+                     </p>
+                     <p class="card-text" style="font-size: 20px">
+                        <span class="font-weight-bold">$300</span>
+                        <span> <s>$550</s> </span>
+                     </p>
+                  </div>
+                  <div class="card-footer">
+                     <div class="form-inline justify-content-around">
+                        <img src="images/teacher/ted_hawkins.jpg" class="rounded-circle" style="width: 30px" />
+
+                        <label>Ted Hawkins</label>
+
+                        <i class="fa-regular fa-bookmark"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <!--Most Popular courses-->
+         <div class="container mt-5">
+            <div class="row">
+               <div class="col-sm-12">
+                  <h3>Most Popular courses</h3>
+               </div>
+            </div>
+            <div class="row mt-2 popular-courses"></div>
+         </div>
+
+         <!--Trending courses-->
+         <div class="container mt-5">
+            <div class="row">
+               <div class="col-sm-12">
+                  <h3>Trending courses</h3>
+               </div>
+            </div>
+            <div class="row mt-2 trending-courses"></div>
+         </div>
+      </div>
+
+   </div>
+
+
+   <!-- 4. Footer -->
+   <div class="container" id="footer">
+      <div class="row">
+         <div class="col-sm-6">
+            <p>© 2021 Ionic Course365. All Rights Reserved.</p>
+         </div>
+         <div class="col-sm-6">
+            <ul class="list form-inline justify-content-around">
+               <li class="list-group"><a href="#">Privarcy</a></li>
+               <li class="list-group"><a href="#">Term</a></li>
+               <li class="list-group"><a href="#">FeedBack</a></li>
+               <li class="list-group"><a href="#">Support</a></li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</body>
+<script>
+   /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+   var gCourse = [];
+
+   /*** REGION 2 - Vùng gán / thực thi sự kiện cho các elements */
+   $(document).ready(function () {
+      onPageLoadDing();
+   });
+
+   /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+   function onPageLoadDing() {
+      loadAllCourse();
+      loadPopularCourses(gCourse);
+      loadTrendingCourses(gCourse);
+   }
+
+   /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+   function loadAllCourse() {
+      $.ajax({
+         async: false,
+         type: "GET",
+         url: "https://624abe0dfd7e30c51c110ac6.mockapi.io/api/v1/courses",
+         dataType: "json",
+         success: function (responseText) {
+            gCourse = responseText;
+            console.log(gCourse);
+         },
+      });
+   }
+
+   function loadPopularCourses(param) {
+      debugger
+      var vPopularCourses = param.filter(function (item) {
+         return item.isPopular == true;
+      });
+      console.log(vPopularCourses);
+      for (let bI = 0; bI < 4; bI++) {
+         $(".popular-courses").append(`  <div class="col-sm-3">
+                  <div class="card">
+                     <img src=${vPopularCourses[bI].coverImage} class="card-img-top" alt="..." />
+                     <div class="card-body">
+                        <h6 class="card-title text-primary">${vPopularCourses[bI].courseName}</h6>
+                        <p class="card-text">
+                           <span><i class="far fa-clock"></i></span>
+                           <span>${vPopularCourses[bI].duration}</span>
+                           <span>${vPopularCourses[bI].level}</span>
+                        </p>
+                        <p class="card-text" style="font-size: 20px">
+                           <span class="font-weight-bold">$${vPopularCourses[bI].discountPrice}</span>
+                           <span> <s>$${vPopularCourses[bI].price}</s> </span>
+                        </p>
+                     </div>
+                     <div class="card-footer">
+                        <div class="form-inline justify-content-around">
+                           <img src=${vPopularCourses[bI].teacherPhoto} class="rounded-circle" style="width: 30px" />
+
+                           <label>${vPopularCourses[bI].teacherName}</label>
+
+                           <i class="fa-regular fa-bookmark"></i>
+                        </div>
+                     </div>
+                  </div>
+               </div>`);
+      }
+   }
+
+   function loadTrendingCourses(param) {
+      var vTrendingCourses = param.filter(function (item) {
+         return item.isTrending == true;
+      });
+      console.log(vTrendingCourses);
+      for (let bI = 0; bI < 4; bI++) {
+         $(".trending-courses").append(`  <div class="col-sm-3">
+                  <div class="card">
+                     <img src=${vTrendingCourses[bI].coverImage} class="card-img-top" alt="..." />
+                     <div class="card-body">
+                        <h6 class="card-title text-primary">${vTrendingCourses[bI].courseName}</h6>
+                        <p class="card-text">
+                           <span><i class="far fa-clock"></i></span>
+                           <span>${vTrendingCourses[bI].duration}</span>
+                           <span>${vTrendingCourses[bI].level}</span>
+                        </p>
+                        <p class="card-text" style="font-size: 20px">
+                           <span class="font-weight-bold">$${vTrendingCourses[bI].discountPrice}</span>
+                           <span> <s>$${vTrendingCourses[bI].price}</s> </span>
+                        </p>
+                     </div>
+                     <div class="card-footer">
+                        <div class="form-inline justify-content-around">
+                           <img src=${vTrendingCourses[bI].teacherPhoto} class="rounded-circle" style="width: 30px" />
+
+                           <label>${vTrendingCourses[bI].teacherName}</label>
+
+                           <i class="fa-regular fa-bookmark"></i>
+                        </div>
+                     </div>
+                  </div>
+               </div>`);
+      }
+   }
+</script>
+
+</html>
