@@ -25,11 +25,11 @@
     <div class="row">
       <div class="col-12">
         <div>
-          <h2 class="text-center">Danh sách giảng viên </h2>
+          <h2 class="text-center">Danh sách khóa học</h2>
         </div>
-        <button class="btn btn-success form-group" id="btn-add-user" data-toggle="modal"
-          data-target="#insert-user-modal">Thêm User</button>
-        <table class="table table-bordered table-striped table-hover" id="table-user">
+        <button class="btn btn-success form-group" id="btn-add-courses" data-toggle="modal"
+          data-target="#insert-courses-modal">Thêm Khóa Học Mới</button>
+        <table class="table table-bordered table-striped table-hover" id="table-courses">
           <thead>
             <tr>
               <th scope="col">Id</th>
@@ -58,13 +58,13 @@
 
   <!-- Vùng Modal -->
 
-  <!-- Create user modal -->
+  <!-- Create courses modal -->
   <div>
-    <div id="insert-user-modal" class="modal fade" tabindex="-1">
+    <div id="insert-courses-modal" class="modal fade" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="h5-modal-title">Thêm User</h5>
+            <h5 class="modal-title" id="h5-modal-title">Thêm Khóa Học Mới</h5>
             <button class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
@@ -183,8 +183,8 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary" id="btn-create-user">Insert User</button>
-            <button class="btn btn-secondary" id="btn-create-cancel" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary" id="btn-create-courses">Thêm</button>
+            <button class="btn btn-secondary" id="btn-create-cancel" data-dismiss="modal">Hủy</button>
           </div>
         </div>
       </div>
@@ -192,13 +192,13 @@
   </div>
   </div>
 
-  <!-- Update user modal -->
+  <!-- Edit courses modal -->
   <div>
-    <div id="update-user-modal" class="modal fade" tabindex="-1">
+    <div id="update-courses-modal" class="modal fade" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="h5-modal-title">Update User</h5>
+            <h5 class="modal-title" id="h5-modal-title">Update Khóa Học</h5>
             <button class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
@@ -310,12 +310,12 @@
                   </select>
                 </div>
               </div>
-              
+
             </form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary" id="btn-update-user">Update User</button>
-            <button class="btn btn-secondary" id="btn-update-cancel" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary" id="btn-update-courses">Xác nhận</button>
+            <button class="btn btn-secondary" id="btn-update-cancel" data-dismiss="modal">Hủy</button>
           </div>
         </div>
       </div>
@@ -328,15 +328,15 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="h5-modal-title">User Delete Confirmation</h5>
+            <h5 class="modal-title" id="h5-modal-title">Xóa Khóa Học</h5>
             <button class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            <label>Bạn có chắc chắn muốn xóa user này không?</label>
+            <label>Bạn có chắc chắn muốn xóa khóa học này không?</label>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-danger" id="btn-confirm-delete-user">Confirm</button>
-            <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-danger" id="btn-confirm-delete-courses">Xác nhận</button>
+            <button class="btn btn-secondary" data-dismiss="modal">Hủy</button>
           </div>
         </div>
       </div>
@@ -345,359 +345,359 @@
 
   <script>
 
-    
-      /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
 
-      const gDATA_COLUMN = [
-        "id",
-        "courseCode",
-        "courseName",
-        "price",
-        "discountPrice",
-        "duration",
-        "level",
-        "coverImage",
-        "teacherName",
-        "teacherPhoto",
-        "isPopular",
-        "isTrending",
-        "action",
-      ];
-      const gID = 0;
-      const gCOURSE_CODDE = 1;
-      const gCOURSE_NAME = 2;
-      const gPRICE = 3;
-      const gPRICE_DISCOUNT = 4;
-      const gDURATION = 5;
-      const gLEVEL = 6;
-      const gCOVER_IMAGE = 7;
-      const gTEACHER_NAME = 8;
-      const gTEACHER_PHOTO = 9;
-      const gIS_POPULAR = 10;
-      const gIS_TRENDING = 11;
-      const gACTION = 12;
+    /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
 
-      var vTable = $("#table-user").DataTable({
-        "columns": [
-          { "data": gDATA_COLUMN[gID] },
-          { "data": gDATA_COLUMN[gCOURSE_CODDE] },
-          { "data": gDATA_COLUMN[gCOURSE_NAME] },
-          { "data": gDATA_COLUMN[gPRICE] },
-          { "data": gDATA_COLUMN[gPRICE_DISCOUNT] },
-          { "data": gDATA_COLUMN[gDURATION] },
-          { "data": gDATA_COLUMN[gLEVEL] },
-          { "data": gDATA_COLUMN[gCOVER_IMAGE] },
-          { "data": gDATA_COLUMN[gTEACHER_NAME] },
-          { "data": gDATA_COLUMN[gTEACHER_PHOTO] },
-          { "data": gDATA_COLUMN[gIS_POPULAR] },
-          { "data": gDATA_COLUMN[gIS_TRENDING] },
-          { "data": gDATA_COLUMN[gACTION] },
-        ],
-        columnDefs: [
-          {
-            targets: gCOVER_IMAGE,
-            render: function (data) {
-              return `<img src="${data}" class="card-img-top">`;
-            }
-          },
-          {
-            targets: gTEACHER_PHOTO,
-            render: function (data) {
-              return `<img src="${data}" class="card-img-top">`;
-            }
-          },
-          {
-            targets: gACTION,
-            defaultContent: ` <button class='btn btn-primary btn-edit'>Sửa</button>
-                    <button class='btn btn-danger btn-delete' data-toggle="modal">Xóa</button> `}
-        ],
-        autoWidth: false
-      });
-  
-      var gIdUsers = "";
-      /*** REGION 2 - Vùng gán / thực thi hàm xử lý sự kiện cho các elements */
-      $(document).ready(function () {
-        onPageLoading();
-      });
-     
-      $(document).on("click", "#table-user .btn-edit", function () {
-        onBtnEditClick(this);
-      })
-      $(document).on("click", "#table-user .btn-delete", function () {
-        onBtnDeleteClick(this);
-      })
-      $("#btn-add-user").on("click", function () {
-        onBtnAddUserClick();
-      })
-      $("#btn-create-user").on("click", function () {
-        onBtnCreateUserClick();
-      })
-      $("#btn-update-user").on("click", function () {
-        onBtnUpdateUserClick();
-      })
-      $("#btn-confirm-delete-user").on("click", function () {
-        onBtnConfirmDeleteUserClick();
-      });
-      /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
-      function onPageLoading() {
-        getApiToTable();
-        
-      }
-      function getApiToTable() {
-        $.ajax({
-          url: "https://624abe0dfd7e30c51c110ac6.mockapi.io/api/v1/" + "/courses",
-          type: "GET",
-          dataType: "json",
-          success: function (res) {
-            loadDataToTable(res);
-          },
-          error: function (ajaxContext) {
-            alert(ajaxContext.responseText);
+    const gDATA_COLUMN = [
+      "id",
+      "courseCode",
+      "courseName",
+      "price",
+      "discountPrice",
+      "duration",
+      "level",
+      "coverImage",
+      "teacherName",
+      "teacherPhoto",
+      "isPopular",
+      "isTrending",
+      "action",
+    ];
+    const gID = 0;
+    const gCOURSE_CODDE = 1;
+    const gCOURSE_NAME = 2;
+    const gPRICE = 3;
+    const gPRICE_DISCOUNT = 4;
+    const gDURATION = 5;
+    const gLEVEL = 6;
+    const gCOVER_IMAGE = 7;
+    const gTEACHER_NAME = 8;
+    const gTEACHER_PHOTO = 9;
+    const gIS_POPULAR = 10;
+    const gIS_TRENDING = 11;
+    const gACTION = 12;
+
+    var vTable = $("#table-courses").DataTable({
+      "columns": [
+        { "data": gDATA_COLUMN[gID] },
+        { "data": gDATA_COLUMN[gCOURSE_CODDE] },
+        { "data": gDATA_COLUMN[gCOURSE_NAME] },
+        { "data": gDATA_COLUMN[gPRICE] },
+        { "data": gDATA_COLUMN[gPRICE_DISCOUNT] },
+        { "data": gDATA_COLUMN[gDURATION] },
+        { "data": gDATA_COLUMN[gLEVEL] },
+        { "data": gDATA_COLUMN[gCOVER_IMAGE] },
+        { "data": gDATA_COLUMN[gTEACHER_NAME] },
+        { "data": gDATA_COLUMN[gTEACHER_PHOTO] },
+        { "data": gDATA_COLUMN[gIS_POPULAR] },
+        { "data": gDATA_COLUMN[gIS_TRENDING] },
+        { "data": gDATA_COLUMN[gACTION] },
+      ],
+      columnDefs: [
+        {
+          targets: gCOVER_IMAGE,
+          render: function (data) {
+            return `<img src="${data}" class="card-img-top">`;
           }
-        })
-      }
-      function loadDataToTable(paramUser) {
-        var vTable = $("#table-user").DataTable();
-        vTable.clear();
-        vTable.rows.add(paramUser);
-        vTable.draw();
-      }
-      function onBtnEditClick(paramUser) {
-        var vRowClick = $(paramUser).parents("tr");
-        var vTable = $("#table-user").DataTable();
-        var vDataRow = vTable.row(vRowClick).data();
-        console.log("Button Edit Click!");
-  
-        gIdUsers = vDataRow.id;
-        $("#update-user-modal").modal("show");
-        $("#input-id-update").val(vDataRow.id);
-        $("#input-course-code-update").val(vDataRow.courseCode);
-        $("#input-course-name-update").val(vDataRow.courseName);
-        $("#input-price-update").val(vDataRow.price);
-        $("#input-discount-price-update").val(vDataRow.discountPrice);
-        $("#input-duration-update").val(vDataRow.duration);
-        $("#select-level-update").val(vDataRow.level);
-        $("#input-cover-image-update").val(vDataRow.coverImage);
-        $("#input-teacher-name-update").val(vDataRow.teacherName);
-        $("#input-teacher-photo-update").val(vDataRow.teacherPhoto);
-        $("#select-update-modal-popular").val(vDataRow.isPopular);
-        $("#select-update-modal-trending").val(vDataRow.isTrending);
-        if (vDataRow.isPopular == true) {
-          $("#select-update-modal-popular").val("true");
-        } else {
-          $("#select-update-modal-popular").val("false");
-        }
-        if (vDataRow.isTrending == true) {
-          $("#select-update-modal-trending").val("true");
-        } else {
-          $("#select-update-modal-trending").val("false");
-        }
-      }
-      function onBtnDeleteClick(paramUser) {
-        var vRowClick = $(paramUser).parents("tr");
-        var vTable = $("#table-user").DataTable();
-        var vDataRow = vTable.row(vRowClick).data();
-        console.log("Button Delete Click!");
-        console.log("User id: " + vDataRow.id);
-        gIdUsers = vDataRow.id;
-        $("#delete-confirm-modal").modal("show");
+        },
+        {
+          targets: gTEACHER_PHOTO,
+          render: function (data) {
+            return `<img src="${data}" class="card-img-top">`;
+          }
+        },
+        {
+          targets: gACTION,
+          defaultContent: ` <button class='btn btn-primary btn-edit'>Sửa</button>
+                    <button class='btn btn-danger btn-delete' data-toggle="modal">Xóa</button> `}
+      ],
+      autoWidth: false
+    });
 
-      }
-      function onBtnAddUserClick() {
-        $("#insert-user-modal").modal("show");
-      }
-      function onBtnCreateUserClick() {
-        var vUserObj = {
-          courseCode: "",
-          courseName: "",
-          price: "",
-          discountPrice: "",
-          duration: "",
-          level: "",
-          coverImage: "",
-          teacherName: "",
-          teacherPhoto: "",
-          isPopular: false,
-          isTrending: false,
+    var gIdCourses = "";
+    /*** REGION 2 - Vùng gán / thực thi hàm xử lý sự kiện cho các elements */
+    $(document).ready(function () {
+      onPageLoading();
+    });
+
+    $(document).on("click", "#table-courses .btn-edit", function () {
+      onBtnEditClick(this);
+    })
+    $(document).on("click", "#table-courses .btn-delete", function () {
+      onBtnDeleteClick(this);
+    })
+    $("#btn-add-courses").on("click", function () {
+      onBtnAddCoursesClick();
+    })
+    $("#btn-create-courses").on("click", function () {
+      onBtnCreateCoursesClick();
+    })
+    $("#btn-update-courses").on("click", function () {
+      onBtnUpdateCoursesClick();
+    })
+    $("#btn-confirm-delete-courses").on("click", function () {
+      onBtnConfirmDeleteUserClick();
+    });
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    function onPageLoading() {
+      getApiToTable();
+
+    }
+    function getApiToTable() {
+      $.ajax({
+        url: "https://624abe0dfd7e30c51c110ac6.mockapi.io/api/v1/" + "/courses",
+        type: "GET",
+        dataType: "json",
+        success: function (res) {
+          loadDataToTable(res);
+        },
+        error: function (ajaxContext) {
+          alert(ajaxContext.responseText);
         }
-        getUserDataCreate(vUserObj);
-        var vIsUserValidate = validateInsertData(vUserObj);
-        if (vIsUserValidate) {
-          postUserApi(vUserObj);
-          location.reload();
-          resertCreateUserForm();
-          $("#insert-user-modal").modal("hide");
-        }
+      })
+    }
+    function loadDataToTable(paramCourses) {
+      var vTable = $("#table-courses").DataTable();
+      vTable.clear();
+      vTable.rows.add(paramCourses);
+      vTable.draw();
+    }
+    function onBtnEditClick(paramCourses) {
+      var vRowClick = $(paramCourses).parents("tr");
+      var vTable = $("#table-courses").DataTable();
+      var vDataRow = vTable.row(vRowClick).data();
+      console.log("Button Edit Click!");
+
+      gIdCourses = vDataRow.id;
+      $("#update-courses-modal").modal("show");
+      $("#input-id-update").val(vDataRow.id);
+      $("#input-course-code-update").val(vDataRow.courseCode);
+      $("#input-course-name-update").val(vDataRow.courseName);
+      $("#input-price-update").val(vDataRow.price);
+      $("#input-discount-price-update").val(vDataRow.discountPrice);
+      $("#input-duration-update").val(vDataRow.duration);
+      $("#select-level-update").val(vDataRow.level);
+      $("#input-cover-image-update").val(vDataRow.coverImage);
+      $("#input-teacher-name-update").val(vDataRow.teacherName);
+      $("#input-teacher-photo-update").val(vDataRow.teacherPhoto);
+      $("#select-update-modal-popular").val(vDataRow.isPopular);
+      $("#select-update-modal-trending").val(vDataRow.isTrending);
+      if (vDataRow.isPopular == true) {
+        $("#select-update-modal-popular").val("true");
+      } else {
+        $("#select-update-modal-popular").val("false");
       }
-      function onBtnUpdateUserClick() {
-        var vUserObj = {
-          courseCode: "",
-          courseName: "",
-          price: "",
-          discountPrice: "",
-          duration: "",
-          level: "",
-          coverImage: "",
-          teacherName: "",
-          teacherPhoto: "",
-          isPopular: false,
-          isTrending: false,
-        }
-        console.log(gIdUsers)
-        getUserDataUpdate(vUserObj);
-        var vIsUserValidate = validateInsertData(vUserObj);
-        if (vIsUserValidate) {
-          putUserApi(vUserObj);
-          location.reload();
-          resertUpdateUserForm();
-          $("#update-user-modal").modal("hide");
-        }
+      if (vDataRow.isTrending == true) {
+        $("#select-update-modal-trending").val("true");
+      } else {
+        $("#select-update-modal-trending").val("false");
       }
-      function onBtnConfirmDeleteUserClick() {
-        deleteUserApi(gIdUsers);
+    }
+    function onBtnDeleteClick(paramCourses) {
+      var vRowClick = $(paramCourses).parents("tr");
+      var vTable = $("#table-courses").DataTable();
+      var vDataRow = vTable.row(vRowClick).data();
+      console.log("Button Delete Click!");
+      console.log("User id: " + vDataRow.id);
+      gIdCourses = vDataRow.id;
+      $("#delete-confirm-modal").modal("show");
+
+    }
+    function onBtnAddCoursesClick() {
+      $("#insert-courses-modal").modal("show");
+    }
+    function onBtnCreateCoursesClick() {
+      var vCoursesObj = {
+        courseCode: "",
+        courseName: "",
+        price: "",
+        discountPrice: "",
+        duration: "",
+        level: "",
+        coverImage: "",
+        teacherName: "",
+        teacherPhoto: "",
+        isPopular: false,
+        isTrending: false,
+      }
+      getCoursesDataCreate(vCoursesObj);
+      var vIsCoursesValidate = validateInsertData(vCoursesObj);
+      if (vIsCoursesValidate) {
+        postCoursesApi(vCoursesObj);
         location.reload();
-        $("#delete-confirm-modal").modal("hide");
+        resertCreateCoursesForm();
+        $("#insert-courses-modal").modal("hide");
       }
-      /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
-    
-    function getUserDataCreate(paramUserObj) {
-      paramUserObj.courseCode = $("#input-course-code").val().trim();
-      paramUserObj.courseName = $("#input-course-name").val().trim();
-      paramUserObj.price = $("#input-price").val().trim();
-      paramUserObj.discountPrice = $("#input-discount-price").val();
-      paramUserObj.duration = $("#input-duration").val().trim();
-      paramUserObj.level = $("#select-level").val()
-      paramUserObj.coverImage = $("#input-cover-image").val().trim();
-      paramUserObj.teacherName = $("#input-teacher-name").val().trim();
-      paramUserObj.teacherPhoto = $("#input-teacher-photo").val().trim();
+    }
+    function onBtnUpdateCoursesClick() {
+      var vCoursesObj = {
+        courseCode: "",
+        courseName: "",
+        price: "",
+        discountPrice: "",
+        duration: "",
+        level: "",
+        coverImage: "",
+        teacherName: "",
+        teacherPhoto: "",
+        isPopular: false,
+        isTrending: false,
+      }
+      console.log(gIdCourses)
+      getUserDataUpdate(vCoursesObj);
+      var vIsCoursesValidate = validateInsertData(vCoursesObj);
+      if (vIsCoursesValidate) {
+        putCoursesApi(vCoursesObj);
+        location.reload();
+        resertUpdateCoursesForm();
+        $("#update-courses-modal").modal("hide");
+      }
+    }
+    function onBtnConfirmDeleteUserClick() {
+      deleteUserApi(gIdCourses);
+      location.reload();
+      $("#delete-confirm-modal").modal("hide");
+    }
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+
+    function getCoursesDataCreate(paramCoursesObj) {
+      paramCoursesObj.courseCode = $("#input-course-code").val().trim();
+      paramCoursesObj.courseName = $("#input-course-name").val().trim();
+      paramCoursesObj.price = $("#input-price").val().trim();
+      paramCoursesObj.discountPrice = $("#input-discount-price").val();
+      paramCoursesObj.duration = $("#input-duration").val().trim();
+      paramCoursesObj.level = $("#select-level").val()
+      paramCoursesObj.coverImage = $("#input-cover-image").val().trim();
+      paramCoursesObj.teacherName = $("#input-teacher-name").val().trim();
+      paramCoursesObj.teacherPhoto = $("#input-teacher-photo").val().trim();
 
       var vIsPopular = $("input[name='select-popular']");
       for (var bI = 0; bI < vIsPopular.length; bI++) {
         if (vIsPopular[bI].checked == true) {
-          paramUserObj.isPopular = vIsPopular[bI].value;
+          paramCoursesObj.isPopular = vIsPopular[bI].value;
         }
       }
       var vIsTrending = $("input[name='select-trending']");
       for (var bI = 0; bI < vIsTrending.length; bI++) {
         if (vIsTrending[bI].checked == true) {
-          paramUserObj.isTrending = vIsTrending[bI].value;
+          paramCoursesObj.isTrending = vIsTrending[bI].value;
         }
       }
     }
-    function getUserDataUpdate(paramUserObj) {
-      paramUserObj.courseCode = $("#input-course-code-update").val().trim();
-      paramUserObj.courseName = $("#input-course-name-update").val().trim();
-      paramUserObj.price = $("#input-price-update").val().trim();
-      paramUserObj.discountPrice = $("#input-discount-price-update").val();
-      paramUserObj.duration = $("#input-duration-update").val().trim();
-      paramUserObj.level = $("#select-level-update").val()
-      paramUserObj.coverImage = $("#input-cover-image-update").val().trim();
-      paramUserObj.teacherName = $("#input-teacher-name-update").val().trim();
-      paramUserObj.teacherPhoto = $("#input-teacher-photo-update").val().trim();
-      paramUserObj.isPopular = $("#select-update-modal-popular").val()
-      paramUserObj.isTrending = $("#select-update-modal-trending").val()
+    function getUserDataUpdate(paramCoursesObj) {
+      paramCoursesObj.courseCode = $("#input-course-code-update").val().trim();
+      paramCoursesObj.courseName = $("#input-course-name-update").val().trim();
+      paramCoursesObj.price = $("#input-price-update").val().trim();
+      paramCoursesObj.discountPrice = $("#input-discount-price-update").val();
+      paramCoursesObj.duration = $("#input-duration-update").val().trim();
+      paramCoursesObj.level = $("#select-level-update").val()
+      paramCoursesObj.coverImage = $("#input-cover-image-update").val().trim();
+      paramCoursesObj.teacherName = $("#input-teacher-name-update").val().trim();
+      paramCoursesObj.teacherPhoto = $("#input-teacher-photo-update").val().trim();
+      paramCoursesObj.isPopular = $("#select-update-modal-popular").val()
+      paramCoursesObj.isTrending = $("#select-update-modal-trending").val()
 
     }
-    function validateInsertData(paramUserObj) {
-      if (paramUserObj.courseCode == "") {
+    function validateInsertData(paramCoursesObj) {
+      if (paramCoursesObj.courseCode == "") {
         alert("Cần nhập courseCode");
         return false;
       }
-      if (paramUserObj.courseCode.length < 10) {
+      if (paramCoursesObj.courseCode.length < 10) {
         alert("courseCode chứa ít nhất 10 ký tự");
         return false;
       }
-      if (paramUserObj.courseName == "") {
+      if (paramCoursesObj.courseName == "") {
         alert("Cần nhập courseName");
         return false;
       }
-      if (paramUserObj.courseName.length < 20) {
+      if (paramCoursesObj.courseName.length < 20) {
         alert("courseName chứa ít nhất 20 ký tự");
         return false;
       }
-      if (paramUserObj.price == "") {
+      if (paramCoursesObj.price == "") {
         alert("Cần nhập price");
         return false;
       }
-      if (isNaN(paramUserObj.price)) {
+      if (isNaN(paramCoursesObj.price)) {
         alert("price Là số nguyên > 0");
         return false;
       }
-      if (paramUserObj.price < 1) {
+      if (paramCoursesObj.price < 1) {
         alert("price Là số nguyên > 0");
         return false;
       }
-      var vprice = Number(paramUserObj.price)
+      var vprice = Number(paramCoursesObj.price)
       if (Number.isInteger(vprice) == false) {
         alert("price Là số nguyên > 0");
         return false;
       }
 
-      if (paramUserObj.discountPrice == "") {
+      if (paramCoursesObj.discountPrice == "") {
         alert("Cần nhập discountPrice");
         return false;
       }
-      if (isNaN(paramUserObj.discountPrice)) {
+      if (isNaN(paramCoursesObj.discountPrice)) {
         alert("discountPrice Là số nguyên >= 0");
         return false;
       }
-      if (paramUserObj.discountPrice < 0) {
+      if (paramCoursesObj.discountPrice < 0) {
         alert("discountPrice Là số nguyên >= 0");
         return false;
       }
-      var vdiscountPrice = Number(paramUserObj.discountPrice)
+      var vdiscountPrice = Number(paramCoursesObj.discountPrice)
       if (Number.isInteger(vdiscountPrice) == false) {
         alert("discountPrice Là số nguyên >= 01");
         return false;
       }
-      if (paramUserObj.duration == "") {
+      if (paramCoursesObj.duration == "") {
         alert("Cần nhập duration");
         return false;
       }
-      if (paramUserObj.level == "NOT") {
+      if (paramCoursesObj.level == "NOT") {
         alert("Cần chọn level");
         return false;
       }
-      if (paramUserObj.coverImage == "") {
+      if (paramCoursesObj.coverImage == "") {
         alert("Cần nhập coverImage");
         return false;
       }
-      if (paramUserObj.teacherName == "") {
+      if (paramCoursesObj.teacherName == "") {
         alert("Cần nhập teacherName");
         return false;
       }
-      if (paramUserObj.teacherPhoto == "") {
+      if (paramCoursesObj.teacherPhoto == "") {
         alert("Cần nhập teacherPhoto");
         return false;
       }
       return true;
     }
-    function postUserApi(paramUserObj) {
+    function postCoursesApi(paramCoursesObj) {
       $.ajax({
         async: false,
         url: "https://624abe0dfd7e30c51c110ac6.mockapi.io/api/v1/" + "/courses",
         type: "POST",
-        data: JSON.stringify(paramUserObj),
+        data: JSON.stringify(paramCoursesObj),
         contentType: "application/json",
         success: function (res) {
           console.log(res);
-          alert("Thêm user thành công!");
+          alert("Thêm khóa học thành công!");
         },
         error: function (error) {
           alert(error.responseText);
         }
       })
     }
-    function putUserApi(paramUserObj, paramId) {
+    function putCoursesApi(paramCoursesObj, paramId) {
       $.ajax({
         async: false,
-        url: "https://624abe0dfd7e30c51c110ac6.mockapi.io/api/v1/" + "/courses/" + gIdUsers,
+        url: "https://624abe0dfd7e30c51c110ac6.mockapi.io/api/v1/" + "/courses/" + gIdCourses,
         type: "PUT",
-        data: JSON.stringify(paramUserObj),
+        data: JSON.stringify(paramCoursesObj),
         contentType: "application/json",
         success: function (res) {
           console.log(res);
-          alert("Thêm user thành công!");
+          alert("Sửa khóa học thành công!");
         },
         error: function (error) {
           alert(error.responseText);
@@ -712,7 +712,7 @@
         type: "DELETE",
         success: function (res) {
           console.log(res);
-          alert("Đã xóa user thành công!");
+          alert("Đã xóa khóa học thành công!");
         },
         error: function (error) {
           alert(error.responseText);
@@ -720,7 +720,7 @@
 
       })
     }
-    function resertCreateUserForm() {
+    function resertCreateCoursesForm() {
       $("#input-id-update").val("");
       $("#input-course-code").val("");
       $("#input-course-name").val("");
@@ -733,7 +733,7 @@
       $("#input-teacher-photo").val("");
 
     }
-    function resertUpdateUserForm() {
+    function resertUpdateCoursesForm() {
       $("#input-id-update").val("");
       $("#input-course-code-update").val("");
       $("#input-course-name-update").val("");

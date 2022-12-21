@@ -1,236 +1,247 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Course 365 - Learning with unlimited!</title>
-  
+
   <!-- Nhúng các thư viện BS4 & jQuery, awesome font -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  
-  
+
+
   <!-- Các file css và js tự định nghĩa thêm -->
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
 </head>
-<body>
-  
-    <!-- 1. Header - Navbar menu -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#"><img src="images/Ionic_logo.png" alt=""></a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link " href="#">Home</a>
-          </li>
-          <li class="nav-item ">
-            <div class="dropdown">
-              <button class="btn dropdown-toggle"  data-toggle="dropdown">Browse courses</button>
-              <ul class="dropdown-menu">
-                <li><a href="#">Web Development</a></li>
-                <li><a href="#">Mobile App</a></li>
-                <li><a href="#">Desktop</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <div class="dropdown">
-              <button class="btn dropdown-toggle"  data-toggle="dropdown">About Us</button>
-              <ul class="dropdown-menu">
-                <li><a href="#">Vision & Mission</a></li>
-                <li><a href="#">Team</a></li>
-                <li><a href="#">Contact Us</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-        <form class="form-inline  search__form" >
-          <i class="fa fa-search search__icon" ></i>
-          <input class="form-control search__input"  style= "padding-left: 22px" type="search" placeholder= "Search Courses" aria-label="Search">&nbsp;&nbsp;
-          <button class="btn btn-outline-success " type="submit">Search </button>
-        </form>
-      </div>
-    </nav>
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <!-- 2. Slide body -->
-    <div class="container-fluid" style="background-color: aqua;">
-      <div class="row">
-        <div class="col-2"></div>
-        <div class="col-5 " style="padding-top: 150px;" >
-          <h1>Welcom to lonic Course365 Learning Center</h1>
-          <p>lonic Course is an online learning and teaching marketplace with over 5000 courses and 1 million students. Instructor and expertly crafted courses, designed for the modern students and entrepreneur.</p>
-          <button class="btn btn-warning">Browse Courses</button>
-          <button class="btn btn-light">Become an Instructor</button>
-        </div>
-        <div class="col-4" >
-          <div> <img src="images/ionic-207965.png" alt=""></div>
-        </div>
-      </div>
-    </div>
-    <!-- 3. Courses content -->
-    <div class="container jumbotron bg-white">
-      <div><h2>Recommended to you</h2></div> <br>
-      <div class="card-deck mb-3 ">
-        <div class="card mb-3 box-shadow">
-          <img src="images/courses/course-angular.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h6 style="color: blue;">How to easily create a website with Angular</h6>
-            <i class="far fa-clock"> 3h 56m Beginner</i>
-            <h6>$600 <strike>$700</strike></h6> 
-          </div>
-          <div class="card-footer">
-            <span>
-              <img src="images/teacher/morris_mccoy.jpg" class="card-img-top" alt="">
-            </span>
-            <p>Morris Mccoy</p>
-            <div class="card-footer__icon">
-              <i class="far fa-bookmark"></i>
-            </div>
-          </div>
-        </div>
-        <div class="card mb-3 box-shadow">
-          <img src="images/courses/course-python.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h6 style="color: blue;">The Python Course: build web application</h6>
-            <i class="far fa-clock"> 4h 30m Advanced</i>
-            <h6>$900 <strike>$1050</strike></h6> 
-          </div>
-          <div class="card-footer">
-            <span>
-              <img src="images/teacher/claire_robertson.jpg" class="card-img-top" alt="">
-            </span>
-            <p>Claire Robertson</p>
-            <div class="card-footer__icon">
-              <i class="far fa-bookmark"></i>
-            </div>
-          </div>
-        </div>
-        <div class="card mb-3 box-shadow">
-          <img src="images/courses/course-graphql.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h6 style="color: blue;">GraphQL: introduction to graphnQL for beginners</h6>
-            <i class="far fa-clock"> 2h 15m Intermediate</i>
-            <h6>$650 <strike>$850</strike></h6> 
-          </div>
-          <div class="card-footer">
-            <span>
-              <img src="images/teacher/ted_hawkins.jpg" class="card-img-top" alt="">
-            </span>
-            <p>Ted Hawkins</p>
-            <div class="card-footer__icon">
-              <i class="far fa-bookmark"></i>
-            </div>
-          </div>
-        </div>
-        <div class="card mb-3 box-shadow">
-          <img src="images/courses/course-javascript.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h6 style="color: blue;">Getting Started with JavaScript</h6>
-            <i class="far fa-clock"> 3h 34m Beginner</i>
-            <h6>$300 <strike>$550</strike></h6> 
-          </div>
-          <div class="card-footer">
-            <span>
-              <img src="images/teacher/ted_hawkins.jpg" class="card-img-top" alt="">
-            </span>
-            <p>Ted Hawkins</p>
-            <div class="card-footer__icon">
-              <i class="far fa-bookmark"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid bg-white">
-      <div><h2>Most popular</h2></div> <br>
-      <div class="card-deck mb-3" id="them-popular">
-      </div>
-    </div>
-    <div class="container-fluid bg-white">
-      <div><h2>Trending</h2></div> <br>
-      <div class="card-deck mb-3" id="them-trending">
-      </div>
-    </div>
-    <!-- 4. Footer -->
-    <div class="footer text-center">
-      <div class="row">
-        <div class="col-md-6"><i class='bx bx-copyright'></i>2021 lonic Course 365. All Rights ReServed.</div>
-        <div class="col-md-6 footer__link">
-          <a href="">Privacy</a> &nbsp; &nbsp; 
-          <a href="">Terms</a>&nbsp; &nbsp; 
-          <a href="">Feedback</a>&nbsp; &nbsp; &nbsp; 
-          <a href="">Support</a>&nbsp; &nbsp; 
-        </div>
-      </div>
-    </div>
 
-      
-      
-    
+<body>
+
+  <!-- 1. Header - Navbar menu -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"><img src="images/Ionic_logo.png" alt=""></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link " href="#">Home</a>
+        </li>
+        <li class="nav-item ">
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" data-toggle="dropdown">Browse courses</button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Web Development</a></li>
+              <li><a href="#">Mobile App</a></li>
+              <li><a href="#">Desktop</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" data-toggle="dropdown">About Us</button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Vision & Mission</a></li>
+              <li><a href="#">Team</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+      <form class="form-inline  search__form">
+        <i class="fa fa-search search__icon"></i>
+        <input class="form-control search__input" style="padding-left: 22px" type="search" placeholder="Search Courses"
+          aria-label="Search">&nbsp;&nbsp;
+        <button class="btn btn-outline-success " type="submit">Search </button>
+      </form>
+    </div>
+  </nav>
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <!-- 2. Slide body -->
+  <div class="container-fluid" style="background-color: aqua;">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-5 " style="padding-top: 150px;">
+        <h1>Welcom to lonic Course365 Learning Center</h1>
+        <p>lonic Course is an online learning and teaching marketplace with over 5000 courses and 1 million students.
+          Instructor and expertly crafted courses, designed for the modern students and entrepreneur.</p>
+        <button class="btn btn-warning">Browse Courses</button>
+        <button class="btn btn-light">Become an Instructor</button>
+      </div>
+      <div class="col-4">
+        <div> <img src="images/ionic-207965.png" alt=""></div>
+      </div>
+    </div>
+  </div>
+  <!-- 3. Courses content -->
+  <div class="container jumbotron bg-white">
+    <div>
+      <h2>Recommended to you</h2>
+    </div> <br>
+    <div class="card-deck mb-3 ">
+      <div class="card mb-3 box-shadow">
+        <img src="images/courses/course-angular.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h6 style="color: blue;">How to easily create a website with Angular</h6>
+          <i class="far fa-clock"> 3h 56m Beginner</i>
+          <h6>$600 <strike>$700</strike></h6>
+        </div>
+        <div class="card-footer">
+          <span>
+            <img src="images/teacher/morris_mccoy.jpg" class="card-img-top" alt="">
+          </span>
+          <p>Morris Mccoy</p>
+          <div class="card-footer__icon">
+            <i class="far fa-bookmark"></i>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3 box-shadow">
+        <img src="images/courses/course-python.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h6 style="color: blue;">The Python Course: build web application</h6>
+          <i class="far fa-clock"> 4h 30m Advanced</i>
+          <h6>$900 <strike>$1050</strike></h6>
+        </div>
+        <div class="card-footer">
+          <span>
+            <img src="images/teacher/claire_robertson.jpg" class="card-img-top" alt="">
+          </span>
+          <p>Claire Robertson</p>
+          <div class="card-footer__icon">
+            <i class="far fa-bookmark"></i>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3 box-shadow">
+        <img src="images/courses/course-graphql.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h6 style="color: blue;">GraphQL: introduction to graphnQL for beginners</h6>
+          <i class="far fa-clock"> 2h 15m Intermediate</i>
+          <h6>$650 <strike>$850</strike></h6>
+        </div>
+        <div class="card-footer">
+          <span>
+            <img src="images/teacher/ted_hawkins.jpg" class="card-img-top" alt="">
+          </span>
+          <p>Ted Hawkins</p>
+          <div class="card-footer__icon">
+            <i class="far fa-bookmark"></i>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3 box-shadow">
+        <img src="images/courses/course-javascript.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h6 style="color: blue;">Getting Started with JavaScript</h6>
+          <i class="far fa-clock"> 3h 34m Beginner</i>
+          <h6>$300 <strike>$550</strike></h6>
+        </div>
+        <div class="card-footer">
+          <span>
+            <img src="images/teacher/ted_hawkins.jpg" class="card-img-top" alt="">
+          </span>
+          <p>Ted Hawkins</p>
+          <div class="card-footer__icon">
+            <i class="far fa-bookmark"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container jumbotron bg-white">
+    <div>
+      <h2>Most popular</h2>
+    </div> <br>
+    <div class="card-deck mb-3" id="them-popular">
+    </div>
+  </div>
+  <div class="container jumbotron bg-white">
+    <div>
+      <h2>Trending</h2>
+    </div> <br>
+    <div class="card-deck mb-3" id="them-trending">
+    </div>
+  </div>
+  <!-- 4. Footer -->
+  <div class="footer text-center">
+    <div class="row">
+      <div class="col-md-6"><i class='bx bx-copyright'></i>2021 lonic Course 365. All Rights ReServed.</div>
+      <div class="col-md-6 footer__link">
+        <a href="">Privacy</a> &nbsp; &nbsp;
+        <a href="">Terms</a>&nbsp; &nbsp;
+        <a href="">Feedback</a>&nbsp; &nbsp; &nbsp;
+        <a href="">Support</a>&nbsp; &nbsp;
+      </div>
+    </div>
+  </div>
+
+
+
+
 </body>
 <script>
-/*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
-/*** REGION 2 - Vùng gán / thực thi hàm xử lý sự kiện cho các elements */  
-  $(document).ready(function(){
+  /*** REGION 1 - Global variables - Vùng khai báo biến, hằng số, tham số TOÀN CỤC */
+  /*** REGION 2 - Vùng gán / thực thi hàm xử lý sự kiện cho các elements */
+  $(document).ready(function () {
     onPageLoading();
-  /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
-  function onPageLoading(){
-    callAPI();
-  }
-  /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
-  function callAPI(){
-    $.ajax({
-      url: "https://630890e4722029d9ddd245bc.mockapi.io/api/v1" + "/courses",
-      async: false,
-      type: 'GET', //Phương thức GET AJAX 
-      dataType: 'json',
-      success:function(paramRes){
-        console.log(paramRes);
-        for(var bI = 0; bI < paramRes.length; bI++){
-          if (paramRes[bI].isPopular == true){
-            var vDivHeader = $("<div>").addClass("card mb-3 box-shadow").appendTo($("#them-popular"));
+    /*** REGION 3 - Event handlers - Vùng khai báo các hàm xử lý sự kiện */
+    function onPageLoading() {
+      callAPI();
+    }
+    /*** REGION 4 - Common funtions - Vùng khai báo hàm dùng chung trong toàn bộ chương trình*/
+    function callAPI() {
+      $.ajax({
+        url: "https://630890e4722029d9ddd245bc.mockapi.io/api/v1" + "/courses",
+        async: false,
+        type: 'GET', //Phương thức GET AJAX 
+        dataType: 'json',
+        success: function (paramRes) {
+          console.log(paramRes);
+          for (var bI = 0; bI < paramRes.length; bI++) {
+            if (paramRes[bI].isPopular == true) {
+              var vDivHeader = $("<div>").addClass("card mb-3 box-shadow").appendTo($("#them-popular"));
               $("<img>").attr('src', paramRes[bI].coverImage).addClass("card-img-top").appendTo(vDivHeader);
               var vDivBody = $("<div>").addClass("card-body").appendTo(vDivHeader);
-                $("<h6>").html(paramRes[bI].courseName).css("color", "blue").appendTo(vDivBody);
-                var vDuration = $("<i>").addClass("far fa-clock").html("&nbsp" +paramRes[bI].duration).appendTo(vDivBody)
-                $("<span>").html("&nbsp" +paramRes[bI].level).appendTo(vDuration)
-                var vDiscountPrice = $("<h6>").html("$" + paramRes[bI].discountPrice + "  ").appendTo(vDivBody);
-                $("<strike>").html("$" + paramRes[bI].price).appendTo(vDiscountPrice);
+              $("<h6>").html(paramRes[bI].courseName).css("color", "blue").appendTo(vDivBody);
+              var vDuration = $("<i>").addClass("far fa-clock").html("&nbsp" + paramRes[bI].duration).appendTo(vDivBody)
+              $("<span>").html("&nbsp" + paramRes[bI].level).appendTo(vDuration)
+              var vDiscountPrice = $("<h6>").html("$" + paramRes[bI].discountPrice + "  ").appendTo(vDivBody);
+              $("<strike>").html("$" + paramRes[bI].price).appendTo(vDiscountPrice);
               var vDivFooter = $("<div>").addClass("card-footer").appendTo(vDivHeader);
-                var vSpanImg = $("<span>").appendTo(vDivFooter);
-                  $("<img>").attr('src', paramRes[bI].teacherPhoto).addClass("card-img-top").appendTo(vSpanImg);
-                $("<p>").html(paramRes[bI].teacherName).appendTo(vDivFooter);
-                var vDivIcon = $("<div>").addClass("card-footer__icon").appendTo(vDivFooter);
-                  $("<i>").addClass("far fa-bookmark").appendTo(vDivIcon);
+              var vSpanImg = $("<span>").appendTo(vDivFooter);
+              $("<img>").attr('src', paramRes[bI].teacherPhoto).addClass("card-img-top").appendTo(vSpanImg);
+              $("<p>").html(paramRes[bI].teacherName).appendTo(vDivFooter);
+              var vDivIcon = $("<div>").addClass("card-footer__icon").appendTo(vDivFooter);
+              $("<i>").addClass("far fa-bookmark").appendTo(vDivIcon);
+            }
           }
-        }
-        for(var bI = 0; bI < paramRes.length; bI++){
-          if (paramRes[bI].isTrending == true){
-            var vDivHeader = $("<div>").addClass("card mb-3 box-shadow").appendTo($("#them-trending"));
+          for (var bI = 0; bI < paramRes.length; bI++) {
+            if (paramRes[bI].isTrending == true) {
+              var vDivHeader = $("<div>").addClass("card mb-3 box-shadow").appendTo($("#them-trending"));
               $("<img>").attr('src', paramRes[bI].coverImage).addClass("card-img-top").appendTo(vDivHeader);
               var vDivBody = $("<div>").addClass("card-body").appendTo(vDivHeader);
-                $("<h6>").html(paramRes[bI].courseName).css("color", "blue").appendTo(vDivBody);
-                var vDuration = $("<i>").addClass("far fa-clock").html("&nbsp" +paramRes[bI].duration).appendTo(vDivBody)
-                $("<span>").html("&nbsp" +paramRes[bI].level).appendTo(vDuration)
-                var vDiscountPrice = $("<h6>").html("$" + paramRes[bI].discountPrice + "  ").appendTo(vDivBody);
-                $("<strike>").html("$" + paramRes[bI].price).appendTo(vDiscountPrice);
+              $("<h6>").html(paramRes[bI].courseName).css("color", "blue").appendTo(vDivBody);
+              var vDuration = $("<i>").addClass("far fa-clock").html("&nbsp" + paramRes[bI].duration).appendTo(vDivBody)
+              $("<span>").html("&nbsp" + paramRes[bI].level).appendTo(vDuration)
+              var vDiscountPrice = $("<h6>").html("$" + paramRes[bI].discountPrice + "  ").appendTo(vDivBody);
+              $("<strike>").html("$" + paramRes[bI].price).appendTo(vDiscountPrice);
               var vDivFooter = $("<div>").addClass("card-footer").appendTo(vDivHeader);
-                var vSpanImg = $("<span>").appendTo(vDivFooter);
-                  $("<img>").attr('src', paramRes[bI].teacherPhoto).addClass("card-img-top").appendTo(vSpanImg);
-                $("<p>").html(paramRes[bI].teacherName).appendTo(vDivFooter);
-                var vDivIcon = $("<div>").addClass("card-footer__icon").appendTo(vDivFooter);
-                  $("<i>").addClass("far fa-bookmark").appendTo(vDivIcon);
+              var vSpanImg = $("<span>").appendTo(vDivFooter);
+              $("<img>").attr('src', paramRes[bI].teacherPhoto).addClass("card-img-top").appendTo(vSpanImg);
+              $("<p>").html(paramRes[bI].teacherName).appendTo(vDivFooter);
+              var vDivIcon = $("<div>").addClass("card-footer__icon").appendTo(vDivFooter);
+              $("<i>").addClass("far fa-bookmark").appendTo(vDivIcon);
+            }
           }
+
+        },
+        error: function (error) {
+          console.log(error);
         }
-      
-      },
-      error: function ( error) {
-        console.log(error);
-      }
-    })
-  }
+      })
+    }
   });
 </script>
+
 </html>
