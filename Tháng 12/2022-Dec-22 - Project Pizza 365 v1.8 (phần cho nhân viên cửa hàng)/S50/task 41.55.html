@@ -302,6 +302,7 @@
             onBtnCancelClick();
         })
         getDrinkListAjaxClick();
+
         // hàm hiện thị kích cỡ pizza
         getPizzaSizeList(gPizzaSize);
         $("#order-table").on('click', '.btn-detail', function () {
@@ -414,6 +415,7 @@
             gOrderCode = vUserData.orderCode;
             $("#order-modal").modal("show");
             getAjaxDetailOrder(gOrderCode);
+            console.log(vUserData);
         }
         // hàm xử lý lọc dữ liệu bảng
         function onBtnFilterDataClick() {
